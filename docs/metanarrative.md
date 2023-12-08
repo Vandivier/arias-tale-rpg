@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This narrative RPG game is inspired by various sci-fi and fantasy themes, such as ".hack//Sign", "Sword Art Online", "The Matrix", "Neurolink", and AI/AGI technologies. In this game, players find themselves in a virtual world, each with unique backstories and objectives. The story revolves around three main characters:
+This narrative RPG game is inspired by various sci-fi and fantasy themes, such as ".hack//Sign", "Sword Art Online", "The Matrix", brain-machine interfaces like Neurolink, the Metaverse, the Age of Em, and other AI, fantasy, and sci-fi topics. In this game, players find themselves in a virtual world, each with unique backstories and objectives. The story revolves around three main characters:
 
 1. **Tank**: A human male who logged into the game, creating a human tank character.
 2. **Eidolon**: An Elven Rogue who has no recollection of ever logging in, questioning his own existence.

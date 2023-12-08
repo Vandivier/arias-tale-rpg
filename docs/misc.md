@@ -11,40 +11,33 @@ A role playing universe, game system, and concrete collection of episodes and ca
 5. Uncodified game system rules and game world data
 6. Misc Other Notes, Open Threads, and TODO
 
-## Tools and Resources
+## History of Games
 
-1. This repository
-2. [Ladderly](https://ladderly.io/) Discord #gaming channel
-3. [Aria's Tale YouTube Playlist](https://www.youtube.com/watch?v=_nEaajP78WQ)
-4. AI Tool: [arias-tale-roleplay-assistant](https://chat.openai.com/g/g-V5UqBQLKh-arias-tale-roleplay-assistant)
-5. [Procgen Arcana](https://watabou.github.io/news.html)
-6. [One Page Dungeon](https://watabou.itch.io/one-page-dungeon)
-7. [Random quest generator](https://donjon.bin.sh/fantasy/adventure/)
-8. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html).
-9. [Google Image Generator](https://www.google.com/search/images/)
-10. [Leonardo.ai Image Generator](https://leonardo.ai/)
-11. Future tools to check
-    1. character.ai
-    2. AI Dungeon
-    3. https://www.fables.gg/features
+See the `/docs` folder and the [Aria's Tale YouTube Playlist](https://www.youtube.com/watch?v=_nEaajP78WQ)
 
-## Related ChatGPT Threads
+Forthcoming: Illustrated lorebooks on the website!
 
-These threads are related to plot development, research, gameplay, or toolbuilding.
+## Game Tools
 
-Gameplay threads are specially noted with an asertisk (\*).
-
-These should not necessarily be taken as canon.
-
-The threads are listed in chronological order, with the first element of the list being the oldest thread, and the most recent thread being at the end of the list.
-
-1. [Anime Plot Summary](https://chat.openai.com/share/6c36dd57-84db-4b27-8fe9-40b7c939f610)
-2. [\*Elven Rogue in a Forest](https://chat.openai.com/c/907da6b9-cb2b-49e7-a1c0-1df4a274a9aa)
-3. [Another Eden RPG Game](https://chat.openai.com/share/45281eb2-5bca-4a2f-b974-2ba405e46707)
-4. [Iron Flame Book Summary](https://chat.openai.com/c/4f6ee9e8-0e99-42af-a5a6-dcd4b1b9fc41)
-   i. Init Dragonica region here
-5. [Hex Grid RPG Battle Map](https://chat.openai.com/c/e20991cb-de81-42a7-9466-58354c0ed22b)
-   7 [Town, Character, and Quest Setup](https://chat.openai.com/share/9bb91cf2-1037-482b-aed6-13964456ac69)
+1. Game-Native Tooling
+   1. The [Aria's Tale Website](https://arias-tale-rpg.vercel.app/) and [Repo](https://github.com/Vandivier/arias-tale-rpg)
+   2. Custom GPT: [arias-tale-roleplay-assistant](https://chat.openai.com/g/g-V5UqBQLKh-arias-tale-roleplay-assistant)
+2. [Ladderly](https://ladderly.io/) Discord #gaming channel with Die Roller
+   1. Also sometimes GPT-4 itself, Google, or offline dice for rolling
+3. Worldbuilding
+4. [Procgen Arcana](https://watabou.github.io/news.html)
+5. [One Page Dungeon](https://watabou.itch.io/one-page-dungeon)
+6. [Random quest generator](https://donjon.bin.sh/fantasy/adventure/)
+7. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html).
+8. Image Generators
+   1. DALL-E, as built into GPT-4
+   2. [Leonardo.ai Image Generator](https://leonardo.ai/)
+   3. [Google Image Generator](https://www.google.com/search/images/)
+   4. [Stable Diffusion XL Turbo](https://stablediffusionxl.com/stable-diffusion-sdxl-turbo/#trynow)
+9. Future tools to check
+   1. [character.ai](https://beta.character.ai/)
+   2. [AI Dungeon](https://aidungeon.com/)
+   3. [Friends & Fables](https://www.fables.gg/features)
 
 ## Uncodified game system rules and game world data
 
