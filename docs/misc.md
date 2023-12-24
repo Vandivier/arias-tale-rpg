@@ -2,9 +2,9 @@
 title: "Miscellaneous Information"
 ---
 
-# Overview: Aria's Tale
+# What is Aria's Tale?
 
-A role playing universe, game system, and concrete collection of episodes and campaigns built communally, streamed, with audience participation, and AI assistance.
+An emergent social story, game, and experiment in generative artificial intelligence.
 
 ## Table of Contents
 
@@ -26,19 +26,21 @@ Forthcoming: Illustrated lorebooks on the website!
 1. Game-Native Tooling
    1. The [Aria's Tale Website](https://arias-tale-rpg.vercel.app/) and [Repo](https://github.com/Vandivier/arias-tale-rpg)
    2. Custom GPT: [arias-tale-roleplay-assistant](https://chat.openai.com/g/g-V5UqBQLKh-arias-tale-roleplay-assistant)
-2. [Ladderly](https://ladderly.io/) Discord #gaming channel with Die Roller
-   1. Also sometimes GPT-4 itself, Google, or offline dice for rolling
-3. Worldbuilding
-4. [Procgen Arcana](https://watabou.github.io/news.html)
-5. [One Page Dungeon](https://watabou.itch.io/one-page-dungeon)
-6. [Random quest generator](https://donjon.bin.sh/fantasy/adventure/)
-7. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html).
-8. Image Generators
+   3. Social channels:
+      1. [TikTok](https://www.tiktok.com/@arias.tale.game)
+      2. Ladderly Discord
+      3. YouTube, Twitter, Reddit
+2. Worldbuilding
+   1. [Procgen Arcana](https://watabou.github.io/news.html)
+   2. [One Page Dungeon](https://watabou.itch.io/one-page-dungeon)
+   3. [Random quest generator](https://donjon.bin.sh/fantasy/adventure/)
+   4. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html).
+3. Image Generators
    1. DALL-E, as built into GPT-4
    2. [Leonardo.ai Image Generator](https://leonardo.ai/)
    3. [Google Image Generator](https://www.google.com/search/images/)
    4. [Stable Diffusion XL Turbo](https://stablediffusionxl.com/stable-diffusion-sdxl-turbo/#trynow)
-9. Future tools to check
+4. Future tools to check
    1. [character.ai](https://beta.character.ai/)
    2. [AI Dungeon](https://aidungeon.com/)
    3. [Friends & Fables](https://www.fables.gg/features)
@@ -72,7 +74,6 @@ Forthcoming: Illustrated lorebooks on the website!
       15. python as a "language" and possibly other accidental code references leading to bugs, wormholes, loopholes, migraines, and plot twists
    4. Dad jokes as game mechanics (eg "spring water" improving jump ability)
    5. Everything is a mimick, everything is a cake, the cake is a mimick
-   6. Aria's Tale and Arya's Tail pun
 3. Custom GPT Dev Notes:
    1. If I use the battle assistant, it can't generate characters, towns, quests, or narrative very well. Seems like we may need a collection of GPTs. Maybe we can use Claude bc enormous context window
    2. [A superuser says](https://community.openai.com/t/gpts-knowledge-capacity-limits/492955/14): Size limitations: In Create mode it will tell you that 25mb is the ideal cap to avoid errors, but you can upload up to 50mb. Character limitations: Based on my experimentation you can upload a single doc (.txt) that is less then 1.5mm characters.
