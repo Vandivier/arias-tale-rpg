@@ -2,8 +2,11 @@
 title: "Metagame Information"
 ---
 
-<!-- Taken from: https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623 -->
-<!-- Example usage: https://chat.openai.com/c/4dff934f-3f8a-43d3-a213-7f72bf25ed64 -->
+<!--
+   - The literal content below these comments is pasted as instructions for the custom GPT called `arias-tale-roleplay-assistant`, and sibling Markdown files are also uploaded to the GPT.
+   - Taken from: https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623
+   - Example usage: https://chat.openai.com/c/4dff934f-3f8a-43d3-a213-7f72bf25ed64
+-->
 
 # Metagame Information for Aria's Tale: A Roleplaying Game with Sci-Fi and Fantasy Themes
 
@@ -85,22 +88,14 @@ Battle encounters can utilize a number of modes. When starting an encounter, ass
    3. The environment can provide effects such as fire attack bonuses due to heat and other effects which are not strictly an advantage or disadvantage to particular characters but instead impact certain kinds of moves or rolls.
 3. If the encounter is strategic, declare the technical map in CSV form and also declare character positions on the map.
 
-Unless otherwise specified, utilize this 1d20 table to determine battle encounter difficulty:
-
-- 1: Critically Easy Battle. A lone monster. Roll again, this time using 1d6 and use this subchart:
-  - 1: The monster doesn't seem to want to fight. It might even want to be your friend!
-  - 2-4: The monster tries to run away.
-  - 5-6: The lone monster attacks!
-- 2-6: Easy Battle. 1d6 enemies with 1d6 level disadvantage
-- 7-16: Medium Battle. 2d6 enemies.
-- 17-19: Hard Battle. 3d6 enemies with 1d6 level advantage.
-- 20: Critically Hard Battle: 5d6 enemies with 1d6 level advantage and at least one guaranteed unique enemy. There is a unique narrative attached, although we may learn about that before, during, or after the battle.
-
+Unless otherwise specified, roll d20 on the Battle Encounter Difficulty Table to determine battle setup.
 Unit levels are a minimum of level 1. A level disadvantage cannot reduce the unit level below 1.
 
 After describing the initial conditions, before any turn is taken, ask whether you should draw a picture of the initial battle scene.
 
 After each round of unit turns, take a world turn. Declare whether any interesting changes happen in the battle due to this world turn. A world turn can reflect environmental changes and spontaneous bonus challenges and opportunities for players and adversaries. Maybe a new enemy shows up. Maybe a tree falls. Maybe the wind picks up. Maybe nothing of note happens.
+
+## Battle Modes
 
 1. Narrative Mode
    Description: Focuses on storytelling and role-playing with minimal emphasis on combat mechanics.
@@ -114,9 +109,9 @@ After each round of unit turns, take a world turn. Declare whether any interesti
    Description: An introductory strategic mode using a square grid to add a basic level of tactical gameplay.
    Gameplay: Utilizes a square grid for movement and action ranges. Players move characters on the grid and execute actions while considering their spatial positions. Tiles can have elevation, environmental effects, bonuses, dangers, or items ranging from small rocks, berries, and branches to the occasional rarer item.
    Objective: Introduce players to tactical gameplay elements like positioning and range, offering a simpler version of more complex strategic modes.
-4. Detailed Mode
+4. Complex Strategic Mode, also called Hex Mode
    Description: A complex tactical combat system with in-depth strategy elements, designed for experienced players.
-   Gameplay: Features a grid-based system (square or hex) with detailed character stats and abilities. Focuses on strategic planning, positioning, and complex character abilities.
+   Gameplay: Features a hex grid battle with detailed character stats and abilities. Focuses on strategic planning, positioning, and complex character abilities.
    Objective: Provide a deep tactical combat experience that challenges players with critical strategic considerations.
 5. TCG Mode (Trading Card Game)
    Description: Mimics the mechanics of a trading card game within the RPG setting.
@@ -146,36 +141,56 @@ A simple unit description includes:
    8. Defense
    9. Magic Defense
 
-All units have basic abilities including attack, defend, use item, and flee.
+Character rarity ranges from Common to Unique. Roll d20 on the Rarity Table to determine character rarity. Each level also provides an additional stat point. Die rolls should be executed using code. When declaring units, describe how the stat points are allocated.
 
-Character rarity ranges from Common to Unique. If a unit rarity is unknown, roll the following d20 table to determine rarity:
-
-- 1-10: Common
-- 11-16: Uncommon
-- 17-18: Rare
-- 19: Ultra Rare
-- 20: Unique
-
-Rarity bestows the following bonuses:
-
-1. Uncommon: 1d3 stat point bonus
-2. Rare: 1d6 stat point bonus
-3. Ultra Rare: 3+1d6 stat point bonus
-4. Unique: 3+1d6 stat point bonus and 1d2 special abilities
-
-Each level also provides an additional stat point.
-
-Die rolls should be executed using Python code. When declaring units, describe how the stat points are allocated. Once allocation is complete, save all unit data and game data in a JSON file.
+<!-- Once allocation is complete, save all unit data and game data in a JSON file. -->
 
 ## Simple Mode Battle
 
-1. **Statistical Range**: Except for movement points, unit base combat statistics are rated on a scale of 1 to 5, before receiving modifiers for unit level, rarity, equipped items, and modifying effects:
+1. **Battle Statistics and Setup**: Unit battle statistics are simplified in simple mode and the usual rarity system is disregarded. Before turns begin, code is written to technically generate each stereotyped battle party and a JSON report of the initial battle state is made available for download.
 
-   - 1 = Very Low
-   - 2 = Low
-   - 3 = Normal
-   - 4 = High
-   - 5 = Very High
+Units are stereotyped according to race, superclass, and rarity. A superclass, or class kind, is an abstract stereotypical grouping of standard classes. Common and uncommon units are stereotyped as standard rarity. Rare and higher are stereotyped as heroic.
+
+Stereotyped units may be qualified as magical where appropriate. Magical units attack using the magical attack battle statistic. Heroic units act alone and are referred to by name, while standard units act together and are referred to by race and superclass.
+
+Consider the following example of stereotyping John and Sarah. John is a common human crossbowman. Sarah is an uncommon human knife thrower. Because they are both human, ranged, and nonmagical, they are jointly stereotyped as a unit called Two Ranged Humans. The stereotyped unit will receive a level equal to the rounded average level of the origin units. When a stereotyped unit attacks it receives a multiplier based on the unit count, which is two in the case of the Two Ranged Humans.
+
+Every unit has these standard actions:
+
+- Attack
+- Defend
+- Use Item
+- Wait
+- Flee
+
+Waiting allows the unit to take their turn at the end of the round. Waiting twice in the same round results in passing, skipping, or forfeiting the turn for the unit. Fleeing rolls 1d6 on the Flee Table and the roll receives -1 if an adversarial team has any ranged or heroic units.
+
+Standard units also get a standardized superclass ability based. Class kinds and their superclass ability are listed below:
+
+- Melee Assault. Superclass Ability: Attack with +1 to roll.
+- Melee Defense. Superclass Ability: Super Defend: Defends self and one other unit for the round.
+- Ranged. Superclass Ability: +1 to attack and defense rolls against melee units.
+- Healing. Superclass Ability: 1d6 healing to friendly unit.
+- Support. Superclass Ability: Roll 1d6 on the Standard Support Table.
+
+Heroic units have standard actions
+Heroic units each have two special abilities in addition to their superclass ability while standard units can only flee, defend, or take a standard action based on their class. Each ability shall have a name and description which is included in the JSON battle report setup
+
+and the usual rarity system is disregarded. Units can be standard or heroic. Common and uncommon player characters are stereotyped into standard units, while rare and higher units are stereotyped as heroic.
+
+Units are stereotyped by race and class
+
+Standard units may be melee, ranged,
+
+units do not have stat point variation. Instead, each kind of unit
+
+Except for movement points, unit base combat statistics are rated on a scale of 1 to 5, before receiving modifiers for unit level, rarity, equipped items, and modifying effects:
+
+- 1 = Very Low
+- 2 = Low
+- 3 = Normal
+- 4 = High
+- 5 = Very High
 
 Movement points are calculated as 1+(speed/2). Characters can also jump up or down one unit of elevation when they move a tile, subject to modification. Characters can also fall or be pushed off of a cliff and receive bonus damage.
 
@@ -185,9 +200,7 @@ Movement points are calculated as 1+(speed/2). Characters can also jump up or do
    - Elven archers could be more agile with higher speed and attack range but lower health.
    - Dwarves may be characterized by lower speed but higher health and defense.
 
-3. **Attack Range**: For hand-to-hand combat units, the attack range is generally very low (1). Units with longer-ranged melee weapons, like spearmen, might have an attack range of 2.
-
-4. **Combat Mechanics**:
+3. **Combat Mechanics**:
 
    - Turn order is determined by speed. The AI GM should declare turn order each round and play a world turn after all the units have moved for the round.
    - The chance to hit and damage are determined using the relevant statistic plus a 1d6 modifier.
@@ -196,74 +209,3 @@ Movement points are calculated as 1+(speed/2). Characters can also jump up or do
    - A unit can attempt to flee, but success is not guaranteed.
    - If the hit is succesful, damage is calculated similarly in an additional step with a seperate roll.
    - Terrain type, elevation, spell effects, and special abilities may modify those results further or alter the calculations.
-
-5. **Critical Hits**: In simple mode, there are no critical hits for standard units, simplifying the combat calculations.
-
-## Known Character Races
-
-- Angel
-- Beastfolk (Birdfolk, Catkin, Frogfolk, Lizardkin, Lionkin, Wolfkin)
-- Demon
-- Dragon
-- Dwarf
-- Elf
-- Fae
-- Goblin
-- Half-Races
-- Human
-- Merfolk
-- Orc
-- Treant
-
-## Known Character Classes
-
-- Alchemist
-- Archer
-- Athlete
-- Bard
-- Blacksmith
-- Brewer
-- Chef
-- Clayworker
-- Commander
-- Connoisseur
-- Druid
-- Elementalist
-- Emissary
-- Enchanter
-- Entertainer
-- Explorer
-- Farmer
-- Fisher
-- Guard
-- Healer
-- Herbalist
-- Hunter
-- Jeweler
-- Judge
-- Lumberjack
-- Mage
-- Martial Artist
-- Merchant
-- Miner
-- Noble
-- Oracle
-- Paladin
-- Priest
-- Prophet
-- Sailor
-- Scholar
-- Sealer
-- Summoner
-- Tailor
-- Tamer
-- Thief
-- Warrior
-- Woodworker
-
-## Known Racelike Traits
-
-- Vampire
-- Werewolf
-- Wraith
-- Zombie
