@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
+import TopNav from "~/components/top-nav";
 
 import { api } from "~/utils/api";
 
@@ -51,10 +52,13 @@ export default function Home() {
       </style>
 
       <main className="from-custom-primary to-custom-primary-dark flex min-h-screen flex-col items-center justify-center bg-gradient-to-b">
+        <TopNav />
+
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[4rem]">
+          <h1 className="text-3xl font-extrabold leading-[4rem] tracking-tight text-white sm:text-[4rem]">
             Embark on an Epic Journey with Aria's Tale!
           </h1>
+
           <div className="flex flex-col items-center gap-2 text-2xl text-white">
             <div className="flex items-center">
               <img
