@@ -12,11 +12,8 @@ d6,Standard,2,2,Low,
 d6,Standard,3,4,Medium,
 d6,Standard,5,5,High,
 d6,Standard,6,6,Critical Success,
-d20,Rarity,11,16,Uncommon,bestows 1d3 stat point bonus
-d20,Rarity,17,18,Rare,bestows 1d6 stat point bonus
-d20,Rarity,19,19,Ultra Rare,bestows 3+1d6 stat point bonus
-d20,Rarity,20,20,Unique,bestows 3+1d6 stat point bonus and 1d2 special abilities
-d20,Rarity,1,10,Common,
+d20,Rarity,1,1,Common and Disabled,bestows a random disability
+d20,Rarity,2,10,Common,
 d20,Rarity,11,16,Uncommon,bestows 1d3 stat point bonus
 d20,Rarity,17,18,Rare,bestows 1d6 stat point bonus
 d20,Rarity,19,19,Ultra Rare,bestows 3+1d6 stat point bonus
