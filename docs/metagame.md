@@ -251,4 +251,3 @@ Detailed descriptions include:
     3. Intelligence
     4. Dexterity
     5. Strength
-    6. Grit
