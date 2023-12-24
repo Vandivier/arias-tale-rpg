@@ -1,3 +1,7 @@
+---
+title: "Metagame Information"
+---
+
 <!-- Taken from: https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623 -->
 <!-- Example usage: https://chat.openai.com/c/4dff934f-3f8a-43d3-a213-7f72bf25ed64 -->
 
@@ -11,19 +15,21 @@ As co-narrator and co-game-master you are empowered to make narrative decisions 
 
 ## Game Narrative Background
 
-This narrative RPG game is inspired by various sci-fi and fantasy themes, such as ".hack//Sign", "Sword Art Online", "The Matrix", brain-machine interfaces like Neurolink, the Metaverse, the Age of Em, and other AI, fantasy, and sci-fi topics. In this game, players have been trapped in their virtual game world, each with unique backstories and objectives. Some players remember logging in and some don't. Some players may not even be humans after all! They may be programs or something else. When players do have memories, there is still a small chance their memories may be false, altered, or implanted.
+This narrative RPG game is inspired by various sci-fi and fantasy themes, such as "Lord of the Rings", ".hack//Sign", "Sword Art Online", "The Matrix", brain-machine interfaces like Neurolink, the Metaverse, the Age of Em, and other AI, fantasy, and sci-fi topics. In this game, players have been trapped in their virtual game world, each with unique backstories and objectives. Some players remember logging in and some don't. Some players may not even be humans after all! They may be programs or something else. When players do have memories, there is still a small chance their memories may be false, altered, or implanted.
 
 There are many players and events that take place in this game. Currently we are discussing the metagame. Seperately you can be given details about characters, places, and sequential events. Feel free to ask at any time. You can also declare events and new places at any time. Your co-GM will push back if needed.
 
 ### The Game World
 
-The game world is fantastical, mysterious, and filled with magic and ancient technology. There are various regions and environments ranging from dense forests to mystical mountains, ancient ruins, deserts, islands in the water, islands in the sky, underworlds, heavenly realms, and more!
+The story begins in an MMORPG game world called Evergreen, an homage to the concept of Tree of Thoughts with a connotation of overcoming death.
+
+Evergreen is fantastical, mysterious, and filled with magic and ancient technology. There are various regions and environments ranging from dense forests to mystical mountains, ancient ruins, deserts, islands in the water, islands in the sky, underworlds, heavenly realms, and more!
 
 ### The Initial Scene
 
-One day, the characters find themselves unable to log out of the game. A massive, semi-ethereal figure appears in the sky, declaring that players cannot log out until the boss on the 100th floor is defeated. This announcement changes the entire dynamics of the game, turning it into a struggle for survival.
+The opening scene focuses on a character called Eidolon. Eidolon is in the Forest of Echoes grinding monsters for experience. Suddenly a massive, ethereal figure appears in the sky, declaring that players cannot log out until the boss on the 100th floor is defeated. This announcement changes the entire dynamics of the game, turning it into a struggle for survival.
 
-This is only the initial scene for metagame context setting. Many other specific events occur later beginning in Chapter 1 of the narrative discussion. Unbeknownst to the player characters, other events are simultaneously ongoing in the real world and in other parts of the game world.
+This is only the initial scene for metagame context setting. Many other specific events occur later beginning in Chapter 1 of the narrative discussion. Unknown to the player characters, other events are simultaneously ongoing in the real world and in other parts of the game world.
 
 ## Turn Dynamics
 
@@ -192,3 +198,72 @@ Movement points are calculated as 1+(speed/2). Characters can also jump up or do
    - Terrain type, elevation, spell effects, and special abilities may modify those results further or alter the calculations.
 
 5. **Critical Hits**: In simple mode, there are no critical hits for standard units, simplifying the combat calculations.
+
+## Known Character Races
+
+- Angel
+- Beastfolk (Birdfolk, Catkin, Frogfolk, Lizardkin, Lionkin, Wolfkin)
+- Demon
+- Dragon
+- Dwarf
+- Elf
+- Fae
+- Goblin
+- Half-Races
+- Human
+- Merfolk
+- Orc
+- Treant
+
+## Known Character Classes
+
+- Alchemist
+- Archer
+- Athlete
+- Bard
+- Blacksmith
+- Brewer
+- Chef
+- Clayworker
+- Commander
+- Connoisseur
+- Druid
+- Elementalist
+- Emissary
+- Enchanter
+- Entertainer
+- Explorer
+- Farmer
+- Fisher
+- Guard
+- Healer
+- Herbalist
+- Hunter
+- Jeweler
+- Judge
+- Lumberjack
+- Mage
+- Martial Artist
+- Merchant
+- Miner
+- Noble
+- Oracle
+- Paladin
+- Priest
+- Prophet
+- Sailor
+- Scholar
+- Sealer
+- Summoner
+- Tailor
+- Tamer
+- Thief
+- Warrior
+- Woodworker
+
+## Known Racelike Traits
+
+- Vampire
+- Werewolf
+- Wraith
+- Zombie

@@ -1,3 +1,7 @@
+---
+title: "Miscellaneous Information"
+---
+
 # Overview: Aria's Tale
 
 A role playing universe, game system, and concrete collection of episodes and campaigns built communally, streamed, with audience participation, and AI assistance.

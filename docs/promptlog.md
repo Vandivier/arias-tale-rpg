@@ -1,4 +1,8 @@
-# Promptlog
+---
+title: "Prompt Log"
+---
+
+# Prompt Log
 
 This document is a technical tool for providing game and metagame history and context to the promptable model that is co-narrating the current Aria's Tale game session.
 

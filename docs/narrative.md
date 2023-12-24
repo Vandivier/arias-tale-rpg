@@ -1,3 +1,7 @@
+---
+title: "Episode Narrative Guide"
+---
+
 <!-- Taken from: https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623 -->
 
 #### Chapter 1: The Beginning of an Epic Adventure
@@ -12,7 +16,7 @@ Their journey begins amidst the ancient trees and ethereal lakes of the forest, 
 
 #### Chapter 2: The Game Changes
 
-Mike created and plays the character called Tank. One day in the early afternoon, Mike faintly hears a doorbell buzz. Realizing his pizza has arrived in real life, he attempts to log out.
+Mike is a human player who created and plays an Evergreen character named Tank. One day in the early afternoon, Mike faintly hears a doorbell buzz. Realizing his pizza has arrived in real life, he attempts to log out.
 
 He is struck by terror as he finds that he cannot log out. Suddenly the sky turns an burnt orange color. A massive shadowy figure appears in sky.
 

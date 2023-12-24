@@ -1,16 +1,40 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
 import { CustomPage } from "~/components/CustomPage";
 
-import { api } from "~/utils/api";
+interface GameManualPageProps {
+  docFiles: string[];
+}
 
-export default function GameManualPage() {
+export default function GameManualPage({ docFiles }: GameManualPageProps) {
   return (
     <CustomPage mainHeading="Game Manual">
-      <ul>
-        <li>TODO</li>
-      </ul>
+      {docFiles.length ? (
+        <ul>
+          {docFiles.map((file: string, index: number) => {
+            const prettyName = file.replace(".md", "");
+            return (
+              <li key={index}>
+                <Link href={`/game-manual/${prettyName}`}>{prettyName}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>Docs not found.</p>
+      )}
     </CustomPage>
   );
+}
+
+export async function getStaticProps() {
+  const docsDirectory = path.join(process.cwd(), "docs");
+  const filenames = fs.readdirSync(docsDirectory);
+
+  return {
+    props: {
+      docFiles: filenames,
+    },
+  };
 }
