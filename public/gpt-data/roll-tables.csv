@@ -1,0 +1,25 @@
+roll_kind,table_kind,min,max,name,description
+d6,Flee,1,1,Critical Failure,Stranger is unique and aggressive. They attack the party.
+d6,Flee,2,3,Progressive Failure,Flee failed. Trying to flee again next turn gains +1 to the roll.
+d6,Flee,4,5,Success,The unit flees.
+d6,Flee,6,6,Critical Success,The unit flees. They can optionally evacuate an ally and re-enter battle with stealth in a later round.
+d6,Lone Stranger Chart,1,1,Critically Unfortunate,Stranger is unique and aggressive.
+d6,Lone Stranger Chart,2,3,Unfortunate,Stranger is an aggressive adversary
+d6,Lone Stranger Chart,4,5,Fortunate,Stranger tries to flee
+d6,Lone Stranger Chart,6,6,Critical Success,Stranger is friendly
+d6,Standard,1,1,Critical Failure,
+d6,Standard,2,2,Low,
+d6,Standard,3,4,Medium,
+d6,Standard,5,5,High,
+d6,Standard,6,6,Critical Success,
+d20,Rarity,1,1,Common and Disabled,bestows a random disability
+d20,Rarity,2,10,Common,
+d20,Rarity,11,16,Uncommon,bestows 1d3 stat point bonus
+d20,Rarity,17,18,Rare,bestows 1d6 stat point bonus
+d20,Rarity,19,19,Ultra Rare,bestows 3+1d6 stat point bonus
+d20,Rarity,20,20,Unique,bestows 3+1d6 stat point bonus and 1d2 special abilities
+d20,Battle Encounter Difficulty,1,1,Critically Easy Battle,"A lone monster. Roll 1d6+1 on the Lone Stranger Chart."
+d20,Battle Encounter Difficulty,2,6,Easy Battle,1d6 enemies with 1d6 level disadvantage
+d20,Battle Encounter Difficulty,7,16,Medium Battle,2d6 enemies.
+d20,Battle Encounter Difficulty,17,19,Hard Battle,3d6 enemies with 1d6 level advantage.
+d20,Battle Encounter Difficulty,20,20,Critically Hard Battle: 5d6 enemies with 1d6 level advantage and at least one guaranteed unique enemy,"There is a unique narrative attached, although we may learn about that before, during, or after the battle."
