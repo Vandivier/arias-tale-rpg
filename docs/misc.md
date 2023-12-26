@@ -2,7 +2,7 @@
 title: "Miscellaneous Information"
 ---
 
-# What is Aria's Tale?
+## What is Aria's Tale?
 
 An emergent social story, game, and experiment in generative artificial intelligence.
 
@@ -79,3 +79,43 @@ Forthcoming: Illustrated lorebooks on the website!
    2. [A superuser says](https://community.openai.com/t/gpts-knowledge-capacity-limits/492955/14): Size limitations: In Create mode it will tell you that 25mb is the ideal cap to avoid errors, but you can upload up to 50mb. Character limitations: Based on my experimentation you can upload a single doc (.txt) that is less then 1.5mm characters.
    3. Another person says "You’re going to have better luck achieving what you’re trying to accomplish with Assistants, not GPT’s"
    4. In the longer run, a custom app could call the various specialty GPTs when appropriate, or other code or non-gpt tools for deterministic or seeded activity. I could also have a vector store of threads or something for pinecone-like memory if it becomes to much for context. I will compare that vs using Claude as a canon store until we have a funded app (funded by the book series??)
+
+## Thread Backlog
+
+These are game sessions that haven't been written up and formalized into canon.
+
+These all occur after Oct 2023:
+
+- AI Gaming Ambiguity Guide
+- Aria's Tale RPG Overview
+- Metagame for Aria's Tale
+- Elven Archer Stat Sheet
+- Roll Character Creation Dice
+- Create Aria's Tale Character
+- Create New Character: Basics
+- Known Character Classes: Tank & Eidolon
+- Battle Modes in Aria's Tale
+- Dwarven Stronghold from Salt Mines
+- Druid Transformation Image
+- Fantasy RPG Hero & Team
+- Angel Appearances: Bible Descriptions
+- Clarifying AI GM Instructions
+- Hex Grid RPG Battle Map
+- Gridless RPG Battles Possible
+- Wendigo in snowy forest
+- Arias-Tale-Roleplay-Assistant Explanation
+- RPG Battlemap in CSV
+- Summarizing common types.
+- Blue-Eyed Elven Rogue
+- Elven Rogue in Forest
+- Quest for Johan's Revival
+- List Regions and Features
+- Purple Gate in Forest
+- Player Units' Stats Setup
+- Hex Grid RPG Encounter
+- Town, Character, Quest Setup
+- Level 1 Encounter Lethality
+- Another Eden RPG Game
+- Iron Flame Book Summary
+- Prequel to Hunger Games
+- Anime Plot Summary
