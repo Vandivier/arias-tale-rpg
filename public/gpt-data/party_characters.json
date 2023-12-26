@@ -1,0 +1,288 @@
+{
+    "warrior": {
+        "awakening_region": "Evergreen Outskirts",
+        "level": 3,
+        "name": "Eorhelm",
+        "rarity": "Common",
+        "class": "Warrior",
+        "race": "Human",
+        "age": "Mid-30s",
+        "items_held": [
+            "Greatsword",
+            "Tower Shield",
+            "Silver Armor"
+        ],
+        "character_backstory": "A seasoned fighter who took up arms to protect the innocent.",
+        "personal_ambitions_goals": "To become a legendary hero remembered throughout the ages.",
+        "irl_backstory": "Human Player",
+        "memories": "Vivid memories of the day they were trapped in the game.",
+        "gender": "Male",
+        "appearance": {
+            "eye_color": "Steel Gray",
+            "hair_color": "Dark Brown",
+            "skin_tone": "Tanned",
+            "physical_size": "Tall",
+            "physical_build": "Muscular",
+            "notable_characteristics": [
+                "Battle Scars",
+                "Stoic Expression"
+            ]
+        },
+        "notable_affinities": {
+            "religions": [
+                "Order of the Valiant"
+            ],
+            "cultures": [
+                "Knights of Evergreen"
+            ],
+            "guild_membership": "The Vanguard",
+            "general_reputation": "Respected for bravery and honor"
+        },
+        "special_abilities": [
+            "Berserk Charge",
+            "Defender's Oath",
+            "War Cry"
+        ],
+        "base_combat_statistics": {
+            "health_points": 60,
+            "speed": 25,
+            "attack": 35,
+            "defense": 45,
+            "magic_attack": 0,
+            "magic_defense": 15
+        },
+        "current_state": {
+            "health_status": "Battle-Ready",
+            "ailments_effects": "None",
+            "hunger_status": "Satisfied",
+            "fatigue_status": "Well-Rested"
+        },
+        "noncombat_statistics": {
+            "big_5_personality_traits": {
+                "openness": 28,
+                "conscientiousness": 90,
+                "extraversion": 86,
+                "agreeableness": 78,
+                "neuroticism": 47
+            },
+            "charisma": 11,
+            "intelligence": 56,
+            "dexterity": 61,
+            "strength": 32
+        }
+    },
+    "robot": {
+        "awakening_region": "The Mechanical Bastion",
+        "level": 3,
+        "name": "Automaton Guardian No. 7519",
+        "rarity": "Common",
+        "class": "Guardian",
+        "race": "Automaton",
+        "age": "Indeterminate",
+        "items_held": [
+            "Energy Core",
+            "Memory Chip",
+            "Repair Kit"
+        ],
+        "character_backstory": "Constructed in the ancient forges, now seeking purpose beyond its initial programming.",
+        "personal_ambitions_goals": "To evolve beyond its original coding and explore the world of Evergreen.",
+        "irl_backstory": "AI",
+        "memories": "Fabricated, a collection of data rather than experiences.",
+        "gender": "None",
+        "appearance": {
+            "eye_color": "Glowing Blue",
+            "hair_color": "None",
+            "skin_tone": "Metallic",
+            "physical_size": "Large",
+            "physical_build": "Robust",
+            "notable_characteristics": [
+                "Steel Plating",
+                "Hydraulic Limbs"
+            ]
+        },
+        "notable_affinities": {
+            "religions": [],
+            "cultures": [
+                "Automaton"
+            ],
+            "guild_membership": "None",
+            "general_reputation": "Known for its unyielding loyalty to its directives"
+        },
+        "special_abilities": [
+            "Precision Strike",
+            "Shield Protocol",
+            "Self-Repair"
+        ],
+        "base_combat_statistics": {
+            "health_points": 50,
+            "speed": 20,
+            "attack": 30,
+            "defense": 40,
+            "magic_attack": 0,
+            "magic_defense": 10
+        },
+        "current_state": {
+            "health_status": "Functional",
+            "ailments_effects": "None",
+            "hunger_status": "N/A",
+            "fatigue_status": "N/A"
+        },
+        "noncombat_statistics": {
+            "big_5_personality_traits": {
+                "openness": 92,
+                "conscientiousness": 80,
+                "extraversion": 56,
+                "agreeableness": 34,
+                "neuroticism": 80
+            },
+            "charisma": 46,
+            "intelligence": 24,
+            "dexterity": 20,
+            "strength": 8
+        }
+    },
+    "elf_archer": {
+        "awakening_region": "Whispering Woods",
+        "level": 4,
+        "name": "Lunara the Swift",
+        "rarity": "Rare",
+        "class": "Archer",
+        "race": "Elf",
+        "age": "Appears in her late 20s",
+        "items_held": [
+            "Longbow of the Ancients",
+            "Quiver of Endless Arrows",
+            "Cloak of Elvenkind"
+        ],
+        "character_backstory": "An elusive ranger known for her unmatched agility and marksmanship.",
+        "personal_ambitions_goals": "To find the ancient relics of her people and restore their legacy.",
+        "irl_backstory": "Human Player",
+        "memories": "Fragments of a life before the game, mixed with the lore of Evergreen.",
+        "gender": "Female",
+        "appearance": {
+            "eye_color": "Emerald Green",
+            "hair_color": "Silver",
+            "skin_tone": "Pale",
+            "physical_size": "Svelte",
+            "physical_build": "Graceful",
+            "notable_characteristics": [
+                "Tattoos of the forest",
+                "Piercing Gaze"
+            ]
+        },
+        "notable_affinities": {
+            "religions": [
+                "Path of the Silent Wind"
+            ],
+            "cultures": [
+                "Elvenkind"
+            ],
+            "guild_membership": "The Silent Arrows",
+            "general_reputation": "Feared as a ghost in the forests, a protector of nature"
+        },
+        "special_abilities": [
+            "Eagle Eye",
+            "Wind Walker",
+            "Nature's Blessing"
+        ],
+        "base_combat_statistics": {
+            "health_points": 40,
+            "speed": 30,
+            "attack": 40,
+            "defense": 20,
+            "magic_attack": 0,
+            "magic_defense": 25
+        },
+        "current_state": {
+            "health_status": "Vigilant",
+            "ailments_effects": "None",
+            "hunger_status": "Nourished",
+            "fatigue_status": "Alert"
+        },
+        "noncombat_statistics": {
+            "big_5_personality_traits": {
+                "openness": 100,
+                "conscientiousness": 20,
+                "extraversion": 61,
+                "agreeableness": 20,
+                "neuroticism": 51
+            },
+            "charisma": 14,
+            "intelligence": 100,
+            "dexterity": 63,
+            "strength": 18
+        }
+    },
+    "dwarf_mage": {
+        "awakening_region": "Molten Depths",
+        "level": 3,
+        "name": "Drogan Flamebeard",
+        "rarity": "Common",
+        "class": "Mage",
+        "race": "Dwarf",
+        "age": "Aged like a fine ale",
+        "items_held": [
+            "Caster's Staff of the Core",
+            "Enchanted Robes",
+            "Flame Rune Amulet"
+        ],
+        "character_backstory": "A formidable sorcerer from the deep mountains, wielding the fiery heart of the earth.",
+        "personal_ambitions_goals": "To master the ancient arcane secrets and forge a legacy that will echo through the halls of stone.",
+        "irl_backstory": "Human Player",
+        "memories": "A blend of mountain songs and the heat of battle, with a longing for the stone halls of his ancestors.",
+        "gender": "Male",
+        "appearance": {
+            "eye_color": "Bright Amber",
+            "hair_color": "Fiery Red",
+            "skin_tone": "Ruddy",
+            "physical_size": "Stout",
+            "physical_build": "Stocky",
+            "notable_characteristics": [
+                "Thick Beard",
+                "Runic Tattoos"
+            ]
+        },
+        "notable_affinities": {
+            "religions": [
+                "Cult of the Eternal Flame"
+            ],
+            "cultures": [
+                "Dwarven Clans"
+            ],
+            "guild_membership": "The Rune Casters",
+            "general_reputation": "Known for his explosive temper and powerful magic"
+        },
+        "special_abilities": [
+            "Lava Burst",
+            "Forge Shield",
+            "Ancestor's Wisdom"
+        ],
+        "base_combat_statistics": {
+            "health_points": 50,
+            "speed": 20,
+            "attack": 25,
+            "defense": 30,
+            "magic_attack": 45,
+            "magic_defense": 35
+        },
+        "current_state": {
+            "health_status": "Enkindled",
+            "ailments_effects": "None",
+            "hunger_status": "Sated",
+            "fatigue_status": "Steady"
+        },
+        "noncombat_statistics": {
+            "big_5_personality_traits": {
+                "openness": 66,
+                "conscientiousness": 63,
+                "extraversion": 4,
+                "agreeableness": 30,
+                "neuroticism": 70
+            },
+            "charisma": 54,
+            "intelligence": 64,
+            "dexterity": 28,
+            "strength": 94
+        }
+    }
+}
