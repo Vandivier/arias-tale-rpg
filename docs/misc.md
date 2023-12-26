@@ -10,16 +10,14 @@ An emergent social story, game, and experiment in generative artificial intellig
 
 1. Overview
 2. Table of Contents
-3. Tools and Resources
-4. Related ChatGPT Threads
-5. Uncodified game system rules and game world data
-6. Misc Other Notes, Open Threads, and TODO
+3. Gameplay Streams and Behind the Scenes
+4. Game Tools
+5. Other Notes and TODO
+6. Thread Backlog
 
-## History of Games
+## Gameplay Streams and Behind the Scenes
 
-See the `/docs` folder and the [Aria's Tale YouTube Playlist](https://www.youtube.com/watch?v=_nEaajP78WQ)
-
-Forthcoming: Illustrated lorebooks on the website!
+See this [Aria's Tale YouTube Playlist](https://www.youtube.com/watch?v=_nEaajP78WQ).
 
 ## Game Tools
 
@@ -45,12 +43,7 @@ Forthcoming: Illustrated lorebooks on the website!
    2. [AI Dungeon](https://aidungeon.com/)
    3. [Friends & Fables](https://www.fables.gg/features)
 
-## Uncodified game system rules and game world data
-
-1. Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
-2. Significant lore and quest food in the `Town, Character, and Quest Setup` thread
-
-## Misc Other Notes, Open Threads, and TODO
+## Other Notes and TODO
 
 1. TODO: Watch "The Peripheral" Prime Video series which apparently has related themes. Players are seemingly locked in a game world, but it turns out they are actually transported into another time-space location in the real world.
 2. Misc tropes and plot concepts
@@ -79,6 +72,9 @@ Forthcoming: Illustrated lorebooks on the website!
    2. [A superuser says](https://community.openai.com/t/gpts-knowledge-capacity-limits/492955/14): Size limitations: In Create mode it will tell you that 25mb is the ideal cap to avoid errors, but you can upload up to 50mb. Character limitations: Based on my experimentation you can upload a single doc (.txt) that is less then 1.5mm characters.
    3. Another person says "You’re going to have better luck achieving what you’re trying to accomplish with Assistants, not GPT’s"
    4. In the longer run, a custom app could call the various specialty GPTs when appropriate, or other code or non-gpt tools for deterministic or seeded activity. I could also have a vector store of threads or something for pinecone-like memory if it becomes to much for context. I will compare that vs using Claude as a canon store until we have a funded app (funded by the book series??)
+4. Uncodified Rules
+   1. Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
+   2. Significant lore and quest food in the `Town, Character, and Quest Setup` thread
 
 ## Thread Backlog
 
