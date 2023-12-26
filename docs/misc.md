@@ -82,40 +82,57 @@ Forthcoming: Illustrated lorebooks on the website!
 
 ## Thread Backlog
 
-These are game sessions that haven't been written up and formalized into canon.
+These are game sessions that haven't been written up and formalized into canon. They are reported by ChatGPT thread name. These all occur after Oct 2023.
 
-These all occur after Oct 2023:
+1. Lunara Arc
 
-- AI Gaming Ambiguity Guide
-- Aria's Tale RPG Overview
-- Metagame for Aria's Tale
-- Elven Archer Stat Sheet
-- Roll Character Creation Dice
-- Create Aria's Tale Character
-- Create New Character: Basics
-- Known Character Classes: Tank & Eidolon
-- Battle Modes in Aria's Tale
-- Dwarven Stronghold from Salt Mines
-- Druid Transformation Image
-- Fantasy RPG Hero & Team
-- Angel Appearances: Bible Descriptions
-- Clarifying AI GM Instructions
-- Hex Grid RPG Battle Map
-- Gridless RPG Battles Possible
-- Wendigo in snowy forest
-- Arias-Tale-Roleplay-Assistant Explanation
-- RPG Battlemap in CSV
-- Summarizing common types.
-- Blue-Eyed Elven Rogue
-- Elven Rogue in Forest
-- Quest for Johan's Revival
-- List Regions and Features
-- Purple Gate in Forest
-- Player Units' Stats Setup
-- Hex Grid RPG Encounter
-- Town, Character, Quest Setup
-- Level 1 Encounter Lethality
-- Another Eden RPG Game
-- Iron Flame Book Summary
-- Prequel to Hunger Games
-- Anime Plot Summary
+   - Aria's Tale RPG Overview
+   - Metagame for Aria's Tale
+   - Elven Archer Stat Sheet
+   - Roll Character Creation Dice
+   - Fantasy RPG Hero & Team
+
+2. Caelum Arc
+
+   - Create Aria's Tale Character
+
+3. Regional Lore
+
+   - Dwarven Stronghold from Salt Mines
+   - Hex Grid RPG Battle Map
+   - Wendigo in snowy forest
+   - List Regions and Features
+   - Town, Character, Quest Setup
+   - Iron Flame Book Summary
+
+4. Unknown Druid Arc
+
+   - Druid Transformation Image
+
+5. Old Religion Arc
+
+   - Angel Appearances: Bible Descriptions
+
+6. Elemental Sacrifice Arc
+
+   - Clarifying AI GM Instructions
+
+7. Strategic Mode Development
+
+   - Gridless RPG Battles Possible
+   - RPG Battlemap in CSV
+
+8. Towns, Leaves, and Squirrels Arc (aka Aria's Arc)
+
+   - Summarizing common types.
+   - Blue-Eyed Elven Rogue
+   - Elven Rogue in Forest
+   - Quest for Johan's Revival
+   - Purple Gate in Forest
+   - List Regions and Features
+   - Player Units' Stats Setup
+   - Hex Grid RPG Encounter
+
+9. Worldbuilding
+
+   - Anime Plot Summary
