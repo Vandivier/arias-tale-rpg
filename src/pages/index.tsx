@@ -31,9 +31,7 @@ export default function Home() {
             quest begins here!
           </p>
           <p>
-            This Official Aria's Tale Site is in Early Alpha. Sign up now to
-            join the waiting list! A limitted number of waitlist signups will
-            get free prizes!
+            This site is in Early Alpha. Sign up now to join the waiting list!
           </p>
           <p>
             Aria's Tale is Open Source and maintained by{" "}
