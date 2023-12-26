@@ -25,7 +25,7 @@ export default function Home() {
 
         <AuthShowcase />
 
-        <div className="my-4 flex max-w-[300px] flex-col gap-8 text-2xl text-white">
+        <div className="my-4 flex flex-col gap-8 text-2xl text-white">
           <p>
             Join our vibrant community of adventurers and shape the story. Your
             quest begins here!
