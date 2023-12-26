@@ -6,21 +6,19 @@ title: "Episode Narrative Guide"
 
 #### Chapter 1: The Beginning of an Epic Adventure
 
-In a realm where virtual reality and digital worlds blur the lines of reality, three unique characters spawn in the Mystical Forest of Echoes:
+Three characters play in the mystical Forest of Echoes, a notable region of Evergreen, a fantasty-themed MMORPG:
 
-1. **Tank**: A human male warrior, a robust tank character in this digital realm.
-2. **Eidolon**: An Elven Rogue with no memory of logging in, a character shrouded in mystery.
-3. **Aria**: A human female spellcaster, aware of her digital inception, and driven to unravel the game's secrets.
+1. **Tank**: A human male warrior created, named, and played by Mike. Tank uses a spear and shield.
+2. **Eidolon**: An Elven Rogue with no memory of logging in.
+3. **Aria**: A human female spellcaster. She founded a guild and named it after herself. Tank and Eidolon have only heard rumors about her skill and charisma as the leader of Aria's Guild, the largest guild in the Forest of Echoes.
 
-Their journey begins amidst the ancient trees and ethereal lakes of the forest, a land imbued with magic and mystery.
+Their journey begins amidst the ancient trees and magical lakes of the Forest of Echoes, a land imbued with power and intrigue.
 
-#### Chapter 2: The Game Changes
+One day in the early afternoon, Mike faintly hears a doorbell buzz. Realizing that his pizza has arrived, he attempts to log out. Mike is struck with terror as he finds that he cannot log out. The in-game sky suddenly turns a burnt orange color. A massive, terrifying, and ethereal figure appears in sky.
 
-Mike is a human player who created and plays an Evergreen character named Tank. One day in the early afternoon, Mike faintly hears a doorbell buzz. Realizing his pizza has arrived in real life, he attempts to log out.
+In an unfamiliar and powerful voice, the mysterious figure confirms that players cannot log out until the 100th floor boss is cleared. The monstrous figure suggests that players should form parties, guilds, and alliances across guilds, as the power of each boss is so incredible that a maximum-level lone player character would be easily destroyed by even the weakest boss monster. The weakest boss monster will be found somewhere on the first floor, the floor presently occupied by Tank and Eidolon.
 
-He is struck by terror as he finds that he cannot log out. Suddenly the sky turns an burnt orange color. A massive shadowy figure appears in sky.
-
-In an unfamiliar and powerful voice, this figure confirms that players cannot log out until the boss on the 100th floor is defeated. The figure suggests that players should form groups or guilds, as he has increased the power of one monster on each floor to such an extent that even strongest max-level player cannot beat the first floor boss.
+he has increased the power of one monster on each floor to such an extent that even strongest max-level player cannot beat the first floor boss.
 
 Eidolon, Aria, and all other characters similarly observed this revelation. With that, the figure disappears and the sky resumes it's normal appearance.
 
