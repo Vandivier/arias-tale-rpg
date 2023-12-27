@@ -1,14 +1,16 @@
 name,kind,description
-Angel,Race,
-Beastfolk,Race,"examples include Birdfolk, Catkin, Frogfolk, Lizardkin, Lionkin, Wolfkin"
-Demon,Race,
+Beastfolk,Race,"Examples include Faun, Centaurs, Birdfolk, Catkin, Frogfolk, Lizardkin, Lionkin, Wolfkin"
+Celestial,Race,"Beings with affinity to the heavens, notably including angels."
+Demon,Race,"Beings with affinity to the underworld. They are also called devils and fiends."
 Dragon,Race,
 Dwarf,Race,
 Elf,Race,
+Elemental,Race,
 Fae,Race,
 Goblin,Race,
-Half-Races,Race,
+Half-Races,Race,"This is a group of races with many subraces that often have alternate names and high ability variation."
 Human,Race,
+Imp,Race,"Tend to have evil or chaotic alignment. Affinity with demons and tieflings. Speaks with fae and sprites. Sometimes-friend of goblins or orcs. It is also called a gremlin or hobgoblin."
 Merfolk,Race,
 Orc,Race,
 Treant,Race,
