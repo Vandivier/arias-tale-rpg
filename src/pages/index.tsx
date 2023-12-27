@@ -1,5 +1,4 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Link from "next/link";
 import { CustomPage } from "~/components/CustomPage";
 import { api } from "~/utils/api";
 

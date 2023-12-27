@@ -18,17 +18,17 @@ interface DocPageProps {
 }
 
 const DocPage: React.FC<DocPageProps> = ({ content, title }) => {
-  const components: { [nodeType: string]: React.ElementType } = {
-    code({ node, inline, className, children, ...props }: CodeProps) {
+  const components: Record<string, React.ElementType> = {
+    code({ className, children, ...props }: CodeProps) {
       return (
         <code className={`whitespace-pre-wrap ${className}`} {...props}>
           {children}
         </code>
       );
     },
-    ol({ node, inline, className, children, ...props }: CodeProps) {
+    ol({ className, children, ...props }: CodeProps) {
       return (
-        <ol className={`flex flex-col`} {...props}>
+        <ol className={`flex flex-col ${className}`} {...props}>
           {children}
         </ol>
       );
