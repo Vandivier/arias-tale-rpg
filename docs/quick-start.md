@@ -14,9 +14,9 @@ There are four ways to play today. Each approach has its own section:
 
 ## Play by Stream
 
-The most popular way to play today is also the least convenient: Follow John Vandivier on TikTok and attend his live games.
+Currently, the most popular way to play is also the least convenient: Follow [John Vandivier on TikTok](https://www.tiktok.com/@johnvandivier) and attend his live games.
 
-John sometimes also streams to YouTube and Twitch. You can view some of the prior gaming streams here.
+John also streams to [YouTube](https://www.youtube.com/c/JohnVandivier?sub_confirmation=1) and [Twitch](https://www.twitch.tv/johnvandivier). You can view some of the prior gaming streams [here](https://www.youtube.com/playlist?list=PL4hsXTgWARMwAaXEEQkGbD6JImaBrCTpM).
 
 You can watch or interact as an audience member. You can also contact John in advance of a stream if you are interested in joining the stream as a live player.
 
@@ -26,7 +26,7 @@ This is a convenient approach because you can play at any time and from any loca
 
 Even if it looks like someone else already took a move - go ahead and try! The game involves multiple characters and it is community driven. If you win support for your move it will take precedence, and multiple characters can be moved in different ways at the same time.
 
-You can also comment on the #gaming channel in the Ladderly Discord server. It should be relevant to any of the current arcs, including but not limited to the pinned TikTok video. Simply ask on the channel if you want to here about other ongoing arcs.
+You can also comment on the #gaming channel in the [Ladderly](https://ladderly.io/) Discord server. It should be relevant to any of the current arcs, including but not limited to the pinned TikTok video. Simply ask on the channel if you want to here about other ongoing arcs.
 
 ## Play by Post
 
@@ -39,7 +39,7 @@ This approach is also nice because you can do more than merely comment. For exam
 1. Before posting, search for `#ariastale` on your platform and consider posting a reply instead of creating a new thread.
 2. When you post, include `#ariastale` in the caption.
 3. Bring a friend! If several people are using a platform it is often easier to get noticed and it can be more fun too!
-4. Mention your post to the community. For example, you might play by tweet and then mention your tweet on the Ladderly Discord #gaming channel. It will not be considered spam or advertisement.
+4. Mention your post to the community. For example, you might play by tweet and then mention your tweet on the [Ladderly](https://ladderly.io/) Discord #gaming channel. It will not be considered spam or advertisement.
 
 ## Run Your Own Campaign
 
@@ -57,11 +57,11 @@ You might choose to have a classic in-person game or you might also run your own
 
 For multiple sessions, it is a good idea to write up a session summary. These summaries are useful for providing context to a language model for your next session, and they also make proposing canon easier. For example, one session might translate into a single book chapter or short story.
 
-Play using ChatGPT with GPT-4 is the current recommended language model approach. This tool supports die rolling by code which produces more correctly distributed random data compared to an ordinary language model approach. Further, GPT-4 can generate images, follows instructions better, and has a larger context limit compared to many other tools.
+Play using [ChatGPT with GPT-4](https://chat.openai.com/) is the current recommended language model approach. This tool supports die rolling by code which produces more correctly distributed random data compared to an ordinary language model approach. Further, GPT-4 can generate images, follows instructions better, and has a larger context limit compared to many other tools.
 
 There are, however, a few downsides to GPT-4:
 
-1. Other models like Claude 2 have a larger context window.
+1. Other models like [Claude 2](https://claude.ai/) have a larger context window.
 2. Other image-specific models can generate better images.
 3. GPT-4 is neither free nor open source.
 
@@ -91,6 +91,6 @@ Here's what you do:
 
 2. Send your draft to the Aria's Tale repository maintainers in either of two ways:
    1. By filing a GitHub issue with the content included
-   2. By posting on the Ladderly Discord channel
+   2. By posting on the [Ladderly](https://ladderly.io/) Discord channel
 
 The team will review, work with you to revise as needed, and render a decision about whether you were approved. Thank you for your interest in effort, we look forward to your contribution!
