@@ -62,7 +62,7 @@ export const CustomPage = ({
           {mainHeading}
         </h1>
 
-        <div className="flex flex-col items-center gap-2 text-2xl text-white">
+        <div className="text-l flex max-w-full flex-col items-center gap-2 text-white md:text-2xl">
           {children}
         </div>
       </div>

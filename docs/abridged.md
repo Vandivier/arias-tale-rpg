@@ -1,5 +1,5 @@
 ---
-title: "Abridge Metagame Information"
+title: "Abridged Metagame Information"
 ---
 
 <!--

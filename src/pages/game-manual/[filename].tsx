@@ -13,7 +13,9 @@ interface DocPageProps {
 const DocPage: React.FC<DocPageProps> = ({ content, title }) => {
   return (
     <CustomPage mainHeading={title}>
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkdown className="flex max-w-full flex-col gap-4">
+        {content}
+      </ReactMarkdown>
     </CustomPage>
   );
 };
