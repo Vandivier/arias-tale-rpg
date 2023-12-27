@@ -248,7 +248,7 @@ Detailed descriptions include:
   "level": 3,
   "name": "Caelum",
   "rarity": "Uncommon",
-  "class": "Mystic Archer",
+  "classes": ["Mystic Archer"],
   "race": "Celestial",
   "age": 137,
   "items_held": [
