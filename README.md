@@ -23,7 +23,7 @@ The user guide is located [here](https://ariastale.com/game-manual). The user gu
 
 ### Gameplay Streams and Behind the Scenes
 
-See this [Aria's Tale YouTube Playlist](https://www.youtube.com/watch?v=_nEaajP78WQ).
+See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL4hsXTgWARMwAaXEEQkGbD6JImaBrCTpM).
 
 ### Game Tools
 
@@ -73,14 +73,6 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/watch?v=_nEaajP7
       15. python as a "language" and possibly other accidental code references leading to bugs, wormholes, loopholes, migraines, and plot twists
    4. Dad jokes as game mechanics (eg "spring water" improving jump ability)
    5. Everything is a mimick, everything is a cake, the cake is a mimick
-3. Custom GPT Dev Notes:
-   1. If I use the battle assistant, it can't generate characters, towns, quests, or narrative very well. Seems like we may need a collection of GPTs. Maybe we can use Claude bc enormous context window
-   2. [A superuser says](https://community.openai.com/t/gpts-knowledge-capacity-limits/492955/14): Size limitations: In Create mode it will tell you that 25mb is the ideal cap to avoid errors, but you can upload up to 50mb. Character limitations: Based on my experimentation you can upload a single doc (.txt) that is less then 1.5mm characters.
-   3. Another person says "You’re going to have better luck achieving what you’re trying to accomplish with Assistants, not GPT’s"
-   4. In the longer run, a custom app could call the various specialty GPTs when appropriate, or other code or non-gpt tools for deterministic or seeded activity. I could also have a vector store of threads or something for pinecone-like memory if it becomes to much for context. I will compare that vs using Claude as a canon store until we have a funded app (funded by the book series??)
-4. Uncodified Rules
-   1. Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
-   2. Significant lore and quest food in the `Town, Character, and Quest Setup` thread
 
 ### Thread Backlog
 
@@ -138,6 +130,8 @@ These are game sessions that haven't been written up and formalized into canon. 
 9. Worldbuilding
 
    - Anime Plot Summary
+   - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
+   - Discord since 11/22/23
 
 ### Narrative Influences
 
