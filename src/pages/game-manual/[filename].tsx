@@ -5,15 +5,44 @@ import path from "path";
 import ReactMarkdown from "react-markdown";
 import { CustomPage } from "~/components/CustomPage";
 
+interface CodeProps {
+  node: React.ReactNode;
+  inline: boolean;
+  className?: string;
+  children: React.ReactNode;
+}
+
 interface DocPageProps {
   content: string;
   title: string;
 }
 
 const DocPage: React.FC<DocPageProps> = ({ content, title }) => {
+  const components: Record<string, React.ElementType> = {
+    code({ className, children, ...props }: CodeProps) {
+      return (
+        <code className={`whitespace-pre-wrap ${className}`} {...props}>
+          {children}
+        </code>
+      );
+    },
+    ol({ className, children, ...props }: CodeProps) {
+      return (
+        <ol className={`flex flex-col ${className}`} {...props}>
+          {children}
+        </ol>
+      );
+    },
+  };
+
   return (
     <CustomPage mainHeading={title}>
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkdown
+        className="flex max-w-full flex-col gap-4 whitespace-pre-wrap"
+        components={components}
+      >
+        {content}
+      </ReactMarkdown>
     </CustomPage>
   );
 };
@@ -43,9 +72,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const fileContents = fs.readFileSync(markdownFile, "utf8");
   const { content, data } = matter(fileContents);
 
+  // strip markdown comments
+  const removeMarkdownComments = (text: string) => {
+    return text.replace(/<!--[\s\S]*?-->/g, "");
+  };
+
+  const cleanedContent = removeMarkdownComments(content);
+
   return {
     props: {
-      content,
+      content: cleanedContent,
       title: (typeof data.title === "string" && data.title) || "No Title",
     },
   };

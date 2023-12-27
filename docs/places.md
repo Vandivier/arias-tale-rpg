@@ -1,5 +1,5 @@
 ---
-title: "Rumorbook"
+title: "Placebook"
 ---
 
 - Evergreen
@@ -14,6 +14,11 @@ title: "Rumorbook"
     - ???
   - Old Pillar
   - Raefun
-  - ???
 - Earth
-  - ???
+  - United States of North America
+  - Texas
+  - United States of Greater Brazil
+  - New Europe
+  - Australia
+  - Other Unknown Regions
+- Other Unknown Worlds

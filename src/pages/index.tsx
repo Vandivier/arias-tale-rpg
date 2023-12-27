@@ -1,5 +1,4 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Link from "next/link";
 import { CustomPage } from "~/components/CustomPage";
 import { api } from "~/utils/api";
 
@@ -25,38 +24,49 @@ export default function Home() {
 
         <AuthShowcase />
 
-        <div className="my-4 flex max-w-[300px] flex-col gap-8 text-2xl text-white">
+        <div className="text-l my-4 flex flex-col gap-8 text-white">
+          <p>Join our vibrant community of adventurers and shape the story!</p>
           <p>
-            Join our vibrant community of adventurers and shape the story. Your
-            quest begins here!
-          </p>
-          <p>
-            This Official Aria's Tale Site is in Early Alpha. Sign up now to
-            join the waiting list! A limitted number of waitlist signups will
-            get free prizes!
-          </p>
-          <p>
-            Aria's Tale is Open Source and maintained by{" "}
-            <Link
+            Read the living narrative of Aria's Tale{" "}
+            <a
               className="underline"
-              target="_blank"
-              href="https://ladderly.io/"
+              href="https://www.ariastale.com/game-manual/narrative"
             >
-              ladderly.io
-            </Link>
-            ! Consider supporting the maintainers with a tip.
+              here
+            </a>
+            , get started playing now with the{" "}
+            <a
+              className="underline"
+              href="https://www.ariastale.com/game-manual/quick-start"
+            >
+              Quick Start Guide
+            </a>
+            , or dive into the technical details with the{" "}
+            <a
+              className="underline"
+              href="https://www.ariastale.com/game-manual/metagame"
+            >
+              Game Manual
+            </a>
+            .
           </p>
           <p>
-            You can also check out some of the early YouTube gaming videos and
-            streams{" "}
-            <Link
+            This website is in development. In the future, you will be able to
+            play Aria's Tale through this website. For now, Aria's Tale is
+            played over social media and during periodic streams, as mentioned
+            in the{" "}
+            <a
               className="underline"
-              target="_blank"
-              href="https://www.youtube.com/watch?v=7e-mB8pYoQs"
+              href="https://www.ariastale.com/game-manual/quick-start"
             >
-              here on YouTube
-            </Link>
-            !
+              Quick Start Guide
+            </a>
+            .
+          </p>
+          <p>
+            Join the waitlist to be notified when the game is ready to play
+            through this site, and to indicate whether you are interested in
+            joining a live stream!
           </p>
         </div>
       </>

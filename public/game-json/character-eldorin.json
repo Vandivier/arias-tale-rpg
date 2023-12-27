@@ -1,0 +1,76 @@
+{
+  "awakening_region": "Harmony Isles",
+  "level": 5,
+  "name": "Eldorin",
+  "rarity": "Rare",
+  "classes": ["Bard", "Tamer"],
+  "race": "Half-Elf",
+  "age": 29,
+  "items_held": [
+    "Lute of Echoes",
+    "Whistle of the Wild",
+    "Healing Herbs",
+    "Enchanted Cloak",
+    "Map of the Unknown Lands",
+    "Potion of Clarity",
+    "Tamer's Bond (magical artifact)"
+  ],
+  "character_backstory": "Eldorin, a wandering minstrel with a deep connection to the wilds, harbors a secret unknown to many - he is also a half-mermaid. Born under the mystic moonlight, his heritage is hidden beneath his perfect half-elf visage. His quest is driven by a longing to understand the harmonic balance of land and sea, and the mystical influence of the moon on both realms.",
+  "personal_ambitions_goals": "To uncover the secrets of his dual heritage and compose a symphony that resonates with both the forest's whispers and the ocean's songs.",
+  "irl_backstory": "Controlled by a real human, a music teacher with a fascination for mythological creatures.",
+  "memories": "Vivid, remembers logging in and the excitement of exploring Evergreen.",
+  "gender": "Male",
+  "appearance": {
+    "eye_color": "Emerald Green",
+    "hair_color": "Chestnut Brown",
+    "skin_tone": "Fair",
+    "physical_size": "Medium",
+    "physical_build": "Lean",
+    "notable_characteristics": "Elf-like ears, a gentle smile, and a small, intricate tattoo of a musical note intertwined with a vine and a moon crescent on his left wrist"
+  },
+  "notable_affinities": {
+    "religions": ["Lunaria"],
+    "cultures": ["Half-Elves", "Musicians"],
+    "guild_membership": "Guild Lunaria",
+    "general_reputation": "Known for his soothing presence, mystical insights, and a mysterious aura that captivates both animals and people alike"
+  },
+  "special_abilities": [
+    "Melody of the Wild (can charm and calm animals)",
+    "Echoes of the Forest (can create illusions with music)",
+    "Beast Whisperer (can communicate with animals)",
+    "Moonlit Harmony (can harness the power of the moon to enhance his abilities, especially near water)"
+  ],
+  "base_combat_statistics": {
+    "health_points": 4,
+    "attack": 2,
+    "defense": 3,
+    "speed": 3,
+    "magic_defense": 6
+  },
+  "current_combat_statistics": {
+    "health_points": 6.25,
+    "attack": 3.13,
+    "defense": 4.69,
+    "speed": 4.69,
+    "magic_defense": 9.38
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 90,
+      "conscientiousness": 65,
+      "extraversion": 70,
+      "agreeableness": 85,
+      "neuroticism": 35
+    },
+    "charisma": 88,
+    "intelligence": 78,
+    "dexterity": 80,
+    "strength": 58
+  },
+  "current_state": {
+    "health_status": "Healthy",
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Energetic"
+  }
+}

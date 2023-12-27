@@ -15,8 +15,10 @@ export default function GameManualPage({ docFiles }: GameManualPageProps) {
           {docFiles.map((file: string, index: number) => {
             const prettyName = file.replace(".md", "");
             return (
-              <li key={index}>
-                <Link href={`/game-manual/${prettyName}`}>{prettyName}</Link>
+              <li className={`my-6 text-2xl`} key={index}>
+                <Link href={`/game-manual/${prettyName}`}>
+                  {prettyName.toUpperCase()}
+                </Link>
               </li>
             );
           })}

@@ -2,8 +2,6 @@
 title: "Prompt Log"
 ---
 
-# Prompt Log
-
 This document is a technical tool for providing game and metagame history and context to the promptable model that is co-narrating the current Aria's Tale game session.
 
 TODO: Once this document is brought up to date, delete this list of legacy thread URLs:

@@ -1,0 +1,80 @@
+{
+  "party_units": {
+    "Eorhelm": {
+      "class_kind": "Melee Assault",
+      "race": "Human",
+      "level": 3,
+      "health_points": 60,
+      "attack": 35,
+      "defense": 45,
+      "speed": 3,
+      "magic_attack": 0,
+      "magic_defense": 15
+    },
+    "Lunara": {
+      "class_kind": "Heroic Archer",
+      "race": "Elf",
+      "level": 4,
+      "health_points": 40,
+      "attack": 40,
+      "defense": 20,
+      "speed": 4,
+      "magic_attack": 0,
+      "magic_defense": 25
+    },
+    "Drogan": {
+      "class_kind": "Mage",
+      "race": "Dwarf",
+      "level": 3,
+      "health_points": 50,
+      "attack": 25,
+      "defense": 30,
+      "speed": 2,
+      "magic_attack": 45,
+      "magic_defense": 35
+    },
+    "Automaton Guardian No. 7519": {
+      "class_kind": "Support",
+      "race": "Automaton",
+      "level": 3,
+      "health_points": 70,
+      "attack": 30,
+      "defense": 50,
+      "speed": 3,
+      "magic_attack": 0,
+      "magic_defense": 40
+    }
+  },
+  "enemy_units": {
+    "Goblins": {
+      "class_kind": "Melee Assault",
+      "race": "Goblin",
+      "level": 1,
+      "count": 6,
+      "health_points": 10,
+      "attack": 2,
+      "defense": 2,
+      "speed": 3
+    },
+    "Hobgoblin Leader": {
+      "class_kind": "Melee Assault",
+      "race": "Hobgoblin",
+      "level": 2,
+      "count": 1,
+      "health_points": 0,
+      "attack": 4,
+      "defense": 4,
+      "speed": 2
+    },
+    "Wargs": {
+      "class_kind": "Beast",
+      "race": "Warg",
+      "level": 2,
+      "count": 2,
+      "health_points": 15,
+      "attack": 3,
+      "defense": 3,
+      "speed": 4
+    }
+  }
+}
