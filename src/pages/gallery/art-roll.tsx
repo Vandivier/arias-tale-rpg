@@ -1,26 +1,19 @@
-import Link from "next/link";
+import { api } from "~/utils/api";
 import { CustomPage } from "~/components/CustomPage";
-import { useState, useEffect } from "react";
 
 export default function ArtRollPage() {
-  const [artRoll, setArtRoll] = useState(null);
+  const { data, isLoading, isError, refetch } = api.art.getArtRoll.useQuery(
+    undefined,
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
 
-  const fetchArtRoll = async () => {
-    try {
-      const response = await fetch("/api/art-roll");
-      const data = await response.json();
-      setArtRoll(data);
-    } catch (error) {
-      console.error("Error fetching art roll:", error);
-    }
-  };
+  if (isLoading) return <span>Loading...</span>;
+  if (isError) return <span>Error occurred</span>;
 
-  useEffect(() => {
-    fetchArtRoll();
-  }, []);
-
-  const handleRollClick = () => {
-    fetchArtRoll();
+  const handleRollClick = async () => {
+    await refetch();
   };
 
   return (
@@ -31,13 +24,27 @@ export default function ArtRollPage() {
       >
         Reroll!
       </button>
-      {artRoll && (
+      {data && (
         <div>
-          <h2>Art Roll Result</h2>
-          <ol>
-            <li>Pieces Rolled: {artRoll.pieces.length}</li>
-            {/* Add more structured data presentation here */}
-          </ol>
+          <h2 className={`py-2 text-2xl`}>Art Roll Result</h2>
+
+          {data.length ? (
+            <>
+              <h3>Pieces Rolled: {data.length}</h3>
+
+              <ol>
+                {data.map((art, idx) => (
+                  <li className={`py-6`} key={`${art.subject}-${idx}`}>
+                    <p>Piece #{idx + 1}</p>
+                    <p>Subject: {art.subject}</p>
+                    <p>Style: {art.style}</p>
+                  </li>
+                ))}
+              </ol>
+            </>
+          ) : (
+            <h3>No art found</h3>
+          )}
         </div>
       )}
     </CustomPage>
