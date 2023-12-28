@@ -22,6 +22,9 @@ function TopNav() {
           >
             Game Manual
           </Link>
+          <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/gallery">
+            Gallery
+          </Link>
           <Link
             className="my-1 cursor-pointer md:mx-4 md:my-0"
             href="https://github.com/Vandivier/arias-tale-rpg"
