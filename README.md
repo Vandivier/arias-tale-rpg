@@ -43,8 +43,11 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
    1. DALL-E, as built into GPT-4
    2. [Leonardo.ai Image Generator](https://leonardo.ai/)
    3. [Google Image Generator](https://www.google.com/search/images/)
-   4. [Stable Diffusion XL Turbo](https://stablediffusionxl.com/stable-diffusion-sdxl-turbo/#trynow)
-4. Future tools to check
+4. Video Generators
+   1. [Decohere](https://app.decohere.ai/turbo)
+   2. [Runway ML](app.runwayml.com) for text to video
+   3. [Pika Labs](https://pika.art/) for image to video
+5. Future tools to check
    1. [character.ai](https://beta.character.ai/)
    2. [AI Dungeon](https://aidungeon.com/)
    3. [Friends & Fables](https://www.fables.gg/features)
@@ -116,7 +119,7 @@ These are game sessions that haven't been written up and formalized into canon. 
    - Gridless RPG Battles Possible
    - RPG Battlemap in CSV
 
-8. Towns, Leaves, and Squirrels Arc (aka Aria's Arc)
+8. Of Leaves, Town, and Squirrels (aka Aria's Arc)
 
    - Summarizing common types.
    - Blue-Eyed Elven Rogue
