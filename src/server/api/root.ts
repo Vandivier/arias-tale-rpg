@@ -1,5 +1,6 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createTRPCRouter } from "~/server/api/trpc";
+import { artRouter } from "./routers/artRouter";
 
 /**
  * This is the primary router for your server.
@@ -7,6 +8,7 @@ import { createTRPCRouter } from "~/server/api/trpc";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
+  art: artRouter,
   post: postRouter,
 });
 
