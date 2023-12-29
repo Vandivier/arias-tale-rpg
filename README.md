@@ -93,7 +93,11 @@ These are game sessions that haven't been written up and formalized into canon. 
 
    - Create Aria's Tale Character
 
-3. Regional Lore
+3. Eldorin Arc
+
+   - Generate Game Character: Races
+
+4. Regional Lore
 
    - Dwarven Stronghold from Salt Mines
    - Hex Grid RPG Battle Map
@@ -102,24 +106,24 @@ These are game sessions that haven't been written up and formalized into canon. 
    - Town, Character, Quest Setup
    - Iron Flame Book Summary
 
-4. Unknown Druid Arc
+5. Bearkin Arc
 
    - Druid Transformation Image
 
-5. Old Religion Arc
+6. Ezekiel's Arc
 
    - Angel Appearances: Bible Descriptions
 
-6. Elemental Sacrifice Arc
+7. Elemental Sacrifice Arc
 
    - Clarifying AI GM Instructions
 
-7. Strategic Mode Development
+8. Strategic Mode Development
 
    - Gridless RPG Battles Possible
    - RPG Battlemap in CSV
 
-8. Of Leaves, Town, and Squirrels (aka Aria's Arc)
+9. Of Leaves, Town, and Squirrels (aka Aria's Arc)
 
    - Summarizing common types.
    - Blue-Eyed Elven Rogue
@@ -130,11 +134,11 @@ These are game sessions that haven't been written up and formalized into canon. 
    - Player Units' Stats Setup
    - Hex Grid RPG Encounter
 
-9. Worldbuilding
+10. Worldbuilding
 
-   - Anime Plot Summary
-   - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
-   - Discord since 11/22/23
+    - Anime Plot Summary
+    - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
+    - Discord since 11/22/23
 
 ### Narrative Influences
 
