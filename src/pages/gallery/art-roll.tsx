@@ -37,7 +37,7 @@ export default function ArtRollPage() {
                   <li className={`py-6`} key={`${art.subject}-${idx}`}>
                     <p>Piece #{idx + 1}</p>
                     <p>Subject: {art.subject}</p>
-                    <p>Style: {art.style}</p>
+                    <p>Art Style: {art.style}</p>
                   </li>
                 ))}
               </ol>
