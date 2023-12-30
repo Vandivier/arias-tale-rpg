@@ -62,7 +62,7 @@ In the aftermath, the Shield Bearers stood united and momentarily cheerful. Then
 
 As they returned towards the Town of Echoes, the world around them seemed to take a quiet breath. A cool mist followed from the lake to the edge of town, kissing their ankles with an acknowledgement of victory and whispering of the adventures that lay ahead.
 
-Eidolon joins up with a different guild called The Elementalists. They perform a training mission at the Crossroads of the Elements, where they unexpectedly come upon a merchant being robbed. They defeat the robbers, but Johan, their fire mage, is fatally wounded during the battle. From a distance, Gavriel somehow senses the fall of Johan.
+Eidolon joins up with a different guild called The Elementalists. They perform a training mission at the Crossroads of the Elements, where they unexpectedly come upon a merchant being robbed. They defeat the robbers, but Johan, their fire mage, is fatally wounded during the battle. Eidolon notably recovers a magical earth crystal among other prizes. From a distance, Gavriel somehow senses the fall of Johan.
 
 ### Chapter 4: The Clash of Titans and Unification
 
@@ -70,31 +70,31 @@ The land trembles. From the Lake of Whispers, Tank spots a dark mushroom cloud e
 
 The Shield Bearers approach the location carefully. Scorched trees, dark energy, and the sound of battle make the location obvious. They find the Dark Paladin locked in active combat with several guilds including Aria's Guild and the Crimson Vanguard.
 
-At Tank's suggestion, the Shield Bearers set up a station on the outskirts of battle, collecting and treating the wounded to the best of their ability.
+At Tank's suggestion, the Shield Bearers set up a station on the outskirts of battle, collecting and treating the wounded to the best of their ability. They patch up many, several of whom are willing and able to return to battle. Perhaps most notable is Vaelor, a Dragonborn Paladin.
 
-The air crackles with dark energy as the Paladin unleashed blasts of shadow magic, tearing through the ranks of the brave combatants. The ground itself seemed to weep at the devastation wrought.
+Vaelor was recovered like shrapnel as the sole survivor of a direct blast from the Dark Paladin. His wounds first appeared most grievous and he was clearly exhausted. While Elara began to work healing at the station, Vaelor took a moment of rest. After a moment, with his eyes still closed and his arm laid across his own chest, he struggled to hinge his hand upward. Healing energy slowly creeped out from his own hand, intersecting with and quickly catalyzing the work of Elara. Their spells seemed to ignite in a healing flash, and Vaelor was struck with vigor in the aftermath.
 
-At an opportune moment, the Shield Bearers form a phalanx and rush in, bolstered by some of the wounded they have healed.
+The air continued to crackle with dark energy as the Paladin unleashed blasts of shadow magic, tearing through the ranks of the brave combatants. The ground itself seemed to weep at the devastation wrought.
+
+At an opportune moment, the Shield Bearers form a phalanx and rush in, bolstered by some of the wounded they have healed. Vaelor bore his shield at the side of , joining the signature formation as if he had used such a technique a thousand times before.
 
 The Dark Paladin succumbs to a final blow, his figure shimmers in bright light and bright smoke seems to escape his armor, leaving a trail of magical energy.
 
-The cost was grievous. Fifty-four brave souls fell that day, their sacrifice a somber echo in the hearts of the survivors. Among the permanent fallen were Briar, Kaelen, and Eryndor, three of the patched wounded that returned to battle as allies of the Shield Bearers. Many of the survivors felt relief at the end of battle, some collapsed from exhaustion, some burst into tears for their fallen allies, and many also felt the sting of guilt for their survival.
+The cost was grievous. Fifty-four brave souls from across four guilds fell that day, their sacrifice a somber echo in the hearts of the survivors. Among the dead were Briar, Kaelen, and Eryndor, three of the patched wounded that returned to battle as allies of the Shield Bearers. Many of the survivors felt relief at the end of battle, some collapsed from exhaustion, some burst into tears for their fallen allies, and many also felt the sting of guilt for their survival.
 
 Overcome with guilt, a swordsman near the front line takes his own life. His body, blood, and tears fall near the damaged armor of the defeated Dark Paladin. After a brief moment, his blood and tears seemingly grow as a vine along the trail of energy left by the Dark Paladin. Then, seemingly under the weight of gravity, the trajectory arcs sharply down, running back into the ground. A dark purple light flashes under the blood vine and when the flash subsides an intricate purple doorway remains.
 
-the steadfast Kaelen, and others whose names would be remembered in songs and whispers. The guilds, Aria's, the Shield Bearers, and The Crimson Vanguard, fought as one, their unity a beacon in the tumult of war.
+Counting the losses of his own guild, and impressed with the performance of the Shield Bearers, Vaelor revealed that is one of The Council of Three that leads a notable guild called The Crimson Vanguard. He invites the Shield Bearers to join forces with his guild. Elara and the others unanimously agree. This new alliance, born from the fires of battle, was a fusion of hope, strength, and determination for the journey ahead.
 
-In the aftermath, victory was theirs, but it came with a heavy heart. The battlefield, strewn with remnants of the struggle, bore witness to their loss and their unwavering spirit. Amidst this bittersweet triumph, the Shield Bearers and the Crimson Vanguard, led by the noble Vaelor, merged. This new alliance, born from the fires of battle, was a fusion of hope, strength, and determination for the journey ahead.
-
-In this harrowing hour, 54 souls met their end, their sacrifice forever etched into the annals of this digital realm. Among the fallen were valiant hearts like Kaelen, whose light was extinguished too soon. The guilds - The Elementalists, The Mercenaries, and others - fought with unwavering courage, united in purpose against a common foe.
-
-As the dust settled, victory was theirs, but it was a triumph laced with the bitterness of loss. The survivors gathered, hearts heavy with grief, to honor those who would not return. From this crucible of battle, the seeds of a new alliance were sown. The Shield Bearers, led by the resolute Tank, and the Crimson Vanguard, under the noble Vaelor, merged into a single force, combining their strengths and aspirations for the challenges ahead.
+While occupied with discussion, Tank notices a few figures launch into the portal. "What in Evergreen are they doing?" he thinks. Many survivors gather into impromptu burial ceremonies. Soon Tank, his allies, and many others make for town.
 
 ### Chapter 5: The Gate Calls
 
-After a day of rest, Thane calls for a training exercise for the newly restructured Crimson Vanguard. The Whispering Woods are selected, an area on the Northeast side of the Lake of Whispers also Northeast of the Town of Echoes, where secrets and ancient magics linger in the air. As his group ventures deeper, the atmosphere grows thick with foreboding. It was here, amidst the eerie silence of the forest, that Tank's head burst with the pain of another migraine.
+After a day of rest, Thane calls for a training exercise for the newly restructured Crimson Vanguard. Thane, another of The Council of Three of the Crimson Vanguard, selects the Whispering Woods as a training location. The battle party departs northeast from town, making way quickly at first over a gravel trail, then departing the trail for grass to head due north to the woods, an east bank of the Lake of Whispers now to their left side.
 
-A vision of the Purple Gate swirled in his mind. This time, the gate was open and a hand reaches out, slowly at first, then accelerating with a grasping motion toward Tank. The vision is abruptly interrupted by a hazy view of the forest and blurred shouts. Figures like creepy men walk about lazily, and one figure darts like a cat. As Tank's vision cleares, he sees that battle has already begun. His allies express a range of emotion from fear and surprise to the readiness of pleased hunter in Thane.
+The group pierces the treeline and their view is quickly shadowed. The group cautiously browses for a target, progressing deeper with nothing besides plants yet seen. As the group ventures deeper, the shadows turn darker as the canopy grows more dense. A humid warmth and a musty smell tickle Tank's nose. The tickle peristed a moment, seemed to vanish, then returned with a blinding burst of force across his head.
+
+This new migraine brought with it a new vision. A vision of the Purple Gate adorned with black vines in the field of the recent traumatic victory swirl through his mind. This time, the gate was open and a hand reaches out, slowly at first, then accelerating with a grasping motion toward Tank. The vision is abruptly interrupted by a hazy view of the forest and blurred shouts. Figures like creepy men walk about lazily, and one figure darts like a cat. As Tank's vision cleares, he sees that battle has already begun. His allies express a range of emotion from fear and surprise to the readiness of pleased hunter in Thane.
 
 The dark shapes are slowly clarified. Several ghouls swing empty fists with little skill. The panther-like Shadow Stalker is another story. The dark, predatory, territorial beast seems to match or even overwhelm Selena, an elegant and talented blade dancer.
 
@@ -105,5 +105,9 @@ The battle proceeds as a dance of steel and magic. Selena's two blades whirl in 
 As steel meets shadow, the woods themselves seemed to hold their breath. Each parry, thrust, and incantation was a stroke in the grand tapestry of battle. The clash echoed through the woods, a symphony of conflict and survival.
 
 In the end, the shadow was dispelled, the foes vanquished, but the questions lingered like the remnants of Tank's vision, hinting at a destiny intertwined with the mysteries of this digital world. The journey of The Crimson Vanguard had taken a turn into realms both wondrous and daunting, where each step forward was a step into the unknown.
+
+### Chapter 6: A Hope of Resurrection
+
+The Ele
 
 **Epilogue**: As the characters settle into their new alliances and reflect on their journeys, the world around them continues to evolve. Challenges and mysteries abound, promising more adventures in this digital realm where reality and fantasy intertwine.

@@ -8,6 +8,18 @@ export default function GalleryPage() {
         <li className={`my-6 text-2xl`}>
           <Link href={`/gallery/art-roll`}>Art Roll</Link>
         </li>
+        <li className={`my-6 text-2xl`}>
+          <Link href={`/gallery/characters`}>Character Portraits</Link>
+        </li>
+        {/* <li className={`my-6 text-2xl`}>
+          <Link href={`/gallery/episodes`}>Episode Gallery</Link>
+        </li>
+        <li className={`my-6 text-2xl`}>
+          <Link href={`/gallery/places`}>Places</Link>
+        </li> */}
+        <li className={`my-6 text-2xl`}>
+          <Link href={`/gallery/random`}>Random Image</Link>
+        </li>
       </ul>
     </CustomPage>
   );
