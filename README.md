@@ -128,7 +128,8 @@ These are game sessions that haven't been written up and formalized into canon. 
    - Hex Grid RPG Battle Map
    - Wendigo in snowy forest
    - List Regions and Features
-   - Town, Character, Quest Setup
+   - [Town, Character, Quest Setup
+     ](https://chat.openai.com/share/9bb91cf2-1037-482b-aed6-13964456ac69)
    - Iron Flame Book Summary
 
 9. Worldbuilding
