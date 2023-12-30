@@ -32,7 +32,35 @@ Eidolon, seeking answers, scales a towering tree, glimpsing the serene Lake of W
 
 As Aria's Guild leads the search for the first floor boss, Tank seeks a guild to join. He finds a strong fit with The Shield Bearers, who welcome his membership contingent on passage of a trial of initiation.
 
-In the course of the trial, Tank is violently cut in half by a powerful water and metal elemental. Elara, a priestess of light, a healer, and the leader of the guild, revives him the next day and congratulates him on his succesful demonstration of commitment. The next day, the guild trains at the Lake of Whispers, where the power of the guild's mage is made clear and the now-three melee members develop a phalanx technique.
+In the course of the trial, Tank is violently cut in half by a powerful water and metal elemental. Elara, a priestess of light, a healer, and the leader of the guild, revives him the next day and congratulates him on his succesful demonstration of commitment.
+
+The next day, the warriors seek and gain approval from Elara to take up a training expedition at The Lake of Whispers. As the group advanced along the verdant path to the lake, Tank learned a bit more about his new party.
+
+Elara, the Healer-Leader, walked with an air of serene authority. Her stories, woven from the fabric of her distant village and her journey into the healing arts, floated around them like a gentle melody. Her leadership, firm yet suffused with empathy, painted her as the guild's guiding star.
+
+Gavriel was always near her side, looming with few words. His simple and large robe, a curtain to his past, fluttered each step on contact with the upper portion of his plain tanned boots. His common attire did little to mask an aura of intense magical power, the kind of which was lost on Tank.
+
+Lyra, an agile warrior, danced around the group as it proceeded, her twin swords catching glints of sunlight as she shared her tales of battle. Her laughter, light and spirited, broke through the group's focused march, injecting moments of levity.
+
+Kael marched directly, embodying a veteran, stalwart, serious, and perhaps slightly annoyed counterpart to the frontline of the guild. He exuded a sense of unwavering loyalty and deference to Elara. The clink of his heavy armor punctuates his every word, a reminder of his dedication to guild and mission.
+
+As they reached the lake, Gavriel's keen eyes fixed on a medium-sized lizardlike monster near the water's edge. "That one," he said, his voice low yet carrying an undertone of challenge. The group, with Tank at its heart, moved in swiftly but clumsily, utterly lacking organization or strategy.
+
+Kael's voice, gruff with encouragement, broke the momentary silence. "I'll take it head-on!" With a decisive gesture, he led the charge towards the unsuspecting lizard.
+
+The ensuing battle was a maelstrom of instinct. Lyra, the only contestant capable of graceful blade movement, struck first, and followed quickly, and again, so that a blur of silver seemed to appear before others had landed a single strike.
+
+Kael followed, his strength channeled into a crushing blow from above. Gavriel's presence, though silent, hummed with latent power, his eyes aglow with the promise of unleashed magic.
+
+As the lizard fought back, spraying a jet of water in defense, Elara stood like a beacon behind her companions. Her staff radiated healing light, weaving a protective tapestry around them.
+
+The confrontation at the water's edge was a dance of elements - steel, water, and arcane energy. The lizard, realizing the futility against such formidable opponents, made a desperate dash for the safety of the lake.
+
+But fate, or perhaps Gavriel's will, had other plans. With a mere gesture, a bolt of lightning arced from the mage's fingertips, striking the fleeing creature with unerring accuracy. The battle was over as swiftly as it had begun.
+
+In the aftermath, the Shield Bearers stood united and momentarily cheerful. Then, on reflection, the frontline was briefly visited by embarassment before it turned into convicion for further training. Lyra set her swords on the ground and practiced with Tank's spear and shield for a bit. By the day's end, the Shield Bearers' signature Phalanx move had come to life, and Lyra had retired from her beloved swords for the foreseeable future.
+
+As they returned towards the Town of Echoes, the world around them seemed to take a quiet breath. A cool mist followed from the lake to the edge of town, kissing their ankles with an acknowledgement of victory and whispering of the adventures that lay ahead.
 
 Eidolon joins up with a different guild called The Elementalists. They perform a training mission at the Crossroads of the Elements, where they unexpectedly come upon a merchant being robbed. They defeat the robbers, but Johan, their fire mage, is fatally wounded during the battle. From a distance, Gavriel somehow senses the fall of Johan.
 
