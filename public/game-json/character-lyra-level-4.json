@@ -1,0 +1,68 @@
+{
+  "awakening_region": "Town of Echoes",
+  "level": 4,
+  "name": "Lyra",
+  "rarity": "Uncommon",
+  "classes": ["Warrior"],
+  "race": "Human",
+  "age": 28,
+  "items_held": [
+    "Twin Short Swords",
+    "Light Leather Armor",
+    "Health Potion",
+    "Rations"
+  ],
+  "character_backstory": "Lyra, early in her journey with the Shield Bearers, is known for her agility and adaptability in battle. Her choice of twin swords reflects her preference for quick, agile combat.",
+  "personal_ambitions_goals": "To master her combat skills and become a versatile fighter capable of adapting to various battle scenarios.",
+  "irl_backstory": "Controlled by a real human player",
+  "memories": "Remembers logging into the game and is eager to explore and grow within the world of Evergreen.",
+  "gender": "Female",
+  "appearance": {
+    "eye_color": "Hazel",
+    "hair_color": "Dark brown",
+    "skin_tone": "Olive",
+    "physical_size": "Tall",
+    "physical_build": "Athletic and agile",
+    "notable_characteristics": "Confident and focused, with a readiness for action"
+  },
+  "notable_affinities": {
+    "religions": ["Warrior's Creed"],
+    "cultures": ["Agile Fighters"],
+    "guild_membership": "The Shield Bearers",
+    "general_reputation": "Emerging as a promising and adaptable warrior"
+  },
+  "special_abilities": ["Dual Wielding", "Quick Reflexes"],
+  "base_combat_statistics": {
+    "health_points": 12,
+    "attack": 14,
+    "defense": 10,
+    "speed": 14,
+    "magic_defense": 7
+  },
+  "current_combat_statistics": {
+    "health_points": 18.75,
+    "attack": 21.88,
+    "defense": 15.63,
+    "speed": 21.88,
+    "magic_defense": 10.94
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 60,
+      "conscientiousness": 70,
+      "extraversion": 65,
+      "agreeableness": 60,
+      "neuroticism": 35
+    },
+    "charisma": 65,
+    "intelligence": 60,
+    "dexterity": 80,
+    "strength": 75
+  },
+  "current_state": {
+    "health_status": "Full Health",
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Rested"
+  }
+}

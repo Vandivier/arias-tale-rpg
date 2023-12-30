@@ -1,0 +1,69 @@
+{
+  "awakening_region": "Town of Echoes",
+  "level": 5,
+  "name": "Lyra",
+  "rarity": "Uncommon",
+  "classes": ["Warrior"],
+  "race": "Human",
+  "age": 28,
+  "items_held": [
+    "Spear",
+    "Shield",
+    "Heavy Leather Armor",
+    "Health Potion",
+    "Rations"
+  ],
+  "character_backstory": "Lyra, adapting to the needs of the Shield Bearers, has taken up the spear and shield to contribute more effectively to the guild's defensive tactics, especially their signature Phalanx formation.",
+  "personal_ambitions_goals": "To become a versatile warrior who can switch between offensive and defensive roles as needed, proving her value in all aspects of combat.",
+  "irl_backstory": "Controlled by a real human player",
+  "memories": "Keenly remembers logging into the game, motivated to adapt and excel in different combat roles.",
+  "gender": "Female",
+  "appearance": {
+    "eye_color": "Hazel",
+    "hair_color": "Dark brown",
+    "skin_tone": "Olive",
+    "physical_size": "Tall",
+    "physical_build": "Athletic and sturdy",
+    "notable_characteristics": "Resolute expression, showcasing readiness for both offensive and defensive battles"
+  },
+  "notable_affinities": {
+    "religions": ["Warrior's Creed"],
+    "cultures": ["Strategic Fighters"],
+    "guild_membership": "The Shield Bearers",
+    "general_reputation": "Recognized for her adaptability and growing expertise in different combat styles"
+  },
+  "special_abilities": ["Shield Mastery", "Spear Proficiency"],
+  "base_combat_statistics": {
+    "health_points": 14,
+    "attack": 13,
+    "defense": 14,
+    "speed": 12,
+    "magic_defense": 8
+  },
+  "current_combat_statistics": {
+    "health_points": 21.88,
+    "attack": 20.31,
+    "defense": 21.88,
+    "speed": 18.75,
+    "magic_defense": 12.5
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 55,
+      "conscientiousness": 75,
+      "extraversion": 70,
+      "agreeableness": 65,
+      "neuroticism": 40
+    },
+    "charisma": 70,
+    "intelligence": 65,
+    "dexterity": 75,
+    "strength": 80
+  },
+  "current_state": {
+    "health_status": "Full Health",
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Rested"
+  }
+}
