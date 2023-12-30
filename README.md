@@ -81,49 +81,7 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
 
 These are game sessions that haven't been written up and formalized into canon. They are reported by ChatGPT thread name. These all occur after Oct 2023.
 
-1. Lunara Arc
-
-   - Aria's Tale RPG Overview
-   - Metagame for Aria's Tale
-   - Elven Archer Stat Sheet
-   - Roll Character Creation Dice
-   - Fantasy RPG Hero & Team
-
-2. Caelum Arc
-
-   - Create Aria's Tale Character
-
-3. Eldorin Arc
-
-   - Generate Game Character: Races
-
-4. Regional Lore
-
-   - Dwarven Stronghold from Salt Mines
-   - Hex Grid RPG Battle Map
-   - Wendigo in snowy forest
-   - List Regions and Features
-   - Town, Character, Quest Setup
-   - Iron Flame Book Summary
-
-5. Bearkin Arc
-
-   - Druid Transformation Image
-
-6. Ezekiel's Arc
-
-   - Angel Appearances: Bible Descriptions
-
-7. Elemental Sacrifice Arc
-
-   - Clarifying AI GM Instructions
-
-8. Strategic Mode Development
-
-   - Gridless RPG Battles Possible
-   - RPG Battlemap in CSV
-
-9. Of Leaves, Town, and Squirrels (aka Aria's Arc)
+1. Aria's Arc, the Arc of Leaves, Town, and Squirrels
 
    - Summarizing common types.
    - Blue-Eyed Elven Rogue
@@ -134,11 +92,50 @@ These are game sessions that haven't been written up and formalized into canon. 
    - Player Units' Stats Setup
    - Hex Grid RPG Encounter
 
-10. Worldbuilding
+2. Lunara's Arc
 
-    - Anime Plot Summary
-    - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
-    - Discord since 11/22/23
+   - Aria's Tale RPG Overview
+   - Metagame for Aria's Tale
+   - Elven Archer Stat Sheet
+   - Roll Character Creation Dice
+   - Fantasy RPG Hero & Team
+
+3. Caelum's Arc, the Second Heaven Arc
+
+   - Create Aria's Tale Character
+
+4. Eldorin's Arc
+
+   - Generate Game Character: Races
+
+5. Ulraker's Arc, the Bearkin Arc
+
+   - Druid Transformation Image
+
+6. Ezekiel's Arc, the Elemental Sacrifice Arc
+
+   - Clarifying AI GM Instructions
+   - Angel Appearances: Bible Descriptions
+
+7. Strategic Mode Development
+
+   - Gridless RPG Battles Possible
+   - RPG Battlemap in CSV
+
+8. Regional Lore
+
+   - Dwarven Stronghold from Salt Mines
+   - Hex Grid RPG Battle Map
+   - Wendigo in snowy forest
+   - List Regions and Features
+   - Town, Character, Quest Setup
+   - Iron Flame Book Summary
+
+9. Worldbuilding
+
+   - Anime Plot Summary
+   - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
+   - Discord since 11/22/23
 
 ### Narrative Influences
 
