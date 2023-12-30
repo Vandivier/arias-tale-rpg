@@ -8,7 +8,7 @@ title: "Episode Narrative Guide"
 
 One bright afternoon, a warrior takes a seat on a stump in a safe, shaded region of the Forest of Echoes. He carries a spear and shield across his back, while he carries a bag of freshly picked berries and walnuts in his hand. He tosses a berry into his mouth and reaches for a second when he hears a faint doorbell.
 
-Mike realizes his pizza has arrived. He taps logout using his neural controller, but the button doesn't work. He tries again. Is there a bug in the game world of Evegreen?
+Mike realizes his pizza has arrived. He taps logout using his neural controller, but the button doesn't work. He tries again. Is there a bug in the game world of Evergreen?
 
 Suddenly, the sky darkens with an orange glow. A massive, powerful figure appears in the sky. This figure confirms the inability of all players to log out unless and until a daunting challenge is completed: the 100th floor boss must be defeated.
 
