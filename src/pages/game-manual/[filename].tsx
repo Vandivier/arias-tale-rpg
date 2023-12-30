@@ -33,6 +33,13 @@ const DocPage: React.FC<DocPageProps> = ({ content, title }) => {
         </ol>
       );
     },
+    a({ className, children, ...props }) {
+      return (
+        <a className={`underline ${className}`} {...props}>
+          {children}
+        </a>
+      );
+    },
   };
 
   return (
