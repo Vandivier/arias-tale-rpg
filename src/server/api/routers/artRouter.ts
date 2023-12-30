@@ -48,13 +48,17 @@ function artRollFunction() {
     "Arabesque",
     "Thangka",
     "Byzantine",
-    "Stained Glass",
     "Mandala",
     "Iconographic",
     "Mural",
     "Chibi",
     "Tabletop Miniature",
     "Pop-up Book Art",
+    "Stick Figures",
+    "Ideographic Script",
+    "Hieroglyphics",
+    "Eastern Pictographic Writing",
+    "Nahuatl",
   ];
 
   const modifierStyles = [
@@ -71,6 +75,7 @@ function artRollFunction() {
     "Cartoon",
     "Origami",
     "Carved",
+    "Stained Glass",
   ];
 
   const artRolls = [];
