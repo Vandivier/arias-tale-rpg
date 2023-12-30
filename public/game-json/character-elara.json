@@ -1,0 +1,74 @@
+{
+  "awakening_region": "Town of Echoes",
+  "level": 6,
+  "name": "Elara",
+  "rarity": "Unique",
+  "classes": ["Priestess of Light"],
+  "race": "Human",
+  "age": 32,
+  "items_held": [
+    "Staff of Light",
+    "Sacred Tome",
+    "Robes of the Divine",
+    "Healing Crystals",
+    "Mana Potions"
+  ],
+  "character_backstory": "Leader of the Shield Bearers, known for her healing powers and spiritual guidance. She played a crucial role in the Battle of the Dark Paladin, reviving fallen allies.",
+  "personal_ambitions_goals": "To bring light to the darkness of Evergreen and guide her guild members to safety.",
+  "irl_backstory": "Controlled by a real human player",
+  "memories": "Clear recollection of logging into the game, driven to find the truth behind the Monstrous Vision.",
+  "gender": "Female",
+  "appearance": {
+    "eye_color": "Blue",
+    "hair_color": "Blonde",
+    "skin_tone": "Fair",
+    "physical_size": "Medium",
+    "physical_build": "Graceful",
+    "notable_characteristics": "Aura of serenity, often surrounded by a soft glow"
+  },
+  "notable_affinities": {
+    "religions": ["Order of the Light"],
+    "cultures": ["Healers and Spiritual Leaders"],
+    "guild_membership": "The Shield Bearers",
+    "general_reputation": "Revered for her wisdom, compassion, and leadership"
+  },
+  "special_abilities": [
+    "Minor Resurrect Other",
+    "Divine Healing",
+    "Light Shield",
+    "Spiritual Guidance"
+  ],
+  "base_combat_statistics": {
+    "health_points": 5,
+    "attack": 3,
+    "defense": 4,
+    "speed": 3,
+    "magic_defense": 7
+  },
+  "current_combat_statistics": {
+    "health_points": 7.81,
+    "attack": 4.69,
+    "defense": 6.25,
+    "speed": 4.69,
+    "magic_defense": 10.94
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 75,
+      "conscientiousness": 85,
+      "extraversion": 60,
+      "agreeableness": 80,
+      "neuroticism": 35
+    },
+    "charisma": 80,
+    "intelligence": 85,
+    "dexterity": 60,
+    "strength": 50
+  },
+  "current_state": {
+    "health_status": "Full Health",
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Rested"
+  }
+}
