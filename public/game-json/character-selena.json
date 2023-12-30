@@ -1,0 +1,68 @@
+{
+  "awakening_region": "Mystic Glade",
+  "level": 4,
+  "name": "Selena",
+  "rarity": "Rare",
+  "classes": ["Blade Dancer"],
+  "race": "Human",
+  "age": 25,
+  "items_held": ["Elixir of Agility", "Smoke Bombs", "Thieves' Tools"],
+  "items_equipped": [
+    "Twin Daggers of the Wind",
+    "Light Leather Armor",
+    "Cloak of Shadows"
+  ],
+  "character_backstory": "Raised in the elusive guild of shadow dancers, Selena combines her agility with her blade dancing skills.",
+  "personal_ambitions_goals": "To become the greatest blade dancer ever known and uncover the secrets of her mysterious past.",
+  "irl_backstory": "Controlled by a player who values agility and stealth over brute strength.",
+  "memories": "Fuzzy recollections of a life before Evergreen, with memories of dance and shadows.",
+  "gender": "Female",
+  "appearance": {
+    "eye_color": "Hazel",
+    "hair_color": "Jet Black",
+    "skin_tone": "Fair",
+    "physical_size": "Medium",
+    "physical_build": "Agile",
+    "notable_characteristics": "Graceful movement, almost cat-like"
+  },
+  "notable_affinities": {
+    "religions": ["Cult of the Whispering Wind"],
+    "cultures": ["Guild of Shadow Dancers"],
+    "guild_membership": "Crimson Vanguard",
+    "general_reputation": "Known for her elusive nature and deadly precision with blades"
+  },
+  "special_abilities": ["Shadow Dance", "Whirlwind Blades", "Stealth Strike"],
+  "base_combat_statistics": {
+    "health_points": 4,
+    "attack": 5,
+    "defense": 3,
+    "speed": 6,
+    "magic_defense": 2
+  },
+  "current_combat_statistics": {
+    "health_points": 6.25,
+    "attack": 7.81,
+    "defense": 4.69,
+    "speed": 9.38,
+    "magic_defense": 3.13
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 70,
+      "conscientiousness": 60,
+      "extraversion": 40,
+      "agreeableness": 50,
+      "neuroticism": 45
+    },
+    "charisma": 65,
+    "intelligence": 70,
+    "dexterity": 85,
+    "strength": 55
+  },
+  "current_state": {
+    "health_status": "Healthy",
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Alert"
+  }
+}

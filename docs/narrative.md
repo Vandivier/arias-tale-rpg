@@ -108,6 +108,8 @@ In the end, the shadow was dispelled, the foes vanquished, but the questions lin
 
 ### Chapter 6: A Hope of Resurrection
 
-The Ele
+The Elementalists and Jacob, the merchant they defended, return to the Town of Echoes with the torn body of Johan wrapped in salvaged strips of his own clothes and those of the defeated robbers. The group visits the tavern. While some of the group drink in sorrow, their sorrows are quickly matched as they hear stories from others of the battle of the Dark Paladin. Eidolon seeks further information about the spear warrior he watched enter town days ago to no avail, but he does hear rumors of a possible resurrection for Johan.
+
+He hears about two rumors in particular. The first is a Tome of Resurrection held by a collector of rare items in another town of the region. The second is the existence of a powerful mage near the Obsidian Forest. The Elementalists decide to seek aid to their now-weakened party. Working their persuasive abilities, the group identifies two potential allied groups: The Knights of the Silver Dragon and the Order of the Azure Lily. At the mention of the Obsidian Forest, the Knights of the Silver Dragon abruptly reject talks of a joint venture. Presenting a different pitch to the Order of the Azure Lily results in a more positive outcome. The guild will head for Yr Adlais Olaf o Ddŵr, which humans call Adlais, an elven village to the east of the Crossroads of the Elements.
 
 **Epilogue**: As the characters settle into their new alliances and reflect on their journeys, the world around them continues to evolve. Challenges and mysteries abound, promising more adventures in this digital realm where reality and fantasy intertwine.
