@@ -19,7 +19,7 @@ interface DocPageProps {
 
 const DocPage: React.FC<DocPageProps> = ({ content, filenames, title }) =>
   filenames ? (
-    <DocIndexPage filenames={filenames} title="Directory Listing" />
+    <DocIndexPage filenames={filenames} title={title} />
   ) : (
     <DocContentPage content={content ?? ""} title={title} />
   );
@@ -107,7 +107,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
       props: {
         filenames,
-        title: "Directory Listing",
+        title: "Game Manual",
       },
     };
   }
