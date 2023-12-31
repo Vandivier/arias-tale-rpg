@@ -82,40 +82,16 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
 These are game sessions that haven't been written up and formalized into canon. They are reported by ChatGPT thread name. These all occur after Oct 2023.
 
 1. Aria's Arc, the Arc of Leaves, Town, and Squirrels
-
-   - Summarizing common types.
-   - Blue-Eyed Elven Rogue
-   - Elven Rogue in Forest
-   - Quest for Johan's Revival
-   - Purple Gate in Forest
-   - List Regions and Features
-   - Player Units' Stats Setup
-   - Hex Grid RPG Encounter
-
 2. Lunara's Arc
-
-   - Aria's Tale RPG Overview
-   - Metagame for Aria's Tale
-   - Elven Archer Stat Sheet
-   - Roll Character Creation Dice
-   - Fantasy RPG Hero & Team
-
 3. Caelum's Arc, the Second Heaven Arc
-
-   - Create Aria's Tale Character
-
-4. Eldorin's Arc
+4. Ezekiel's Arc, the Elemental Sacrifice Arc
+5. Eldorin's Arc
 
    - Generate Game Character: Races
 
-5. Ulraker's Arc, the Bearkin Arc
+6. Ulraker's Arc, the Bearkin Arc
 
    - Druid Transformation Image
-
-6. Ezekiel's Arc, the Elemental Sacrifice Arc
-
-   - Clarifying AI GM Instructions
-   - Angel Appearances: Bible Descriptions
 
 7. Strategic Mode Development
 
