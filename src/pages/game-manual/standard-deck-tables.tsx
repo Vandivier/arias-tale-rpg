@@ -6,3 +6,5 @@ export const StandardDeckTables = () => {
     </div>
   );
 };
+
+export default StandardDeckTables;
