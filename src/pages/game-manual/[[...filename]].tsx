@@ -11,17 +11,30 @@ import path from "path";
 import { DocContentPage } from "~/components/DocContentPage";
 import { DocIndexPage } from "~/components/DocIndexPage";
 
+const GitHubRawRoot =
+  "https://raw.githubusercontent.com/Vandivier/arias-tale-rpg/main/docs/";
+
 interface DocPageProps {
   content?: string;
   filePaths?: string[];
+  rawMarkdownUrl?: string;
   title: string;
 }
 
-const DocPage: React.FC<DocPageProps> = ({ content, filePaths, title }) =>
+const DocPage: React.FC<DocPageProps> = ({
+  content,
+  filePaths,
+  rawMarkdownUrl,
+  title,
+}) =>
   filePaths ? (
     <DocIndexPage filePaths={filePaths} title={title} />
   ) : (
-    <DocContentPage content={content ?? ""} title={title} />
+    <DocContentPage
+      content={content ?? ""}
+      rawMarkdownUrl={rawMarkdownUrl}
+      title={title}
+    />
   );
 
 async function getFiles(dir: string): Promise<string[]> {
@@ -129,6 +142,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       content: cleanedContent,
+      rawMarkdownUrl: `${GitHubRawRoot}${markdownFileName}`,
       title: (typeof data.title === "string" && data.title) || "No Title",
     },
   };
