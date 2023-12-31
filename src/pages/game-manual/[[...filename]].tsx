@@ -100,9 +100,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (await isDirectory(filePath)) {
     const fileNameWithExtension = await fs.promises.readdir(filePath);
-    const filenames = fileNameWithExtension
-      .filter((f) => f.endsWith(".md"))
-      .map((f) => f.replace(/\.md$/, ""));
+    const filenames = fileNameWithExtension.map((f) => f.replace(/\.md$/, ""));
 
     return {
       props: {
