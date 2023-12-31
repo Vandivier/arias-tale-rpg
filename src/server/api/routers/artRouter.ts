@@ -28,7 +28,8 @@ function artRollFunction() {
     "Realism",
     "Impressionism",
     "Surrealism",
-    "Cubism",
+    "Analytical Cubism or Early Cubism",
+    "Late Cubism or Post-Cubism",
     "Pop Art",
     "Art Nouveau",
     "Art Deco",
@@ -66,7 +67,7 @@ function artRollFunction() {
     "Color Monochrome (Non-grayscale. Declare the monochrome hue before drawing.)",
     "Black and White, Sepia, Pyrography, or Grayscale (Declare which before drawing).",
     "Pixel Art",
-    "Photorealistic",
+    "Photorealism",
     "Sculpture",
     "Watercolor",
     "Pen and Ink",
@@ -74,9 +75,12 @@ function artRollFunction() {
     "Crayon",
     "Cartoon",
     "Origami",
-    "Carved",
     "Stained Glass",
     "Two-Tone Color Scheme",
+    "Asymmetry",
+    "with the image split into two parts",
+    "with a circular split image",
+    "Pyrography",
   ];
 
   const artRolls = [];
