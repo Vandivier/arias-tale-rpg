@@ -1,8 +1,18 @@
 ---
-title: "Episode Narrative Guide"
+title: "Episode Narrative Guide - Arc Aria"
 ---
 
-<!-- Taken from: https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623 -->
+<!--
+    Taken from:
+    - [Summarizing common types.](https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623)
+    - Blue-Eyed Elven Rogue
+    - Elven Rogue in Forest
+    - Quest for Johan's Revival
+    - Purple Gate in Forest
+    - List Regions and Features
+    - Player Units' Stats Setup
+    - Hex Grid RPG Encounter
+-->
 
 ### Chapter 1 Summary: The Monstrous Vision
 

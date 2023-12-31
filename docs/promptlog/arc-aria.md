@@ -1,5 +1,5 @@
 ---
-title: "Prompt Log"
+title: "Prompt Log - Arc Aria"
 ---
 
 This document gives a behind-the-scenes technical look at prompts used to play campaign sessions that were eventually included into the canon.
@@ -88,4 +88,9 @@ Some prompts have been updated or removed. In particular, prompts requesting a s
 74. "The hits in this round were as follows: 1. Thorned Entangler had medium success 2. Forest Ghoul 1 landed a strong hit 3. Forest Ghoul 2 landed a strong hit 4. Kael landed a critical hit. Who did they attack and using what ability? Do not give 'likely' explanations: Take the roll of game master and pick specifically."
 75. "For round 2, Thane and Tank can also act. Give the turn order, considering the Shadow Stalker is stunned."
 76. "Roll 1d20 for each character. Everyone is using basic attacks (feel free to modify this for the enemies as you please). Remember, Selena has a basic attack with two strikes in it, so roll 2d20 for her. Interpret the rolls this way: [roll interpretation criteria] Before declaring the individual turns, make a 1d20 environment check: if the roll is over 15 trigger an environment event. Here are the roll results: [dice roll results]"
-77. thane takes light damage, thane destroys the thorned entangler, and the shadow stalker takes moderate damage.
+77. "Thane takes light damage, Thane destroys the Thorned Entangler, and the Shadow Stalker takes moderate damage. Draw this."
+78. "Forest Ghoul 3 - This ghoul joins the fray, targeting any vulnerable member of Thane's group. Pick a specific target."
+79. "The ghoul has high damage on Selena."
+80. "Now that the Thorned Entangler is gone, write out the turn order for the next round."
+81. "Does anything in the environment happen?"
+82. "Thane retreats from combat and Selena kills a Ghoul. The Shadow Stalker is down. What is the remaining turn order?"
