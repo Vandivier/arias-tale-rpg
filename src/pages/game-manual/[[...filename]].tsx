@@ -13,13 +13,13 @@ import { DocIndexPage } from "~/components/DocIndexPage";
 
 interface DocPageProps {
   content?: string;
-  filenames?: string[];
+  filePaths?: string[];
   title: string;
 }
 
-const DocPage: React.FC<DocPageProps> = ({ content, filenames, title }) =>
-  filenames ? (
-    <DocIndexPage filenames={filenames} title={title} />
+const DocPage: React.FC<DocPageProps> = ({ content, filePaths, title }) =>
+  filePaths ? (
+    <DocIndexPage filePaths={filePaths} title={title} />
   ) : (
     <DocContentPage content={content ?? ""} title={title} />
   );
@@ -100,18 +100,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (await isDirectory(filePath)) {
     const fileNameWithExtension = await fs.promises.readdir(filePath);
-    const filenames = fileNameWithExtension.map((f) => f.replace(/\.md$/, ""));
+    const filePaths = fileNameWithExtension.map((file) =>
+      path.join(...filename, file).replace(/\.md$/, ""),
+    );
 
     return {
       props: {
-        filenames,
+        filePaths,
         title: "Game Manual",
       },
     };
   }
 
   const markdownFileName = `${
-    Array.isArray(filename) ? filename.join("") : filename
+    Array.isArray(filename) ? filename.join("/") : filename
   }.md`;
   const markdownFile = path.join(process.cwd(), "docs", markdownFileName);
   const fileContents = fs.readFileSync(markdownFile, "utf8");

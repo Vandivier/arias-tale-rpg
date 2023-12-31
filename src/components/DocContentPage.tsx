@@ -1,7 +1,3 @@
-import fs from "fs";
-import matter from "gray-matter";
-import type { GetStaticPaths, GetStaticProps } from "next";
-import path from "path";
 import ReactMarkdown from "react-markdown";
 import { CustomPage } from "./CustomPage";
 

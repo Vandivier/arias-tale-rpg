@@ -2,19 +2,21 @@ import Link from "next/link";
 import { CustomPage } from "./CustomPage";
 
 interface DocIndexPageProps {
-  filenames: string[];
+  filePaths: string[];
   title: string;
 }
 
-export const DocIndexPage = ({ filenames, title }: DocIndexPageProps) => (
+export const DocIndexPage = ({ filePaths, title }: DocIndexPageProps) => (
   <CustomPage mainHeading={title}>
-    {filenames.length ? (
+    {filePaths.length ? (
       <ul>
-        {filenames.map((file: string, index: number) => {
-          const prettyName = file.replace(".md", "");
+        {filePaths.map((currFilePath: string, index: number) => {
+          const prettyName =
+            currFilePath.split("/").pop()?.replace(".md", "") ?? "";
+
           return (
             <li className={`my-6 text-2xl`} key={index}>
-              <Link href={`/game-manual/${prettyName}`}>
+              <Link href={`/game-manual/${currFilePath}`}>
                 {prettyName.toUpperCase()}
               </Link>
             </li>
