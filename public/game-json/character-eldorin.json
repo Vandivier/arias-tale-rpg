@@ -6,15 +6,7 @@
   "classes": ["Bard", "Tamer"],
   "race": "Half-Elf",
   "age": 29,
-  "items_held": [
-    "Lute of Echoes",
-    "Whistle of the Wild",
-    "Healing Herbs",
-    "Enchanted Cloak",
-    "Map of the Unknown Lands",
-    "Potion of Clarity",
-    "Tamer's Bond (magical artifact)"
-  ],
+  "items_held": ["Harmony Wood Lute", "Healing Herbs"],
   "character_backstory": "Eldorin, a wandering minstrel with a deep connection to the wilds, harbors a secret unknown to many - he is also a half-mermaid. Born under the mystic moonlight, his heritage is hidden beneath his perfect half-elf visage. His quest is driven by a longing to understand the harmonic balance of land and sea, and the mystical influence of the moon on both realms.",
   "personal_ambitions_goals": "To uncover the secrets of his dual heritage and compose a symphony that resonates with both the forest's whispers and the ocean's songs.",
   "irl_backstory": "Controlled by a real human, a music teacher with a fascination for mythological creatures.",

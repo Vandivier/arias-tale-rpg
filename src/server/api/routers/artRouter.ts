@@ -63,8 +63,8 @@ function artRollFunction() {
 
   const modifierStyles = [
     "Charcoal",
-    "Color Monochrome",
-    "Black and White",
+    "Color Monochrome (Non-grayscale. Declare the monochrome hue before drawing.)",
+    "Black and White, Sepia, Pyrography, or Grayscale (Declare which before drawing).",
     "Pixel Art",
     "Photorealistic",
     "Sculpture",
@@ -76,6 +76,7 @@ function artRollFunction() {
     "Origami",
     "Carved",
     "Stained Glass",
+    "Two-Tone Color Scheme",
   ];
 
   const artRolls = [];

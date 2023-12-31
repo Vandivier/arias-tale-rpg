@@ -6,12 +6,7 @@
   "classes": ["Warrior"],
   "race": "Human",
   "age": 28,
-  "items_held": [
-    "Twin Short Swords",
-    "Light Leather Armor",
-    "Health Potion",
-    "Rations"
-  ],
+  "items_held": ["Twin Short Swords", "Light Leather Armor", "Health Potion"],
   "character_backstory": "Lyra, early in her journey with the Shield Bearers, is known for her agility and adaptability in battle. Her choice of twin swords reflects her preference for quick, agile combat.",
   "personal_ambitions_goals": "To master her combat skills and become a versatile fighter capable of adapting to various battle scenarios.",
   "irl_backstory": "Controlled by a real human player",
