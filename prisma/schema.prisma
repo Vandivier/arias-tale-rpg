@@ -91,7 +91,6 @@ model GameCard {
     name        String
     description String
     isGeneric   Boolean
-    kind        CardKindEnum
     rarity      CardRarityEnum
     tags        Tag[]
 
@@ -133,6 +132,7 @@ model UserCustomDeck {
     gameCards   UserGameCard[]
 }
 
+// TODO: seed notable non_battler tags including techniques, items, environments, and events
 model Tag {
     id        Int      @id @default(autoincrement())
     createdAt DateTime @default(now())
@@ -172,11 +172,6 @@ model PokerCard {
     name     String             @unique
     suit     String
     mappings PokerCardMapping[]
-}
-
-enum CardKindEnum {
-    BATTLER
-    ITEM
 }
 
 enum CardRarityEnum {
