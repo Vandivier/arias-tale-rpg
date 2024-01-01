@@ -64,8 +64,8 @@ function artRollFunction() {
 
   const modifierStyles = [
     "Charcoal",
-    "Color Monochrome (Non-grayscale. Declare the monochrome hue before drawing.)",
-    "Black and White, Sepia, Pyrography, or Grayscale (Declare which before drawing).",
+    "Color Monochrome (Non-grayscale and declare the monochrome hue before drawing)",
+    "Black and White, Sepia, Pyrography, or Grayscale (Declare which before drawing)",
     "Pixel Art",
     "Photorealism",
     "Sculpture",
@@ -87,10 +87,20 @@ function artRollFunction() {
   const numberOfPieces = getRandomInt(1, 6);
 
   for (let i = 0; i < numberOfPieces; i++) {
+    const artSubjects = [
+      "Aria's Arc, Ch. 1",
+      "Aria's Arc, Ch. 2",
+      "Aria's Arc, Ch. 3",
+      "Aria's Arc, Ch. 4",
+      "Aria's Arc, Ch. 5",
+      "Aria's Arc, Ch. 6",
+      "Caelum's Arc, Ch. 1",
+      "Lunara's Arc, Ch. 1",
+      "Ezekiel's Arc, Ch. 1",
+      "a TCG Card Back with a 7:5 aspect ratio. Feature a d20 die or hexagon (declare before drawing) and the letters 'AT'",
+    ];
     const artSubject =
-      getRandomInt(1, 6) === 6
-        ? "Not Aria's Arc"
-        : `Chapter ${getRandomInt(1, 5)}`;
+      artSubjects[Math.floor(Math.random() * artSubjects.length)];
 
     // Roll for the art style
     let artStyle = "";

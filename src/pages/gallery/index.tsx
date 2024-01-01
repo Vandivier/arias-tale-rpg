@@ -8,13 +8,13 @@ export default function GalleryPage() {
         <li className={`my-6 text-2xl`}>
           <Link href={`/gallery/art-roll`}>Art Roll</Link>
         </li>
-        <li className={`my-6 text-2xl`}>
-          <Link href={`/gallery/characters`}>Character Portraits</Link>
-        </li>
         {/*
             - TODO: below pages + search by tag & other attributes
             - Episode gallery browser has multiple images per episode
 
+        <li className={`my-6 text-2xl`}>
+          <Link href={`/gallery/characters`}>Character Portraits</Link>
+        </li>
         <li className={`my-6 text-2xl`}>
           <Link href={`/gallery/episodes`}>Episode Gallery</Link>
         </li>
