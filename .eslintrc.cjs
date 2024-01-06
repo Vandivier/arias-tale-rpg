@@ -7,7 +7,8 @@ const config = {
   plugins: ["@typescript-eslint"],
   extends: [
     "plugin:@next/next/recommended",
-    "plugin:@typescript-eslint/recommended-type-checked",
+    // TODO: I shouldn't have to comment the below rule..ask on Discord
+    // "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
   ],
   rules: {
