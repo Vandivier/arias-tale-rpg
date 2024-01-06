@@ -14,7 +14,7 @@ title: "Episode Narrative Guide - Arc Aria"
     - Hex Grid RPG Encounter
 -->
 
-### Chapter 1 Summary: The Monstrous Vision
+## Chapter 1 Summary: The Monstrous Vision
 
 One bright afternoon, a warrior takes a seat on a stump in a safe, shaded region of the Forest of Echoes. He carries a spear and shield across his back, while he carries a bag of freshly picked berries and walnuts in his hand. He tosses a berry into his mouth and reaches for a second when he hears a faint doorbell.
 
@@ -24,7 +24,7 @@ Suddenly, the sky darkens with an orange glow. A massive, powerful figure appear
 
 The mysterious and monstrous figure warns of the extraordinary power of these floor bosses, advising players to form parties, guilds, and inter-guild alliances for survival. The figure notably enhances the strength of one monster on each floor, making them unbeatable by even the most powerful players alone.
 
-### Chapter 2: Of Leaves, Town, and Squirrels
+## Chapter 2: Of Leaves, Town, and Squirrels
 
 Eidolon reels in shock as the monster vanishes from the sky, taking the sick orange light with it. He wonders to himself, "What should I do?" It dawns on him that he can't remember what he was doing in the first place. In fact, he doesn't remember logging in at all.
 
@@ -38,7 +38,7 @@ Tank, the spearman played by Mike, shelters for a while in a safe portion of the
 
 Eidolon, seeking answers, scales a towering tree, glimpsing the serene Lake of Whispers, Tank in his tussle with the squirrel, and the distant town. Eidolon heads for the town, deftly avoiding a pack of wolves.
 
-### Chapter 3: Preparation and Search
+## Chapter 3: Preparation and Search
 
 As Aria's Guild leads the search for the first floor boss, Tank seeks a guild to join. He finds a strong fit with The Shield Bearers, who welcome his membership contingent on passage of a trial of initiation.
 
@@ -74,7 +74,7 @@ As they returned towards the Town of Echoes, the world around them seemed to tak
 
 Eidolon joins up with a different guild called The Elementalists. They perform a training mission at the Crossroads of the Elements, where they unexpectedly come upon a merchant being robbed. They defeat the robbers, but Johan, their fire mage, is fatally wounded during the battle. Eidolon notably recovers a magical earth crystal among other prizes. From a distance, Gavriel somehow senses the fall of Johan.
 
-### Chapter 4: The Clash of Titans and Unification
+## Chapter 4: The Clash of Titans and Unification
 
 The land trembles. From the Lake of Whispers, Tank spots a dark mushroom cloud erupt from the heart of the forest. Aria's Guild, it seems, has found the first floor boss.
 
@@ -98,7 +98,7 @@ Counting the losses of his own guild, and impressed with the performance of the 
 
 While occupied with discussion, Tank notices a few figures launch into the portal. "What in Evergreen are they doing?" he thinks. Many survivors gather into impromptu burial ceremonies. Soon Tank, his allies, and many others make for town.
 
-### Chapter 5: The Gate Calls
+## Chapter 5: The Gate Calls
 
 After a day of rest, Thane calls for a training exercise for the newly restructured Crimson Vanguard. Thane, another of The Council of Three of the Crimson Vanguard, selects the Whispering Woods as a training location. The battle party departs northeast from town, making way quickly at first over a gravel trail, then departing the trail for grass to head due north to the woods, an east bank of the Lake of Whispers now to their left side.
 
@@ -116,7 +116,7 @@ As steel meets shadow, the woods themselves seemed to hold their breath. Each pa
 
 In the end, the shadow was dispelled, the foes vanquished, but the questions lingered like the remnants of Tank's vision, hinting at a destiny intertwined with the mysteries of this digital world. The journey of The Crimson Vanguard had taken a turn into realms both wondrous and daunting, where each step forward was a step into the unknown.
 
-### Chapter 6: A Hope of Resurrection
+## Chapter 6: A Hope of Resurrection
 
 The Elementalists and Jacob, the merchant they defended, return to the Town of Echoes with the torn body of Johan wrapped in salvaged strips of his own clothes and those of the defeated robbers. The group visits the tavern. While some of the group drink in sorrow, their sorrows are quickly matched as they hear stories from others of the battle of the Dark Paladin. Eidolon seeks further information about the spear warrior he watched enter town days ago to no avail, but he does hear rumors of a possible resurrection for Johan.
 
