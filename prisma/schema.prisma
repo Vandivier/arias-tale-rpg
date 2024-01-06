@@ -74,11 +74,11 @@ model SearchableImage {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    description   String
-    imageFileName String
+    description   String @unique
+    imageFileName String @unique
 
     tags          Tag[]
-    title         String
+    title         String         @unique
     gameCard      GameCard?
     userGameCards UserGameCard[]
 }
@@ -150,7 +150,7 @@ model StandardDeck {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name              String @unique
+    name              String             @unique
     description       String
     pokerCardMappings PokerCardMapping[]
 }
