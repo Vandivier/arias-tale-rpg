@@ -64,7 +64,7 @@ export const searchableImages: SearchableImageSeed[] = [
     description:
       "A fire elemental with the ability to create a massive fire shield.",
     id: 4,
-    imageFileName: "4-guardian-elemental.png",
+    imageFileName: "4-guardian-fire-elemental.png",
     tags: ["fire", "elemental", "battler"],
     title: "Guardian Fire Elemental",
   },
