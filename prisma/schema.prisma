@@ -74,8 +74,8 @@ model SearchableImage {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    description String
-    imageUrl    String
+    description   String
+    imageFileName String
 
     tags          Tag[]
     title         String
@@ -88,8 +88,8 @@ model GameCard {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name        String
-    description String
+    name        String         @unique
+    description String         @unique
     isGeneric   Boolean
     rarity      CardRarityEnum
     tags        Tag[]
@@ -138,7 +138,7 @@ model Tag {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name             String
+    name             String            @unique
     isPrintedTag     Boolean
     searchableImages SearchableImage[]
     gameCards        GameCard[]
@@ -150,7 +150,7 @@ model StandardDeck {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name              String
+    name              String @unique
     description       String
     pokerCardMappings PokerCardMapping[]
 }
