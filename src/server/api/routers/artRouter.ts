@@ -23,7 +23,7 @@ function rollArtStyle(styles: string[]): string {
   return result;
 }
 
-function artRollFunction() {
+function createRandomArtPrompt() {
   const baseStyles = [
     "Realism",
     "Impressionism",
@@ -133,6 +133,6 @@ function artRollFunction() {
 
 export const artRouter = createTRPCRouter({
   getArtRoll: publicProcedure.query(() => {
-    return artRollFunction();
+    return createRandomArtPrompt();
   }),
 });

@@ -17,6 +17,11 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+
+  // Add the images property to configure external domains
+  images: {
+    domains: ["github.com"],
+  },
 };
 
 export default config;
