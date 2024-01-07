@@ -98,17 +98,7 @@ These are game sessions that haven't been written up and formalized into canon. 
    - Gridless RPG Battles Possible
    - RPG Battlemap in CSV
 
-8. Regional Lore
-
-   - Dwarven Stronghold from Salt Mines
-   - Hex Grid RPG Battle Map
-   - Wendigo in snowy forest
-   - List Regions and Features
-   - [Town, Character, Quest Setup
-     ](https://chat.openai.com/share/9bb91cf2-1037-482b-aed6-13964456ac69)
-   - Iron Flame Book Summary
-
-9. Worldbuilding
+8. Worldbuilding
 
    - Anime Plot Summary
    - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
