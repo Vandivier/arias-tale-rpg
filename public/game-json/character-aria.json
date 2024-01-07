@@ -1,0 +1,73 @@
+{
+  "awakening_region": "Emerald Forest",
+  "level": 5,
+  "name": "Aria",
+  "rarity": "Rare",
+  "classes": ["Spellcaster"],
+  "race": "Human",
+  "age": 24,
+  "items_held": [
+    "Enchanted Staff",
+    "Spell Tome",
+    "Mystic Amulet",
+    "Healing Potions",
+    "Mana Crystals"
+  ],
+  "character_backstory": "A charismatic mage known for her powerful spells and leadership skills.",
+  "personal_ambitions_goals": "To explore the mysteries of Evergreen and break the game's curse.",
+  "irl_backstory": "Controlled by a real human",
+  "memories": "Clear recollection of logging into the game.",
+  "gender": "Female",
+  "appearance": {
+    "eye_color": "Emerald green",
+    "hair_color": "Dark brown",
+    "skin_tone": "Fair",
+    "physical_size": "Average",
+    "physical_build": "Athletic",
+    "notable_characteristics": "Elegant robes adorned with arcane symbols"
+  },
+  "notable_affinities": {
+    "religions": ["Guild of Arcanists"],
+    "cultures": ["Spellcasters"],
+    "guild_membership": "Leader of Aria's Guild",
+    "general_reputation": "Respected for her wisdom and strength"
+  },
+  "special_abilities": [
+    "Arcane Blast",
+    "Telekinesis",
+    "Elemental Manipulation"
+  ],
+  "base_combat_statistics": {
+    "health_points": 5,
+    "attack": 4,
+    "defense": 3,
+    "speed": 3,
+    "magic_defense": 5
+  },
+  "current_combat_statistics": {
+    "health_points": 7.81,
+    "attack": 6.25,
+    "defense": 4.69,
+    "speed": 4.69,
+    "magic_defense": 7.81
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 80,
+      "conscientiousness": 75,
+      "extraversion": 65,
+      "agreeableness": 70,
+      "neuroticism": 40
+    },
+    "charisma": 85,
+    "intelligence": 90,
+    "dexterity": 70,
+    "strength": 60
+  },
+  "current_state": {
+    "health_status": "Full Health",
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Rested"
+  }
+}

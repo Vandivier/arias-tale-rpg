@@ -1,0 +1,70 @@
+{
+  "awakening_region": "The Enchanted Forest",
+  "level": 2,
+  "name": "Lunara",
+  "rarity": "Uncommon",
+  "class": "Elven Archer",
+  "race": "Elf",
+  "age": 147,
+  "items_held": [
+    "Elven Longbow",
+    "Quiver of Silver Arrows",
+    "Cloak of Elvenkind",
+    "Woodland Camouflage",
+    "Elven Blade",
+    "Forest Map",
+    "Mystic Amulet"
+  ],
+  "character_backstory": "Born in the heart of the Enchanted Forest, with a natural affinity for archery.",
+  "personal_ambitions_goals": "To protect the sacred groves of her homeland and uncover ancient elven secrets.",
+  "irl_backstory": "Controlled by a real human player",
+  "memories": "Vivid memories of the Enchanted Forest and elven traditions.",
+  "gender": "Female",
+  "appearance": {
+    "eye_color": "Emerald green",
+    "hair_color": "Silver",
+    "skin_tone": "Fair",
+    "physical_size": "Tall and slender",
+    "physical_build": "Graceful"
+  },
+  "notable_affinities": {
+    "religions": ["Worshipper of the Sylvan Gods"],
+    "cultures": ["Elven Society"],
+    "guild_membership": "Member of the Forest Guardians",
+    "general_reputation": "Known for unmatched archery skills and deep connection to nature"
+  },
+  "special_abilities": ["Precision Shot", "Nature's Camouflage", "Eagle Eye"],
+  "base_combat_statistics": {
+    "health_points": 3,
+    "attack": 4,
+    "defense": 3,
+    "speed": 5,
+    "magic_defense": 2
+  },
+  "current_combat_statistics": {
+    "health_points": 4.5,
+    "attack": 6,
+    "defense": 4.5,
+    "speed": 7.5,
+    "magic_defense": 3
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 75,
+      "conscientiousness": 80,
+      "extraversion": 60,
+      "agreeableness": 70,
+      "neuroticism": 40
+    },
+    "charisma": 70,
+    "intelligence": 80,
+    "dexterity": 90,
+    "strength": 45
+  },
+  "current_state": {
+    "health_status": 0.75,
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Rested"
+  }
+}

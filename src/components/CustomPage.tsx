@@ -7,6 +7,7 @@ interface CustomPageProps {
   metaDescription?: string;
   mainHeading: string;
   children: React.ReactNode;
+  contentBeforeTitle?: React.ReactNode;
 }
 
 export const CustomPage = ({
@@ -14,6 +15,7 @@ export const CustomPage = ({
   metaDescription = `A Tech-Forward Emergent AI-Assisted TRPG Game and Community!`,
   mainHeading,
   children,
+  contentBeforeTitle,
 }: CustomPageProps) => (
   <>
     <Head>
@@ -54,8 +56,10 @@ export const CustomPage = ({
       `}
     </style>
 
-    <main className="from-custom-primary to-custom-primary-dark flex min-h-screen flex-col items-center bg-gradient-to-b">
+    <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-custom-primary to-custom-primary-dark">
       <TopNav />
+
+      {contentBeforeTitle && contentBeforeTitle}
 
       <div className="container flex flex-col items-center gap-6 px-4 py-2 md:py-8">
         <h1 className="text-2xl font-extrabold tracking-tight text-white sm:text-[4rem] md:leading-[4rem]">
@@ -67,7 +71,7 @@ export const CustomPage = ({
         </div>
       </div>
     </main>
-    <footer className="text-custom-primary flex items-center justify-center gap-4 py-4 text-2xl">
+    <footer className="flex items-center justify-center gap-4 py-4 text-2xl text-custom-primary">
       <Link href="https://github.com/Vandivier/arias-tale-rpg" target="_blank">
         GitHub
       </Link>

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function TopNav() {
   return (
-    <nav className="text-custom-primary w-full bg-white shadow">
+    <nav className="w-full bg-white text-custom-primary shadow">
       <div className="container mx-auto px-6 py-3 md:flex md:items-center md:justify-between">
         <div className="flex items-center justify-between">
           <Link href="/">
@@ -31,6 +31,13 @@ function TopNav() {
             target="_blank"
           >
             GitHub
+          </Link>
+          <Link
+            className="my-1 cursor-pointer md:mx-4 md:my-0"
+            href="https://www.tiktok.com/@arias.tale.game"
+            target="_blank"
+          >
+            TikTok
           </Link>
         </div>
       </div>

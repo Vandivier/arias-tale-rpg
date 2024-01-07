@@ -23,12 +23,13 @@ function rollArtStyle(styles: string[]): string {
   return result;
 }
 
-function artRollFunction() {
+function createRandomArtPrompt() {
   const baseStyles = [
     "Realism",
     "Impressionism",
     "Surrealism",
-    "Cubism",
+    "Analytical Cubism or Early Cubism",
+    "Late Cubism or Post-Cubism",
     "Pop Art",
     "Art Nouveau",
     "Art Deco",
@@ -48,21 +49,25 @@ function artRollFunction() {
     "Arabesque",
     "Thangka",
     "Byzantine",
-    "Stained Glass",
     "Mandala",
     "Iconographic",
     "Mural",
     "Chibi",
     "Tabletop Miniature",
     "Pop-up Book Art",
+    "Stick Figures",
+    "Ideographic Script",
+    "Hieroglyphics",
+    "Eastern Pictographic Writing",
+    "Nahuatl",
   ];
 
   const modifierStyles = [
     "Charcoal",
-    "Color Monochrome",
-    "Black and White",
+    "Color Monochrome (Non-grayscale and declare the monochrome hue before drawing)",
+    "Black and White, Sepia, Pyrography, or Grayscale (Declare which before drawing)",
     "Pixel Art",
-    "Photorealistic",
+    "Photorealism",
     "Sculpture",
     "Watercolor",
     "Pen and Ink",
@@ -70,17 +75,32 @@ function artRollFunction() {
     "Crayon",
     "Cartoon",
     "Origami",
-    "Carved",
+    "Stained Glass",
+    "Two-Tone Color Scheme",
+    "Asymmetry",
+    "with the image split into two parts",
+    "with a circular split image",
+    "Pyrography",
   ];
 
   const artRolls = [];
   const numberOfPieces = getRandomInt(1, 6);
 
   for (let i = 0; i < numberOfPieces; i++) {
+    const artSubjects = [
+      "Aria's Arc, Ch. 1",
+      "Aria's Arc, Ch. 2",
+      "Aria's Arc, Ch. 3",
+      "Aria's Arc, Ch. 4",
+      "Aria's Arc, Ch. 5",
+      "Aria's Arc, Ch. 6",
+      "Caelum's Arc, Ch. 1",
+      "Lunara's Arc, Ch. 1",
+      "Ezekiel's Arc, Ch. 1",
+      "a TCG Card Back with a 7:5 aspect ratio. Feature a d20 die or hexagon (declare before drawing) and the letters 'AT'",
+    ];
     const artSubject =
-      getRandomInt(1, 6) === 6
-        ? "Not Aria's Arc"
-        : `Chapter ${getRandomInt(1, 5)}`;
+      artSubjects[Math.floor(Math.random() * artSubjects.length)];
 
     // Roll for the art style
     let artStyle = "";
@@ -113,6 +133,6 @@ function artRollFunction() {
 
 export const artRouter = createTRPCRouter({
   getArtRoll: publicProcedure.query(() => {
-    return artRollFunction();
+    return createRandomArtPrompt();
   }),
 });

@@ -1,0 +1,73 @@
+{
+  "awakening_region": "The Crimson Battlegrounds",
+  "level": 5,
+  "name": "Lysandra",
+  "rarity": "Rare",
+  "classes": ["Strategist", "Warrior"],
+  "race": "Human",
+  "age": 29,
+  "items_held": [
+    "Tactical Blade",
+    "Shield of Valor",
+    "Crimson Cloak",
+    "Potion of Clarity",
+    "Enchanted Compass"
+  ],
+  "character_backstory": "Raised in the royal courts, trained in the art of war and strategy.",
+  "personal_ambitions_goals": "To lead the Crimson Vanguard to legendary victories.",
+  "irl_backstory": "Controlled by a seasoned RPG player known for tactical prowess.",
+  "memories": "Vivid memories of life before entering Evergreen, mixed with in-game experiences.",
+  "gender": "Female",
+  "appearance": {
+    "eye_color": "Emerald green",
+    "hair_color": "Auburn",
+    "skin_tone": "Olive",
+    "physical_size": "Medium",
+    "physical_build": "Athletic",
+    "notable_characteristics": "A scar across the left cheek, signifying battle prowess"
+  },
+  "notable_affinities": {
+    "religions": ["Order of the Crimson Sun"],
+    "cultures": ["Warrior Elites"],
+    "guild_membership": "Crimson Vanguard",
+    "general_reputation": "Respected for strategic mind and unwavering determination"
+  },
+  "special_abilities": [
+    "Crimson Strike",
+    "Shield of Fortitude",
+    "Tactical Retreat"
+  ],
+  "base_combat_statistics": {
+    "health_points": 5,
+    "attack": 4,
+    "defense": 5,
+    "speed": 3,
+    "magic_defense": 2
+  },
+  "current_combat_statistics": {
+    "health_points": 7.81,
+    "attack": 6.25,
+    "defense": 7.81,
+    "speed": 4.69,
+    "magic_defense": 3.13
+  },
+  "noncombat_statistics": {
+    "big_5_personality_traits": {
+      "openness": 60,
+      "conscientiousness": 90,
+      "extraversion": 50,
+      "agreeableness": 55,
+      "neuroticism": 40
+    },
+    "charisma": 70,
+    "intelligence": 85,
+    "dexterity": 75,
+    "strength": 70
+  },
+  "current_state": {
+    "health_status": "Healthy",
+    "ailments_effects": "None",
+    "hunger_status": "Satiated",
+    "fatigue_status": "Rested"
+  }
+}

@@ -22,11 +22,11 @@ You can watch or interact as an audience member. You can also contact John in ad
 
 ## Play by Comment
 
-This is a convenient approach because you can play at any time and from any location! Play a move using social media by commenting on the official Aria's Tale TikTok account pinned video. The pinned video on the account shows the current episode and you can comment to play a move or impact the world on these pinned videos.
+This is a convenient approach because you can play at any time and from any location! Play a move using social media by commenting on the official [Aria's Tale TikTok account](https://www.tiktok.com/@arias.tale.game) pinned video. The pinned video on the account shows the current episode and you can comment to play a move or impact the world on these pinned videos.
 
 Even if it looks like someone else already took a move - go ahead and try! The game involves multiple characters and it is community driven. If you win support for your move it will take precedence, and multiple characters can be moved in different ways at the same time.
 
-You can also comment on the #gaming channel in the [Ladderly](https://ladderly.io/) Discord server. It should be relevant to any of the current arcs, including but not limited to the pinned TikTok video. Simply ask on the channel if you want to here about other ongoing arcs.
+You can also comment on the #gaming channel in the [Ladderly](https://ladderly.io/) Discord server. It should be relevant to any of the current arcs, including but not limited to the [pinned TikTok video](https://www.tiktok.com/@arias.tale.game). Simply ask on the channel if you want to here about other ongoing arcs.
 
 ## Play by Post
 

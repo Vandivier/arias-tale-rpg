@@ -33,13 +33,24 @@ export default function ArtRollPage() {
               <h3>Pieces Rolled: {data.length}</h3>
 
               <ol>
-                {data.map((art, idx) => (
-                  <li className={`py-6`} key={`${art.subject}-${idx}`}>
-                    <p>Piece #{idx + 1}</p>
-                    <p>Subject: {art.subject}</p>
-                    <p>Style: {art.style}</p>
-                  </li>
-                ))}
+                {data.map((art, idx) => {
+                  const promptText = `Draw ${art.subject}. Use the art style ${art.style}`;
+
+                  return (
+                    <li className={`py-6`} key={`${art.subject}-${idx}`}>
+                      <p>Piece #{idx + 1}</p>
+                      <p>{promptText}</p>
+                      <button
+                        className="mt-4 rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+                        onClick={async () => {
+                          await navigator.clipboard.writeText(promptText);
+                        }}
+                      >
+                        Copy Prompt to Clipboard
+                      </button>
+                    </li>
+                  );
+                })}
               </ol>
             </>
           ) : (

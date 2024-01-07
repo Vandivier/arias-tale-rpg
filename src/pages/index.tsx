@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import { CustomPage } from "~/components/CustomPage";
 import { api } from "~/utils/api";
 
@@ -9,16 +10,20 @@ export default function Home() {
     <CustomPage mainHeading="Embark on an Epic Journey with Aria's Tale!">
       <>
         <div className="flex items-center">
-          <img
-            src="/arias-tale-d20-logo.png"
+          <Image
             alt="Aria's Tale Dice Logo"
             className="dice-logo mr-2"
+            height={50}
+            width={50}
+            src="/arias-tale-d20-logo.png"
           />
           <p>{hello.data ? hello.data.greeting : "Loading..."}</p>
-          <img
-            src="/arias-tale-d20-logo.png"
+          <Image
             alt="Aria's Tale Dice Logo"
             className="dice-logo ml-2"
+            height={50}
+            width={50}
+            src="/arias-tale-d20-logo.png"
           />
         </div>
 
