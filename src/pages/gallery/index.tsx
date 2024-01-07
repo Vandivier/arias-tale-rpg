@@ -27,7 +27,7 @@ export default function GalleryPage() {
           <Link href={`/gallery/random`}>Random Image</Link>
         </li>
         <li className={`my-6 text-2xl`}>
-          <Link href={`/gallery/search`}>Search Images</Link>
+          <Link href={`/gallery/search`}>Search Cards and Images</Link>
         </li>
       </ul>
     </CustomPage>

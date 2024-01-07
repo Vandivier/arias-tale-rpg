@@ -1,8 +1,4 @@
-import {
-  CaretSortIcon,
-  ChevronDownIcon,
-  DotsHorizontalIcon,
-} from "@radix-ui/react-icons";
+import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import {
   flexRender,
   getCoreRowModel,
@@ -14,6 +10,8 @@ import {
   type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
+  FilterFn,
+  Row,
 } from "@tanstack/react-table";
 
 import {
@@ -22,13 +20,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
 import React from "react";
 import { Button } from "./ui/button";
-import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import {
   Table,
@@ -39,106 +35,92 @@ import {
   TableRow,
 } from "./ui/table";
 
-const data: Payment[] = [
+const data: GameCardData[] = [
   {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
+    id: 1,
+    title: "Archmage Caelum",
+    description: "He's pretty strong",
+    tags: ["battler", "celestial", "caelum"],
+    battlePower: 1800,
   },
   {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
+    id: 2,
+    title: "Health Potion",
+    description: "it helps if ur hurt",
+    tags: ["item"],
   },
   {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
+    id: 3,
+    title: "Mace Troll",
+    description: "ken99@yahoo.com",
+    tags: ["stereotypical", "troll", "melee", "battler"],
+    battlePower: 300,
   },
   {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
+    id: 4,
+    title: "Watchtower",
+    description: "Lets you see further",
+    tags: [],
   },
 ];
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
+export type GameCardData = {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  battlePower?: number;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+const globalFilterFn: FilterFn<GameCardData> = (
+  row: Row<GameCardData>,
+  columnIds: string,
+  filterValue: string,
+): boolean => {
+  const lowerCaseFilterValue = String(filterValue).toLowerCase();
+  const titleMatches = (row.getValue("title") as string)
+    .toLowerCase()
+    .includes(lowerCaseFilterValue);
+  const descriptionMatches = (row.getValue("description") as string)
+    .toLowerCase()
+    .includes(lowerCaseFilterValue);
+  const tagsMatch = (row.getValue("tags") as string[]).some((tag: string) =>
+    tag.toLowerCase().includes(lowerCaseFilterValue),
+  );
+
+  return titleMatches || descriptionMatches || tagsMatch;
+};
+
+export const columns: ColumnDef<GameCardData>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
+    accessorKey: "id",
+    header: () => "ID",
+    cell: ({ row }) => row.getValue("id"),
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
+    accessorKey: "title",
+    header: () => "Title",
+    cell: ({ row }) => row.getValue("title"),
   },
   {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    accessorKey: "description",
+    header: () => "Description",
+    cell: ({ row }) => row.getValue("description"),
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "tags",
+    header: () => "Tags",
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+      const tags: string[] = row.getValue("tags");
+      return tags.join(", ");
     },
   },
+  {
+    accessorKey: "battlePower",
+    header: () => "Battle Power",
+    cell: ({ row }) => row.getValue("battlePower") || "N/A",
+  },
+
   {
     id: "actions",
     enableHiding: false,
@@ -155,14 +137,8 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>View Image Details</DropdownMenuItem>
+            <DropdownMenuItem>View Game Card Details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -185,6 +161,7 @@ export function ImageSearchResultTable() {
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
+    globalFilterFn: globalFilterFn,
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -200,18 +177,18 @@ export function ImageSearchResultTable() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center gap-4 py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter by title, description, or tags..."
+          value={table.getState().globalFilter ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.setGlobalFilter(event.target.value || undefined)
           }
           className="max-w-sm"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="secondary" className="ml-auto">
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -293,7 +270,7 @@ export function ImageSearchResultTable() {
         </div>
         <div className="space-x-2">
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
@@ -301,7 +278,7 @@ export function ImageSearchResultTable() {
             Previous
           </Button>
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}

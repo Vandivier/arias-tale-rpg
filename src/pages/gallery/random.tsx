@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CustomPage } from "~/components/CustomPage";
+import { Button } from "~/components/ui/button";
 import { api } from "~/utils/api";
 
 export default function RandomGalleryImagePage() {
@@ -25,12 +26,9 @@ export default function RandomGalleryImagePage() {
 
   return (
     <CustomPage mainHeading="Random Image">
-      <button
-        onClick={handleRollClick}
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-      >
+      <Button onClick={handleRollClick} size={"lg"} variant="secondary">
         Reroll!
-      </button>
+      </Button>
 
       <div>
         {data && imageUrl ? (
