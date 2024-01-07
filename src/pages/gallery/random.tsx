@@ -19,13 +19,12 @@ export default function RandomGalleryImagePage() {
     await refetch();
   };
 
-  // Update the imageUrl to use local path
   const imageUrl = data?.imageFileName
     ? `/searchable-images/${data.imageFileName}`
     : "";
 
   return (
-    <CustomPage mainHeading="Gallery">
+    <CustomPage mainHeading="Random Image">
       <button
         onClick={handleRollClick}
         className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
@@ -34,11 +33,9 @@ export default function RandomGalleryImagePage() {
       </button>
 
       <div>
-        <h2 className={`py-2 text-2xl`}>Art Roll Result</h2>
-
         {data && imageUrl ? (
           <>
-            <h3>{data.title}</h3>
+            <h2 className={`py-2 text-2xl`}>{data.title}</h2>
             <Image
               src={imageUrl}
               alt={data.title}
@@ -49,7 +46,7 @@ export default function RandomGalleryImagePage() {
             <p>{data.description}</p>
           </>
         ) : (
-          <h3>Image not found</h3>
+          <h2 className={`py-2 text-2xl`}>Image Not Found</h2>
         )}
       </div>
     </CustomPage>

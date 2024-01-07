@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.disabled-link {
+    pointer-events: none;
+    color: #ccc;
+    cursor: default;
+}

@@ -88,15 +88,15 @@ function createRandomArtPrompt() {
 
   for (let i = 0; i < numberOfPieces; i++) {
     const artSubjects = [
-      "Aria's Arc, Ch. 1",
-      "Aria's Arc, Ch. 2",
-      "Aria's Arc, Ch. 3",
-      "Aria's Arc, Ch. 4",
-      "Aria's Arc, Ch. 5",
-      "Aria's Arc, Ch. 6",
-      "Caelum's Arc, Ch. 1",
-      "Lunara's Arc, Ch. 1",
-      "Ezekiel's Arc, Ch. 1",
+      "an excerpt from Aria's Arc, Ch. 1",
+      "an excerpt from Aria's Arc, Ch. 2",
+      "an excerpt from Aria's Arc, Ch. 3",
+      "an excerpt from Aria's Arc, Ch. 4",
+      "an excerpt from Aria's Arc, Ch. 5",
+      "an excerpt from Aria's Arc, Ch. 6",
+      "an excerpt from Caelum's Arc, Ch. 1",
+      "an excerpt from Lunara's Arc, Ch. 1",
+      "an excerpt from Ezekiel's Arc, Ch. 1",
       "a TCG Card Back with a 7:5 aspect ratio. Feature a d20 die or hexagon (declare before drawing) and the letters 'AT'",
     ];
     const artSubject =
