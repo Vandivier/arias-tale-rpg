@@ -160,6 +160,7 @@ Aria's Tale is also built with the following libraries and their associated offi
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
 - [zod](https://zod.dev/)
+- [shadcn/ui](https://ui.shadcn.com/)
 
 ### Deployment
 
