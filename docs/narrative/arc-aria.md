@@ -54,7 +54,7 @@ Lyra, an agile warrior, danced around the group as it proceeded, her twin swords
 
 Kael marched directly, embodying a veteran, stalwart, serious, and perhaps slightly annoyed counterpart to the frontline of the guild. He exuded a sense of unwavering loyalty and deference to Elara. The clink of his heavy armor punctuates his every word, a reminder of his dedication to guild and mission.
 
-As they reached the lake, Gavriel's keen eyes fixed on a medium-sized lizardlike monster near the water's edge. "That one," he said, his voice low yet carrying an undertone of challenge. The group, with Tank at its heart, moved in swiftly but clumsily, utterly lacking organization or strategy.
+As they reached the lake, Gavriel's keen eyes fixed on a medium-sized wingless lizardlike monster near the water's edge. "That one," he said, his voice low yet carrying an undertone of challenge. The group, with Tank at its heart, moved in swiftly but clumsily, utterly lacking organization or strategy.
 
 Kael's voice, gruff with encouragement, broke the momentary silence. "I'll take it head-on!" With a decisive gesture, he led the charge towards the unsuspecting lizard.
 
