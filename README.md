@@ -38,7 +38,8 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
    1. [Procgen Arcana](https://watabou.github.io/news.html)
    2. [One Page Dungeon](https://watabou.itch.io/one-page-dungeon)
    3. [Random quest generator](https://donjon.bin.sh/fantasy/adventure/)
-   4. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html).
+   4. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html)
+   5. [Inkarnate Pro](https://inkarnate.com/) with Commercial License
 3. Image Generators
    1. DALL-E, as built into GPT-4
    2. [Leonardo.ai Image Generator](https://leonardo.ai/)
