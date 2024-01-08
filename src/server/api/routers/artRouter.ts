@@ -94,9 +94,13 @@ function createRandomArtPrompt() {
       "an excerpt from Aria's Arc, Ch. 4",
       "an excerpt from Aria's Arc, Ch. 5",
       "an excerpt from Aria's Arc, Ch. 6",
+      "an excerpt from Aria's Arc, Ch. 7",
+      "an excerpt from Aria's Arc, Ch. 8",
+      "an excerpt from Aria's Arc, Ch. 9",
       "an excerpt from Caelum's Arc, Ch. 1",
       "an excerpt from Lunara's Arc, Ch. 1",
       "an excerpt from Ezekiel's Arc, Ch. 1",
+      "an excerpt from Arc Solara, Ch. 1",
       "a TCG Card Back with a 7:5 aspect ratio. Feature a d20 die or hexagon (declare before drawing) and the letters 'AT'",
     ];
     const artSubject =
