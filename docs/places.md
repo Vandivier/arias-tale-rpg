@@ -17,7 +17,7 @@ title: "Placebook"
 
    1. Aetheria
    2. Dragonica
-   3. Olympia
+   3. New Olympia, a mountain range internally occupied by a large dwarven civilization. A multiracial and highly competitive society lives above ground. Regalis is a smaller civilization its northeast and Elysia is to its southeast.
    4. Obsidia
       - Coast of Echoes
       - Forest of Echoes
@@ -37,12 +37,11 @@ title: "Placebook"
    7. Triton, the largest merfolk ocean civilization, and above ground it is also the sole island civilization of Evergreen
    8. Neptune, a merfolk civilization in the sea between the continents
    9. Regalis
-   10. Judah, a desert region
-   11. Elysia, a region of mainly plains
+      1. Elderglen, known for having a large library.
+   10. Terah, also called The Land of Judges, a region with a large swath of desert in the south. The northern geography is varied from plains to low mountains and coast. Notably includes the Nahorite or Dreamwalker civilization of summoners and the New Abramites, a civilization modeled after the descendents of Abraham.
+   11. Elysia, a region of mainly plains. The people here are egalitarian and have an antagonistic relationship with Regalis.
    12. Goblin Hollow, a network of underground caves and tunnels adjacent to Raefun
    13. Antiqua, the cursed former capital district of the The Empire of Solara
-   14.
-   15.
 
 2. Earth
 
@@ -53,4 +52,4 @@ title: "Placebook"
    - Australia
    - Other Unknown Regions
 
-3. Other Unknown Worlds!
+3. Mars is somewhat occupied, the moon is occupied, Jupiter is being mined, some of the moons have stations, mainly occupied by drones, and there are many people that live in space. (year 3202 if i have to pick? would love to just not say)

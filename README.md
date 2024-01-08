@@ -82,24 +82,20 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
 
 These are game sessions that haven't been written up and formalized into canon. They are reported by ChatGPT thread name. These all occur after Oct 2023.
 
-1. Aria's Arc, the Arc of Leaves, Town, and Squirrels
-2. Lunara's Arc
-3. Caelum's Arc, the Second Heaven Arc
-4. Ezekiel's Arc, the Elemental Sacrifice Arc
-5. Eldorin's Arc
+1. Eldorin's Arc
 
    - Generate Game Character: Races
 
-6. Ulraker's Arc, the Bearkin Arc
+2. Ulraker's Arc, the Bearkin Arc
 
    - Druid Transformation Image
 
-7. Strategic Mode Development
+3. Strategic Mode Development
 
    - Gridless RPG Battles Possible
    - RPG Battlemap in CSV
 
-8. Worldbuilding
+4. Worldbuilding
 
    - Anime Plot Summary
    - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
