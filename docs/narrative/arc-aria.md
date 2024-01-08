@@ -5,8 +5,8 @@ title: "Episode Narrative Guide - Arc Aria"
 <!--
     Taken from:
     - [Summarizing common types.](https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623)
+    - Quest for Johan's Revival
     - Purple Gate in Forest
-    - List Regions and Features
     - Player Units' Stats Setup
     - Hex Grid RPG Encounter
     - https://chat.openai.com/share/8eeaadfa-db38-4841-92b7-795c9dd64818

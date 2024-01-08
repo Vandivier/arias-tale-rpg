@@ -7,9 +7,6 @@ title: "Placebook"
    - Dwarven Stronghold from Salt Mines
    - Hex Grid RPG Battle Map
    - Wendigo in snowy forest
-   - List Regions and Features
-   - [Town, Character, Quest Setup
-     ](https://chat.openai.com/share/9bb91cf2-1037-482b-aed6-13964456ac69)
    - Iron Flame Book Summary
 -->
 
@@ -37,7 +34,8 @@ title: "Placebook"
    7. Triton, the largest merfolk ocean civilization, and above ground it is also the sole island civilization of Evergreen
    8. Neptune, a merfolk civilization in the sea between the continents
    9. Regalis
-      1. Elderglen, known for having a large library.
+      1. Areion, a well-known citadel with a gladiator arena.
+      2. Elderglen, known for having a large library.
    10. Terah, also called The Land of Judges, a region with a large swath of desert in the south. The northern geography is varied from plains to low mountains and coast. Notably includes the Nahorite or Dreamwalker civilization of summoners and the New Abramites, a civilization modeled after the descendents of Abraham.
    11. Elysia, a region of mainly plains. The people here are egalitarian and have an antagonistic relationship with Regalis.
    12. Goblin Hollow, a network of underground caves and tunnels adjacent to Raefun
