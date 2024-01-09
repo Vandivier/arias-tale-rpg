@@ -25,7 +25,16 @@
       "religions": ["Order of the Valiant"],
       "cultures": ["Knights of Evergreen"],
       "guild_membership": "The Vanguard",
-      "general_reputation": "Respected for bravery and honor"
+      "reputations": [
+        {
+          "name": "Order of the Valiant",
+          "reputation": "Honored"
+        },
+        {
+          "name": "Knights of Evergreen",
+          "reputation": "Valued Member"
+        }
+      ]
     },
     "special_abilities": ["Berserk Charge", "Defender's Oath", "War Cry"],
     "base_combat_statistics": {
@@ -82,7 +91,7 @@
       "religions": [],
       "cultures": ["Automaton"],
       "guild_membership": "None",
-      "general_reputation": "Known for its unyielding loyalty to its directives"
+      "reputations": []
     },
     "special_abilities": ["Precision Strike", "Shield Protocol", "Self-Repair"],
     "base_combat_statistics": {
@@ -143,7 +152,16 @@
       "religions": ["Path of the Silent Wind"],
       "cultures": ["Elvenkind"],
       "guild_membership": "The Silent Arrows",
-      "general_reputation": "Feared as a ghost in the forests, a protector of nature"
+      "reputations": [
+        {
+          "name": "Elven Communities",
+          "reputation": "Revered"
+        },
+        {
+          "name": "The Silent Arrows",
+          "reputation": "Key Member"
+        }
+      ]
     },
     "special_abilities": ["Eagle Eye", "Wind Walker", "Nature's Blessing"],
     "base_combat_statistics": {
@@ -204,7 +222,16 @@
       "religions": ["Cult of the Eternal Flame"],
       "cultures": ["Dwarven Clans"],
       "guild_membership": "The Rune Casters",
-      "general_reputation": "Known for his explosive temper and powerful magic"
+      "reputations": [
+        {
+          "name": "Cult of the Eternal Flame",
+          "reputation": "Esteemed"
+        },
+        {
+          "name": "Dwarven Mages Guild",
+          "reputation": "Respected"
+        }
+      ]
     },
     "special_abilities": ["Lava Burst", "Forge Shield", "Ancestor's Wisdom"],
     "base_combat_statistics": {
