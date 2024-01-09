@@ -244,41 +244,51 @@ Detailed descriptions include:
 
 ```json
 {
-  "awakening_region": "The Iron Mountains",
-  "level": 6,
-  "name": "Thane",
+  "awakening_region": "Forest of Echoes",
+  "level": 2,
+  "name": "Tank",
   "rarity": "Unique",
-  "classes": ["Swordsman", "Leader"],
+  "classes": ["Warrior", "Guardian", "Spearman"],
   "race": "Human",
-  "age": 34,
-  "items_held": ["Healing Draughts", "Map of Evergreen"],
-  "items_equipped": [
-    "Crimson Sword of Valor",
-    "Shield of the Mountain",
-    "Full Body Crimson Armor",
-    "Crimson Hooded Robe",
-    "Warrior's Helm"
+  "age": 30,
+  "items_held": [
+    "Spear",
+    "Medium Wooden Shield",
+    "Bronze Chestplate",
+    "Healing Potion",
+    "Bag of Walnuts"
   ],
-  "character_backstory": "A warrior from a lineage of legendary fighters, Thane rose through the ranks to lead the Crimson Vanguard.",
-  "personal_ambitions_goals": "To unite the various guilds under the Crimson Vanguard's banner.",
-  "irl_backstory": "Controlled by an experienced player known for strategic thinking and leadership.",
-  "memories": "Clear recollections of his life before Evergreen, mixed with vivid in-game experiences.",
+  "character_backstory": "A seasoned warrior, known for his resilience and combat skills.",
+  "personal_ambitions_goals": "To survive the challenges of Evergreen and defeat the 100th floor boss.",
+  "irl_backstory": "Controlled by a player named Mike",
+  "memories": "Remembers logging in, but now trapped in the game.",
   "gender": "Male",
   "appearance": {
-    "eye_color": "Steel gray",
+    "eye_color": "Brown",
     "hair_color": "Black",
-    "skin_tone": "Tan",
-    "physical_size": "Large",
+    "skin_tone": "Tanned",
+    "physical_size": "Tall",
     "physical_build": "Muscular",
-    "notable_characteristics": "A battle-worn scar across his right arm"
+    "notable_characteristics": "A determined look"
   },
   "notable_affinities": {
-    "religions": ["Warrior's Code"],
-    "cultures": ["Iron Mountain Clan"],
-    "guild_membership": "Crimson Vanguard",
-    "general_reputation": "Known for his courage and unwavering will"
+    "religions": [],
+    "cultures": ["Human"],
+    "guild_membership": "The Shield Bearers",
+    "reputations": [
+      {
+        "name": "Squirrelfolk of the Forest of Echoes",
+        "reputation": "Minor Negative"
+      }
+    ]
   },
-  "special_abilities": ["Mountain's Might", "Vanguard's Rally", "Iron Defense"],
+  "special_abilities": [
+    "Defensive Spear Thrust",
+    "Battle Cry",
+    "Strategic Thinker (Passive)",
+    "Painful Third Eye (Passive)",
+    "Phalanx"
+  ],
   "base_combat_statistics": {
     "health_points": 6,
     "attack": 5,
@@ -286,31 +296,24 @@ Detailed descriptions include:
     "speed": 3,
     "magic_defense": 2
   },
-  "current_combat_statistics": {
-    "health_points": 9.38,
-    "attack": 7.81,
-    "defense": 9.38,
-    "speed": 4.69,
-    "magic_defense": 3.13
-  },
   "noncombat_statistics": {
     "big_5_personality_traits": {
       "openness": 50,
-      "conscientiousness": 90,
-      "extraversion": 65,
-      "agreeableness": 60,
-      "neuroticism": 35
+      "conscientiousness": 80,
+      "extraversion": 60,
+      "agreeableness": 70,
+      "neuroticism": 40
     },
-    "charisma": 80,
-    "intelligence": 70,
-    "dexterity": 60,
+    "charisma": 65,
+    "intelligence": 60,
+    "dexterity": 70,
     "strength": 85
   },
   "current_state": {
-    "health_status": "Healthy",
+    "health_status": "Full Health",
     "ailments_effects": "None",
     "hunger_status": "Satiated",
-    "fatigue_status": "Alert"
+    "fatigue_status": "Rested"
   }
 }
 ```

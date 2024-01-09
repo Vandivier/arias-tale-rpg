@@ -30,7 +30,12 @@
     "religions": ["Guild of Arcanists"],
     "cultures": ["Spellcasters"],
     "guild_membership": "Leader of Aria's Guild",
-    "general_reputation": "Respected for her wisdom and strength"
+    "reputations": [
+      {
+        "name": "Forest of Echoes",
+        "reputation": "Respected for her wisdom and strength"
+      }
+    ]
   },
   "special_abilities": [
     "Arcane Blast",
@@ -43,13 +48,6 @@
     "defense": 3,
     "speed": 3,
     "magic_defense": 5
-  },
-  "current_combat_statistics": {
-    "health_points": 7.81,
-    "attack": 6.25,
-    "defense": 4.69,
-    "speed": 4.69,
-    "magic_defense": 7.81
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

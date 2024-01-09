@@ -30,7 +30,10 @@
     "religions": ["Bearkin Totem Worship"],
     "cultures": ["Wilderness Tribes"],
     "guild_membership": "The Elementalists",
-    "general_reputation": "Feared and respected for his raw power and primal fury"
+    "reputations": [
+      { "name": "Crimson Vanguard", "reputation": "Respected" },
+      { "name": "Tribe of the Bearkin", "reputation": "Respected" }
+    ]
   },
   "special_abilities": [
     "Bear's Rage",
@@ -43,13 +46,6 @@
     "defense": 4,
     "speed": 4,
     "magic_defense": 3
-  },
-  "current_combat_statistics": {
-    "health_points": 10,
-    "attack": 9,
-    "defense": 5,
-    "speed": 5,
-    "magic_defense": 3.5
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

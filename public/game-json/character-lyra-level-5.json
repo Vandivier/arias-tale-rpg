@@ -30,7 +30,12 @@
     "religions": ["Warrior's Creed"],
     "cultures": ["Strategic Fighters"],
     "guild_membership": "The Shield Bearers",
-    "general_reputation": "Recognized for her adaptability and growing expertise in different combat styles"
+    "reputations": [
+      {
+        "name": "The Shield Bearers",
+        "reputation": "Recognized for her adaptability and growing expertise in different combat styles"
+      }
+    ]
   },
   "special_abilities": ["Shield Mastery", "Spear Proficiency"],
   "base_combat_statistics": {
@@ -39,13 +44,6 @@
     "defense": 14,
     "speed": 12,
     "magic_defense": 8
-  },
-  "current_combat_statistics": {
-    "health_points": 21.88,
-    "attack": 20.31,
-    "defense": 21.88,
-    "speed": 18.75,
-    "magic_defense": 12.5
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

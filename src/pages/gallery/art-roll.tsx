@@ -1,5 +1,6 @@
 import { api } from "~/utils/api";
 import { CustomPage } from "~/components/CustomPage";
+import { Button } from "~/components/ui/button";
 
 export default function ArtRollPage() {
   const { data, isLoading, isError, refetch } = api.art.getArtRoll.useQuery(
@@ -18,12 +19,9 @@ export default function ArtRollPage() {
 
   return (
     <CustomPage mainHeading="Gallery">
-      <button
-        onClick={handleRollClick}
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-      >
+      <Button onClick={handleRollClick} size={"lg"} variant="secondary">
         Reroll!
-      </button>
+      </Button>
       {data && (
         <div>
           <h2 className={`py-2 text-2xl`}>Art Roll Result</h2>
@@ -40,14 +38,16 @@ export default function ArtRollPage() {
                     <li className={`py-6`} key={`${art.subject}-${idx}`}>
                       <p>Piece #{idx + 1}</p>
                       <p>{promptText}</p>
-                      <button
-                        className="mt-4 rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+                      <Button
+                        className="mt-2"
                         onClick={async () => {
                           await navigator.clipboard.writeText(promptText);
                         }}
+                        size={"lg"}
+                        variant="secondary"
                       >
                         Copy Prompt to Clipboard
-                      </button>
+                      </Button>
                     </li>
                   );
                 })}

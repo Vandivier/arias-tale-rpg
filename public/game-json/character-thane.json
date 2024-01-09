@@ -3,16 +3,15 @@
   "level": 6,
   "name": "Thane",
   "rarity": "Unique",
-  "classes": ["Swordsman", "Leader"],
+  "classes": ["Swordsman", "Leader", "Minor Spellsword"],
   "race": "Human",
   "age": 34,
-  "items_held": ["Healing Draughts", "Map of Evergreen"],
+  "items_held": ["Health Potion", "Map of Evergreen"],
   "items_equipped": [
     "Crimson Sword of Valor",
-    "Shield of the Mountain",
-    "Full Body Crimson Armor",
-    "Crimson Hooded Robe",
-    "Warrior's Helm"
+    "Tower Shield with Crimson Insignia",
+    "Full Body Plate Armor, Painted Red",
+    "Crimson Robe"
   ],
   "character_backstory": "A warrior from a lineage of legendary fighters, Thane rose through the ranks to lead the Crimson Vanguard.",
   "personal_ambitions_goals": "To unite the various guilds under the Crimson Vanguard's banner.",
@@ -28,25 +27,26 @@
     "notable_characteristics": "A battle-worn scar across his right arm"
   },
   "notable_affinities": {
-    "religions": ["Warrior's Code"],
-    "cultures": ["Iron Mountain Clan"],
+    "religions": [],
+    "cultures": ["Human", "Iron Mountains"],
     "guild_membership": "Crimson Vanguard",
-    "general_reputation": "Known for his courage and unwavering will"
+    "reputations": [
+      { "name": "Crimson Vanguard", "reputation": "Respected" },
+      { "name": "The Iron Mountains", "reputation": "Respected" }
+    ]
   },
-  "special_abilities": ["Mountain's Might", "Vanguard's Rally", "Iron Defense"],
+  "special_abilities": [
+    "Nimble (Passive)",
+    "Empowered Slash",
+    "Rally Team",
+    "Magic Missile"
+  ],
   "base_combat_statistics": {
     "health_points": 6,
     "attack": 5,
     "defense": 6,
     "speed": 3,
     "magic_defense": 2
-  },
-  "current_combat_statistics": {
-    "health_points": 9.38,
-    "attack": 7.81,
-    "defense": 9.38,
-    "speed": 4.69,
-    "magic_defense": 3.13
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {
