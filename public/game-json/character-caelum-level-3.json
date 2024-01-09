@@ -31,7 +31,12 @@
     "religions": ["Lunaria"],
     "cultures": ["Celestial beings"],
     "guild_membership": "None",
-    "general_reputation": "Known for calm demeanor and insight"
+    "reputations": [
+      {
+        "name": "Guild Lunaria",
+        "reputation": "Respected"
+      }
+    ]
   },
   "special_abilities": [
     "Starlight Arrow",
@@ -44,13 +49,6 @@
     "defense": 3,
     "speed": 4,
     "magic_defense": 3
-  },
-  "current_combat_statistics": {
-    "health_points": 6.25,
-    "attack": 4.69,
-    "defense": 4.69,
-    "speed": 6.25,
-    "magic_defense": 4.69
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

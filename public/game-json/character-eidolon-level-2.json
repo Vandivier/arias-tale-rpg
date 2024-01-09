@@ -1,16 +1,15 @@
 {
   "awakening_region": "Forest of Echoes",
-  "level": 4,
+  "level": 2,
   "name": "Eidolon",
   "rarity": "Rare",
   "classes": ["Rogue"],
   "race": "Elf",
   "age": 120,
   "items_held": [
-    "Elven Bow",
+    "Low-Quality Elven Bow",
     "Quiver of Arrows",
     "Light Leather Armor",
-    "Invisibility Cloak",
     "Healing Herbs"
   ],
   "character_backstory": "An elven rogue with agility and prowess in combat, suffering from amnesia and unsure of his real identity.",
@@ -27,25 +26,18 @@
     "notable_characteristics": "Enigmatic aura, with a graceful and stealthy demeanor"
   },
   "notable_affinities": {
-    "religions": ["Ancient Elven Beliefs"],
-    "cultures": ["Elven Stealth Experts"],
-    "guild_membership": "The Elementalists",
-    "general_reputation": "Known for his mysterious origin and combat skills"
+    "religions": ["Mother Tree"],
+    "cultures": ["Elves", "Thieves"],
+    "guild_membership": null,
+    "reputations": []
   },
-  "special_abilities": ["Fae Ancestry Arrow", "Shadow Step", "Elven Agility"],
+  "special_abilities": ["Fae Ancestry", "Hidden Strike"],
   "base_combat_statistics": {
     "health_points": 5,
     "attack": 6,
     "defense": 4,
     "speed": 7,
     "magic_defense": 5
-  },
-  "current_combat_statistics": {
-    "health_points": 7.81,
-    "attack": 9.38,
-    "defense": 6.25,
-    "speed": 10.94,
-    "magic_defense": 7.81
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

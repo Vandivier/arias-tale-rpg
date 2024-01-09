@@ -31,7 +31,7 @@
     "religions": ["Worshipper of the Sylvan Gods"],
     "cultures": ["Elven Society"],
     "guild_membership": "Member of the Forest Guardians",
-    "general_reputation": "Known for unmatched archery skills and deep connection to nature"
+    "reputations": []
   },
   "special_abilities": ["Precision Shot", "Nature's Camouflage", "Eagle Eye"],
   "base_combat_statistics": {
@@ -40,13 +40,6 @@
     "defense": 3,
     "speed": 5,
     "magic_defense": 2
-  },
-  "current_combat_statistics": {
-    "health_points": 4.5,
-    "attack": 6,
-    "defense": 4.5,
-    "speed": 7.5,
-    "magic_defense": 3
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

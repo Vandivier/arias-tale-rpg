@@ -1,17 +1,17 @@
 {
   "awakening_region": "Forest of Echoes",
-  "level": 4,
+  "level": 2,
   "name": "Tank",
   "rarity": "Unique",
-  "classes": ["Warrior"],
+  "classes": ["Warrior", "Guardian", "Spearman"],
   "race": "Human",
   "age": 30,
   "items_held": [
     "Spear",
-    "Shield",
-    "Warrior's Armor",
+    "Medium Wooden Shield",
+    "Bronze Chestplate",
     "Healing Potion",
-    "Rations"
+    "Bag of Walnuts"
   ],
   "character_backstory": "A seasoned warrior, known for his resilience and combat skills.",
   "personal_ambitions_goals": "To survive the challenges of Evergreen and defeat the 100th floor boss.",
@@ -24,20 +24,25 @@
     "skin_tone": "Tanned",
     "physical_size": "Tall",
     "physical_build": "Muscular",
-    "notable_characteristics": "Battle scars and a determined look"
+    "notable_characteristics": "A determined look"
   },
   "notable_affinities": {
-    "religions": ["Warrior's Creed"],
-    "cultures": ["Frontline Fighters"],
+    "religions": [],
+    "cultures": ["Human"],
     "guild_membership": "The Shield Bearers",
-    "general_reputation": "Respected for bravery and combat skills"
+    "reputations": [
+      {
+        "name": "Squirrelfolk of the Forest of Echoes",
+        "reputation": "Minor Negative"
+      }
+    ]
   },
   "special_abilities": [
-    "Shield Wall",
-    "Spear Thrust",
+    "Defensive Spear Thrust",
     "Battle Cry",
     "Strategic Thinker (Passive)",
-    "Painful Third Eye (Passive)"
+    "Painful Third Eye (Passive)",
+    "Phalanx"
   ],
   "base_combat_statistics": {
     "health_points": 6,
@@ -45,13 +50,6 @@
     "defense": 6,
     "speed": 3,
     "magic_defense": 2
-  },
-  "current_combat_statistics": {
-    "health_points": 9,
-    "attack": 7.5,
-    "defense": 9,
-    "speed": 4.5,
-    "magic_defense": 3
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

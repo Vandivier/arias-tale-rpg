@@ -29,7 +29,7 @@ Eidolon reels in shock as the monster vanishes from the sky, taking the sick ora
 
 "I need to find a town," he decides. That will be the best way to form a party and survive. Unfortunately, he has no clue where the nearest town is.
 
-Exploring the forest, Eidolon encounters a plant monster. Revealing his agility and combat prowess, he deftly dodges and overcomes the creature. The final blow is dealt by an arrow shot empowered by the spiritual energy of his fae ancestors. Later, he reflects on the fact that he cannot remember logging in. Is he real, or merely a digital construct?
+Exploring the forest, Eidolon encounters a plant monster. Revealing his agility and combat prowess, he deftly dodges and overcomes the creature. The final blow is dealt by an arrow shot empowered by the spiritual energy of his fae ancestors. He pillages a poison fang from the corpse. Later, he reflects on the fact that he cannot remember logging in. Is he real, or merely a digital construct?
 
 Aria, a charismatic spellcaster already within the Town of Echoes, immediately and succesfully seeks to rally local players into a guild of her own name. Within a day, Aria's Guild swells to about eighty members in a town of about three hundred residents.
 
@@ -71,7 +71,7 @@ In the aftermath, the Shield Bearers stood united and momentarily cheerful. Then
 
 As they returned towards the Town of Echoes, the world around them seemed to take a quiet breath. A cool mist followed from the lake to the edge of town, kissing their ankles with an acknowledgement of victory and whispering of the adventures that lay ahead.
 
-Eidolon joins up with a different guild called The Elementalists. They perform a training mission at the Crossroads of the Elements, where they unexpectedly come upon a merchant being robbed. They defeat the robbers, but Johan, their fire mage, is fatally wounded during the battle. Eidolon notably recovers a magical earth crystal among other prizes. From a distance, Gavriel somehow senses the fall of Johan.
+In town, Eidolon seeks information about the spear warrior he saw from the top of the tree. He sells the poison fang looted from his fallen foe for a few gold pieces. Unable to rally the party he seeks, Eidolon joins up with a different guild called The Elementalists. They perform a training mission at the Crossroads of the Elements, where they unexpectedly come upon a merchant being robbed. They defeat the robbers, but Johan, their fire mage, is fatally wounded during the battle. Eidolon notably recovers a magical earth crystal among other prizes. From a distance, Gavriel somehow senses the fall of Johan.
 
 ## Chapter 4: The Clash of Titans and Unification
 

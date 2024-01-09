@@ -29,7 +29,7 @@
     "religions": ["Cult of the Whispering Wind"],
     "cultures": ["Guild of Shadow Dancers"],
     "guild_membership": "Crimson Vanguard",
-    "general_reputation": "Known for her elusive nature and deadly precision with blades"
+    "reputations": [{ "name": "The Crimson Vanguard", "reputation": "Feared" }]
   },
   "special_abilities": ["Shadow Dance", "Whirlwind Blades", "Stealth Strike"],
   "base_combat_statistics": {
@@ -38,13 +38,6 @@
     "defense": 3,
     "speed": 6,
     "magic_defense": 2
-  },
-  "current_combat_statistics": {
-    "health_points": 6.25,
-    "attack": 7.81,
-    "defense": 4.69,
-    "speed": 9.38,
-    "magic_defense": 3.13
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

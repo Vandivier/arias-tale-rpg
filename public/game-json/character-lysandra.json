@@ -1,5 +1,5 @@
 {
-  "awakening_region": "The Crimson Battlegrounds",
+  "awakening_region": "New Olympia",
   "level": 5,
   "name": "Lysandra",
   "rarity": "Rare",
@@ -28,9 +28,12 @@
   },
   "notable_affinities": {
     "religions": ["Order of the Crimson Sun"],
-    "cultures": ["Warrior Elites"],
+    "cultures": ["Human", "Olympian"],
     "guild_membership": "Crimson Vanguard",
-    "general_reputation": "Respected for strategic mind and unwavering determination"
+    "reputations": [
+      { "name": "The Crimson Vanguard", "reputation": "Highly Respected" },
+      { "name": "Order of the Crimson Sun", "reputation": "Respected" }
+    ]
   },
   "special_abilities": [
     "Crimson Strike",
@@ -43,13 +46,6 @@
     "defense": 5,
     "speed": 3,
     "magic_defense": 2
-  },
-  "current_combat_statistics": {
-    "health_points": 7.81,
-    "attack": 6.25,
-    "defense": 7.81,
-    "speed": 4.69,
-    "magic_defense": 3.13
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

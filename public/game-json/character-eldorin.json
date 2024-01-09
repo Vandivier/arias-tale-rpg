@@ -24,7 +24,24 @@
     "religions": ["Lunaria"],
     "cultures": ["Half-Elves", "Musicians"],
     "guild_membership": "Guild Lunaria",
-    "general_reputation": "Known for his soothing presence, mystical insights, and a mysterious aura that captivates both animals and people alike"
+    "reputations": [
+      {
+        "name": "Merfolk of Triton",
+        "reputation": "Foolish"
+      },
+      {
+        "name": "Pirates of Triton",
+        "reputation": "Friendly"
+      },
+      {
+        "name": "Humans of Triton",
+        "reputation": "Friendly"
+      },
+      {
+        "name": "Coast of Echoes",
+        "reputation": "Minor Hero"
+      }
+    ]
   },
   "special_abilities": [
     "Melody of the Wild (can charm and calm animals)",
@@ -38,13 +55,6 @@
     "defense": 3,
     "speed": 3,
     "magic_defense": 6
-  },
-  "current_combat_statistics": {
-    "health_points": 6.25,
-    "attack": 3.13,
-    "defense": 4.69,
-    "speed": 4.69,
-    "magic_defense": 9.38
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {
