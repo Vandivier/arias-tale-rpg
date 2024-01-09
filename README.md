@@ -44,6 +44,7 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
    1. DALL-E, as built into GPT-4
    2. [Leonardo.ai Image Generator](https://leonardo.ai/)
    3. [Google Image Generator](https://www.google.com/search/images/)
+   4. [Pixlr Magic Eraser](https://pixlr.com/express/?tool=paint)
 4. Video Generators
    1. [Decohere](https://app.decohere.ai/turbo)
    2. [Runway ML](app.runwayml.com) for text to video
