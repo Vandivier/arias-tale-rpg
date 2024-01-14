@@ -30,7 +30,7 @@
     "religions": ["Order of the Light"],
     "cultures": ["Healers and Spiritual Leaders"],
     "guild_membership": "The Shield Bearers",
-    "general_reputation": "Revered for her wisdom, compassion, and leadership"
+    "reputations": []
   },
   "special_abilities": [
     "Minor Resurrect Other",
@@ -44,13 +44,6 @@
     "defense": 4,
     "speed": 3,
     "magic_defense": 7
-  },
-  "current_combat_statistics": {
-    "health_points": 7.81,
-    "attack": 4.69,
-    "defense": 6.25,
-    "speed": 4.69,
-    "magic_defense": 10.94
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {

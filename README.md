@@ -38,11 +38,13 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
    1. [Procgen Arcana](https://watabou.github.io/news.html)
    2. [One Page Dungeon](https://watabou.itch.io/one-page-dungeon)
    3. [Random quest generator](https://donjon.bin.sh/fantasy/adventure/)
-   4. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html).
+   4. [Shop generator](https://donjon.bin.sh/d20/magic/shop.html)
+   5. [Inkarnate Pro](https://inkarnate.com/) with Commercial License
 3. Image Generators
    1. DALL-E, as built into GPT-4
    2. [Leonardo.ai Image Generator](https://leonardo.ai/)
    3. [Google Image Generator](https://www.google.com/search/images/)
+   4. [Pixlr Magic Eraser](https://pixlr.com/express/?tool=paint)
 4. Video Generators
    1. [Decohere](https://app.decohere.ai/turbo)
    2. [Runway ML](app.runwayml.com) for text to video
@@ -81,34 +83,20 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
 
 These are game sessions that haven't been written up and formalized into canon. They are reported by ChatGPT thread name. These all occur after Oct 2023.
 
-1. Aria's Arc, the Arc of Leaves, Town, and Squirrels
-2. Lunara's Arc
-3. Caelum's Arc, the Second Heaven Arc
-4. Ezekiel's Arc, the Elemental Sacrifice Arc
-5. Eldorin's Arc
+1. Eldorin's Arc
 
    - Generate Game Character: Races
 
-6. Ulraker's Arc, the Bearkin Arc
+2. Ulraker's Arc, the Bearkin Arc
 
    - Druid Transformation Image
 
-7. Strategic Mode Development
+3. Strategic Mode Development
 
    - Gridless RPG Battles Possible
    - RPG Battlemap in CSV
 
-8. Regional Lore
-
-   - Dwarven Stronghold from Salt Mines
-   - Hex Grid RPG Battle Map
-   - Wendigo in snowy forest
-   - List Regions and Features
-   - [Town, Character, Quest Setup
-     ](https://chat.openai.com/share/9bb91cf2-1037-482b-aed6-13964456ac69)
-   - Iron Flame Book Summary
-
-9. Worldbuilding
+4. Worldbuilding
 
    - Anime Plot Summary
    - Quests receive progression bonuses so you don't have to keep doing mundane quests. Documented in the Iron Flame Book Summary thread.
@@ -160,6 +148,7 @@ Aria's Tale is also built with the following libraries and their associated offi
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
 - [zod](https://zod.dev/)
+- [shadcn/ui](https://ui.shadcn.com/)
 
 ### Deployment
 

@@ -68,4 +68,35 @@ export const searchableImages: SearchableImageSeed[] = [
     tags: ["fire", "elemental", "battler"],
     title: "Guardian Fire Elemental",
   },
+  {
+    description: "Can strike two opponents at once with a lightning bolt.",
+    id: 5,
+    imageFileName: "5-thunder-mage.png",
+    tags: ["thunder", "magic", "ranged", "battler"],
+    title: "Thunder Mage",
+  },
+  {
+    description:
+      "Caelum, surrounded by vibrant crystals, is exhausted after his battle.",
+    id: 6,
+    imageFileName: "6-vibrant-anime-caelum-exhausted.png",
+    tags: ["celestial", "ranged", "battler", "arc-caelum-ch-1"],
+    title: "Vibrant Exhausted Caelum",
+  },
+  {
+    description:
+      "A crystal spider feeds on magical energy and has sharp claws.",
+    id: 7,
+    imageFileName: "7-crystal-spider.png",
+    tags: ["bug", "monster", "arc-caelum-ch-1", "battler"],
+    title: "Crystal Spider",
+  },
+  {
+    description:
+      "Caelum, with his Stardust Bow drawn, is ready to fire an arrow.",
+    id: 8,
+    imageFileName: "8-caelum-mystic-archer-adrenaline.png",
+    tags: ["arc-caelum-ch-1", "caelum", "battler", "celestial", "ranged"],
+    title: "Adrenaline Rush Caelum",
+  },
 ];

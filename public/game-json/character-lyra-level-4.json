@@ -24,7 +24,12 @@
     "religions": ["Warrior's Creed"],
     "cultures": ["Agile Fighters"],
     "guild_membership": "The Shield Bearers",
-    "general_reputation": "Emerging as a promising and adaptable warrior"
+    "reputations": [
+      {
+        "name": "The Shield Bearers",
+        "reputation": "Respected"
+      }
+    ]
   },
   "special_abilities": ["Dual Wielding", "Quick Reflexes"],
   "base_combat_statistics": {
@@ -33,13 +38,6 @@
     "defense": 10,
     "speed": 14,
     "magic_defense": 7
-  },
-  "current_combat_statistics": {
-    "health_points": 18.75,
-    "attack": 21.88,
-    "defense": 15.63,
-    "speed": 21.88,
-    "magic_defense": 10.94
   },
   "noncombat_statistics": {
     "big_5_personality_traits": {
