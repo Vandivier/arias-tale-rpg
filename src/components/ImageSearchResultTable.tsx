@@ -21,7 +21,10 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
+import { useRouter } from "next/router";
 import React from "react";
+import type { SearchableImageWithGameCard } from "~/server/api/routers/searchableImageRouter";
+import { api } from "~/utils/api";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -32,8 +35,6 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { api } from "~/utils/api";
-import type { SearchableImageWithGameCard } from "~/server/api/routers/searchableImageRouter";
 
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
@@ -89,6 +90,9 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
+      const router = useRouter();
+      const imageId = row.original.id;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -99,7 +103,11 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>View Image Details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () => await router.push(`/gallery/${imageId}`)}
+            >
+              View Image Details
+            </DropdownMenuItem>
             <DropdownMenuItem disabled={true}>
               View Game Card Details
             </DropdownMenuItem>
