@@ -175,6 +175,11 @@ export function ImageSearchResultTable() {
           onChange={(event) =>
             setTableFilterCurrInput(event.target.value || "")
           }
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSearchClick();
+            }
+          }}
           className="max-w-sm"
         />
 
