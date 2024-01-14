@@ -38,16 +38,19 @@ import type { SearchableImageWithGameCard } from "~/server/api/routers/searchabl
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "id",
+    enableSorting: true,
     header: () => "ID",
     cell: ({ row }) => row.getValue("id"),
   },
   {
     accessorKey: "title",
+    enableSorting: true,
     header: () => "Title",
     cell: ({ row }) => row.getValue("title"),
   },
   {
     accessorKey: "description",
+    enableSorting: true,
     header: () => "Description",
     cell: ({ row }) => row.getValue("description"),
   },
@@ -60,9 +63,26 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     },
   },
   {
-    accessorKey: "battlePower",
-    header: () => "Battle Power",
-    cell: ({ row }) => row.getValue("battlePower") || "N/A",
+    accessorKey: "battlerHealth",
+    cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
+    enableSorting: true,
+    header: () => "Battler Health",
+    sortingFn: (rowA, rowB) => {
+      const numA = rowA.original.gameCard?.battlerHealth ?? -1;
+      const numB = rowB.original.gameCard?.battlerHealth ?? -1;
+      return numA - numB;
+    },
+  },
+  {
+    accessorKey: "battlerPower",
+    enableSorting: true,
+    header: () => "Battler Power",
+    cell: ({ row }) => row.original.gameCard?.battlerPower ?? "N/A",
+    sortingFn: (rowA, rowB) => {
+      const numA = rowA.original.gameCard?.battlerPower ?? -1;
+      const numB = rowB.original.gameCard?.battlerPower ?? -1;
+      return numA - numB;
+    },
   },
 
   {
@@ -108,16 +128,19 @@ export function ImageSearchResultTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data: data ?? [],
     columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
+    data: data ?? [],
+
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
+
+    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+
     state: {
       sorting,
       columnFilters,
@@ -204,23 +227,36 @@ export function ImageSearchResultTable() {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const sortingState = header.column.getIsSorted();
+                  const sortingIconRotation =
+                    sortingState === "desc" ? "rotate-180" : "";
+
                   return (
                     <TableHead
                       key={header.id}
-                      className="tracking-wider text-white"
+                      className="cursor-pointer select-none tracking-wider text-white"
+                      onClick={() => header.column.toggleSorting()}
                     >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
+                          <ChevronDownIcon
+                            className={`ml-2 h-4 w-4 transform ${
+                              sortingState ? sortingIconRotation : "opacity-0"
+                            }`}
+                          />
+                        </>
+                      )}
                     </TableHead>
                   );
                 })}
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
