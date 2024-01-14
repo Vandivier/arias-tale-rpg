@@ -205,7 +205,10 @@ export function ImageSearchResultTable() {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-white">
+                    <TableHead
+                      key={header.id}
+                      className="tracking-wider text-white"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
