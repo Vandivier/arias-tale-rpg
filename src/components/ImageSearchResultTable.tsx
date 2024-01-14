@@ -133,7 +133,12 @@ export function ImageSearchResultTable() {
     );
   }
 
-  const handleRollClick = async () => {
+  const handleResetClick = async () => {
+    setTableFilterForNetworkCall("");
+    await refetch();
+  };
+
+  const handleSearchClick = async () => {
     setTableFilterForNetworkCall(tableFilterCurrInput);
     await refetch();
   };
@@ -153,7 +158,7 @@ export function ImageSearchResultTable() {
         <Button
           variant="secondary"
           className="ml-auto"
-          onClick={handleRollClick}
+          onClick={handleSearchClick}
         >
           Search
         </Button>
@@ -161,10 +166,7 @@ export function ImageSearchResultTable() {
         <Button
           variant="secondary"
           className="ml-auto"
-          onClick={async () => {
-            setTableFilterCurrInput("");
-            await handleRollClick();
-          }}
+          onClick={handleResetClick}
         >
           Reset Search
         </Button>
@@ -203,7 +205,7 @@ export function ImageSearchResultTable() {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-white">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
