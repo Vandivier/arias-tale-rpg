@@ -92,7 +92,6 @@ model GameCard {
     description String         @unique
     isGeneric   Boolean
     rarity      CardRarityEnum
-    tags        Tag[]
 
     battlerPower  Int?
     battlerHealth Int?
@@ -132,7 +131,6 @@ model UserCustomDeck {
     gameCards   UserGameCard[]
 }
 
-// TODO: seed notable non_battler tags including techniques, items, environments, and events
 model Tag {
     id        Int      @id @default(autoincrement())
     createdAt DateTime @default(now())
@@ -141,7 +139,6 @@ model Tag {
     name             String            @unique
     isPrintedTag     Boolean
     searchableImages SearchableImage[]
-    gameCards        GameCard[]
     userGameCards    UserGameCard[]
 }
 

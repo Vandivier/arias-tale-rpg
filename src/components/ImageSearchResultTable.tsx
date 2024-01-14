@@ -10,8 +10,6 @@ import {
   type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
-  FilterFn,
-  Row,
 } from "@tanstack/react-table";
 
 import {
@@ -23,7 +21,10 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
+import { useRouter } from "next/router";
 import React from "react";
+import type { SearchableImageWithGameCard } from "~/server/api/routers/searchableImageRouter";
+import { api } from "~/utils/api";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -35,75 +36,22 @@ import {
   TableRow,
 } from "./ui/table";
 
-const data: GameCardData[] = [
-  {
-    id: 1,
-    title: "Archmage Caelum",
-    description: "He's pretty strong",
-    tags: ["battler", "celestial", "caelum"],
-    battlePower: 1800,
-  },
-  {
-    id: 2,
-    title: "Health Potion",
-    description: "it helps if ur hurt",
-    tags: ["item"],
-  },
-  {
-    id: 3,
-    title: "Mace Troll",
-    description: "ken99@yahoo.com",
-    tags: ["stereotypical", "troll", "melee", "battler"],
-    battlePower: 300,
-  },
-  {
-    id: 4,
-    title: "Watchtower",
-    description: "Lets you see further",
-    tags: [],
-  },
-];
-
-export type GameCardData = {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  battlePower?: number;
-};
-
-const globalFilterFn: FilterFn<GameCardData> = (
-  row: Row<GameCardData>,
-  columnIds: string,
-  filterValue: string,
-): boolean => {
-  const lowerCaseFilterValue = String(filterValue).toLowerCase();
-  const titleMatches = (row.getValue("title") as string)
-    .toLowerCase()
-    .includes(lowerCaseFilterValue);
-  const descriptionMatches = (row.getValue("description") as string)
-    .toLowerCase()
-    .includes(lowerCaseFilterValue);
-  const tagsMatch = (row.getValue("tags") as string[]).some((tag: string) =>
-    tag.toLowerCase().includes(lowerCaseFilterValue),
-  );
-
-  return titleMatches || descriptionMatches || tagsMatch;
-};
-
-export const columns: ColumnDef<GameCardData>[] = [
+export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "id",
+    enableSorting: true,
     header: () => "ID",
     cell: ({ row }) => row.getValue("id"),
   },
   {
     accessorKey: "title",
+    enableSorting: true,
     header: () => "Title",
     cell: ({ row }) => row.getValue("title"),
   },
   {
     accessorKey: "description",
+    enableSorting: true,
     header: () => "Description",
     cell: ({ row }) => row.getValue("description"),
   },
@@ -116,16 +64,34 @@ export const columns: ColumnDef<GameCardData>[] = [
     },
   },
   {
-    accessorKey: "battlePower",
-    header: () => "Battle Power",
-    cell: ({ row }) => row.getValue("battlePower") || "N/A",
+    accessorKey: "battlerHealth",
+    cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
+    enableSorting: true,
+    header: () => "Battler Health",
+    sortingFn: (rowA, rowB) => {
+      const numA = rowA.original.gameCard?.battlerHealth ?? -1;
+      const numB = rowB.original.gameCard?.battlerHealth ?? -1;
+      return numA - numB;
+    },
+  },
+  {
+    accessorKey: "battlerPower",
+    enableSorting: true,
+    header: () => "Battler Power",
+    cell: ({ row }) => row.original.gameCard?.battlerPower ?? "N/A",
+    sortingFn: (rowA, rowB) => {
+      const numA = rowA.original.gameCard?.battlerPower ?? -1;
+      const numB = rowB.original.gameCard?.battlerPower ?? -1;
+      return numA - numB;
+    },
   },
 
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const router = useRouter();
+      const imageId = row.original.id;
 
       return (
         <DropdownMenu>
@@ -137,8 +103,14 @@ export const columns: ColumnDef<GameCardData>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>View Image Details</DropdownMenuItem>
-            <DropdownMenuItem>View Game Card Details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () => await router.push(`/gallery/${imageId}`)}
+            >
+              View Image Details
+            </DropdownMenuItem>
+            <DropdownMenuItem disabled={true}>
+              View Game Card Details
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -147,26 +119,43 @@ export const columns: ColumnDef<GameCardData>[] = [
 ];
 
 export function ImageSearchResultTable() {
+  const [tableFilterCurrInput, setTableFilterCurrInput] = React.useState("");
+  const [tableFilterForNetworkCall, setTableFilterForNetworkCall] =
+    React.useState("");
+  const { data, isLoading, isError, refetch } = api.image.getImages.useQuery(
+    { filter: tableFilterForNetworkCall },
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+    React.useState<VisibilityState>({
+      battlerHealth: false,
+      battlerPower: false,
+      id: false,
+      tags: false,
+    });
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
     columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
+    data: data ?? [],
+
     getCoreRowModel: getCoreRowModel(),
-    globalFilterFn: globalFilterFn,
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
+
+    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+
     state: {
       sorting,
       columnFilters,
@@ -175,17 +164,56 @@ export function ImageSearchResultTable() {
     },
   });
 
+  if (isLoading) return <span>Loading...</span>;
+  if (isError) {
+    return (
+      <span>😭 An error occured while trying to obtain the image. 😭</span>
+    );
+  }
+
+  const handleResetClick = async () => {
+    setTableFilterForNetworkCall("");
+    await refetch();
+  };
+
+  const handleSearchClick = async () => {
+    setTableFilterForNetworkCall(tableFilterCurrInput);
+    await refetch();
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center gap-4 py-4">
         <Input
           placeholder="Filter by title, description, or tags..."
-          value={table.getState().globalFilter ?? ""}
+          value={tableFilterCurrInput}
           onChange={(event) =>
-            table.setGlobalFilter(event.target.value || undefined)
+            setTableFilterCurrInput(event.target.value || "")
           }
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSearchClick();
+            }
+          }}
           className="max-w-sm"
         />
+
+        <Button
+          variant="secondary"
+          className="ml-auto"
+          onClick={handleSearchClick}
+        >
+          Search
+        </Button>
+
+        <Button
+          variant="secondary"
+          className="ml-auto"
+          onClick={handleResetClick}
+        >
+          Reset Search
+        </Button>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" className="ml-auto">
@@ -219,20 +247,36 @@ export function ImageSearchResultTable() {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const sortingState = header.column.getIsSorted();
+                  const sortingIconRotation =
+                    sortingState === "desc" ? "rotate-180" : "";
+
                   return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
+                    <TableHead
+                      key={header.id}
+                      className="cursor-pointer select-none tracking-wider text-white"
+                      onClick={() => header.column.toggleSorting()}
+                    >
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
+                          <ChevronDownIcon
+                            className={`ml-2 h-4 w-4 transform ${
+                              sortingState ? sortingIconRotation : "opacity-0"
+                            }`}
+                          />
+                        </>
+                      )}
                     </TableHead>
                   );
                 })}
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -264,7 +308,7 @@ export function ImageSearchResultTable() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
+        <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
