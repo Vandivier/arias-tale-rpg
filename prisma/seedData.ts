@@ -69,7 +69,8 @@ export const searchableImages: SearchableImageSeed[] = [
     title: "Guardian Fire Elemental",
   },
   {
-    description: "Can strike two opponents at once with a lightning bolt.",
+    description:
+      "A thunder mage can strike two opponents at once with a lightning bolt.",
     id: 5,
     imageFileName: "5-thunder-mage.png",
     tags: ["thunder", "magic", "ranged", "battler"],
@@ -115,11 +116,11 @@ export const searchableImages: SearchableImageSeed[] = [
   },
   {
     description:
-      "Caelum, with his Stardust Bow drawn, is ready to fire an arrow.",
+      "Young Caelum appears shocked, stressed, confused, or embarrassed in an anime art style.",
     id: 11,
     imageFileName: "11-caelum-young-shocked.png",
-    tags: ["arc-caelum-ch-1", "caelum", "battler", "celestial", "ranged"],
-    title: "Adrenaline Rush Caelum",
+    tags: ["caelum"],
+    title: "Young Caelum is Shocked",
   },
   {
     description:
