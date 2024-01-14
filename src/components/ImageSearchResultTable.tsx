@@ -100,7 +100,9 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem>View Image Details</DropdownMenuItem>
-            <DropdownMenuItem>View Game Card Details</DropdownMenuItem>
+            <DropdownMenuItem disabled={true}>
+              View Game Card Details
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
