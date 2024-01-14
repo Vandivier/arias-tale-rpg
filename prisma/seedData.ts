@@ -99,4 +99,50 @@ export const searchableImages: SearchableImageSeed[] = [
     tags: ["arc-caelum-ch-1", "caelum", "battler", "celestial", "ranged"],
     title: "Adrenaline Rush Caelum",
   },
+  {
+    description: "A pack of crystal spiders attacking Caelum.",
+    id: 9,
+    imageFileName: "9-pack-of-crystal-spiders.png",
+    tags: ["bug", "monster", "arc-caelum-ch-1", "battler", "caelum"],
+    title: "Pack of Crystal Spiders",
+  },
+  {
+    description: "Caelum, the mystic archer, standing calm.",
+    id: 10,
+    imageFileName: "10-caelum-mystic-archer-calm.png",
+    tags: ["arc-caelum-ch-1", "caelum", "battler", "celestial", "ranged"],
+    title: "Caelum the Mystic Archer",
+  },
+  {
+    description:
+      "Caelum, with his Stardust Bow drawn, is ready to fire an arrow.",
+    id: 11,
+    imageFileName: "11-caelum-young-shocked.png",
+    tags: ["arc-caelum-ch-1", "caelum", "battler", "celestial", "ranged"],
+    title: "Adrenaline Rush Caelum",
+  },
+  {
+    description:
+      "Lyra prepares to fight a lizard monster at the Lake of Whispers.",
+    id: 12,
+    imageFileName: "12-lyra-twin-swords.png",
+    tags: ["lyra", "melee", "dual-wield", "arc-aria-ch-3"],
+    title: "Lyra with Twin Swords at the Lake of Whispers",
+  },
+  {
+    description:
+      "The Shield Bearers in their signature phalanx, with Elara adding magical shielding to the physical shields of the melee members.",
+    id: 13,
+    imageFileName: "13-shield-bearers-in-phalanx.png",
+    tags: ["arc-aria-ch-4", "elara", "battler", "melee"],
+    title: "Shield Bearers in Phalanx",
+  },
+  {
+    description:
+      "Elara revives Tank after his death at the hands of the water and metal elemental during initiation into the Shield Bearers.",
+    id: 14,
+    imageFileName: "14-elara-can-minor-revive.png",
+    tags: ["arc-aria-ch-3", "elara", "tank", "healing"],
+    title: "Elara the Reviver in Stained Glass",
+  },
 ];
