@@ -10,8 +10,6 @@ import {
   type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
-  FilterFn,
-  Row,
 } from "@tanstack/react-table";
 
 import {
@@ -34,64 +32,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { api } from "~/utils/api";
+import type { SearchableImageWithGameCard } from "~/server/api/routers/searchableImageRouter";
 
-const data: GameCardData[] = [
-  {
-    id: 1,
-    title: "Archmage Caelum",
-    description: "He's pretty strong",
-    tags: ["battler", "celestial", "caelum"],
-    battlePower: 1800,
-  },
-  {
-    id: 2,
-    title: "Health Potion",
-    description: "it helps if ur hurt",
-    tags: ["item"],
-  },
-  {
-    id: 3,
-    title: "Mace Troll",
-    description: "ken99@yahoo.com",
-    tags: ["stereotypical", "troll", "melee", "battler"],
-    battlePower: 300,
-  },
-  {
-    id: 4,
-    title: "Watchtower",
-    description: "Lets you see further",
-    tags: [],
-  },
-];
-
-export type GameCardData = {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  battlePower?: number;
-};
-
-const globalFilterFn: FilterFn<GameCardData> = (
-  row: Row<GameCardData>,
-  columnIds: string,
-  filterValue: string,
-): boolean => {
-  const lowerCaseFilterValue = String(filterValue).toLowerCase();
-  const titleMatches = (row.getValue("title") as string)
-    .toLowerCase()
-    .includes(lowerCaseFilterValue);
-  const descriptionMatches = (row.getValue("description") as string)
-    .toLowerCase()
-    .includes(lowerCaseFilterValue);
-  const tagsMatch = (row.getValue("tags") as string[]).some((tag: string) =>
-    tag.toLowerCase().includes(lowerCaseFilterValue),
-  );
-
-  return titleMatches || descriptionMatches || tagsMatch;
-};
-
-export const columns: ColumnDef<GameCardData>[] = [
+export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "id",
     header: () => "ID",
@@ -125,8 +69,6 @@ export const columns: ColumnDef<GameCardData>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -147,6 +89,16 @@ export const columns: ColumnDef<GameCardData>[] = [
 ];
 
 export function ImageSearchResultTable() {
+  const [tableFilterCurrInput, setTableFilterCurrInput] = React.useState("");
+  const [tableFilterForNetworkCall, setTableFilterForNetworkCall] =
+    React.useState("");
+  const { data, isLoading, isError, refetch } = api.image.getImages.useQuery(
+    { filter: tableFilterForNetworkCall },
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -156,12 +108,11 @@ export function ImageSearchResultTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: data ?? [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    globalFilterFn: globalFilterFn,
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -175,17 +126,49 @@ export function ImageSearchResultTable() {
     },
   });
 
+  if (isLoading) return <span>Loading...</span>;
+  if (isError) {
+    return (
+      <span>😭 An error occured while trying to obtain the image. 😭</span>
+    );
+  }
+
+  const handleRollClick = async () => {
+    setTableFilterForNetworkCall(tableFilterCurrInput);
+    await refetch();
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center gap-4 py-4">
         <Input
           placeholder="Filter by title, description, or tags..."
-          value={table.getState().globalFilter ?? ""}
+          value={tableFilterCurrInput}
           onChange={(event) =>
-            table.setGlobalFilter(event.target.value || undefined)
+            setTableFilterCurrInput(event.target.value || "")
           }
           className="max-w-sm"
         />
+
+        <Button
+          variant="secondary"
+          className="ml-auto"
+          onClick={handleRollClick}
+        >
+          Search
+        </Button>
+
+        <Button
+          variant="secondary"
+          className="ml-auto"
+          onClick={async () => {
+            setTableFilterCurrInput("");
+            await handleRollClick();
+          }}
+        >
+          Reset Search
+        </Button>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" className="ml-auto">
@@ -264,7 +247,7 @@ export function ImageSearchResultTable() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
+        <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
