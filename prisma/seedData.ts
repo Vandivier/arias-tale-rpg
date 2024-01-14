@@ -1,8 +1,11 @@
+import { CardRarityEnum } from "@prisma/client";
+
 type TagSeed = {
   isPrintedTag: boolean;
   name: string;
 };
 
+// TODO: seed notable non_battler tags including techniques, items, environments, and events
 export const tags: TagSeed[] = [
   {
     isPrintedTag: false,
@@ -28,6 +31,21 @@ export const tags: TagSeed[] = [
     isPrintedTag: true,
     name: "elemental",
   },
+  { isPrintedTag: true, name: "thunder" },
+  { isPrintedTag: true, name: "magic" },
+  { isPrintedTag: true, name: "ranged" },
+  { isPrintedTag: false, name: "arc-caelum-ch-1" },
+  { isPrintedTag: true, name: "bug" },
+  { isPrintedTag: true, name: "monster" },
+  { isPrintedTag: false, name: "lyra" },
+  { isPrintedTag: true, name: "melee" },
+  { isPrintedTag: true, name: "dual-wield" },
+  { isPrintedTag: false, name: "arc-aria-ch-3" },
+  { isPrintedTag: false, name: "arc-aria-ch-4" },
+  { isPrintedTag: false, name: "elara" },
+  // Note: "Tank" refers to a character name, not a unit class
+  { isPrintedTag: false, name: "tank" },
+  { isPrintedTag: true, name: "healing" },
 ];
 
 type SearchableImageSeed = {
@@ -38,26 +56,39 @@ type SearchableImageSeed = {
   title: string;
 };
 
-export const searchableImages: SearchableImageSeed[] = [
+type GameCardSeed = {
+  id: number;
+  name?: string;
+  description?: string;
+
+  isGeneric: boolean;
+  rarity: CardRarityEnum;
+
+  battlerPower?: number;
+  battlerHealth?: number;
+  imageTitle: string;
+};
+
+export const searchableImageSeeds: SearchableImageSeed[] = [
   {
     description: "Archmage Caelum holding a moonstaff.",
     id: 1,
     imageFileName: "1-caelum-archmage-moonstaff.png",
-    tags: ["caelum", "battler", "celestial"],
+    tags: ["caelum", "battler", "celestial", "magic"],
     title: "Archmage Caelum with a Moonstaff",
   },
   {
     description: "Archmage Caelum holding the Timesight Wand.",
     id: 2,
     imageFileName: "2-caelum-archmage-timesight-wand.png",
-    tags: ["caelum", "battler", "celestial"],
+    tags: ["caelum", "battler", "celestial", "magic"],
     title: "Archmage Caelum with the Timesight Wand",
   },
   {
     description: "A troll strikes an opponent with a spiked mace.",
     id: 3,
     imageFileName: "3-mace-troll.png",
-    tags: ["battler", "troll"],
+    tags: ["battler", "troll", "melee"],
     title: "Mace Troll",
   },
   {
@@ -145,5 +176,43 @@ export const searchableImages: SearchableImageSeed[] = [
     imageFileName: "14-elara-can-minor-revive.png",
     tags: ["arc-aria-ch-3", "elara", "tank", "healing"],
     title: "Elara the Reviver in Stained Glass",
+  },
+];
+
+export const gameCardSeeds: GameCardSeed[] = [
+  {
+    id: 1,
+    isGeneric: false,
+    rarity: CardRarityEnum.UNIQUE,
+    battlerPower: 2400,
+    battlerHealth: 4,
+    imageTitle: "Archmage Caelum with a Moonstaff",
+  },
+  {
+    id: 2,
+    description:
+      "Once per turn, declare a battler. If it is an ally, let them attack twice. If it is an opponent, they cannot neither attack nor activate effects on their next turn.",
+    isGeneric: false,
+    rarity: CardRarityEnum.UNIQUE,
+    battlerPower: 1200,
+    battlerHealth: 4,
+    imageTitle: "Archmage Caelum with the Timesight Wand",
+  },
+  {
+    id: 3,
+    isGeneric: false,
+    rarity: CardRarityEnum.UNCOMMON,
+    battlerPower: 600,
+    battlerHealth: 3,
+    imageTitle: "Mace Troll",
+  },
+  {
+    id: 4,
+    name: "Oh No!",
+    description:
+      "Select an opposing battler and roll 2d6. Apply one of the following effects: 2: (Surprising Backfire) One of your own battlers is stunned this turn. 3-5: (Surprised) They are stunned for a turn. 6-8: (Confused) They are confused and must attack an ally battler if any are on the field. 9-11: (Embarrassed) They take double damage this turn. 12: (Critically Confused) They attack each ally once and cannot attack on their turn.",
+    isGeneric: true,
+    rarity: CardRarityEnum.RARE,
+    imageTitle: "Young Caelum is Shocked",
   },
 ];
