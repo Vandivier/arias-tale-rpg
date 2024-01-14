@@ -124,7 +124,12 @@ export function ImageSearchResultTable() {
     [],
   );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+    React.useState<VisibilityState>({
+      battlerHealth: false,
+      battlerPower: false,
+      id: false,
+      tags: false,
+    });
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
