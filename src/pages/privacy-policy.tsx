@@ -16,8 +16,12 @@ export default function PrivacyPolicyPage() {
           In what situations does ariastale.com collect personal data?
         </h2>
         <p>
-          If you create an ariastale.com account, we collect your email address
-          for authentication purposes.
+          If you create an ariastale.com account, we collect your name and email
+          address for authentication purposes and to personalize your
+          experience. If you create an account through a third party
+          authentication provider such as Google or Facebook, we will also
+          attempt to collect a copy of your public profile picture for display
+          on your Aria's Tale public profile, if enabled.
         </p>
 
         <h2 className={`text-2xl`}>Can I use this site anonymously?</h2>

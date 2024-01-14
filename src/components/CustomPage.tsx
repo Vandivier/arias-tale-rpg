@@ -79,6 +79,10 @@ export const CustomPage = ({
       <Link href="https://ladderly.io" target="_blank">
         ladderly.io
       </Link>
+      {" | "}
+      <Link href="https://ariastale.com/privacy-policy" target="_blank">
+        Privacy Policy
+      </Link>
     </footer>
   </>
 );
