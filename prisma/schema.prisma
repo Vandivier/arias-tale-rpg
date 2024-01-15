@@ -113,7 +113,6 @@ model UserGameCard {
 
     user            User             @relation(fields: [userId], references: [id])
     userId          String
-    userCardTags    Tag[]
     cardBackImage   SearchableImage  @relation(fields: [cardBackImageId], references: [id])
     cardBackImageId Int
     customDecks     UserCustomDeck[]
@@ -138,8 +137,9 @@ model Tag {
 
     name             String            @unique
     isPrintedTag     Boolean
+    characters       Character[]
     searchableImages SearchableImage[]
-    userGameCards    UserGameCard[]
+    regionSnapshots  RegionSnapshot[]
 }
 
 model StandardDeck {
@@ -177,4 +177,185 @@ enum CardRarityEnum {
     RARE
     ULTRA_RARE
     UNIQUE
+}
+
+enum RegionKind {
+    UNIVERSE
+    SUPERCLUSTER
+    GALAXY
+    WORLD
+    SUPERREGION
+    REGION
+    SUBREGION
+    // zones include towns, dungeons, encounter areas, building interiors, and so on
+    ZONE
+}
+
+model RegionSnapshot {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    name          String
+    // days before or after the monstrous vision
+    narrativeDays Int
+    description   String
+    mainImageTag  Tag    @relation(fields: [tagId], references: [id])
+    tagId         Int    @unique
+
+    regionKind     RegionKind
+    minElevation   Int
+    maxElavation   Int
+    commonRace     String
+    commonTongue   String
+    // rating of 1 to 100 influencing racial, religious, economic, political, and other diversity
+    diversityScore Int
+    subregions     RegionSnapshot[] @relation("RegionHierarchy")
+    parentRegion   RegionSnapshot?  @relation("RegionHierarchy", fields: [parentRegionId], references: [id])
+    parentRegionId Int?
+
+    @@unique([name, narrativeDays])
+}
+
+model Character {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    name         String
+    description  String
+    mainImageTag Tag    @relation(fields: [tagId], references: [id])
+    tagId        Int    @unique
+    rarity       String
+    race         String
+
+    appearance            CharacterAppearance @relation(fields: [appearanceId], references: [id])
+    appearanceId          Int                 @unique
+    combatStatistics      CombatStatistics    @relation(fields: [combatStatisticsId], references: [id])
+    combatStatisticsId    Int
+    gender                String
+    noncombatStatistics   NoncombatStatistics @relation(fields: [noncombatStatisticsId], references: [id])
+    noncombatStatisticsId Int @unique
+    socialAffinities     CharacterAffinities @relation(fields: [socialAffinitiesId], references: [id])
+    socialAffinitiesId   Int
+
+    awakeningRegion         String
+    characterBackstory      String           @unique
+    initialLevel            Int
+    initialAge              Int
+    initialClasses          BattleClass[]
+    initialSpecialAbilities SpecialAbility[]
+    initialMemories         String
+    irlBackstory            String
+}
+
+model CharacterSnapshot {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    name             String
+    narrativeArc     String
+    narrativeChapter Int
+    narrativeDays    Int
+
+    age              Int
+    awakeningRegion  String
+    classes          BattleClass[]
+    currentState     CharacterState   @relation(fields: [currentStateId], references: [id])
+    currentStateId   Int              @unique
+    description      String
+    itemsHeld        ItemHeld[]
+    level            Int
+    specialAbilities SpecialAbility[]
+
+    @@unique([name, narrativeDays])
+}
+
+model CharacterAppearance {
+    id                     Int        @id @default(autoincrement())
+    eyeColor               String
+    hairColor              String
+    skinTone               String
+    physicalSize           String
+    physicalBuild          String
+    notableCharacteristics String
+    character              Character?
+}
+
+model CharacterAffinities {
+    id              Int          @id @default(autoincrement())
+    characters      Character[]
+    cultures        String[]
+    guildMembership String
+    religions       String[]
+    reputations     Reputation[]
+}
+
+model SpecialAbility {
+    id                  Int                @id @default(autoincrement())
+    name                String             @unique
+    description         String
+    character           Character?         @relation(fields: [characterId], references: [id])
+    characterId         Int?
+    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
+    characterSnapshotId Int?
+}
+
+model CombatStatistics {
+    id           Int         @id @default(autoincrement())
+    healthPoints Int
+    attack       Int
+    defense      Int
+    speed        Int
+    magicDefense Int
+    character    Character[]
+}
+
+model NoncombatStatistics {
+    id                Int         @id @default(autoincrement())
+
+    agreeableness     Int
+    character         Character?
+    charisma          Int
+    conscientiousness Int
+    dexterity         Int
+    extraversion      Int
+    intelligence      Int
+    neuroticism       Int
+    openness          Int
+    strength          Int
+}
+
+model CharacterState {
+    id              Int                @id @default(autoincrement())
+    healthStatus    String
+    ailmentsEffects String
+    hungerStatus    String
+    fatigueStatus   String
+    character       CharacterSnapshot?
+}
+
+model BattleClass {
+    id                  Int                @id @default(autoincrement())
+    name                String
+    character           Character?         @relation(fields: [characterId], references: [id])
+    characterId         Int?
+    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
+    characterSnapshotId Int?
+}
+
+model ItemHeld {
+    id          Int               @id @default(autoincrement())
+    item        String
+    characterId Int
+    character   CharacterSnapshot @relation(fields: [characterId], references: [id])
+}
+
+model Reputation {
+    id           Int                 @id @default(autoincrement())
+    name         String
+    reputation   String
+    affinitiesId Int
+    affinities   CharacterAffinities @relation(fields: [affinitiesId], references: [id])
 }
