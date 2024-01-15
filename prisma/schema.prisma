@@ -203,13 +203,20 @@ model RegionSnapshot {
     mainImageTag  Tag    @relation(fields: [tagId], references: [id])
     tagId         Int    @unique
 
-    regionKind     RegionKind
-    minElevation   Int
-    maxElavation   Int
-    commonRace     String
-    commonTongue   String
-    // rating of 1 to 100 influencing racial, religious, economic, political, and other diversity
-    diversityScore Int
+    commonRace   String
+    commonTongue String
+    // elevation is in meters
+    maxElavation Int
+    minElevation Int
+    regionKind   RegionKind
+
+    // score ratings are 1 to 100
+    // diversityScore influences racial, religious, economic, political, and other diversity
+    diversityScore      Int
+    // Evergreen and Earth are both size 100
+    physicalSizeScore   Int
+    populationSizeScore Int
+
     subregions     RegionSnapshot[] @relation("RegionHierarchy")
     parentRegion   RegionSnapshot?  @relation("RegionHierarchy", fields: [parentRegionId], references: [id])
     parentRegionId Int?
@@ -235,9 +242,9 @@ model Character {
     combatStatisticsId    Int
     gender                String
     noncombatStatistics   NoncombatStatistics @relation(fields: [noncombatStatisticsId], references: [id])
-    noncombatStatisticsId Int @unique
-    socialAffinities     CharacterAffinities @relation(fields: [socialAffinitiesId], references: [id])
-    socialAffinitiesId   Int
+    noncombatStatisticsId Int                 @unique
+    socialAffinities      CharacterAffinities @relation(fields: [socialAffinitiesId], references: [id])
+    socialAffinitiesId    Int
 
     awakeningRegion         String
     characterBackstory      String           @unique
@@ -313,7 +320,7 @@ model CombatStatistics {
 }
 
 model NoncombatStatistics {
-    id                Int         @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
     agreeableness     Int
     character         Character?
