@@ -1,0 +1,15 @@
+name,narrativeDays,description,regionKind,minElevation,maxElevation,commonRace,commonTongue,diversityScore
+Evergreen,0,A mystical and vast world with diverse landscapes.,WORLD,0,0,Various,Multiple,50
+Aetheria,0,"A floating region in the sky, known for its forests, plains, rivers, and mountains.",REGION,0,0,"Birdfolk, Celestials, Fae",Multiple,30
+Dragonica,0,Region filled with ancient dragon lore and mysteries.,REGION,0,0,"Dragons, Various",Multiple,40
+New Olympia,0,Mountain range occupied by a large dwarven civilization and a multiracial society.,REGION,0,0,"Dwarves, Various",Multiple,70
+Obsidia,0,Region known for its Echoing Forest and Whispering Woods.,REGION,0,0,Various,Multiple,60
+Raefun,0,"A region with varied geography, from plains to mountains and coast.",REGION,0,0,Various,Multiple,50
+Old Pillar,0,An area known for its historical significance and ancient ruins.,REGION,0,0,Various,Multiple,20
+Triton,0,"The largest merfolk ocean civilization, also an island civilization.",REGION,0,0,Merfolk,Merfolk Languages,30
+Neptune,0,A merfolk civilization located in the sea between continents.,REGION,0,0,Merfolk,Merfolk Languages,30
+Regalis,0,Region with the well-known citadel Areion and the large library of Elderglen.,REGION,0,0,Various,Multiple,60
+Terah,0,"Known as The Land of Judges, includes deserts, plains, and coastal areas.",REGION,0,0,"Humans, Other",Multiple,40
+Elysia,0,"Mainly plains, known for its egalitarian society and tension with Regalis.",REGION,0,0,Humans,Multiple,50
+Goblin Hollow,0,Network of underground caves and tunnels adjacent to Raefun.,ZONE,0,0,Goblins,Goblin,20
+Antiqua,0,"The cursed former capital of the Empire of Solara, now a barren land.",REGION,0,0,Various,Multiple,10
