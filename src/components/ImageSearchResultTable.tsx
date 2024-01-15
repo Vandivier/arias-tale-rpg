@@ -67,21 +67,23 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     accessorKey: "battlerHealth",
     cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
     enableSorting: true,
+    sortUndefined: 1,
     header: () => "Battler Health",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerHealth ?? -1;
-      const numB = rowB.original.gameCard?.battlerHealth ?? -1;
+      const numA = rowA.original.gameCard?.battlerHealth ;
+      const numB = rowB.original.gameCard?.battlerHealth ;
       return numA - numB;
     },
   },
   {
     accessorKey: "battlerPower",
-    enableSorting: true,
-    header: () => "Battler Power",
     cell: ({ row }) => row.original.gameCard?.battlerPower ?? "N/A",
+    enableSorting: true,
+    sortUndefined: 1,
+    header: () => "Battler Power",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerPower ?? -1;
-      const numB = rowB.original.gameCard?.battlerPower ?? -1;
+      const numA = rowA.original.gameCard?.battlerPower ;
+      const numB = rowB.original.gameCard?.battlerPower ;
       return numA - numB;
     },
   },
