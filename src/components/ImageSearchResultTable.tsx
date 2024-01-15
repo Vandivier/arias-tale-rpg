@@ -1,4 +1,7 @@
 import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { BarsArrowUpIcon, BarsArrowDownIcon } from "@heroicons/react/16/solid";
+import classNames from 'classnames';
+
 import {
   flexRender,
   getCoreRowModel,
@@ -36,6 +39,43 @@ import {
   TableRow,
 } from "./ui/table";
 
+export function tagPill({ value }) {
+  const tag = value ? value.toLowerCase() : "common";
+
+  const raceOptions = ["celestial", "troll", "bug", "monster"];
+  const characterOptions = ["caelum", "elara", "lyra", "tank", "battler"];
+  const fightingOptions = ["dual-wield", "healing", "melee", "ranged"];
+  const magicOptions = ["elemental", "fire", "magic", "thunder"];
+
+  let tagClass = '';
+
+  if (raceOptions.includes(tag)) {
+    tagClass = 'bg-yellow-100 text-yellow-700';
+  } else if (characterOptions.includes(tag)) {
+    tagClass = 'bg-blue-100 text-blue-700';
+  } else if (fightingOptions.includes(tag)) {
+    tagClass = 'bg-green-100 text-green-700';
+  } else if (magicOptions.includes(tag)) {
+    tagClass = 'bg-red-100 text-red-700';
+  } else {
+    tagClass = 'bg-gray-100 text-gray-700';
+  }
+
+  return (
+    <span
+      className={classNames(
+        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        "flex items-center justify-center", // Flexbox classes for vertical alignment
+        "whitespace-nowrap overflow-hidden text-overflow-ellipsis",
+        tagClass
+      )}
+    >
+      {tag !== 'common' ? value : 'Common'}
+    </span>
+  );
+}
+
+
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "id",
@@ -58,30 +98,45 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "tags",
     header: () => "Tags",
+    // cell: ({ row }) => {
+    //   const tags: string[] = row.getValue("tags");
+    //   // return tags.join(", ");
+    //   return tags.map((tag) => tagPill({ value: tag })).join(" ");
+    // },
     cell: ({ row }) => {
       const tags: string[] = row.getValue("tags");
-      return tags.join(", ");
+      return (
+        <div style={{ display: 'flex', gap: '4px' }}>
+          {tags.map((tag, index) => (
+            <React.Fragment key={index}>
+              {tagPill({ value: tag })}
+            </React.Fragment>
+          ))}
+        </div>
+      );
     },
   },
   {
     accessorKey: "battlerHealth",
     cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
     enableSorting: true,
+    sortUndefined: 1,
     header: () => "Battler Health",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerHealth ?? -1;
-      const numB = rowB.original.gameCard?.battlerHealth ?? -1;
+      const numA = rowA.original.gameCard?.battlerHealth ;
+      const numB = rowB.original.gameCard?.battlerHealth ;
       return numA - numB;
     },
   },
   {
     accessorKey: "battlerPower",
-    enableSorting: true,
-    header: () => "Battler Power",
     cell: ({ row }) => row.original.gameCard?.battlerPower ?? "N/A",
+    enableSorting: true,
+    sortUndefined: 1,
+    header: () => "Battler Power",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerPower ?? -1;
-      const numB = rowB.original.gameCard?.battlerPower ?? -1;
+      const numA = rowA.original.gameCard?.battlerPower ;
+      const numB = rowB.original.gameCard?.battlerPower ;
       return numA - numB;
     },
   },
@@ -248,27 +303,25 @@ export function ImageSearchResultTable() {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   const sortingState = header.column.getIsSorted();
-                  const sortingIconRotation =
-                    sortingState === "desc" ? "rotate-180" : "";
 
                   return (
                     <TableHead
                       key={header.id}
-                      className="cursor-pointer select-none tracking-wider text-white"
+                      className="cursor-pointer select-none tracking-wider text-white table-header"
                       onClick={() => header.column.toggleSorting()}
                     >
                       {header.isPlaceholder ? null : (
-                        <>
+                        <div className="header-flex">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
-                          <ChevronDownIcon
-                            className={`ml-2 h-4 w-4 transform ${
-                              sortingState ? sortingIconRotation : "opacity-0"
-                            }`}
-                          />
-                        </>
+                          {sortingState === "asc" ? (
+                            <BarsArrowDownIcon className="h-4 w-4" />
+                          ) : sortingState === "desc" ? (
+                            <BarsArrowUpIcon className="h-4 w-4" />
+                          ) : null}
+                        </div>
                       )}
                     </TableHead>
                   );
