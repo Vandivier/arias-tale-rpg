@@ -66,6 +66,8 @@ export function tagPill({ value }) {
     <span
       className={classNames(
         "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        "flex items-center justify-center", // Flexbox classes for vertical alignment
+        "whitespace-nowrap overflow-hidden text-overflow-ellipsis",
         tagClass
       )}
     >
