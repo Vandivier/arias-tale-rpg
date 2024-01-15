@@ -1,4 +1,8 @@
 import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { BarsArrowUp, BarsArrowDown} from "@heroicons/react/solid";
+import classNames from 'classnames';
+
 import {
   flexRender,
   getCoreRowModel,
@@ -36,6 +40,41 @@ import {
   TableRow,
 } from "./ui/table";
 
+export function tagPill({ value }) {
+  const tag = value ? value.toLowerCase() : "common";
+
+  const raceOptions = ["celestial", "troll", "bug", "monster"];
+  const characterOptions = ["caelum", "elara", "lyra", "tank", "battler"];
+  const fightingOptions = ["dual-wield", "healing", "melee", "ranged"];
+  const magicOptions = ["elemental", "fire", "magic", "thunder"];
+
+  let tagClass = '';
+
+  if (raceOptions.includes(tag)) {
+    tagClass = 'bg-yellow-100 text-yellow-700';
+  } else if (characterOptions.includes(tag)) {
+    tagClass = 'bg-blue-100 text-blue-700';
+  } else if (fightingOptions.includes(tag)) {
+    tagClass = 'bg-green-100 text-green-700';
+  } else if (magicOptions.includes(tag)) {
+    tagClass = 'bg-red-100 text-red-700';
+  } else {
+    tagClass = 'bg-gray-100 text-gray-700';
+  }
+
+  return (
+    <span
+      className={classNames(
+        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
+        tagClass
+      )}
+    >
+      {tag !== 'common' ? value : 'Common'}
+    </span>
+  );
+}
+
+
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "id",
@@ -58,9 +97,22 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "tags",
     header: () => "Tags",
+    // cell: ({ row }) => {
+    //   const tags: string[] = row.getValue("tags");
+    //   // return tags.join(", ");
+    //   return tags.map((tag) => tagPill({ value: tag })).join(" ");
+    // },
     cell: ({ row }) => {
       const tags: string[] = row.getValue("tags");
-      return tags.join(", ");
+      return (
+        <div style={{ display: 'flex', gap: '4px' }}>
+          {tags.map((tag, index) => (
+            <React.Fragment key={index}>
+              {tagPill({ value: tag })}
+            </React.Fragment>
+          ))}
+        </div>
+      );
     },
   },
   {
