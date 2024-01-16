@@ -1,7 +1,5 @@
-import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { BarsArrowUp, BarsArrowDown} from "@heroicons/react/solid";
-import classNames from 'classnames';
+import { ChevronDownIcon, DotsHorizontalIcon, TextAlignTopIcon, TextAlignBottomIcon } from "@radix-ui/react-icons";
+import classNames from 'classnames';  // required to be able to create the pills
 
 import {
   flexRender,
@@ -99,11 +97,6 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
     accessorKey: "tags",
     header: () => "Tags",
-    // cell: ({ row }) => {
-    //   const tags: string[] = row.getValue("tags");
-    //   // return tags.join(", ");
-    //   return tags.map((tag) => tagPill({ value: tag })).join(" ");
-    // },
     cell: ({ row }) => {
       const tags: string[] = row.getValue("tags");
       return (
@@ -304,27 +297,25 @@ export function ImageSearchResultTable() {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   const sortingState = header.column.getIsSorted();
-                  const sortingIconRotation =
-                    sortingState === "desc" ? "rotate-180" : "";
 
                   return (
                     <TableHead
                       key={header.id}
-                      className="cursor-pointer select-none tracking-wider text-white"
+                      className="cursor-pointer select-none tracking-wider text-white table-header"
                       onClick={() => header.column.toggleSorting()}
                     >
                       {header.isPlaceholder ? null : (
-                        <>
+                        <div className="header-flex">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
-                          <ChevronDownIcon
-                            className={`ml-2 h-4 w-4 transform ${
-                              sortingState ? sortingIconRotation : "opacity-0"
-                            }`}
-                          />
-                        </>
+                          {sortingState === "asc" ? (
+                            <TextAlignBottomIcon className="h-4 w-4" />
+                          ) : sortingState === "desc" ? (
+                            <TextAlignTopIcon className="h-4 w-4" />
+                          ) : null}
+                        </div>
                       )}
                     </TableHead>
                   );
