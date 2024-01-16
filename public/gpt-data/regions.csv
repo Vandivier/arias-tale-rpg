@@ -8,7 +8,7 @@ Raefun,0,"A region with varied geography, from plains to mountains and coast.",R
 Old Pillar,0,An area known for its historical significance and ancient ruins.,REGION,0,0,Various,Multiple,20,30,30
 Triton,0,"The largest merfolk ocean civilization, also an island civilization.",REGION,0,0,Merfolk,Merfolk Languages,30,65,45
 Neptune,0,A merfolk civilization located in the sea between continents.,REGION,0,0,Merfolk,Merfolk Languages,30,65,45
-Regalis,0,Region with the well-known citadel Areion and the large library of Elderglen.,REGION,0,0,Various,Multiple,60,45,75
+Regalis,0,Region with the well-known citadel Reion and the large library of Elderglen.,REGION,0,0,Various,Multiple,60,45,75
 Terah,0,"Known as The Land of Judges, includes deserts, plains, and coastal areas.",REGION,0,0,"Humans, Other",Multiple,40,75,65
 Elysia,0,"Mainly plains, known for its egalitarian society and tension with Regalis.",REGION,0,0,Humans,Multiple,50,50,60
 Goblin Hollow,0,Network of underground caves and tunnels adjacent to Raefun.,ZONE,0,0,Goblins,Goblin,20,35,25
