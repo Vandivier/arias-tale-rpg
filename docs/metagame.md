@@ -43,9 +43,9 @@ Evergreen is fantastical, mysterious, and filled with magic and technology. Ther
 
 ### The Initial Scene
 
-One day a massive, ethereal figure appears in the sky, declaring that players cannot log out until the boss on the 100th floor is defeated. This event is known as the Monstrous Vision. For many characters, though not all, this announcement changes the game into a struggle for survival.
+One day in Evergreen, early in the afternoon, the sky suddenly darkens with an orange glow. A massive, powerful figure appears in the sky. This figure confirms the inability of all players to log out unless and until a daunting challenge is completed: the 100th floor boss must be defeated. Further, given the changes made to the neural software each player is using, death to a game character may lead to a damaged brain or nervous system on the part of the real-life player, including the possibility of death.
 
-Unknown to players, other events are already concurrently unfolding across Evergreen, the real world, and further worlds yet to be revealed!
+The mysterious and monstrous figure warns of the extraordinary power of these floor bosses, advising players to form parties, guilds, and inter-guild alliances for survival. The figure notably empowered these bosses, making them unbeatable by even the most powerful players alone.
 
 ## Turn Dynamics
 
