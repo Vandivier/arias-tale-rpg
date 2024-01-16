@@ -3,9 +3,6 @@ title: "Placebook"
 ---
 
 <!-- Regional Lore Threads
-
-   - Dwarven Stronghold from Salt Mines
-   - Hex Grid RPG Battle Map
    - Wendigo in snowy forest
    - Iron Flame Book Summary
 -->
