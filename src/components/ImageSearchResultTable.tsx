@@ -1,5 +1,10 @@
-import { ChevronDownIcon, DotsHorizontalIcon, TextAlignTopIcon, TextAlignBottomIcon } from "@radix-ui/react-icons";
-import colorMapping from '../styles/colormaps.json';
+import {
+  ChevronDownIcon,
+  DotsHorizontalIcon,
+  TextAlignTopIcon,
+  TextAlignBottomIcon,
+} from "@radix-ui/react-icons";
+import colorMapping from "../styles/colormaps.json";
 
 import {
   flexRender,
@@ -40,20 +45,21 @@ import {
 
 export function tagPill({ value, colorMapping }) {
   const tag = value ? value.toLowerCase() : "common";
-  const defaultStyles = { bg: 'rgb(243, 244, 246)', text: 'rgb(107, 114, 128)' }; // Default RGB colors
+  const defaultStyles = {
+    bg: "rgb(243, 244, 246)",
+    text: "rgb(107, 114, 128)",
+  }; // Default RGB colors
   const styles = colorMapping[tag] || defaultStyles;
- 
+
   return (
     <span
       style={{ backgroundColor: styles.bg, color: styles.text }}
-      className="px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm flex items-center justify-center whitespace-nowrap overflow-hidden text-overflow-ellipsis"
+      className="leading-wide text-overflow-ellipsis flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold uppercase shadow-sm"
     >
-      {tag !== 'common' ? value : 'Common'}
+      {tag !== "common" ? value : "Common"}
     </span>
   );
 }
-
-
 
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
@@ -80,13 +86,14 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     cell: ({ row }) => {
       const tags = row.getValue("tags") || []; // Ensure tags is always an array
       return (
-        <div style={{ display: 'flex', gap: '4px' }}>
+        <div style={{ display: "flex", gap: "4px" }}>
           {tags.map((tag, index) => {
             if (!tag) return null; // Skip undefined or null tags
-  
+
             return (
               <React.Fragment key={index}>
-                {tagPill({ value: tag, colorMapping })} {/* Make sure to pass colorMapping */}
+                {tagPill({ value: tag, colorMapping })}{" "}
+                {/* Make sure to pass colorMapping */}
               </React.Fragment>
             );
           })}
@@ -94,8 +101,7 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
       );
     },
   },
-  
-  
+
   {
     accessorKey: "battlerHealth",
     cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
@@ -103,8 +109,8 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortUndefined: 1,
     header: () => "Battler Health",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerHealth ;
-      const numB = rowB.original.gameCard?.battlerHealth ;
+      const numA = rowA.original.gameCard?.battlerHealth;
+      const numB = rowB.original.gameCard?.battlerHealth;
       return numA - numB;
     },
   },
@@ -115,8 +121,8 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortUndefined: 1,
     header: () => "Battler Power",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerPower ;
-      const numB = rowB.original.gameCard?.battlerPower ;
+      const numA = rowA.original.gameCard?.battlerPower;
+      const numB = rowB.original.gameCard?.battlerPower;
       return numA - numB;
     },
   },
@@ -287,11 +293,11 @@ export function ImageSearchResultTable() {
                   return (
                     <TableHead
                       key={header.id}
-                      className="cursor-pointer select-none tracking-wider text-white table-header"
+                      className="table-header cursor-pointer select-none tracking-wider text-white"
                       onClick={() => header.column.toggleSorting()}
                     >
                       {header.isPlaceholder ? null : (
-                        <div className="header-flex">
+                        <div className="flex items-center justify-start gap-1">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
