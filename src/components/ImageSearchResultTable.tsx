@@ -1,5 +1,5 @@
 import { ChevronDownIcon, DotsHorizontalIcon, TextAlignTopIcon, TextAlignBottomIcon } from "@radix-ui/react-icons";
-import classNames from 'classnames';  // required to be able to create the pills
+import colorMapping from '../styles/colormaps.json';
 
 import {
   flexRender,
@@ -38,41 +38,21 @@ import {
   TableRow,
 } from "./ui/table";
 
-export function tagPill({ value }) {
+export function tagPill({ value, colorMapping }) {
   const tag = value ? value.toLowerCase() : "common";
-
-  const raceOptions = ["celestial", "troll", "bug", "monster"];
-  const characterOptions = ["caelum", "elara", "lyra", "tank", "battler"];
-  const fightingOptions = ["dual-wield", "healing", "melee", "ranged"];
-  const magicOptions = ["elemental", "fire", "magic", "thunder"];
-
-  let tagClass = '';
-
-  if (raceOptions.includes(tag)) {
-    tagClass = 'bg-yellow-100 text-yellow-700';
-  } else if (characterOptions.includes(tag)) {
-    tagClass = 'bg-blue-100 text-blue-700';
-  } else if (fightingOptions.includes(tag)) {
-    tagClass = 'bg-green-100 text-green-700';
-  } else if (magicOptions.includes(tag)) {
-    tagClass = 'bg-red-100 text-red-700';
-  } else {
-    tagClass = 'bg-gray-100 text-gray-700';
-  }
-
+  const defaultStyles = { bg: 'rgb(243, 244, 246)', text: 'rgb(107, 114, 128)' }; // Default RGB colors
+  const styles = colorMapping[tag] || defaultStyles;
+ 
   return (
     <span
-      className={classNames(
-        "px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm",
-        "flex items-center justify-center", // Flexbox classes for vertical alignment
-        "whitespace-nowrap overflow-hidden text-overflow-ellipsis",
-        tagClass
-      )}
+      style={{ backgroundColor: styles.bg, color: styles.text }}
+      className="px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm flex items-center justify-center whitespace-nowrap overflow-hidden text-overflow-ellipsis"
     >
       {tag !== 'common' ? value : 'Common'}
     </span>
   );
 }
+
 
 
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
@@ -98,18 +78,24 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     accessorKey: "tags",
     header: () => "Tags",
     cell: ({ row }) => {
-      const tags: string[] = row.getValue("tags");
+      const tags = row.getValue("tags") || []; // Ensure tags is always an array
       return (
         <div style={{ display: 'flex', gap: '4px' }}>
-          {tags.map((tag, index) => (
-            <React.Fragment key={index}>
-              {tagPill({ value: tag })}
-            </React.Fragment>
-          ))}
+          {tags.map((tag, index) => {
+            if (!tag) return null; // Skip undefined or null tags
+  
+            return (
+              <React.Fragment key={index}>
+                {tagPill({ value: tag, colorMapping })} {/* Make sure to pass colorMapping */}
+              </React.Fragment>
+            );
+          })}
         </div>
       );
     },
   },
+  
+  
   {
     accessorKey: "battlerHealth",
     cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
