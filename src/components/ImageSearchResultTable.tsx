@@ -4,7 +4,6 @@ import {
   TextAlignTopIcon,
   TextAlignBottomIcon,
 } from "@radix-ui/react-icons";
-import colorMapping from "../styles/colormaps.json";
 
 import {
   flexRender,
@@ -42,24 +41,17 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { stringToHSLColor } from "~/lib/utils";
+import type { Tag } from "@prisma/client";
 
-export function tagPill({ value, colorMapping }) {
-  const tag = value ? value.toLowerCase() : "common";
-  const defaultStyles = {
-    bg: "rgb(243, 244, 246)",
-    text: "rgb(107, 114, 128)",
-  }; // Default RGB colors
-  const styles = colorMapping[tag] || defaultStyles;
-
-  return (
-    <span
-      style={{ backgroundColor: styles.bg, color: styles.text }}
-      className="leading-wide text-overflow-ellipsis flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold uppercase shadow-sm"
-    >
-      {tag !== "common" ? value : "Common"}
-    </span>
-  );
-}
+const TagPill = ({ tagText }: { tagText: string }) => (
+  <span
+    style={{ backgroundColor: stringToHSLColor(tagText) }}
+    className="leading-wide text-overflow-ellipsis flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold uppercase shadow-sm"
+  >
+    {tagText}
+  </span>
+);
 
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
@@ -84,19 +76,17 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     accessorKey: "tags",
     header: () => "Tags",
     cell: ({ row }) => {
-      const tags = row.getValue("tags") || []; // Ensure tags is always an array
+      const tagTexts: string[] = Array.isArray(row.getValue("tags"))
+        ? row.getValue("tags")
+        : [];
+
       return (
         <div style={{ display: "flex", gap: "4px" }}>
-          {tags.map((tag, index) => {
-            if (!tag) return null; // Skip undefined or null tags
-
-            return (
-              <React.Fragment key={index}>
-                {tagPill({ value: tag, colorMapping })}{" "}
-                {/* Make sure to pass colorMapping */}
-              </React.Fragment>
-            );
-          })}
+          {tagTexts
+            .filter((tagText) => !!tagText)
+            .map((tagText, index) => (
+              <TagPill key={`${index}-${tagText}`} tagText={tagText} />
+            ))}
         </div>
       );
     },
