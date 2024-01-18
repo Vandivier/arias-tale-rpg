@@ -99,8 +99,8 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortUndefined: 1,
     header: () => "Battler Health",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerHealth ?? -1;
-      const numB = rowB.original.gameCard?.battlerHealth ?? -1;
+      const numA = rowA.original.gameCard?.battlerHealth ;
+      const numB = rowB.original.gameCard?.battlerHealth ;
       return numA - numB;
     },
   },
@@ -111,8 +111,8 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortUndefined: 1,
     header: () => "Battler Power",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerPower ?? -1;
-      const numB = rowB.original.gameCard?.battlerPower ?? -1;
+      const numA = rowA.original.gameCard?.battlerPower ;
+      const numB = rowB.original.gameCard?.battlerPower ;
       return numA - numB;
     },
   },
@@ -274,7 +274,7 @@ export function ImageSearchResultTable() {
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader style={{ backgroundColor: 'hsla(0, 0%, 100%, 0.3)' }}>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
