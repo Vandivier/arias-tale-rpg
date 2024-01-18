@@ -1,6 +1,9 @@
-import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { BarsArrowUpIcon, BarsArrowDownIcon } from "@heroicons/react/16/solid";
-import classNames from 'classnames';
+import {
+  ChevronDownIcon,
+  DotsHorizontalIcon,
+  TextAlignTopIcon,
+  TextAlignBottomIcon,
+} from "@radix-ui/react-icons";
 
 import {
   flexRender,
@@ -38,6 +41,17 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { stringToHSLColor } from "~/lib/utils";
+import type { Tag } from "@prisma/client";
+
+const TagPill = ({ tagText }: { tagText: string }) => (
+  <span
+    style={{ backgroundColor: stringToHSLColor(tagText) }}
+    className="leading-wide text-overflow-ellipsis flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold uppercase shadow-sm"
+  >
+    {tagText}
+  </span>
+);
 
 export function tagPill({ value }) {
   const tag = value ? value.toLowerCase() : "common";
@@ -104,18 +118,22 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     //   return tags.map((tag) => tagPill({ value: tag })).join(" ");
     // },
     cell: ({ row }) => {
-      const tags: string[] = row.getValue("tags");
+      const tagTexts: string[] = Array.isArray(row.getValue("tags"))
+        ? row.getValue("tags")
+        : [];
+
       return (
-        <div style={{ display: 'flex', gap: '4px' }}>
-          {tags.map((tag, index) => (
-            <React.Fragment key={index}>
-              {tagPill({ value: tag })}
-            </React.Fragment>
-          ))}
+        <div style={{ display: "flex", gap: "4px" }}>
+          {tagTexts
+            .filter((tagText) => !!tagText)
+            .map((tagText, index) => (
+              <TagPill key={`${index}-${tagText}`} tagText={tagText} />
+            ))}
         </div>
       );
     },
   },
+
   {
     accessorKey: "battlerHealth",
     cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
@@ -307,19 +325,19 @@ export function ImageSearchResultTable() {
                   return (
                     <TableHead
                       key={header.id}
-                      className="cursor-pointer select-none tracking-wider text-white table-header"
+                      className="table-header cursor-pointer select-none tracking-wider text-white"
                       onClick={() => header.column.toggleSorting()}
                     >
                       {header.isPlaceholder ? null : (
-                        <div className="header-flex">
+                        <div className="flex items-center justify-start gap-1">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
                           {sortingState === "asc" ? (
-                            <BarsArrowDownIcon className="h-4 w-4" />
+                            <TextAlignBottomIcon className="h-4 w-4" />
                           ) : sortingState === "desc" ? (
-                            <BarsArrowUpIcon className="h-4 w-4" />
+                            <TextAlignTopIcon className="h-4 w-4" />
                           ) : null}
                         </div>
                       )}
