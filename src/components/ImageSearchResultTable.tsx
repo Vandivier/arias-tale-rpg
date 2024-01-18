@@ -1,4 +1,10 @@
-import { ChevronDownIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import {
+  ChevronDownIcon,
+  DotsHorizontalIcon,
+  TextAlignTopIcon,
+  TextAlignBottomIcon,
+} from "@radix-ui/react-icons";
+
 import {
   flexRender,
   getCoreRowModel,
@@ -35,6 +41,17 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { stringToHSLColor } from "~/lib/utils";
+import type { Tag } from "@prisma/client";
+
+const TagPill = ({ tagText }: { tagText: string }) => (
+  <span
+    style={{ backgroundColor: stringToHSLColor(tagText) }}
+    className="leading-wide text-overflow-ellipsis flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold uppercase shadow-sm"
+  >
+    {tagText}
+  </span>
+);
 
 export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   {
@@ -59,14 +76,27 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     accessorKey: "tags",
     header: () => "Tags",
     cell: ({ row }) => {
-      const tags: string[] = row.getValue("tags");
-      return tags.join(", ");
+      const tagTexts: string[] = Array.isArray(row.getValue("tags"))
+        ? row.getValue("tags")
+        : [];
+
+      return (
+        <div style={{ display: "flex", gap: "4px" }}>
+          {tagTexts
+            .filter((tagText) => !!tagText)
+            .map((tagText, index) => (
+              <TagPill key={`${index}-${tagText}`} tagText={tagText} />
+            ))}
+        </div>
+      );
     },
   },
+
   {
     accessorKey: "battlerHealth",
     cell: ({ row }) => row.original.gameCard?.battlerHealth ?? "N/A",
     enableSorting: true,
+    sortUndefined: 1,
     header: () => "Battler Health",
     sortingFn: (rowA, rowB) => {
       const numA = rowA.original.gameCard?.battlerHealth ?? -1;
@@ -76,9 +106,10 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
   },
   {
     accessorKey: "battlerPower",
-    enableSorting: true,
-    header: () => "Battler Power",
     cell: ({ row }) => row.original.gameCard?.battlerPower ?? "N/A",
+    enableSorting: true,
+    sortUndefined: 1,
+    header: () => "Battler Power",
     sortingFn: (rowA, rowB) => {
       const numA = rowA.original.gameCard?.battlerPower ?? -1;
       const numB = rowB.original.gameCard?.battlerPower ?? -1;
@@ -248,27 +279,25 @@ export function ImageSearchResultTable() {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   const sortingState = header.column.getIsSorted();
-                  const sortingIconRotation =
-                    sortingState === "desc" ? "rotate-180" : "";
 
                   return (
                     <TableHead
                       key={header.id}
-                      className="cursor-pointer select-none tracking-wider text-white"
+                      className="table-header cursor-pointer select-none tracking-wider text-white"
                       onClick={() => header.column.toggleSorting()}
                     >
                       {header.isPlaceholder ? null : (
-                        <>
+                        <div className="flex items-center justify-start gap-1">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
                           )}
-                          <ChevronDownIcon
-                            className={`ml-2 h-4 w-4 transform ${
-                              sortingState ? sortingIconRotation : "opacity-0"
-                            }`}
-                          />
-                        </>
+                          {sortingState === "asc" ? (
+                            <TextAlignBottomIcon className="h-4 w-4" />
+                          ) : sortingState === "desc" ? (
+                            <TextAlignTopIcon className="h-4 w-4" />
+                          ) : null}
+                        </div>
                       )}
                     </TableHead>
                   );
