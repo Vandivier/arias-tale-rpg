@@ -99,8 +99,8 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortUndefined: 1,
     header: () => "Battler Health",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerHealth;
-      const numB = rowB.original.gameCard?.battlerHealth;
+      const numA = rowA.original.gameCard?.battlerHealth ?? -1;
+      const numB = rowB.original.gameCard?.battlerHealth ?? -1;
       return numA - numB;
     },
   },
@@ -111,8 +111,8 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortUndefined: 1,
     header: () => "Battler Power",
     sortingFn: (rowA, rowB) => {
-      const numA = rowA.original.gameCard?.battlerPower;
-      const numB = rowB.original.gameCard?.battlerPower;
+      const numA = rowA.original.gameCard?.battlerPower ?? -1;
+      const numB = rowB.original.gameCard?.battlerPower ?? -1;
       return numA - numB;
     },
   },
