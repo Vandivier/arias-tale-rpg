@@ -39,6 +39,12 @@ function TopNav() {
           >
             TikTok
           </Link>
+          <Link
+            className="my-1 cursor-pointer md:mx-4 md:my-0"
+            href="/settings"
+          >
+            Account
+          </Link>
         </div>
       </div>
     </nav>
