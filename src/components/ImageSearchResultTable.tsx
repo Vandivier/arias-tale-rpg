@@ -101,6 +101,11 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortingFn: (rowA, rowB) => {
       const numA = rowA.original.gameCard?.battlerHealth ?? -1;
       const numB = rowB.original.gameCard?.battlerHealth ?? -1;
+
+      if (numA === -1 || numB === -1) {
+        return 0;
+      }
+
       return numA - numB;
     },
   },
@@ -113,6 +118,11 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
     sortingFn: (rowA, rowB) => {
       const numA = rowA.original.gameCard?.battlerPower ?? -1;
       const numB = rowB.original.gameCard?.battlerPower ?? -1;
+
+      if (numA === -1 || numB === -1) {
+        return 0;
+      }
+
       return numA - numB;
     },
   },
@@ -129,7 +139,7 @@ export const columns: ColumnDef<SearchableImageWithGameCard>[] = [
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
+              <DotsHorizontalIcon />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -274,7 +284,7 @@ export function ImageSearchResultTable() {
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader style={{ backgroundColor: "hsla(0, 0%, 100%, 0.1)" }}>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -293,9 +303,9 @@ export function ImageSearchResultTable() {
                             header.getContext(),
                           )}
                           {sortingState === "asc" ? (
-                            <TextAlignBottomIcon className="h-4 w-4" />
+                            <TextAlignBottomIcon />
                           ) : sortingState === "desc" ? (
-                            <TextAlignTopIcon className="h-4 w-4" />
+                            <TextAlignTopIcon />
                           ) : null}
                         </div>
                       )}
