@@ -10,6 +10,11 @@ export default function SettingsPage() {
   const isDiscordConnected = false;
   const isGoogleConnected = false;
 
+  //   TODO: if sessionData is null they aren't logged in so redirect them
+  // also make the page not visible to logged out users
+
+  console.log({ sessionData });
+
   //   // Fetch user settings
   //   const settings = api.get.userSettings.useQuery({
   //     userId: sessionData?.user?.id,
@@ -42,13 +47,47 @@ export default function SettingsPage() {
             htmlFor="backupEmail"
             className="mb-2 block text-sm font-medium text-white"
           >
+            First Name
+          </label>
+          <input
+            type="email"
+            id="backupEmail"
+            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+            placeholder="First Name"
+            value={backupEmail}
+            onChange={(e) => setBackupEmail(e.target.value)}
+            // defaultValue={settings.data?.primary}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="backupEmail"
+            className="mb-2 block text-sm font-medium text-white"
+          >
+            Last Name
+          </label>
+          <input
+            type="email"
+            id="backupEmail"
+            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+            placeholder="Last Name"
+            value={backupEmail}
+            onChange={(e) => setBackupEmail(e.target.value)}
+            // defaultValue={settings.data?.primary}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="backupEmail"
+            className="mb-2 block text-sm font-medium text-white"
+          >
             Primary Email
           </label>
           <input
             type="email"
             id="backupEmail"
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            placeholder="Enter primary email"
+            placeholder="Primary Email"
             value={backupEmail}
             onChange={(e) => setBackupEmail(e.target.value)}
             // defaultValue={settings.data?.primary}
@@ -65,25 +104,29 @@ export default function SettingsPage() {
             type="email"
             id="backupEmail"
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            placeholder="Enter backup email"
+            placeholder="Backup Email"
             value={backupEmail}
             onChange={(e) => setBackupEmail(e.target.value)}
           />
         </div>
 
-        <button
-          className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-          // onClick={sessionData ? () => void signOut() : () => void signIn()}
-        >
-          {isDiscordConnected ? "Discord is Linked" : "Connect to Discord"}
-        </button>
+        <div className="mb-4">
+          <button
+            className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+            // onClick={sessionData ? () => void signOut() : () => void signIn()}
+          >
+            {isDiscordConnected ? "Discord is Linked" : "Connect to Discord"}
+          </button>
+        </div>
 
-        <button
-          className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-          // onClick={sessionData ? () => void signOut() : () => void signIn()}
-        >
-          {isGoogleConnected ? "Google is Linked" : "Connect to Google"}
-        </button>
+        <div className="mb-4">
+          <button
+            className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+            // onClick={sessionData ? () => void signOut() : () => void signIn()}
+          >
+            {isGoogleConnected ? "Google is Linked" : "Connect to Google"}
+          </button>
+        </div>
 
         <div className="mb-4">
           <span className="mb-2 block text-sm font-medium text-white">
