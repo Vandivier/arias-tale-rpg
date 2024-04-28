@@ -2,31 +2,40 @@ import { signIn, useSession } from "next-auth/react";
 import React from "react";
 import { CustomPage } from "~/components/CustomPage";
 import { SubheadingWithDice } from "~/components/SubheadingWithDice";
+import type { BuyCardResponse } from "~/server/api/routers/stripeRouter";
+import { api } from "~/utils/api";
+
+type BuyCardResponseRendererProps = {
+  buyCardResponse: BuyCardResponse | undefined;
+  isBuyCardDataError: boolean;
+  isBuyCardDataLoading: boolean;
+  isRendererEnabled: boolean;
+};
 
 export default function StorePage() {
   const { data: sessionData } = useSession();
-  // TODO: don't use any type
-  const [buyCardResponse, setBuyCardResponse] = React.useState<any>(null);
+
+  // TODO
+  // 1. call our own buy-a-card service [done]
+  // 2. our service calls stripe
+  // 3. user pays stripe
+  // 4. stripe calls our service back
+  // 5. our service calls the game server to give the card to the user
+  // 6. our service returns success to the client with card info
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const {
+    data: buyCardData,
+    isLoading: isBuyCardDataLoading,
+    isError: isBuyCardDataError,
+    refetch,
+  } = api.stripe.getStripeCardPurchaseUrl.useQuery(undefined, {
+    enabled: isEnabled,
+    refetchOnWindowFocus: false,
+  });
 
   const handleBuyCardClick = async () => {
-    // 1. call our own buy-a-card service
-    // 2. our service calls stripe
-    // 3. user pays stripe
-    // 4. stripe calls our service back
-    // 5. our service calls the game server to give the card to the user
-    // 6. our service returns success to the client with card info
-    // const response = await fetch("/api/buy-card", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ cardId: "1" }),
-    // });
-
-    // const responseBody = await response.json();
-    setBuyCardResponse({
-      errorMessage: "Error: Card purchase not yet implemented.",
-    });
+    setIsEnabled(true);
+    refetch();
   };
 
   return (
@@ -39,7 +48,12 @@ export default function StorePage() {
           <AuthButtonIfNeeded />
         )}
 
-        <BuyCardResponseRenderer buyCardResponse={buyCardResponse} />
+        <BuyCardResponseRenderer
+          buyCardResponse={buyCardData}
+          isBuyCardDataError={isBuyCardDataError}
+          isBuyCardDataLoading={isBuyCardDataLoading}
+          isRendererEnabled={isEnabled}
+        />
       </>
     </CustomPage>
   );
@@ -69,16 +83,36 @@ const BuyCardButton = ({
   );
 };
 
-const BuyCardResponseRenderer = ({ buyCardResponse }) => {
-  if (!buyCardResponse) return null;
+const BuyCardResponseRenderer = ({
+  buyCardResponse,
+  isBuyCardDataError,
+  isBuyCardDataLoading,
+  isRendererEnabled,
+}: BuyCardResponseRendererProps) => {
+  if (!isRendererEnabled || buyCardResponse === null) return null;
+
+  if (isBuyCardDataLoading) {
+    return (
+      <div className="mt-4">
+        <p className="text-white">Loading...</p>
+      </div>
+    );
+  }
+
+  if (isBuyCardDataError || !buyCardResponse || buyCardResponse.errorMessage) {
+    return (
+      <span>
+        {buyCardResponse?.errorMessage ??
+          "An error occurred while purchasing the card."}
+      </span>
+    );
+  }
 
   return !buyCardResponse.errorMessage ? (
     <div className="mt-4">
       <p className="text-white">Card purchased!</p>
-      <p className="text-white">Card name: {buyCardResponse.name}</p>
-      <p className="text-white">
-        Card description: {buyCardResponse.description}
-      </p>
+      <p>TODO: now I need to figure out how to forward you to Stripe</p>
+      <p>I got this url but it's kinda sus right? {buyCardResponse.url}</p>
     </div>
   ) : (
     <div className="mt-4">
