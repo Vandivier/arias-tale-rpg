@@ -1,6 +1,6 @@
 import { signIn, useSession } from "next-auth/react";
-import Image from "next/image";
 import { CustomPage } from "~/components/CustomPage";
+import { SubheadingWithDice } from "~/components/SubheadingWithDice";
 import { api } from "~/utils/api";
 
 export default function StorePage() {
@@ -9,24 +9,9 @@ export default function StorePage() {
   return (
     <CustomPage mainHeading="Embark on an Epic Journey with Aria's Tale!">
       <>
-        <div className="flex items-center">
-          <Image
-            alt="Aria's Tale Dice Logo"
-            className="dice-logo mr-2"
-            height={50}
-            width={50}
-            src="/arias-tale-d20-logo.png"
-          />
-          <p>{hello.data ? hello.data.greeting : "Loading..."}</p>
-          <Image
-            alt="Aria's Tale Dice Logo"
-            className="dice-logo ml-2"
-            height={50}
-            width={50}
-            src="/arias-tale-d20-logo.png"
-          />
-        </div>
-
+        <SubheadingWithDice
+          subheading={hello.data ? hello.data.greeting : "Loading..."}
+        />
         <AuthButtonIfNeeded />
 
         <div className="text-l my-4 flex flex-col gap-8 text-white">
