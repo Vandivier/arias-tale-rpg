@@ -32,6 +32,9 @@ function TopNav() {
           >
             GitHub
           </Link>
+          <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/store">
+            Store
+          </Link>
           <Link
             className="my-1 cursor-pointer md:mx-4 md:my-0"
             href="https://www.tiktok.com/@arias.tale.game"
