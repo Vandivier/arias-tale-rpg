@@ -2,17 +2,6 @@
 title: "Episode Narrative Guide - Arc Aria"
 ---
 
-<!--
-    Taken from:
-    - [Summarizing common types.](https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623)
-    - Quest for Johan's Revival
-    - Purple Gate in Forest
-    - Player Units' Stats Setup
-    - Hex Grid RPG Encounter
-    - https://chat.openai.com/share/8eeaadfa-db38-4841-92b7-795c9dd64818
-    - https://chat.openai.com/c/841a04ba-9575-4f59-998c-4621e85db7c4
--->
-
 ## Chapter 1: The Monstrous Vision
 
 One bright afternoon, a warrior takes a seat on a stump in a safe, shaded region of the Forest of Echoes. He carries a spear and shield across his back, while he carries a bag of freshly picked berries and walnuts in his hand. He tosses a berry into his mouth and reaches for a second when he hears a faint doorbell.
@@ -196,3 +185,37 @@ The journey through the Whispering Woods was marked by an eerie calm, the only d
 Their path brought them to the serene shores of the Lake of Whispers. The water, a mirror to the sky, lay undisturbed, its surface reflecting the quandary that now faced them. To the north lay uncharted territories, their secrets veiled by the horizon; to the south, the familiar path back to the Town of Echoes; and behind them, the enigmatic depths of the Whispering Woods.
 
 There, at the water's edge, Thane's resolve wavered. The decision of whether to venture into new lands, return to the forest's embrace, or follow the lake's edge back to town weighed heavily upon him.
+
+# Chapter 10: Sending Elric and Lina
+
+Aria, the charismatic leader, stands at the heart of the guild, her presence a beacon of strength and stability amidst the chaos. She knows that the challenges facing her guild are not merely external, but also come from within, as each member grapples with their own doubts and fears in the wake of recent events.
+
+In the days following the Elementalists' departure, Aria works tirelessly to maintain the guild's unity and sense of purpose. She organizes training sessions, encouraging her members to hone their skills and strengthen their bonds. She also leads discussions and strategy meetings, seeking to chart a course forward in an increasingly uncertain world.
+
+During one such meeting, a heated debate arises among the guild members. An aggressive faction pushes for a party to explore the purple gate. Others speak of the pressing need to find the second floor boss, need for better training and equipment, and the desire to return to more urban regions which might provide better opportinities or safety.
+
+"My friends," Aria calls with a motion for quiet and a calm pause. "In the face of darkness, it is easy to give in to fear and despair. But we must hold fast to hope, to the belief that together, we can overcome any challenge. We will train, we will prepare, and we will stand ready to defend our home and our people. But we will also seek out allies, forge new connections, and work towards a future where all of Evergreen can thrive."
+
+As Aria speaks, the guild members feel a surge of renewed purpose and determination. They see in their leader a strength that goes beyond mere combat prowess, a wisdom that comes from a deep understanding of the human heart.
+
+In the days that follow, Aria's Guild begins to implement their new strategy. They reach out to other guilds and factions within the town, seeking to build bridges and forge alliances. They also send scouts into the surrounding regions, gathering information about potential threats and opportunities.
+
+Meanwhile, Aria herself seeks information that might hint at the identity or location of the second floor boss, a means of safety for her people, or a means of escape from this world. Her guild's archives, composed of a scant stack of eleven books and three letters in their humble headquarters, reveal nothing of interest. She proceeds to call in her best mage and priest.
+
+"Counselors, we utterly lack the knowledge needed to advance. I propose that we should seek better records, perhaps from nearby studied elves, if any, by some further journey to a larger city, or even by seeking one of these Oracles mentioned in two books of our pitiful library. What do you say?"
+
+Aria's advisors, a wizened mage named Elric and a serene priestess called Lina, exchange thoughtful glances as they consider their leader's words. They, too, have felt the limitations of their current knowledge, and the prospect of seeking wisdom beyond the confines of their guild is both exciting and daunting.
+
+# Chapter 11: The Whisperer
+
+Aria sent Elric to the elven lands and Lina to seek out the Oracles, hoping to gain new knowledge and insights to aid them in the battles to come. Whispers of a powerful necromancer known as the Dread Lord began to circulate, adding to the growing sense of unease in Evergreen.
+
+Eidolon and the Elementalists, having failed in their attempt to retrieve the Aeloria's Whisper, returned to Adlais to seek guidance from the elves. Eidolon, desperate to find a way to resurrect Johan, made the controversial decision to pursue the path of necromancy and seek out a mysterious figure known as "The Whisperer." Despite the reservations of some of his companions, Eidolon remained determined to see this path through to the end.
+
+Eidolon's attempt to recruit additional members for the mission in Adlais was met with complete failure. The locals feared the prospect of associating with a necromancer. In a surprising turn of events, the Order of the Azure Lily unanimously decides to join Eidolon and the Elementalists, believing that their combined knowledge and skills could be invaluable in navigating the dangers ahead.
+
+Back in the Town of Echoes, Tank approached Thane with a proposal to venture into the Forest of Echoes to search for Vaelor and Lysandra's missing party. After a successful recruiting effort, the newly expanded Crimson Vanguard prepared to set out once more, determined to uncover the mysteries that plagued the forest and bring their comrades home.
+
+As these various groups set out on their respective missions, strange and troubling events take place across the world of Evegreen. Rumors swirl, for instance, of distant grasslands turning to desert with magical speed.
+
+<!-- https://chat.openai.com/c/5b449d27-9a3f-49dd-ab80-f437254cb340 -->
