@@ -2,6 +2,10 @@
 title: "Episode Narrative Guide - Arc Aria"
 ---
 
+<!-- TODO: see "Resolving the Backstory for Vaelor"
+and "Preparing for the Next Session" in
+https://chatgpt.com/c/24822430-89f8-47e1-b3f0-6a3a533ba144 -->
+
 ## Chapter 1: The Monstrous Vision
 
 One bright afternoon, a warrior takes a seat on a stump in a safe, shaded region of the Forest of Echoes. He carries a spear and shield across his back, while he carries a bag of freshly picked berries and walnuts in his hand. He tosses a berry into his mouth and reaches for a second when he hears a faint doorbell.
@@ -298,9 +302,7 @@ The air was thick with the earthy scent of moss and the subtle undertones of dec
 
 Despite the initial setback, the group managed to regain their composure and continued their search for The Whisperer. Their determination paid off as subtle clues led them deeper into the heart of the grove.
 
-As they navigated the twisted paths, Eidolon spotted a series of faint, arcane symbols etched into the bark of an ancient tree. Recognizing these as necromantic sigils from his studies, he followed the trail, which led to a secluded clearing obscured by
-
-hanging moss and shadow.
+As they navigated the twisted paths, Eidolon spotted a series of faint, arcane symbols etched into the bark of an ancient tree. Recognizing these as necromantic sigils from his studies, he followed the trail, which led to a secluded clearing obscured by hanging moss and shadow.
 
 In the center of the clearing, a cloaked figure stood over an altar made from stone, surrounded by flickering candles that emitted a ghostly light. The figure was engrossed in a ritual, speaking in low, urgent tones. As the group approached, the figure paused and turned, revealing a face shrouded in mystery and age, eyes glowing with a faint, unnatural light.
 
