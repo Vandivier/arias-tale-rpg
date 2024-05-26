@@ -25,6 +25,7 @@ title: "Placebook"
         - Whispering Woods
         - Crossroads of the Elements
         - Adlais
+        - Luminara, the Throne of the Elven King
       - Obsidian Forest
       - Bronzepaw Hamlet, a small town in the northwest of Obsidia.
       - Three other settlements northeast of the Whispering Woods
