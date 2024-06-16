@@ -1,6 +1,7 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { artRouter } from "./routers/artRouter";
+import { gachaRouter } from "./routers/gachaRouter";
 import { searchableImageRouter } from "./routers/searchableImageRouter";
 import { stripeRouter } from "./routers/stripeRouter";
 
@@ -11,6 +12,7 @@ import { stripeRouter } from "./routers/stripeRouter";
  */
 export const appRouter = createTRPCRouter({
   art: artRouter,
+  gacha: gachaRouter,
   image: searchableImageRouter,
   post: postRouter,
   stripe: stripeRouter,
