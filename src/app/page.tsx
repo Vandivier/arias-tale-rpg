@@ -1,3 +1,5 @@
+"use client";
+
 import { signIn, signOut, useSession } from "next-auth/react";
 import { CustomPage } from "~/components/CustomPage";
 import { SubheadingWithDice } from "~/components/SubheadingWithDice";
