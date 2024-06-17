@@ -1,20 +1,18 @@
 // src/app/game/page.tsx
 "use client";
 
-// TODO: fixme
-
 import CheckoutButton from "~/components/CheckoutButton";
 import { useSession, signIn, signOut } from "next-auth/react";
-// import { api } from "~/utils/api";
+import { api } from "~/utils/api";
 
 export default function Game() {
   const { data: session } = useSession();
-  //   const helloQuery = api.hello.useQuery({ text: "Gamer" });
+  const helloQuery = api.post.hello.useQuery({ text: "Gamer" });
 
   return (
     <main>
       <h1>Phaser Gacha Game with Payments</h1>
-      {/* <p>{helloQuery.data ? helloQuery.data.greeting : "Loading..."}</p> */}
+      <p>{helloQuery.data ? helloQuery.data.greeting : "Loading..."}</p>
       {session ? (
         <>
           <p>Welcome, {session.user?.email}</p>

@@ -1,25 +1,26 @@
-// src/app/layout.tsx
 "use client";
 
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import "~/styles/globals.css";
-import { TRPCProvider } from "./trpc-provider";
+import { type ReactNode } from "react";
 
-export default function RootLayout({
-  children,
-  session,
-}: {
-  children: React.ReactNode;
+import { api } from "~/utils/api";
+
+import "~/styles/globals.css";
+
+interface RootLayoutProps {
+  children: ReactNode;
   session: Session | null;
-}) {
+}
+
+function RootLayout({ children, session }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <SessionProvider session={session}>
-          <TRPCProvider>{children}</TRPCProvider>
-        </SessionProvider>
+        <SessionProvider session={session}>{children}</SessionProvider>
       </body>
     </html>
   );
 }
+
+export default api.withTRPC(RootLayout);
