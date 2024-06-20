@@ -20,7 +20,14 @@ const config = {
 
   // Add the images property to configure external domains
   images: {
-    domains: ["github.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "github.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

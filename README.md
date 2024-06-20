@@ -45,10 +45,10 @@ See this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
    2. [Leonardo.ai Image Generator](https://leonardo.ai/)
    3. [Google Image Generator](https://www.google.com/search/images/)
    4. [Pixlr Magic Eraser](https://pixlr.com/express/?tool=paint)
+   5. [Decohere](https://app.decohere.ai/turbo)
 4. Video Generators
-   1. [Decohere](https://app.decohere.ai/turbo)
-   2. [Runway ML](app.runwayml.com) for text to video
-   3. [Pika Labs](https://pika.art/) for image to video
+   1. [Runway ML](app.runwayml.com) for text to video
+   2. [Pika Labs](https://pika.art/) for image to video
 5. Future tools to check
    1. [character.ai](https://beta.character.ai/)
    2. [AI Dungeon](https://aidungeon.com/)
