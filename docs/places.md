@@ -57,4 +57,4 @@ title: "Placebook"
    - Australia
    - Other Unknown Regions
 
-3. Mars is somewhat occupied, the moon is occupied, Jupiter is being mined, some of the moons have stations, mainly occupied by drones, and there are many people that live in space. (year 3202 if i have to pick? would love to just not say)
+3. Mars is somewhat occupied, the moon is occupied, Jupiter is being mined, some of the moons have stations, mainly occupied by drones, and there are many people that live in space. The year 2336 is when the monstrous vision happened.
