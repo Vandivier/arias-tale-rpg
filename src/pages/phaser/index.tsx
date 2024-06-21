@@ -27,6 +27,7 @@ interface PlayerCharacter {
   experience: number;
   gold: number;
   items: string[];
+  score: number;
 }
 
 interface Enemy {
@@ -35,6 +36,13 @@ interface Enemy {
   maxHealth: number;
   rarity: EnemyRarity;
   tier: EnemyTier;
+}
+
+interface LeaderboardEntry {
+  name: string;
+  level: number;
+  score: number;
+  victories: number;
 }
 
 const PhaserGameComponent: React.FC = () => {
@@ -57,8 +65,12 @@ const PhaserGameComponent: React.FC = () => {
         victoriesText!: Phaser.GameObjects.Text;
         goldText!: Phaser.GameObjects.Text;
         itemsText!: Phaser.GameObjects.Text;
+        scoreText!: Phaser.GameObjects.Text;
         messageText!: Phaser.GameObjects.Text;
         enemyInfoText!: Phaser.GameObjects.Text;
+        actionButtons: Phaser.GameObjects.Text[] = [];
+        isDefending: boolean = false;
+        leaderboard: LeaderboardEntry[] = [];
 
         constructor() {
           super("ColosseumScene");
@@ -133,6 +145,7 @@ const PhaserGameComponent: React.FC = () => {
             experience: 0,
             gold: 0,
             items: [],
+            score: 0,
           };
         }
 
@@ -144,7 +157,6 @@ const PhaserGameComponent: React.FC = () => {
           );
           this.enemy = this.createEnemy();
 
-          // Scale sprites to a consistent height
           const targetHeight = 200;
           this.scaleSprite(this.playerSprite, targetHeight);
           this.scaleSprite(this.enemy.sprite, targetHeight);
@@ -176,7 +188,13 @@ const PhaserGameComponent: React.FC = () => {
           this.itemsText = this.add.text(
             10,
             90,
-            `Items: ${this.player.items.join(", ")}`,
+            `Items: ${this.player.items.join(", ") ?? ""}`,
+            { fontSize: "16px", color: "#fff" },
+          );
+          this.scoreText = this.add.text(
+            10,
+            110,
+            `Score: ${this.player.score}`,
             { fontSize: "16px", color: "#fff" },
           );
 
@@ -188,7 +206,38 @@ const PhaserGameComponent: React.FC = () => {
             color: "#fff",
           });
 
-          this.input.keyboard!.on("keydown-SPACE", this.attack, this);
+          this.createActionButtons();
+        }
+
+        createActionButtons() {
+          const actions = ["Attack", "Defend", "Run", "Use Item"];
+          actions.forEach((action, index) => {
+            const button = this.add
+              .text(200 + index * 150, 500, action, {
+                fontSize: "20px",
+                color: "#fff",
+              })
+              .setInteractive()
+              .on("pointerdown", () => this.handleAction(action));
+            this.actionButtons.push(button);
+          });
+        }
+
+        handleAction(action: string) {
+          switch (action) {
+            case "Attack":
+              this.attack();
+              break;
+            case "Defend":
+              this.defend();
+              break;
+            case "Run":
+              this.run();
+              break;
+            case "Use Item":
+              this.useItem();
+              break;
+          }
         }
 
         scaleSprite(
@@ -236,23 +285,87 @@ const PhaserGameComponent: React.FC = () => {
           return `Enemy: ${this.enemy.rarity} (${this.enemy.tier})\nHealth: ${this.enemy.health}/${this.enemy.maxHealth}`;
         }
 
-        attack = () => {
+        attack() {
           const damage = this.calculateDamage();
           this.enemy.health -= damage;
 
           if (this.enemy.health <= 0) {
             this.handleVictory();
           } else {
-            const enemyDamage = this.calculateEnemyDamage();
-            this.player.health -= enemyDamage;
-
-            if (this.player.health <= 0) {
-              this.handleDefeat();
-            }
+            this.enemyAttack();
           }
 
           this.updateTexts();
-        };
+        }
+
+        defend() {
+          this.isDefending = true;
+          this.showMessage("You're defending against the next attack!");
+          this.enemyAttack();
+        }
+
+        run() {
+          if (Math.random() < 0.5) {
+            this.enemy = this.createEnemy();
+            this.enemy.sprite.setPosition(700, 300);
+            this.showMessage("You successfully fled! A new enemy appears.");
+          } else {
+            this.showMessage("You failed to run away!");
+            this.enemyAttack();
+          }
+          this.updateTexts();
+        }
+
+        useItem() {
+          if (this.player.items.length === 0) {
+            this.showMessage("You don't have any items!");
+            return;
+          }
+
+          const item = this.player.items.pop()!;
+          switch (item) {
+            case "Health Potion":
+              this.player.health = Math.min(
+                this.player.health + 50,
+                this.player.maxHealth,
+              );
+              this.showMessage("You used a Health Potion and recovered 50 HP!");
+              break;
+            case "Strength Elixir":
+              this.player.score += 100;
+              this.showMessage(
+                "You used a Strength Elixir and gained 100 points!",
+              );
+              break;
+            case "Magic Scroll":
+              this.enemy.health -= 30;
+              this.showMessage(
+                "You used a Magic Scroll and dealt 30 damage to the enemy!",
+              );
+              if (this.enemy.health <= 0) {
+                this.handleVictory();
+              }
+              break;
+            case "Lucky Charm":
+              this.player.gold += 50;
+              this.showMessage("You used a Lucky Charm and gained 50 gold!");
+              break;
+          }
+          this.updateTexts();
+        }
+
+        enemyAttack() {
+          const enemyDamage = this.calculateEnemyDamage();
+          const finalDamage = this.isDefending
+            ? Math.floor(enemyDamage / 2)
+            : enemyDamage;
+          this.player.health -= finalDamage;
+          this.isDefending = false;
+
+          if (this.player.health <= 0) {
+            this.handleDefeat();
+          }
+        }
 
         calculateDamage(): number {
           const baseDamage = Phaser.Math.Between(5, 15);
@@ -283,18 +396,20 @@ const PhaserGameComponent: React.FC = () => {
           this.victories++;
           const expGained = this.calculateExpGain();
           const goldEarned = this.calculateGoldEarned();
+          const pointsEarned = this.calculatePointsEarned();
           this.player.experience += expGained;
           this.player.gold += goldEarned;
+          this.player.score += pointsEarned;
 
           if (Phaser.Math.Between(1, 10) === 1) {
             const newItem = this.getRandomItem();
             this.player.items.push(newItem);
             this.showMessage(
-              `Victory! You earned ${goldEarned} gold, ${expGained} XP, and found a ${newItem}!`,
+              `Victory! You earned ${goldEarned} gold, ${expGained} XP, ${pointsEarned} points, and found a ${newItem}!`,
             );
           } else {
             this.showMessage(
-              `Victory! You earned ${goldEarned} gold and ${expGained} XP.`,
+              `Victory! You earned ${goldEarned} gold, ${expGained} XP, and ${pointsEarned} points.`,
             );
           }
 
@@ -328,9 +443,59 @@ const PhaserGameComponent: React.FC = () => {
           return Math.floor(baseGold * rarityMultiplier);
         }
 
+        calculatePointsEarned(): number {
+          const basePoints = 100;
+          const rarityMultiplier =
+            this.enemy.rarity === "Common"
+              ? 1
+              : this.enemy.rarity === "Uncommon"
+                ? 2
+                : 3;
+          return Math.floor(basePoints * rarityMultiplier);
+        }
+
         handleDefeat() {
           this.showMessage("You have been defeated! Game over.");
-          this.time.delayedCall(2000, () => this.scene.restart());
+          this.updateLeaderboard();
+          this.time.delayedCall(2000, () => this.showLeaderboard());
+        }
+
+        updateLeaderboard() {
+          const entry: LeaderboardEntry = {
+            name: this.player.name,
+            level: this.player.level,
+            score: this.player.score,
+            victories: this.victories,
+          };
+
+          this.leaderboard.push(entry);
+          this.leaderboard.sort((a, b) => b.score - a.score);
+          this.leaderboard = this.leaderboard.slice(0, 10); // Keep only top 10
+        }
+
+        showLeaderboard() {
+          this.children.removeAll();
+
+          const title = this.add
+            .text(400, 50, "Leaderboard", { fontSize: "32px", color: "#fff" })
+            .setOrigin(0.5);
+
+          this.leaderboard.forEach((entry, index) => {
+            const text = this.add.text(
+              100,
+              100 + index * 40,
+              `${index + 1}. ${entry.name} - Level: ${entry.level}, Score: ${
+                entry.score
+              }, Victories: ${entry.victories}`,
+              { fontSize: "16px", color: "#fff" },
+            );
+          });
+
+          const restartButton = this.add
+            .text(400, 550, "Restart Game", { fontSize: "24px", color: "#fff" })
+            .setOrigin(0.5)
+            .setInteractive()
+            .on("pointerdown", () => this.scene.restart());
         }
 
         levelUp() {
@@ -362,7 +527,10 @@ const PhaserGameComponent: React.FC = () => {
           );
           this.victoriesText.setText(`Victories: ${this.victories}`);
           this.goldText.setText(`Gold: ${this.player.gold}`);
-          this.itemsText.setText(`Items: ${this.player.items.join(", ")}`);
+          this.itemsText.setText(
+            `Items: ${this.player.items.join(", ") ?? ""}`,
+          );
+          this.scoreText.setText(`Score: ${this.player.score}`);
           this.enemyInfoText.setText(this.getEnemyInfoText());
         }
 
@@ -407,7 +575,7 @@ const PhaserGameComponent: React.FC = () => {
   return (
     <div
       ref={gameRef}
-      style={{ margin: "auto", width: "800px", height: "600px" }}
+      style={{ width: "800px", height: "600px", margin: "auto" }}
     />
   );
 };
