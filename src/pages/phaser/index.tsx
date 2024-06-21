@@ -1,6 +1,22 @@
 import React, { useEffect, useRef } from "react";
 
 type PlayerClass = "warrior" | "mage" | "archer";
+type EnemyRarity = "Common" | "Uncommon" | "Rare";
+type EnemyTier =
+  | "F"
+  | "E"
+  | "D"
+  | "C"
+  | "B"
+  | "A"
+  | "AA"
+  | "AAA"
+  | "R"
+  | "RR"
+  | "RRR"
+  | "S"
+  | "SS"
+  | "SSS";
 
 interface PlayerCharacter {
   name: string;
@@ -11,6 +27,14 @@ interface PlayerCharacter {
   experience: number;
   gold: number;
   items: string[];
+}
+
+interface Enemy {
+  sprite: Phaser.Physics.Arcade.Sprite;
+  health: number;
+  maxHealth: number;
+  rarity: EnemyRarity;
+  tier: EnemyTier;
 }
 
 const PhaserGameComponent: React.FC = () => {
@@ -26,8 +50,7 @@ const PhaserGameComponent: React.FC = () => {
       class ColosseumScene extends Phaser.Scene {
         player!: PlayerCharacter;
         playerSprite!: Phaser.Physics.Arcade.Sprite;
-        enemy!: Phaser.Physics.Arcade.Sprite;
-        enemyHealth!: number;
+        enemy!: Enemy;
         victories!: number;
         healthText!: Phaser.GameObjects.Text;
         levelText!: Phaser.GameObjects.Text;
@@ -35,6 +58,7 @@ const PhaserGameComponent: React.FC = () => {
         goldText!: Phaser.GameObjects.Text;
         itemsText!: Phaser.GameObjects.Text;
         messageText!: Phaser.GameObjects.Text;
+        enemyInfoText!: Phaser.GameObjects.Text;
 
         constructor() {
           super("ColosseumScene");
@@ -118,14 +142,13 @@ const PhaserGameComponent: React.FC = () => {
             300,
             this.player.class,
           );
-          this.enemy = this.physics.add.sprite(700, 300, "enemy");
+          this.enemy = this.createEnemy();
 
           // Scale sprites to a consistent height
           const targetHeight = 200;
           this.scaleSprite(this.playerSprite, targetHeight);
-          this.scaleSprite(this.enemy, targetHeight);
+          this.scaleSprite(this.enemy.sprite, targetHeight);
 
-          this.enemyHealth = 50;
           this.victories = 0;
 
           this.healthText = this.add.text(
@@ -160,6 +183,10 @@ const PhaserGameComponent: React.FC = () => {
           this.messageText = this.add
             .text(400, 550, "", { fontSize: "18px", color: "#fff" })
             .setOrigin(0.5);
+          this.enemyInfoText = this.add.text(600, 10, this.getEnemyInfoText(), {
+            fontSize: "16px",
+            color: "#fff",
+          });
 
           this.input.keyboard!.on("keydown-SPACE", this.attack, this);
         }
@@ -172,14 +199,51 @@ const PhaserGameComponent: React.FC = () => {
           sprite.setScale(scale);
         }
 
+        createEnemy(): Enemy {
+          const rarityRoll = Phaser.Math.Between(1, 20);
+          let rarity: EnemyRarity, tier: EnemyTier;
+
+          if (rarityRoll <= 12) {
+            rarity = "Common";
+            tier = ["F", "E", "D", "C", "B"][
+              Phaser.Math.Between(0, 4)
+            ] as EnemyTier;
+          } else if (rarityRoll <= 18) {
+            rarity = "Uncommon";
+            tier = ["A", "AA", "AAA"][Phaser.Math.Between(0, 2)] as EnemyTier;
+          } else {
+            rarity = "Rare";
+            tier = ["R", "RR", "RRR", "S", "SS", "SSS"][
+              Phaser.Math.Between(0, 5)
+            ] as EnemyTier;
+          }
+
+          const baseHealth = 50 + this.player.level * 10;
+          const healthMultiplier =
+            rarity === "Common" ? 1 : rarity === "Uncommon" ? 1.5 : 2;
+          const maxHealth = Math.floor(baseHealth * healthMultiplier);
+
+          return {
+            sprite: this.physics.add.sprite(700, 300, "enemy"),
+            health: maxHealth,
+            maxHealth: maxHealth,
+            rarity,
+            tier,
+          };
+        }
+
+        getEnemyInfoText(): string {
+          return `Enemy: ${this.enemy.rarity} (${this.enemy.tier})\nHealth: ${this.enemy.health}/${this.enemy.maxHealth}`;
+        }
+
         attack = () => {
           const damage = this.calculateDamage();
-          this.enemyHealth -= damage;
+          this.enemy.health -= damage;
 
-          if (this.enemyHealth <= 0) {
+          if (this.enemy.health <= 0) {
             this.handleVictory();
           } else {
-            const enemyDamage = Phaser.Math.Between(3, 10);
+            const enemyDamage = this.calculateEnemyDamage();
             this.player.health -= enemyDamage;
 
             if (this.player.health <= 0) {
@@ -191,7 +255,7 @@ const PhaserGameComponent: React.FC = () => {
         };
 
         calculateDamage(): number {
-          let baseDamage = Phaser.Math.Between(5, 15);
+          const baseDamage = Phaser.Math.Between(5, 15);
           switch (this.player.class) {
             case "warrior":
               return baseDamage * 1.2;
@@ -204,21 +268,33 @@ const PhaserGameComponent: React.FC = () => {
           }
         }
 
+        calculateEnemyDamage(): number {
+          const baseDamage = Phaser.Math.Between(3, 10);
+          const rarityMultiplier =
+            this.enemy.rarity === "Common"
+              ? 1
+              : this.enemy.rarity === "Uncommon"
+                ? 1.3
+                : 1.6;
+          return Math.floor(baseDamage * rarityMultiplier);
+        }
+
         handleVictory() {
           this.victories++;
-          this.player.experience += 10;
-          const goldEarned = Phaser.Math.Between(5, 20);
+          const expGained = this.calculateExpGain();
+          const goldEarned = this.calculateGoldEarned();
+          this.player.experience += expGained;
           this.player.gold += goldEarned;
 
           if (Phaser.Math.Between(1, 10) === 1) {
             const newItem = this.getRandomItem();
             this.player.items.push(newItem);
             this.showMessage(
-              `Victory! You earned ${goldEarned} gold, 10 XP, and found a ${newItem}!`,
+              `Victory! You earned ${goldEarned} gold, ${expGained} XP, and found a ${newItem}!`,
             );
           } else {
             this.showMessage(
-              `Victory! You earned ${goldEarned} gold and 10 XP.`,
+              `Victory! You earned ${goldEarned} gold and ${expGained} XP.`,
             );
           }
 
@@ -226,8 +302,30 @@ const PhaserGameComponent: React.FC = () => {
             this.levelUp();
           }
 
-          this.enemyHealth = 50 + this.player.level * 10;
-          this.enemy.setPosition(700, 300);
+          this.enemy = this.createEnemy();
+          this.enemy.sprite.setPosition(700, 300);
+        }
+
+        calculateExpGain(): number {
+          const baseExp = 10;
+          const rarityMultiplier =
+            this.enemy.rarity === "Common"
+              ? 1
+              : this.enemy.rarity === "Uncommon"
+                ? 1.5
+                : 2;
+          return Math.floor(baseExp * rarityMultiplier);
+        }
+
+        calculateGoldEarned(): number {
+          const baseGold = Phaser.Math.Between(5, 20);
+          const rarityMultiplier =
+            this.enemy.rarity === "Common"
+              ? 1
+              : this.enemy.rarity === "Uncommon"
+                ? 1.5
+                : 2;
+          return Math.floor(baseGold * rarityMultiplier);
         }
 
         handleDefeat() {
@@ -252,7 +350,7 @@ const PhaserGameComponent: React.FC = () => {
             "Magic Scroll",
             "Lucky Charm",
           ];
-          return items[Phaser.Math.Between(0, items.length - 1)];
+          return items[Phaser.Math.Between(0, items.length - 1)] ?? "";
         }
 
         updateTexts() {
@@ -265,6 +363,7 @@ const PhaserGameComponent: React.FC = () => {
           this.victoriesText.setText(`Victories: ${this.victories}`);
           this.goldText.setText(`Gold: ${this.player.gold}`);
           this.itemsText.setText(`Items: ${this.player.items.join(", ")}`);
+          this.enemyInfoText.setText(this.getEnemyInfoText());
         }
 
         showMessage(message: string) {
@@ -305,7 +404,12 @@ const PhaserGameComponent: React.FC = () => {
     };
   }, []);
 
-  return <div ref={gameRef} style={{ width: "800px", height: "600px" }} />;
+  return (
+    <div
+      ref={gameRef}
+      style={{ margin: "auto", width: "800px", height: "600px" }}
+    />
+  );
 };
 
 export default PhaserGameComponent;
