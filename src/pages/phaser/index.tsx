@@ -72,6 +72,7 @@ const PhaserGameComponent: React.FC = () => {
         actionButtons: Phaser.GameObjects.Text[] = [];
         isDefending: boolean = false;
         leaderboard: LeaderboardEntry[] = [];
+        nameInput: Phaser.GameObjects.DOMElement | null = null;
 
         constructor() {
           super("ColosseumScene");
@@ -124,16 +125,6 @@ const PhaserGameComponent: React.FC = () => {
               this.confirmCharacter(nameInput.node.value, "warrior");
             }
           });
-        }
-
-        confirmCharacter(name: string, playerClass: PlayerClass) {
-          if (!name) {
-            this.showMessage("Please enter a name.");
-            return;
-          }
-          this.player = this.createPlayer(name, playerClass);
-          this.children.removeAll();
-          this.startGame();
         }
 
         createPlayer(name: string, playerClass: PlayerClass): PlayerCharacter {
@@ -460,10 +451,50 @@ const PhaserGameComponent: React.FC = () => {
           return Math.floor(basePoints * rarityMultiplier);
         }
 
+        confirmCharacter(name: string, playerClass: PlayerClass) {
+          if (!name) {
+            this.showMessage("Please enter a name.");
+            return;
+          }
+          this.player = this.createPlayer(name, playerClass);
+          this.cleanupCharacterCreationUI();
+          this.startGame();
+        }
+
+        cleanupCharacterCreationUI() {
+          this.children.list.forEach((child) => {
+            if (
+              child instanceof Phaser.GameObjects.Text ||
+              child instanceof Phaser.GameObjects.DOMElement
+            ) {
+              child.destroy();
+            }
+          });
+          if (this.nameInput) {
+            this.nameInput.destroy();
+            this.nameInput = null;
+          }
+        }
+
         handleDefeat() {
           this.showMessage("You have been defeated! Game over.");
           this.updateLeaderboard();
-          this.time.delayedCall(2000, () => this.showLeaderboard());
+          this.time.delayedCall(2000, () => {
+            this.cleanupGameUI();
+            this.showLeaderboard();
+          });
+        }
+
+        cleanupGameUI() {
+          this.children.list.forEach((child) => {
+            if (
+              child instanceof Phaser.GameObjects.Text ||
+              child instanceof Phaser.GameObjects.Sprite ||
+              child instanceof Phaser.GameObjects.DOMElement
+            ) {
+              child.destroy();
+            }
+          });
         }
 
         updateLeaderboard() {
