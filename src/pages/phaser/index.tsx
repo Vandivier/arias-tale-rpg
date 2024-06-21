@@ -15,15 +15,17 @@ interface PlayerCharacter {
 
 const PhaserGameComponent: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
+  const gameInstanceRef = useRef<Phaser.Game | null>(null);
 
   useEffect(() => {
-    let game: Phaser.Game;
-
     const initPhaser = async () => {
+      if (gameInstanceRef.current) return;
+
       const Phaser = await import("phaser");
 
       class ColosseumScene extends Phaser.Scene {
         player!: PlayerCharacter;
+        playerSprite!: Phaser.Physics.Arcade.Sprite;
         enemy!: Phaser.Physics.Arcade.Sprite;
         enemyHealth!: number;
         victories!: number;
@@ -39,10 +41,10 @@ const PhaserGameComponent: React.FC = () => {
         }
 
         preload() {
-          this.load.image("warrior", "/phaser/warrior.png");
-          this.load.image("mage", "/phaser/mage.png");
-          this.load.image("archer", "/phaser/archer.png");
-          this.load.image("enemy", "/phaser/enemy.png");
+          this.load.image("warrior", "/searchable-images/16-eidolon.png");
+          this.load.image("mage", "/searchable-images/16-eidolon.png");
+          this.load.image("archer", "/searchable-images/16-eidolon.png");
+          this.load.image("enemy", "/searchable-images/16-eidolon.png");
         }
 
         create() {
@@ -93,7 +95,7 @@ const PhaserGameComponent: React.FC = () => {
             return;
           }
           this.player = this.createPlayer(name, playerClass);
-          this.children.removeAll(); // Clear the character creation UI
+          this.children.removeAll();
           this.startGame();
         }
 
@@ -111,12 +113,17 @@ const PhaserGameComponent: React.FC = () => {
         }
 
         startGame() {
-          const playerSprite = this.physics.add.sprite(
+          this.playerSprite = this.physics.add.sprite(
             100,
             300,
             this.player.class,
           );
           this.enemy = this.physics.add.sprite(700, 300, "enemy");
+
+          // Scale sprites to a consistent height
+          const targetHeight = 200;
+          this.scaleSprite(this.playerSprite, targetHeight);
+          this.scaleSprite(this.enemy, targetHeight);
 
           this.enemyHealth = 50;
           this.victories = 0;
@@ -155,6 +162,14 @@ const PhaserGameComponent: React.FC = () => {
             .setOrigin(0.5);
 
           this.input.keyboard!.on("keydown-SPACE", this.attack, this);
+        }
+
+        scaleSprite(
+          sprite: Phaser.Physics.Arcade.Sprite,
+          targetHeight: number,
+        ) {
+          const scale = targetHeight / sprite.height;
+          sprite.setScale(scale);
         }
 
         attack = () => {
@@ -275,13 +290,18 @@ const PhaserGameComponent: React.FC = () => {
         },
       };
 
-      game = new Phaser.Game(config);
+      gameInstanceRef.current = new Phaser.Game(config);
     };
 
-    initPhaser();
+    if (gameRef.current && !gameInstanceRef.current) {
+      initPhaser();
+    }
 
     return () => {
-      game?.destroy(true);
+      if (gameInstanceRef.current) {
+        gameInstanceRef.current.destroy(true);
+        gameInstanceRef.current = null;
+      }
     };
   }, []);
 
