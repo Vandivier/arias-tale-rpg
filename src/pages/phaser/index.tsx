@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
+const AVATAR_MAX_HEIGHT = 200;
 type PlayerClass = "warrior" | "mage" | "archer";
 type EnemyRarity = "Common" | "Uncommon" | "Rare";
 type EnemyTier =
@@ -89,7 +90,7 @@ const PhaserGameComponent: React.FC = () => {
 
         createCharacterCreationUI() {
           const namePrompt = this.add
-            .text(400, 200, "Enter your name:", {
+            .text(400, AVATAR_MAX_HEIGHT, "Enter your name:", {
               fontSize: "24px",
               color: "#fff",
             })
@@ -157,9 +158,8 @@ const PhaserGameComponent: React.FC = () => {
           );
           this.enemy = this.createEnemy();
 
-          const targetHeight = 200;
-          this.scaleSprite(this.playerSprite, targetHeight);
-          this.scaleSprite(this.enemy.sprite, targetHeight);
+          this.scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
+          this.scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
 
           this.victories = 0;
 
@@ -271,9 +271,11 @@ const PhaserGameComponent: React.FC = () => {
           const healthMultiplier =
             rarity === "Common" ? 1 : rarity === "Uncommon" ? 1.5 : 2;
           const maxHealth = Math.floor(baseHealth * healthMultiplier);
+          const sprite = this.physics.add.sprite(700, 300, "enemy");
+          this.scaleSprite(sprite, AVATAR_MAX_HEIGHT);
 
           return {
-            sprite: this.physics.add.sprite(700, 300, "enemy"),
+            sprite,
             health: maxHealth,
             maxHealth: maxHealth,
             rarity,
@@ -417,8 +419,12 @@ const PhaserGameComponent: React.FC = () => {
             this.levelUp();
           }
 
+          this.enemy.sprite.destroy();
           this.enemy = this.createEnemy();
+          this.scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
           this.enemy.sprite.setPosition(700, 300);
+
+          this.updateTexts();
         }
 
         calculateExpGain(): number {
