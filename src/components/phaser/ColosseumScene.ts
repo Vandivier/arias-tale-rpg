@@ -112,95 +112,11 @@ export default class ColosseumScene extends Phaser.Scene {
     });
   };
 
-  processNameSubmission = () => {
-    const inputElement = this.nameInput.getChildByName(
-      "nameField",
-    ) as HTMLInputElement;
-    const name = inputElement.value.trim();
-    const playerClass = this.classButtons.find(
-      (button) => button.style.color === "#ff0",
-    )?.text as PlayerClass;
-
-    if (name && playerClass) {
-      this.startGame(name, playerClass);
-    } else if (!name) {
-      this.showMessage("Please enter a name.");
-    } else {
-      this.showMessage("Please select a class.");
-    }
-  };
-
   selectClass = (playerClass: PlayerClass) => {
     this.classButtons.forEach((button) => {
       button.setColor(button.text === playerClass ? "#ff0" : "#fff");
     });
   };
-
-  showMessage = (message: string) => {
-    if (this.messageTimer) {
-      this.messageTimer.remove();
-    }
-
-    if (!this.messageText) {
-      this.messageText = this.add
-        .text(400, 550, "", { fontSize: "18px", color: "#fff" })
-        .setOrigin(0.5);
-    }
-
-    this.messageText.setText(message);
-    this.messageTimer = this.time.delayedCall(3000, () => {
-      if (this.messageText && !this.messageText.destroyed) {
-        this.messageText.setText("");
-      }
-    });
-  };
-
-  startGame = () => {
-    if (!this.player) {
-      // TODO: user-visible error, not console.error
-      console.error("Player not created before starting game");
-      return;
-    }
-
-    this.playerSprite = this.physics.add.sprite(100, 300, this.player.class);
-    this.enemy = this.createEnemy();
-
-    this.scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
-    this.scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
-
-    this.victories = 0;
-
-    this.createGameUI();
-    this.createActionButtons();
-  };
-
-  cleanupCharacterCreationUI() {
-    this.children.list.forEach((child) => {
-      if (
-        child instanceof Phaser.GameObjects.Text ||
-        child instanceof Phaser.GameObjects.DOMElement
-      ) {
-        child.destroy();
-      }
-    });
-    this.nameInput.destroy();
-    this.classButtons.forEach((button) => button.destroy());
-    this.classButtons = [];
-  }
-
-  createPlayer(name: string, playerClass: PlayerClass): PlayerCharacter {
-    return {
-      name,
-      class: playerClass,
-      health: 100,
-      maxHealth: 100,
-      level: 1,
-      experience: 0,
-      gold: 0,
-      items: [],
-      score: 0,
-    };
-  }
 
   createGameUI = () => {
     this.healthText = this.add.text(
@@ -248,6 +164,103 @@ export default class ColosseumScene extends Phaser.Scene {
       color: "#fff",
     });
   };
+
+  showMessage = (message: string) => {
+    if (this.messageTimer) {
+      this.messageTimer.remove();
+    }
+
+    if (!this.messageText) {
+      this.messageText = this.add
+        .text(400, 550, "", { fontSize: "18px", color: "#fff" })
+        .setOrigin(0.5);
+    }
+
+    this.messageText.setText(message);
+    this.messageTimer = this.time.delayedCall(3000, () => {
+      if (this.messageText && !this.messageText.destroyed) {
+        this.messageText.setText("");
+      }
+    });
+  };
+
+  processNameSubmission = () => {
+    const inputElement = this.nameInput.getChildByName(
+      "nameField",
+    ) as HTMLInputElement;
+    const name = inputElement.value.trim();
+    const playerClass = this.classButtons.find(
+      (button) => button.style.color === "#ff0",
+    )?.text as PlayerClass;
+
+    if (name && playerClass) {
+      this.confirmCharacter(name, playerClass);
+    } else if (!name) {
+      this.showMessage("Please enter a name.");
+    } else {
+      this.showMessage("Please select a class.");
+    }
+  };
+
+  confirmCharacter = (name: string, playerClass: PlayerClass) => {
+    this.player = this.createPlayer(name, playerClass);
+    this.cleanupCharacterCreationUI();
+    this.startGame();
+  };
+
+  createPlayer(name: string, playerClass: PlayerClass): PlayerCharacter {
+    return {
+      name,
+      class: playerClass,
+      health: 100,
+      maxHealth: 100,
+      level: 1,
+      experience: 0,
+      gold: 0,
+      items: [],
+      score: 0,
+    };
+  }
+
+  startGame = () => {
+    try {
+      if (!this.player) {
+        throw new Error("Player not created before starting game");
+      }
+
+      this.playerSprite = this.physics.add.sprite(100, 300, this.player.class);
+      this.enemy = this.createEnemy();
+
+      this.scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
+      this.scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
+
+      this.victories = 0;
+
+      this.createGameUI();
+      this.createActionButtons();
+    } catch (error) {
+      console.error(error);
+      this.showMessage(
+        "An error occurred while starting the game. Please try again.",
+      );
+      // TODO: restart game button
+      // this.scene.restart();
+    }
+  };
+
+  cleanupCharacterCreationUI() {
+    this.children.list.forEach((child) => {
+      if (
+        child instanceof Phaser.GameObjects.Text ||
+        child instanceof Phaser.GameObjects.DOMElement
+      ) {
+        child.destroy();
+      }
+    });
+    this.nameInput.destroy();
+    this.classButtons.forEach((button) => button.destroy());
+    this.classButtons = [];
+  }
 
   createActionButtons() {
     const actions = ["Attack", "Defend", "Run", "Use Item"];
@@ -497,23 +510,6 @@ export default class ColosseumScene extends Phaser.Scene {
           ? 2
           : 3;
     return Math.floor(basePoints * rarityMultiplier);
-  }
-
-  confirmCharacter(playerClass: PlayerClass) {
-    let name = "";
-    if (this.nameInput?.node) {
-      name = (this.nameInput.node as HTMLInputElement).value;
-    }
-
-    if (!name) {
-      if (playerClass) {
-        this.showMessage("Please enter a name.");
-      }
-      return;
-    }
-    this.player = this.createPlayer(name, playerClass);
-    this.cleanupCharacterCreationUI();
-    this.startGame();
   }
 
   handleDefeat() {
