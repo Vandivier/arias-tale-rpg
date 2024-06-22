@@ -4,6 +4,7 @@ interface LeaderboardEntry {
   name: string;
   score: number;
   victories: number;
+  level: number;
 }
 
 export class LeaderboardScene extends Phaser.Scene {
@@ -13,16 +14,22 @@ export class LeaderboardScene extends Phaser.Scene {
     super("Leaderboard");
   }
 
-  init(data: { score: number; victories: number }) {
+  init(data: {
+    name: string;
+    score: number;
+    victories: number;
+    level: number;
+  }) {
     // In a real application, you'd load the leaderboard from a server or local storage
     // Here, we'll just add the current score to a mock leaderboard
     this.leaderboard.push({
-      name: "Player",
+      name: data.name,
       score: data.score,
       victories: data.victories,
+      level: data.level,
     });
     this.leaderboard.sort((a, b) => b.score - a.score);
-    this.leaderboard = this.leaderboard.slice(0, 10);
+    this.leaderboard = this.leaderboard.slice(0, 10); // Keep only top 10
   }
 
   create() {
@@ -36,7 +43,7 @@ export class LeaderboardScene extends Phaser.Scene {
         100 + index * 40,
         `${index + 1}. ${entry.name} - Score: ${entry.score}, Victories: ${
           entry.victories
-        }`,
+        }, Level: ${entry.level}`,
         { fontSize: "18px", color: "#fff" },
       );
     });

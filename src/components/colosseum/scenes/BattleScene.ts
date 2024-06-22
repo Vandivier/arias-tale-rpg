@@ -4,6 +4,7 @@ import {
   type Enemy,
   type EnemyRarity,
   type EnemyTier,
+  type Item,
 } from "./types";
 import {
   AVATAR_MAX_HEIGHT,
@@ -22,6 +23,7 @@ export class BattleScene extends Phaser.Scene {
   private playerStatsText!: Phaser.GameObjects.Text;
   private enemyStatsText!: Phaser.GameObjects.Text;
   private victories: number = 0;
+  private itemSelectionTexts: Phaser.GameObjects.Text[] = [];
 
   constructor() {
     super("Battle");
@@ -107,7 +109,7 @@ export class BattleScene extends Phaser.Scene {
         this.run();
         break;
       case "Use Item":
-        this.useItem();
+        this.showItemSelection();
         break;
     }
   }
@@ -142,32 +144,72 @@ export class BattleScene extends Phaser.Scene {
     this.updateHUD();
   }
 
-  useItem() {
+  showItemSelection() {
     if (this.player.inventory.length === 0) {
       this.showMessage("You don't have any items!");
       return;
     }
 
-    const item = this.player.inventory.pop()!;
+    // Hide action buttons
+    this.actionButtons.forEach((button) => button.setVisible(false));
+
+    // Show item selection
+    this.player.inventory.forEach((item, index) => {
+      const itemText = this.add
+        .text(400, 200 + index * 40, `${index + 1}. ${item.name}`, {
+          fontSize: "18px",
+          color: "#fff",
+        })
+        .setOrigin(0.5)
+        .setInteractive()
+        .on("pointerdown", () => this.useItem(item, index));
+      this.itemSelectionTexts.push(itemText);
+    });
+
+    // Add cancel option
+    const cancelText = this.add
+      .text(400, 200 + this.player.inventory.length * 40, "Cancel", {
+        fontSize: "18px",
+        color: "#ff0000",
+      })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on("pointerdown", () => this.hideItemSelection());
+    this.itemSelectionTexts.push(cancelText);
+  }
+
+  hideItemSelection() {
+    // Remove item selection texts
+    this.itemSelectionTexts.forEach((text) => text.destroy());
+    this.itemSelectionTexts = [];
+
+    // Show action buttons
+    this.actionButtons.forEach((button) => button.setVisible(true));
+  }
+
+  useItem(item: Item, index: number) {
+    this.hideItemSelection();
+
     let effectDescription = "";
 
     if (item.type === "consumable") {
-      if (item.effect?.health) {
+      if (item.effect.health) {
         this.player.health = Math.min(
           this.player.health + item.effect.health,
           this.player.maxHealth,
         );
         effectDescription = `restored ${item.effect.health} health`;
       }
-      if (item.effect?.damage) {
+      if (item.effect.damage) {
         this.enemy.health -= item.effect.damage;
         effectDescription += `${effectDescription ? " and " : ""}dealt ${
           item.effect.damage
         } damage to the enemy`;
       }
+      // Remove the used item from inventory
+      this.player.inventory.splice(index, 1);
     } else {
       this.showMessage(`You can't use ${item.name} in battle!`);
-      this.player.inventory.push(item);
       return;
     }
 
@@ -197,8 +239,10 @@ export class BattleScene extends Phaser.Scene {
     this.showMessage("You have been defeated!");
     this.time.delayedCall(2000, () => {
       this.scene.start("GameOver", {
+        name: this.player.name,
         score: this.player.score,
         victories: this.victories,
+        level: this.player.level,
       });
     });
   }

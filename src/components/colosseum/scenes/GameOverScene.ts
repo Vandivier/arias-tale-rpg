@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 
 export class GameOverScene extends Phaser.Scene {
+  private level: number = 1;
+  private name: string = "";
   private score: number = 0;
   private victories: number = 0;
 
@@ -8,7 +10,14 @@ export class GameOverScene extends Phaser.Scene {
     super("GameOver");
   }
 
-  init(data: { score: number; victories: number }) {
+  init(data: {
+    level: number;
+    name: string;
+    score: number;
+    victories: number;
+  }) {
+    this.level = data.level;
+    this.name = data.name;
     this.score = data.score;
     this.victories = data.victories;
   }
@@ -42,8 +51,10 @@ export class GameOverScene extends Phaser.Scene {
       .setInteractive()
       .on("pointerdown", () =>
         this.scene.start("Leaderboard", {
+          name: this.name,
           score: this.score,
           victories: this.victories,
+          level: this.level,
         }),
       );
   }
