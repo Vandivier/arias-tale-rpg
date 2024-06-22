@@ -1,5 +1,10 @@
 import Phaser from "phaser";
-import { PlayerCharacter, Enemy, Item, EquipmentSlot } from "./types";
+import {
+  type PlayerCharacter,
+  type Enemy,
+  type Item,
+  type EquipmentSlot,
+} from "./types";
 
 export const AVATAR_MAX_HEIGHT = 200;
 
@@ -46,14 +51,18 @@ export function generateLoot(enemy: Enemy): Item[] {
         ? Phaser.Math.Between(15, 30)
         : Phaser.Math.Between(30, 50);
 
-  loot.push({
-    name: `${enemy.rarity} ${itemType}`,
-    type: itemType,
-    value: itemValue,
-    effect: {
-      [itemType === "weapon" ? "damage" : "defense"]: Math.floor(itemValue / 2),
-    },
-  });
+  if (itemType) {
+    loot.push({
+      name: `${enemy.rarity} ${itemType}`,
+      type: itemType,
+      value: itemValue,
+      effect: {
+        [itemType === "weapon" ? "damage" : "defense"]: Math.floor(
+          itemValue / 2,
+        ),
+      },
+    });
+  }
 
   return loot;
 }
