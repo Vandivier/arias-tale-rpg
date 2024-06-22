@@ -38,6 +38,22 @@ export class StoreScene extends Phaser.Scene {
       .on("pointerdown", () =>
         this.scene.start("Battle", { player: this.player }),
       );
+
+    this.add
+      .text(400, 500, "View Inventory", { fontSize: "24px", color: "#fff" })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on("pointerdown", () =>
+        this.scene.start("Inventory", { player: this.player }),
+      );
+
+    this.add
+      .text(400, 550, "Return to Battle", { fontSize: "24px", color: "#fff" })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on("pointerdown", () =>
+        this.scene.start("Battle", { player: this.player }),
+      );
   }
 
   createItemDisplay() {
