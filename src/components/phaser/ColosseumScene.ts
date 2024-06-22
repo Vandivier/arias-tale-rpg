@@ -60,6 +60,7 @@ export default class ColosseumScene extends Phaser.Scene {
   actionButtons: Phaser.GameObjects.Text[] = [];
   isDefending: boolean = false;
   leaderboard: LeaderboardEntry[] = [];
+  nameInput: Phaser.GameObjects.DOMElement | null = null;
 
   constructor() {
     super("ColosseumScene");
@@ -78,22 +79,16 @@ export default class ColosseumScene extends Phaser.Scene {
 
   createCharacterCreationUI() {
     const namePrompt = this.add
-      .text(400, AVATAR_MAX_HEIGHT, "Enter your name:", {
-        fontSize: "24px",
-        color: "#fff",
-      })
+      .text(400, 200, "Enter your name:", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5);
-    const nameInput = this.add.dom(
+    this.nameInput = this.add.dom(
       400,
       250,
       "input",
       "width: 200px; height: 30px;",
     );
     const classPrompt = this.add
-      .text(400, 300, "Choose your class:", {
-        fontSize: "24px",
-        color: "#fff",
-      })
+      .text(400, 300, "Choose your class:", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5);
 
     const classes: PlayerClass[] = ["warrior", "mage", "archer"];
@@ -101,17 +96,17 @@ export default class ColosseumScene extends Phaser.Scene {
       return this.add
         .text(300 + i * 100, 350, c, { fontSize: "20px", color: "#fff" })
         .setInteractive()
-        .on("pointerdown", () =>
-          this.confirmCharacter(nameInput.node.value, c),
-        );
+        .on("pointerdown", () => this.confirmCharacter(c));
     });
 
-    nameInput.addListener("keydown");
-    nameInput.on("keydown", (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        this.confirmCharacter(nameInput.node.value, "warrior");
-      }
-    });
+    if (this.nameInput.node) {
+      this.nameInput.addListener("keydown");
+      this.nameInput.on("keydown", (event: KeyboardEvent) => {
+        if (event.key === "Enter") {
+          this.confirmCharacter("warrior");
+        }
+      });
+    }
   }
 
   createPlayer(name: string, playerClass: PlayerClass): PlayerCharacter {
@@ -186,9 +181,13 @@ export default class ColosseumScene extends Phaser.Scene {
         .text(200 + index * 150, 500, action, {
           fontSize: "20px",
           color: "#fff",
+          backgroundColor: "#333",
+          padding: { x: 10, y: 5 },
         })
-        .setInteractive()
-        .on("pointerdown", () => this.handleAction(action));
+        .setInteractive({ useHandCursor: true })
+        .on("pointerdown", () => this.handleAction(action))
+        .on("pointerover", () => button.setStyle({ backgroundColor: "#555" }))
+        .on("pointerout", () => button.setStyle({ backgroundColor: "#333" }));
       this.actionButtons.push(button);
     });
   }
@@ -248,20 +247,26 @@ export default class ColosseumScene extends Phaser.Scene {
     };
   }
 
-  getEnemyInfoText(): string {
-    return `Enemy: ${this.enemy.rarity} (${this.enemy.tier})\nHealth: ${this.enemy.health}/${this.enemy.maxHealth}`;
-  }
-
   attack() {
-    const damage = this.calculateDamage();
+    const damage = Math.round(this.calculateDamage());
     this.enemy.health -= damage;
 
+    let message = `You attack the enemy for ${damage} damage!`;
+
     if (this.enemy.health <= 0) {
+      message += " The enemy is defeated!";
       this.handleVictory();
     } else {
-      this.enemyAttack();
+      const enemyDamage = Math.round(this.calculateEnemyDamage());
+      this.player.health = Math.max(0, this.player.health - enemyDamage);
+      message += ` The enemy counterattacks for ${enemyDamage} damage!`;
+
+      if (this.player.health <= 0) {
+        this.handleDefeat();
+      }
     }
 
+    this.showMessage(message);
     this.updateTexts();
   }
 
@@ -336,13 +341,13 @@ export default class ColosseumScene extends Phaser.Scene {
     const baseDamage = Phaser.Math.Between(5, 15);
     switch (this.player.class) {
       case "warrior":
-        return baseDamage * 1.2;
+        return Math.round(baseDamage * 1.2);
       case "mage":
-        return baseDamage * 1.5;
+        return Math.round(baseDamage * 1.5);
       case "archer":
-        return baseDamage * 1.3;
+        return Math.round(baseDamage * 1.3);
       default:
-        return baseDamage;
+        return Math.round(baseDamage);
     }
   }
 
@@ -354,29 +359,27 @@ export default class ColosseumScene extends Phaser.Scene {
         : this.enemy.rarity === "Uncommon"
           ? 1.3
           : 1.6;
-    return Math.floor(baseDamage * rarityMultiplier);
+    return Math.round(baseDamage * rarityMultiplier);
   }
 
   handleVictory() {
     this.victories++;
-    const expGained = this.calculateExpGain();
-    const goldEarned = this.calculateGoldEarned();
-    const pointsEarned = this.calculatePointsEarned();
+    const expGained = Math.round(this.calculateExpGain());
+    const goldEarned = Math.round(this.calculateGoldEarned());
+    const pointsEarned = Math.round(this.calculatePointsEarned());
     this.player.experience += expGained;
     this.player.gold += goldEarned;
     this.player.score += pointsEarned;
 
+    let message = `Victory! You earned ${goldEarned} gold, ${expGained} XP, and ${pointsEarned} points.`;
+
     if (Phaser.Math.Between(1, 10) === 1) {
       const newItem = this.getRandomItem();
       this.player.items.push(newItem);
-      this.showMessage(
-        `Victory! You earned ${goldEarned} gold, ${expGained} XP, ${pointsEarned} points, and found a ${newItem}!`,
-      );
-    } else {
-      this.showMessage(
-        `Victory! You earned ${goldEarned} gold, ${expGained} XP, and ${pointsEarned} points.`,
-      );
+      message += ` You found a ${newItem}!`;
     }
+
+    this.showMessage(message);
 
     if (this.player.experience >= this.player.level * 20) {
       this.levelUp();
@@ -384,9 +387,7 @@ export default class ColosseumScene extends Phaser.Scene {
 
     this.enemy.sprite.destroy();
     this.enemy = this.createEnemy();
-    this.scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
     this.enemy.sprite.setPosition(700, 300);
-
     this.updateTexts();
   }
 
@@ -423,9 +424,17 @@ export default class ColosseumScene extends Phaser.Scene {
     return Math.floor(basePoints * rarityMultiplier);
   }
 
-  confirmCharacter(name: string, playerClass: PlayerClass) {
+  confirmCharacter(playerClass: PlayerClass) {
+    let name = "";
+    if (this.nameInput && this.nameInput.node) {
+      name = (this.nameInput.node as HTMLInputElement).value;
+    }
+
     if (!name) {
-      this.showMessage("Please enter a name.");
+      // Only show the message if the name is empty and a class was clicked
+      if (playerClass) {
+        this.showMessage("Please enter a name.");
+      }
       return;
     }
     this.player = this.createPlayer(name, playerClass);
@@ -442,6 +451,7 @@ export default class ColosseumScene extends Phaser.Scene {
         child.destroy();
       }
     });
+
     if (this.nameInput) {
       this.nameInput.destroy();
       this.nameInput = null;
@@ -529,7 +539,7 @@ export default class ColosseumScene extends Phaser.Scene {
 
   updateTexts() {
     this.healthText.setText(
-      `Health: ${this.player.health}/${this.player.maxHealth}`,
+      `Health: ${Math.round(this.player.health)}/${this.player.maxHealth}`,
     );
     this.levelText.setText(
       `Level: ${this.player.level} (XP: ${this.player.experience})`,
@@ -539,6 +549,12 @@ export default class ColosseumScene extends Phaser.Scene {
     this.itemsText.setText(`Items: ${this.player.items.join(", ") ?? ""}`);
     this.scoreText.setText(`Score: ${this.player.score}`);
     this.enemyInfoText.setText(this.getEnemyInfoText());
+  }
+
+  getEnemyInfoText(): string {
+    return `Enemy: ${this.enemy.rarity} (${
+      this.enemy.tier
+    })\nHealth: ${Math.round(this.enemy.health)}/${this.enemy.maxHealth}`;
   }
 
   showMessage(message: string) {
