@@ -35,6 +35,9 @@ export interface Equipment {
 export interface PlayerCharacter {
   name: string;
   class: PlayerClass;
+  effects?: {
+    poisonedSmog?: number;
+  };
   health: number;
   maxHealth: number;
   level: number;

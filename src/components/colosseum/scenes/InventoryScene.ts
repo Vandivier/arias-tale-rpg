@@ -16,14 +16,14 @@ export class InventoryScene extends Phaser.Scene {
 
   create() {
     this.add
-      .text(400, 50, "Inventory", { fontSize: "32px", color: "#fff" })
+      .text(170, 30, "Inventory", { fontSize: "28px", color: "#fff" })
       .setOrigin(0.5);
 
     this.createInventoryDisplay();
     this.createEquipmentDisplay();
 
     this.add
-      .text(400, 550, "Return to Battle", { fontSize: "24px", color: "#fff" })
+      .text(170, 490, "Return to Battle", { fontSize: "20px", color: "#fff" })
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () =>
@@ -32,11 +32,11 @@ export class InventoryScene extends Phaser.Scene {
   }
 
   createInventoryDisplay() {
-    this.add.text(100, 100, "Inventory:", { fontSize: "24px", color: "#fff" });
+    this.add.text(20, 70, "Inventory:", { fontSize: "18px", color: "#fff" });
     this.player.inventory.forEach((item, index) => {
       const text = this.add
-        .text(120, 140 + index * 30, `${item.name} (${item.type})`, {
-          fontSize: "18px",
+        .text(30, 100 + index * 30, `${item.name} (${item.type})`, {
+          fontSize: "14px",
           color: "#fff",
         })
         .setInteractive()
@@ -46,7 +46,7 @@ export class InventoryScene extends Phaser.Scene {
   }
 
   createEquipmentDisplay() {
-    this.add.text(500, 100, "Equipment:", { fontSize: "24px", color: "#fff" });
+    this.add.text(20, 260, "Equipment:", { fontSize: "18px", color: "#fff" });
     const slots: EquipmentSlot[] = [
       "weapon",
       "gloves",
@@ -57,8 +57,8 @@ export class InventoryScene extends Phaser.Scene {
     slots.forEach((slot, index) => {
       const item = this.player.equipment[slot];
       const text = this.add
-        .text(520, 140 + index * 30, `${slot}: ${item ? item.name : "Empty"}`, {
-          fontSize: "18px",
+        .text(30, 290 + index * 30, `${slot}: ${item ? item.name : "Empty"}`, {
+          fontSize: "14px",
           color: "#fff",
         })
         .setInteractive()

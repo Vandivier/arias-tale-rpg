@@ -14,6 +14,34 @@ export class LeaderboardScene extends Phaser.Scene {
     super("Leaderboard");
   }
 
+  create() {
+    this.add
+      .text(170, 30, "Leaderboard", { fontSize: "28px", color: "#fff" })
+      .setOrigin(0.5);
+
+    this.leaderboard.forEach((entry, index) => {
+      this.add.text(
+        20,
+        70 + index * 40,
+        `${index + 1}. ${entry.name}\nScore: ${entry.score}, Victories: ${
+          entry.victories
+        }, Level: ${entry.level}`,
+        {
+          fontSize: "14px",
+          color: "#fff",
+          align: "left",
+          wordWrap: { width: 300 },
+        },
+      );
+    });
+
+    this.add
+      .text(170, 490, "Restart Game", { fontSize: "20px", color: "#fff" })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on("pointerdown", () => this.scene.start("CharacterCreation"));
+  }
+
   init(data: {
     name: string;
     score: number;
@@ -30,28 +58,5 @@ export class LeaderboardScene extends Phaser.Scene {
     });
     this.leaderboard.sort((a, b) => b.score - a.score);
     this.leaderboard = this.leaderboard.slice(0, 10); // Keep only top 10
-  }
-
-  create() {
-    this.add
-      .text(400, 50, "Leaderboard", { fontSize: "36px", color: "#fff" })
-      .setOrigin(0.5);
-
-    this.leaderboard.forEach((entry, index) => {
-      this.add.text(
-        100,
-        100 + index * 40,
-        `${index + 1}. ${entry.name} - Score: ${entry.score}, Victories: ${
-          entry.victories
-        }, Level: ${entry.level}`,
-        { fontSize: "18px", color: "#fff" },
-      );
-    });
-
-    this.add
-      .text(400, 550, "Restart Game", { fontSize: "24px", color: "#fff" })
-      .setOrigin(0.5)
-      .setInteractive()
-      .on("pointerdown", () => this.scene.start("CharacterCreation"));
   }
 }
