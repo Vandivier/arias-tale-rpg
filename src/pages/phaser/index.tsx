@@ -46,13 +46,6 @@ const PhaserGameComponent: React.FC = () => {
   }, []);
 
   return (
-    <div
-      ref={gameRef}
-      style={{ width: "800px", height: "600px", margin: "auto" }}
-    />
-  );
-
-  return (
     <CustomPage mainHeading="Aria's Tale Colosseum">
       <div
         ref={gameRef}

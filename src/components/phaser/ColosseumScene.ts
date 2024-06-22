@@ -1,4 +1,5 @@
-const AVATAR_MAX_HEIGHT = 200;
+import Phaser from "phaser";
+
 type PlayerClass = "warrior" | "mage" | "archer";
 type EnemyRarity = "Common" | "Uncommon" | "Rare";
 type EnemyTier =
@@ -16,6 +17,8 @@ type EnemyTier =
   | "S"
   | "SS"
   | "SSS";
+
+const AVATAR_MAX_HEIGHT = 200;
 
 interface PlayerCharacter {
   name: string;
@@ -48,21 +51,21 @@ export default class ColosseumScene extends Phaser.Scene {
   player!: PlayerCharacter;
   playerSprite!: Phaser.Physics.Arcade.Sprite;
   enemy!: Enemy;
-  victories!: number;
+  victories: number = 0;
   healthText!: Phaser.GameObjects.Text;
   levelText!: Phaser.GameObjects.Text;
   victoriesText!: Phaser.GameObjects.Text;
   goldText!: Phaser.GameObjects.Text;
   itemsText!: Phaser.GameObjects.Text;
   scoreText!: Phaser.GameObjects.Text;
+  playerClassText!: Phaser.GameObjects.Text;
   messageText!: Phaser.GameObjects.Text;
   messageTimer: Phaser.Time.TimerEvent | null = null;
   enemyInfoText!: Phaser.GameObjects.Text;
   actionButtons: Phaser.GameObjects.Text[] = [];
   isDefending: boolean = false;
   leaderboard: LeaderboardEntry[] = [];
-  nameInput: Phaser.GameObjects.DOMElement | null = null;
-  playerClassText!: Phaser.GameObjects.Text;
+  nameInput!: Phaser.GameObjects.DOMElement;
   classButtons: Phaser.GameObjects.Text[] = [];
 
   constructor() {
@@ -70,6 +73,7 @@ export default class ColosseumScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.html("nameform", "assets/colosseum_nameform.html");
     this.load.image("warrior", "/searchable-images/16-eidolon.png");
     this.load.image("mage", "/searchable-images/16-eidolon.png");
     this.load.image("archer", "/searchable-images/16-eidolon.png");
@@ -80,36 +84,108 @@ export default class ColosseumScene extends Phaser.Scene {
     this.createCharacterCreationUI();
   }
 
-  createCharacterCreationUI() {
-    const namePrompt = this.add
-      .text(400, 200, "Enter your name:", { fontSize: "24px", color: "#fff" })
+  createCharacterCreationUI = () => {
+    this.add
+      .text(400, 150, "Enter your name:", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5);
-    this.nameInput = this.add.dom(
-      400,
-      250,
-      "input",
-      "width: 200px; height: 30px;",
-    );
-    const classPrompt = this.add
-      .text(400, 300, "Choose your class:", { fontSize: "24px", color: "#fff" })
+
+    this.nameInput = this.add.dom(400, 250).createFromCache("nameform");
+    this.nameInput.addListener("click");
+    this.nameInput.on("click", (event: any) => {
+      if (event.target.name === "submitButton") {
+        this.processNameSubmission();
+      }
+    });
+
+    // Add key listener for Enter key
+    this.input.keyboard!.on("keydown-ENTER", this.processNameSubmission);
+    this.add
+      .text(400, 350, "Choose your class:", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5);
 
     const classes: PlayerClass[] = ["warrior", "mage", "archer"];
     this.classButtons = classes.map((c, i) => {
       return this.add
-        .text(300 + i * 100, 350, c, { fontSize: "20px", color: "#fff" })
+        .text(300 + i * 100, 400, c, { fontSize: "20px", color: "#fff" })
         .setInteractive()
-        .on("pointerdown", () => this.confirmCharacter(c));
+        .on("pointerdown", () => this.selectClass(c));
     });
+  };
 
-    if (this.nameInput.node) {
-      this.nameInput.addListener("keydown");
-      this.nameInput.on("keydown", (event: KeyboardEvent) => {
-        if (event.key === "Enter") {
-          this.confirmCharacter("warrior");
-        }
-      });
+  processNameSubmission = () => {
+    const inputElement = this.nameInput.getChildByName(
+      "nameField",
+    ) as HTMLInputElement;
+    const name = inputElement.value.trim();
+    const playerClass = this.classButtons.find(
+      (button) => button.style.color === "#ff0",
+    )?.text as PlayerClass;
+
+    if (name && playerClass) {
+      this.startGame(name, playerClass);
+    } else if (!name) {
+      this.showMessage("Please enter a name.");
+    } else {
+      this.showMessage("Please select a class.");
     }
+  };
+
+  selectClass = (playerClass: PlayerClass) => {
+    this.classButtons.forEach((button) => {
+      button.setColor(button.text === playerClass ? "#ff0" : "#fff");
+    });
+  };
+
+  showMessage = (message: string) => {
+    if (this.messageTimer) {
+      this.messageTimer.remove();
+    }
+
+    if (!this.messageText) {
+      this.messageText = this.add
+        .text(400, 550, "", { fontSize: "18px", color: "#fff" })
+        .setOrigin(0.5);
+    }
+
+    this.messageText.setText(message);
+    this.messageTimer = this.time.delayedCall(3000, () => {
+      if (this.messageText && !this.messageText.destroyed) {
+        this.messageText.setText("");
+      }
+    });
+  };
+
+  startGame = () => {
+    if (!this.player) {
+      // TODO: user-visible error, not console.error
+      console.error("Player not created before starting game");
+      return;
+    }
+
+    this.playerSprite = this.physics.add.sprite(100, 300, this.player.class);
+    this.enemy = this.createEnemy();
+
+    this.scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
+    this.scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
+
+    this.victories = 0;
+
+    this.createGameUI();
+    this.createActionButtons();
+  };
+
+  cleanupCharacterCreationUI() {
+    this.children.list.forEach((child) => {
+      if (
+        child instanceof Phaser.GameObjects.Text ||
+        child instanceof Phaser.GameObjects.DOMElement
+      ) {
+        child.destroy();
+      }
+    });
+    this.nameInput.destroy();
+    this.classButtons.forEach((button) => button.destroy());
+    this.classButtons = [];
   }
 
   createPlayer(name: string, playerClass: PlayerClass): PlayerCharacter {
@@ -126,19 +202,7 @@ export default class ColosseumScene extends Phaser.Scene {
     };
   }
 
-  startGame() {
-    // Ensure the character creation UI is fully cleaned up
-    this.cleanupCharacterCreationUI();
-
-    this.playerSprite = this.physics.add.sprite(100, 300, this.player.class);
-    this.enemy = this.createEnemy();
-
-    const targetHeight = 200;
-    this.scaleSprite(this.playerSprite, targetHeight);
-    this.scaleSprite(this.enemy.sprite, targetHeight);
-
-    this.victories = 0;
-
+  createGameUI = () => {
     this.healthText = this.add.text(
       10,
       10,
@@ -183,9 +247,7 @@ export default class ColosseumScene extends Phaser.Scene {
       fontSize: "16px",
       color: "#fff",
     });
-
-    this.createActionButtons();
-  }
+  };
 
   createActionButtons() {
     const actions = ["Attack", "Defend", "Run", "Use Item"];
@@ -439,7 +501,7 @@ export default class ColosseumScene extends Phaser.Scene {
 
   confirmCharacter(playerClass: PlayerClass) {
     let name = "";
-    if (this.nameInput && this.nameInput.node) {
+    if (this.nameInput?.node) {
       name = (this.nameInput.node as HTMLInputElement).value;
     }
 
@@ -452,40 +514,6 @@ export default class ColosseumScene extends Phaser.Scene {
     this.player = this.createPlayer(name, playerClass);
     this.cleanupCharacterCreationUI();
     this.startGame();
-  }
-
-  cleanupCharacterCreationUI() {
-    // Remove all text objects
-    this.children.list.forEach((child) => {
-      if (child instanceof Phaser.GameObjects.Text) {
-        child.destroy();
-      }
-    });
-
-    // Remove the name input
-    if (this.nameInput) {
-      this.nameInput.destroy();
-      this.nameInput = null;
-    }
-
-    // Remove class buttons
-    this.classButtons.forEach((button) => button.destroy());
-    this.classButtons = [];
-
-    // Clear any remaining game objects that are not needed in the battle scene
-    this.children.list.forEach((child) => {
-      if (!(child instanceof Phaser.GameObjects.Sprite)) {
-        child.destroy();
-      }
-    });
-
-    if (this.messageText) {
-      this.messageText.destroy();
-    }
-    if (this.messageTimer) {
-      this.messageTimer.remove();
-      this.messageTimer = null;
-    }
   }
 
   handleDefeat() {
@@ -595,29 +623,5 @@ export default class ColosseumScene extends Phaser.Scene {
     return `Enemy: ${this.enemy.rarity} (${
       this.enemy.tier
     })\nHealth: ${Math.round(this.enemy.health)}/${this.enemy.maxHealth}`;
-  }
-
-  showMessage(message: string) {
-    // Clear any existing message timer
-    if (this.messageTimer) {
-      this.messageTimer.remove();
-      this.messageTimer = null;
-    }
-
-    // Create a new message text if it doesn't exist
-    if (!this.messageText || this.messageText.destroyed) {
-      this.messageText = this.add
-        .text(400, 550, "", { fontSize: "18px", color: "#fff" })
-        .setOrigin(0.5);
-    }
-
-    this.messageText.setText(message);
-
-    // Set a new timer to clear the message
-    this.messageTimer = this.time.delayedCall(3000, () => {
-      if (this.messageText && !this.messageText.destroyed) {
-        this.messageText.setText("");
-      }
-    });
   }
 }
