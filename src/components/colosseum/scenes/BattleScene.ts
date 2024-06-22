@@ -1,10 +1,5 @@
 import Phaser from "phaser";
-import {
-  type PlayerCharacter,
-  type Enemy,
-  type EnemyTier,
-  type EnemyRarity,
-} from "./types";
+import { type PlayerCharacter, type Enemy, type EnemyRarity } from "./types";
 import {
   AVATAR_MAX_HEIGHT,
   scaleSprite,
@@ -17,25 +12,27 @@ export class BattleScene extends Phaser.Scene {
   private player!: PlayerCharacter;
   private enemy!: Enemy;
   private playerSprite!: Phaser.Physics.Arcade.Sprite;
-  private enemySprite!: Phaser.Physics.Arcade.Sprite;
   private actionButtons: Phaser.GameObjects.Text[] = [];
   private messageText!: Phaser.GameObjects.Text;
-  private playerHealthText!: Phaser.GameObjects.Text;
-  private enemyHealthText!: Phaser.GameObjects.Text;
+  private playerStatsText!: Phaser.GameObjects.Text;
+  private enemyStatsText!: Phaser.GameObjects.Text;
   private victories: number = 0;
 
   constructor() {
     super("Battle");
   }
 
-  init(data: { player: PlayerCharacter }) {
-    this.player = data.player;
+  preload() {
+    this.load.image("warrior", "assets/warrior.png");
+    this.load.image("mage", "assets/mage.png");
+    this.load.image("archer", "assets/archer.png");
+    this.load.image("enemy", "assets/enemy.png");
   }
 
   create() {
     this.createPlayerSprite();
     this.createEnemy();
-    this.createUI();
+    this.createHUD();
     this.createActionButtons();
   }
 
@@ -51,6 +48,23 @@ export class BattleScene extends Phaser.Scene {
       sprite: this.physics.add.sprite(600, 300, "enemy"),
     };
     scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
+  }
+
+  createHUD() {
+    const hudY = 50; // Start HUD below the player name
+    this.playerStatsText = this.add.text(
+      10,
+      hudY,
+      this.getPlayerStatsString(),
+      { fontSize: "16px", color: "#fff" },
+    );
+    this.enemyStatsText = this.add.text(590, hudY, this.getEnemyStatsString(), {
+      fontSize: "16px",
+      color: "#fff",
+    });
+    this.messageText = this.add
+      .text(400, 550, "", { fontSize: "18px", color: "#fff" })
+      .setOrigin(0.5);
   }
 
   createUI() {
@@ -148,33 +162,6 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
-  handleVictory() {
-    this.victories++;
-    this.player.experience += 10;
-    this.player.gold += 5;
-
-    const loot = generateLoot(this.enemy);
-    if (loot.length > 0) {
-      this.player.inventory.push(...loot);
-      this.showMessage(
-        `You defeated the enemy and found: ${loot
-          .map((item) => item.name)
-          .join(", ")}!`,
-      );
-    } else {
-      this.showMessage("You defeated the enemy!");
-    }
-
-    this.time.delayedCall(2000, () => {
-      if (Math.random() < 0.05) {
-        this.scene.start("Store", { player: this.player });
-      } else {
-        this.createEnemy();
-        this.updateHealthTexts();
-      }
-    });
-  }
-
   handleDefeat() {
     this.showMessage("You have been defeated!");
     this.time.delayedCall(2000, () => {
@@ -200,6 +187,81 @@ export class BattleScene extends Phaser.Scene {
     this.enemyHealthText.setText(
       `Enemy HP: ${this.enemy.health}/${this.enemy.maxHealth}`,
     );
+  }
+
+  getPlayerStatsString(): string {
+    return [
+      `HP: ${this.player.health}/${this.player.maxHealth}`,
+      `Class: ${this.player.class}`,
+      `Level: ${this.player.level}`,
+      `XP: ${this.player.experience}`,
+      `Score: ${this.player.score}`,
+      `Gold: ${this.player.gold}`,
+      `Victories: ${this.victories}`,
+    ].join("\n");
+  }
+
+  getEnemyStatsString(): string {
+    return [
+      `Enemy HP: ${this.enemy.health}/${this.enemy.maxHealth}`,
+      `Rarity: ${this.enemy.rarity}`,
+      `Tier: ${this.enemy.tier}`,
+    ].join("\n");
+  }
+
+  updateHUD() {
+    this.playerStatsText.setText(this.getPlayerStatsString());
+    this.enemyStatsText.setText(this.getEnemyStatsString());
+  }
+
+  handleVictory() {
+    this.victories++;
+
+    const rarityMultiplier = this.getRarityMultiplier(this.enemy.rarity);
+
+    const expGained = Math.floor(Phaser.Math.Between(8, 12) * rarityMultiplier);
+    const goldGained = Math.floor(Phaser.Math.Between(4, 6) * rarityMultiplier);
+    const scoreGained = Math.floor(100 * rarityMultiplier);
+
+    this.player.experience += expGained;
+    this.player.gold += goldGained;
+    this.player.score += scoreGained;
+
+    const loot = generateLoot(this.enemy);
+    if (loot.length > 0) {
+      this.player.inventory.push(...loot);
+      this.showMessage(
+        `Victory! Gained ${expGained} XP, ${goldGained} gold, ${scoreGained} score, and found: ${loot
+          .map((item) => item.name)
+          .join(", ")}!`,
+      );
+    } else {
+      this.showMessage(
+        `Victory! Gained ${expGained} XP, ${goldGained} gold, and ${scoreGained} score!`,
+      );
+    }
+
+    this.time.delayedCall(2000, () => {
+      if (Math.random() < 0.05) {
+        this.scene.start("Store", { player: this.player });
+      } else {
+        this.createEnemy();
+        this.updateHUD();
+      }
+    });
+  }
+
+  getRarityMultiplier(rarity: EnemyRarity): number {
+    switch (rarity) {
+      case "Common":
+        return 1;
+      case "Uncommon":
+        return 1.5;
+      case "Rare":
+        return 2;
+      default:
+        return 1;
+    }
   }
 
   generateEnemyConfig(): Omit<Enemy, "sprite"> {
