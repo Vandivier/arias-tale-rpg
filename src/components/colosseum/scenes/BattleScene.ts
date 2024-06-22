@@ -1,5 +1,10 @@
 import Phaser from "phaser";
-import { type PlayerCharacter, type Enemy, type EnemyRarity } from "./types";
+import {
+  type PlayerCharacter,
+  type Enemy,
+  type EnemyRarity,
+  type EnemyTier,
+} from "./types";
 import {
   AVATAR_MAX_HEIGHT,
   scaleSprite,
@@ -22,14 +27,23 @@ export class BattleScene extends Phaser.Scene {
     super("Battle");
   }
 
+  init(data: { player: PlayerCharacter }) {
+    this.player = data.player;
+  }
+
   preload() {
-    this.load.image("warrior", "assets/warrior.png");
-    this.load.image("mage", "assets/mage.png");
-    this.load.image("archer", "assets/archer.png");
-    this.load.image("enemy", "assets/enemy.png");
+    this.load.image("warrior", "searchable-images/16-eidolon.png");
+    this.load.image("mage", "searchable-images/16-eidolon.png");
+    this.load.image("archer", "searchable-images/16-eidolon.png");
+    this.load.image("enemy", "searchable-images/16-eidolon.png");
   }
 
   create() {
+    if (!this.player) {
+      console.error("Player data not initialized");
+      return;
+    }
+
     this.createPlayerSprite();
     this.createEnemy();
     this.createHUD();
@@ -51,7 +65,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   createHUD() {
-    const hudY = 50; // Start HUD below the player name
+    const hudY = 50;
     this.playerStatsText = this.add.text(
       10,
       hudY,
@@ -62,24 +76,6 @@ export class BattleScene extends Phaser.Scene {
       fontSize: "16px",
       color: "#fff",
     });
-    this.messageText = this.add
-      .text(400, 550, "", { fontSize: "18px", color: "#fff" })
-      .setOrigin(0.5);
-  }
-
-  createUI() {
-    this.playerHealthText = this.add.text(
-      10,
-      10,
-      `Player HP: ${this.player.health}/${this.player.maxHealth}`,
-      { fontSize: "16px", color: "#fff" },
-    );
-    this.enemyHealthText = this.add.text(
-      590,
-      10,
-      `Enemy HP: ${this.enemy.health}/${this.enemy.maxHealth}`,
-      { fontSize: "16px", color: "#fff" },
-    );
     this.messageText = this.add
       .text(400, 550, "", { fontSize: "18px", color: "#fff" })
       .setOrigin(0.5);
@@ -119,18 +115,18 @@ export class BattleScene extends Phaser.Scene {
   attack() {
     const damage = calculateDamage(this.player);
     this.enemy.health -= damage;
+    this.showDamageText(this.enemy.sprite, damage);
     this.showMessage(`You dealt ${damage} damage to the enemy!`);
-    this.updateHealthTexts();
 
     if (this.enemy.health <= 0) {
       this.handleVictory();
     } else {
       this.enemyTurn();
     }
+    this.updateHUD();
   }
 
   defend() {
-    // Implement defend logic
     this.showMessage("You're defending against the next attack!");
     this.enemyTurn();
   }
@@ -143,23 +139,58 @@ export class BattleScene extends Phaser.Scene {
       this.showMessage("You failed to run away!");
       this.enemyTurn();
     }
+    this.updateHUD();
   }
 
   useItem() {
-    // Implement item usage logic
-    this.showMessage("You used an item!");
-    this.enemyTurn();
+    if (this.player.inventory.length === 0) {
+      this.showMessage("You don't have any items!");
+      return;
+    }
+
+    const item = this.player.inventory.pop()!;
+    let effectDescription = "";
+
+    if (item.type === "consumable") {
+      if (item.effect?.health) {
+        this.player.health = Math.min(
+          this.player.health + item.effect.health,
+          this.player.maxHealth,
+        );
+        effectDescription = `restored ${item.effect.health} health`;
+      }
+      if (item.effect?.damage) {
+        this.enemy.health -= item.effect.damage;
+        effectDescription += `${effectDescription ? " and " : ""}dealt ${
+          item.effect.damage
+        } damage to the enemy`;
+      }
+    } else {
+      this.showMessage(`You can't use ${item.name} in battle!`);
+      this.player.inventory.push(item);
+      return;
+    }
+
+    this.showMessage(`You used ${item.name} and ${effectDescription}!`);
+    this.updateHUD();
+
+    if (this.enemy.health <= 0) {
+      this.handleVictory();
+    } else {
+      this.enemyTurn();
+    }
   }
 
   enemyTurn() {
     const damage = calculateEnemyDamage(this.enemy);
     this.player.health -= damage;
+    this.showDamageText(this.playerSprite, damage);
     this.showMessage(`The enemy dealt ${damage} damage to you!`);
-    this.updateHealthTexts();
 
     if (this.player.health <= 0) {
       this.handleDefeat();
     }
+    this.updateHUD();
   }
 
   handleDefeat() {
@@ -180,13 +211,21 @@ export class BattleScene extends Phaser.Scene {
     });
   }
 
-  updateHealthTexts() {
-    this.playerHealthText.setText(
-      `Player HP: ${this.player.health}/${this.player.maxHealth}`,
-    );
-    this.enemyHealthText.setText(
-      `Enemy HP: ${this.enemy.health}/${this.enemy.maxHealth}`,
-    );
+  showDamageText(target: Phaser.GameObjects.Sprite, damage: number) {
+    const damageText = this.add
+      .text(target.x, target.y - 20, `-${damage}`, {
+        fontSize: "24px",
+        color: "#ff0000",
+      })
+      .setOrigin(0.5);
+
+    this.tweens.add({
+      targets: damageText,
+      y: damageText.y - 50,
+      alpha: 0,
+      duration: 1000,
+      onComplete: () => damageText.destroy(),
+    });
   }
 
   getPlayerStatsString(): string {
@@ -198,6 +237,7 @@ export class BattleScene extends Phaser.Scene {
       `Score: ${this.player.score}`,
       `Gold: ${this.player.gold}`,
       `Victories: ${this.victories}`,
+      `Items: ${this.player.inventory.length}`,
     ].join("\n");
   }
 
@@ -240,6 +280,8 @@ export class BattleScene extends Phaser.Scene {
         `Victory! Gained ${expGained} XP, ${goldGained} gold, and ${scoreGained} score!`,
       );
     }
+
+    this.updateHUD();
 
     this.time.delayedCall(2000, () => {
       if (Math.random() < 0.05) {
