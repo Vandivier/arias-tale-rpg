@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 import {
-  type Equipment,
-  type PlayerCharacter,
   type PlayerClass,
+  type PlayerCharacter,
+  type Equipment,
 } from "./types";
 
 export class CharacterCreationScene extends Phaser.Scene {
@@ -49,7 +49,9 @@ export class CharacterCreationScene extends Phaser.Scene {
   selectClass(cls: PlayerClass) {
     this.selectedClass = cls;
     this.classButtons.forEach((button) => {
-      button.setColor(button.text === cls ? "#ff0" : "#fff");
+      if (button && this.children.exists(button)) {
+        button.setColor(button.text === cls ? "#ff0" : "#fff");
+      }
     });
   }
 
