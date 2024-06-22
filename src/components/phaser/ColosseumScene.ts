@@ -62,6 +62,7 @@ export default class ColosseumScene extends Phaser.Scene {
   leaderboard: LeaderboardEntry[] = [];
   nameInput: Phaser.GameObjects.DOMElement | null = null;
   playerClassText!: Phaser.GameObjects.Text;
+  classButtons: Phaser.GameObjects.Text[] = [];
 
   constructor() {
     super("ColosseumScene");
@@ -93,7 +94,7 @@ export default class ColosseumScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     const classes: PlayerClass[] = ["warrior", "mage", "archer"];
-    const classButtons = classes.map((c, i) => {
+    this.classButtons = classes.map((c, i) => {
       return this.add
         .text(300 + i * 100, 350, c, { fontSize: "20px", color: "#fff" })
         .setInteractive()
@@ -125,6 +126,9 @@ export default class ColosseumScene extends Phaser.Scene {
   }
 
   startGame() {
+    // Ensure the character creation UI is fully cleaned up
+    this.cleanupCharacterCreationUI();
+
     this.playerSprite = this.physics.add.sprite(100, 300, this.player.class);
     this.enemy = this.createEnemy();
 
@@ -164,8 +168,6 @@ export default class ColosseumScene extends Phaser.Scene {
       fontSize: "16px",
       color: "#fff",
     });
-
-    // Add player class text
     this.playerClassText = this.add.text(
       10,
       130,
@@ -441,7 +443,6 @@ export default class ColosseumScene extends Phaser.Scene {
     }
 
     if (!name) {
-      // Only show the message if the name is empty and a class was clicked
       if (playerClass) {
         this.showMessage("Please enter a name.");
       }
@@ -453,19 +454,29 @@ export default class ColosseumScene extends Phaser.Scene {
   }
 
   cleanupCharacterCreationUI() {
+    // Remove all text objects
     this.children.list.forEach((child) => {
-      if (
-        child instanceof Phaser.GameObjects.Text ||
-        child instanceof Phaser.GameObjects.DOMElement
-      ) {
+      if (child instanceof Phaser.GameObjects.Text) {
         child.destroy();
       }
     });
 
+    // Remove the name input
     if (this.nameInput) {
       this.nameInput.destroy();
       this.nameInput = null;
     }
+
+    // Remove class buttons
+    this.classButtons.forEach((button) => button.destroy());
+    this.classButtons = [];
+
+    // Clear any remaining game objects that are not needed in the battle scene
+    this.children.list.forEach((child) => {
+      if (!(child instanceof Phaser.GameObjects.Sprite)) {
+        child.destroy();
+      }
+    });
   }
 
   handleDefeat() {
