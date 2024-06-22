@@ -56,6 +56,7 @@ export default class ColosseumScene extends Phaser.Scene {
   itemsText!: Phaser.GameObjects.Text;
   scoreText!: Phaser.GameObjects.Text;
   messageText!: Phaser.GameObjects.Text;
+  messageTimer: Phaser.Time.TimerEvent | null = null;
   enemyInfoText!: Phaser.GameObjects.Text;
   actionButtons: Phaser.GameObjects.Text[] = [];
   isDefending: boolean = false;
@@ -477,14 +478,25 @@ export default class ColosseumScene extends Phaser.Scene {
         child.destroy();
       }
     });
+
+    if (this.messageText) {
+      this.messageText.destroy();
+    }
+    if (this.messageTimer) {
+      this.messageTimer.remove();
+      this.messageTimer = null;
+    }
   }
 
   handleDefeat() {
     this.showMessage("You have been defeated! Game over.");
     this.updateLeaderboard();
+
+    // Use a local variable for the delay to avoid issues if the scene is destroyed
+    const scene = this;
     this.time.delayedCall(2000, () => {
-      this.cleanupGameUI();
-      this.showLeaderboard();
+      if (!scene.scene.isActive("ColosseumScene")) return;
+      scene.showLeaderboard();
     });
   }
 
@@ -586,7 +598,26 @@ export default class ColosseumScene extends Phaser.Scene {
   }
 
   showMessage(message: string) {
+    // Clear any existing message timer
+    if (this.messageTimer) {
+      this.messageTimer.remove();
+      this.messageTimer = null;
+    }
+
+    // Create a new message text if it doesn't exist
+    if (!this.messageText || this.messageText.destroyed) {
+      this.messageText = this.add
+        .text(400, 550, "", { fontSize: "18px", color: "#fff" })
+        .setOrigin(0.5);
+    }
+
     this.messageText.setText(message);
-    this.time.delayedCall(3000, () => this.messageText.setText(""));
+
+    // Set a new timer to clear the message
+    this.messageTimer = this.time.delayedCall(3000, () => {
+      if (this.messageText && !this.messageText.destroyed) {
+        this.messageText.setText("");
+      }
+    });
   }
 }
