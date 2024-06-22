@@ -193,14 +193,14 @@ export class BattleScene extends Phaser.Scene {
     let effectDescription = "";
 
     if (item.type === "consumable") {
-      if (item.effect.health) {
+      if (item.effect?.health) {
         this.player.health = Math.min(
           this.player.health + item.effect.health,
           this.player.maxHealth,
         );
         effectDescription = `restored ${item.effect.health} health`;
       }
-      if (item.effect.damage) {
+      if (item.effect?.damage) {
         this.enemy.health -= item.effect.damage;
         effectDescription += `${effectDescription ? " and " : ""}dealt ${
           item.effect.damage
