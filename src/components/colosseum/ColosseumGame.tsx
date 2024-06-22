@@ -27,7 +27,7 @@ const ColosseumGame: React.FC = () => {
         ],
         physics: {
           default: "arcade",
-          arcade: { gravity: { y: 0 } },
+          arcade: { gravity: { x: 0, y: 0 } },
         },
         scale: {
           mode: Phaser.Scale.FIT,
