@@ -39,7 +39,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.classButtons.push(button);
     });
 
-    const startButton = this.add
+    this.add
       .text(400, 400, "Start Game", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5)
       .setInteractive()

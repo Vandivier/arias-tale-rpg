@@ -89,7 +89,7 @@ export function generateStoreItems(): Item[] {
         value: itemValue,
         effect: { health: Math.floor(itemValue / 2) },
       });
-    } else {
+    } else if (itemType) {
       items.push({
         name: `Store ${itemType}`,
         type: itemType,

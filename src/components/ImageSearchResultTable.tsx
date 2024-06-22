@@ -42,7 +42,6 @@ import {
   TableRow,
 } from "./ui/table";
 import { stringToHSLColor } from "~/lib/utils";
-import type { Tag } from "@prisma/client";
 
 const TagPill = ({ tagText }: { tagText: string }) => (
   <span

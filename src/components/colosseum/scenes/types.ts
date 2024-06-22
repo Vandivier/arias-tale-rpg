@@ -21,7 +21,7 @@ export interface Item {
   name: string;
   type: EquipmentSlot | "consumable";
   value: number;
-  effect?: { [key: string]: number };
+  effect?: Record<string, number>;
 }
 
 export interface Equipment {
