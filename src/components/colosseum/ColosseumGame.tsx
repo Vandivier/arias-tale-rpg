@@ -14,8 +14,8 @@ const ColosseumGame: React.FC = () => {
     if (gameRef.current) {
       const config: Phaser.Types.Core.GameConfig = {
         type: Phaser.AUTO,
-        width: 800,
-        height: 600,
+        width: 340,
+        height: 520,
         parent: gameRef.current,
         scene: [
           CharacterCreationScene,
@@ -32,6 +32,16 @@ const ColosseumGame: React.FC = () => {
         scale: {
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
+          width: 340,
+          height: 520,
+          min: {
+            width: 340,
+            height: 520,
+          },
+          max: {
+            width: 1020,
+            height: 1560,
+          },
         },
         dom: {
           createContainer: true,
@@ -49,7 +59,7 @@ const ColosseumGame: React.FC = () => {
   return (
     <div
       ref={gameRef}
-      style={{ width: "800px", height: "600px", margin: "auto" }}
+      style={{ width: "340px", height: "520px", margin: "auto" }}
     />
   );
 };

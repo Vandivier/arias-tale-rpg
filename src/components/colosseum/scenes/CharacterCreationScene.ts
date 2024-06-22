@@ -16,31 +16,34 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   create() {
     this.add
-      .text(400, 100, "Create Your Character", {
-        fontSize: "32px",
+      .text(170, 50, "Create Your Character", {
+        fontSize: "24px",
         color: "#fff",
       })
       .setOrigin(0.5);
 
     this.nameInput = this.add
-      .dom(400, 200, "input", "width: 200px; height: 30px;")
+      .dom(170, 120, "input", "width: 200px; height: 30px;")
       .setOrigin(0.5);
 
     const classes: PlayerClass[] = ["warrior", "mage", "archer"];
     classes.forEach((cls, index) => {
       const button = this.add
-        .text(400 + (index - 1) * 150, 300, cls, {
-          fontSize: "24px",
-          color: "#fff",
-        })
+        .text(170, 200 + index * 50, cls, { fontSize: "20px", color: "#fff" })
         .setOrigin(0.5)
         .setInteractive()
         .on("pointerdown", () => this.selectClass(cls));
       this.classButtons.push(button);
+
+      // Add sprite preview
+      this.add
+        .image(170, 225 + index * 50, cls)
+        .setScale(0.4)
+        .setOrigin(0.5);
     });
 
     this.add
-      .text(400, 400, "Start Game", { fontSize: "24px", color: "#fff" })
+      .text(170, 450, "Start Game", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () => this.startGame());

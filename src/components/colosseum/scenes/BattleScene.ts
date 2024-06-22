@@ -53,43 +53,56 @@ export class BattleScene extends Phaser.Scene {
   }
 
   createPlayerSprite() {
-    this.playerSprite = this.physics.add.sprite(200, 300, this.player.class);
-    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
+    this.playerSprite = this.physics.add.sprite(85, 300, this.player.class);
+    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT * 0.7); // Reduced size for mobile
   }
 
   createEnemy() {
     const enemyConfig = this.generateEnemyConfig();
     this.enemy = {
       ...enemyConfig,
-      sprite: this.physics.add.sprite(600, 300, "enemy"),
+      sprite: this.physics.add.sprite(255, 300, "enemy"),
     };
-    scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
+    scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.7); // Reduced size for mobile
   }
 
   createHUD() {
-    const hudY = 50;
+    const hudY = 20;
     this.playerStatsText = this.add.text(
       10,
       hudY,
       this.getPlayerStatsString(),
-      { fontSize: "16px", color: "#fff" },
+      { fontSize: "12px", color: "#fff" },
     );
-    this.enemyStatsText = this.add.text(590, hudY, this.getEnemyStatsString(), {
-      fontSize: "16px",
+    this.enemyStatsText = this.add.text(180, hudY, this.getEnemyStatsString(), {
+      fontSize: "12px",
       color: "#fff",
     });
     this.messageText = this.add
-      .text(400, 550, "", { fontSize: "18px", color: "#fff" })
+      .text(170, 500, "", {
+        fontSize: "14px",
+        color: "#fff",
+        align: "center",
+        wordWrap: { width: 320 },
+      })
       .setOrigin(0.5);
   }
 
   createActionButtons() {
     const actions = ["Attack", "Defend", "Run", "Use Item"];
+    const buttonWidth = 160;
+    const buttonHeight = 40;
+    const startY = 400;
+
     actions.forEach((action, index) => {
+      const x = 10 + (index % 2) * (buttonWidth + 10);
+      const y = startY + Math.floor(index / 2) * (buttonHeight + 10);
       const button = this.add
-        .text(200 + index * 150, 500, action, {
-          fontSize: "20px",
+        .text(x, y, action, {
+          fontSize: "16px",
           color: "#fff",
+          backgroundColor: "#333",
+          padding: { x: 10, y: 5 },
         })
         .setInteractive()
         .on("pointerdown", () => this.handleAction(action));
@@ -156,8 +169,8 @@ export class BattleScene extends Phaser.Scene {
     // Show item selection
     this.player.inventory.forEach((item, index) => {
       const itemText = this.add
-        .text(400, 200 + index * 40, `${index + 1}. ${item.name}`, {
-          fontSize: "18px",
+        .text(170, 200 + index * 30, `${index + 1}. ${item.name}`, {
+          fontSize: "14px",
           color: "#fff",
         })
         .setOrigin(0.5)
@@ -168,8 +181,8 @@ export class BattleScene extends Phaser.Scene {
 
     // Add cancel option
     const cancelText = this.add
-      .text(400, 200 + this.player.inventory.length * 40, "Cancel", {
-        fontSize: "18px",
+      .text(170, 200 + this.player.inventory.length * 30, "Cancel", {
+        fontSize: "14px",
         color: "#ff0000",
       })
       .setOrigin(0.5)
@@ -258,14 +271,14 @@ export class BattleScene extends Phaser.Scene {
   showDamageText(target: Phaser.GameObjects.Sprite, damage: number) {
     const damageText = this.add
       .text(target.x, target.y - 20, `-${damage}`, {
-        fontSize: "24px",
+        fontSize: "18px",
         color: "#ff0000",
       })
       .setOrigin(0.5);
 
     this.tweens.add({
       targets: damageText,
-      y: damageText.y - 50,
+      y: damageText.y - 40,
       alpha: 0,
       duration: 1000,
       onComplete: () => damageText.destroy(),
