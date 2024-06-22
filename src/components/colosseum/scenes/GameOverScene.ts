@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { PlayerCharacter } from "./types";
+import { type PlayerCharacter } from "./types";
 
 export class GameOverScene extends Phaser.Scene {
   private player!: PlayerCharacter;

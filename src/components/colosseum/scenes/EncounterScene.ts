@@ -84,7 +84,7 @@ export class EncounterScene extends Phaser.Scene {
   }
 
   poisonousSmog() {
-    this.player.effects = this.player.effects || {};
+    this.player.effects = this.player.effects ?? {};
     this.player.effects.poisonedSmog = 3; // lasts for 3 turns
     this.encounterText.setText(
       "You walk through a poisonous smog. You'll take light damage each turn in the next battle.",
