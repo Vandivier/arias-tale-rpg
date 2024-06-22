@@ -24,6 +24,8 @@ export class BattleScene extends Phaser.Scene {
   private enemyStatsText!: Phaser.GameObjects.Text;
   private victories: number = 0;
   private itemSelectionTexts: Phaser.GameObjects.Text[] = [];
+  private messageLog: string[] = [];
+  private messageLogText!: Phaser.GameObjects.Text;
 
   constructor() {
     super("Battle");
@@ -50,49 +52,28 @@ export class BattleScene extends Phaser.Scene {
     this.createEnemy();
     this.createHUD();
     this.createActionButtons();
-  }
-
-  createPlayerSprite() {
-    this.playerSprite = this.physics.add.sprite(85, 300, this.player.class);
-    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT * 0.7); // Reduced size for mobile
-  }
-
-  createEnemy() {
-    const enemyConfig = this.generateEnemyConfig();
-    this.enemy = {
-      ...enemyConfig,
-      sprite: this.physics.add.sprite(255, 300, "enemy"),
-    };
-    scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.7); // Reduced size for mobile
+    this.createMessageLog();
   }
 
   createHUD() {
-    const hudY = 20;
+    const hudY = 10;
     this.playerStatsText = this.add.text(
       10,
       hudY,
       this.getPlayerStatsString(),
-      { fontSize: "12px", color: "#fff" },
+      { fontSize: "10px", color: "#fff" },
     );
     this.enemyStatsText = this.add.text(180, hudY, this.getEnemyStatsString(), {
-      fontSize: "12px",
+      fontSize: "10px",
       color: "#fff",
     });
-    this.messageText = this.add
-      .text(170, 500, "", {
-        fontSize: "14px",
-        color: "#fff",
-        align: "center",
-        wordWrap: { width: 320 },
-      })
-      .setOrigin(0.5);
   }
 
   createActionButtons() {
     const actions = ["Attack", "Defend", "Run", "Use Item"];
-    const buttonWidth = 160;
+    const buttonWidth = 155;
     const buttonHeight = 40;
-    const startY = 400;
+    const startY = 350;
 
     actions.forEach((action, index) => {
       const x = 10 + (index % 2) * (buttonWidth + 10);
@@ -108,6 +89,29 @@ export class BattleScene extends Phaser.Scene {
         .on("pointerdown", () => this.handleAction(action));
       this.actionButtons.push(button);
     });
+  }
+
+  createMessageLog() {
+    this.messageLogText = this.add.text(10, 450, "", {
+      fontSize: "12px",
+      color: "#fff",
+      wordWrap: { width: 320 },
+      lineSpacing: 5,
+    });
+  }
+
+  createPlayerSprite() {
+    this.playerSprite = this.physics.add.sprite(85, 200, this.player.class);
+    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT * 0.6); // Further reduced size
+  }
+
+  createEnemy() {
+    const enemyConfig = this.generateEnemyConfig();
+    this.enemy = {
+      ...enemyConfig,
+      sprite: this.physics.add.sprite(255, 200, "enemy"),
+    };
+    scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.6); // Further reduced size
   }
 
   handleAction(action: string) {
@@ -127,6 +131,19 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
+  showMessage(message: string) {
+    this.messageLog.push(message);
+    if (this.messageLog.length > 4) {
+      // Keep only the 4 most recent messages
+      this.messageLog.shift();
+    }
+    this.updateMessageLog();
+  }
+
+  updateMessageLog() {
+    this.messageLogText.setText(this.messageLog.join("\n"));
+  }
+
   attack() {
     const damage = calculateDamage(this.player);
     this.enemy.health -= damage;
@@ -136,7 +153,34 @@ export class BattleScene extends Phaser.Scene {
     if (this.enemy.health <= 0) {
       this.handleVictory();
     } else {
-      this.enemyTurn();
+      this.time.delayedCall(1000, () => this.enemyTurn());
+    }
+    this.updateHUD();
+  }
+
+  enemyTurn() {
+    const damage = calculateEnemyDamage(this.enemy);
+    this.player.health -= damage;
+
+    let message = `The enemy dealt ${damage} damage to you!`;
+
+    // Apply poison damage if effect is active
+    if (
+      this.player?.effects?.poisonedSmog &&
+      this.player?.effects?.poisonedSmog > 0
+    ) {
+      const poisonDamage = 1;
+      this.player.health -= poisonDamage;
+      this.player.effects.poisonedSmog--;
+      message += ` You also took ${poisonDamage} poison damage!`;
+      message += ` Poison Smog will last for ${this.player.effects.poisonedSmog} more turns.`;
+    }
+
+    this.showMessage(message);
+    this.showDamageText(this.playerSprite, damage);
+
+    if (this.player.health <= 0) {
+      this.handleDefeat();
     }
     this.updateHUD();
   }
@@ -236,35 +280,13 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
-  enemyTurn() {
-    const damage = calculateEnemyDamage(this.enemy);
-    this.player.health -= damage;
-    this.showDamageText(this.playerSprite, damage);
-    this.showMessage(`The enemy dealt ${damage} damage to you!`);
-
-    if (this.player.health <= 0) {
-      this.handleDefeat();
-    }
-    this.updateHUD();
-  }
-
   handleDefeat() {
     this.showMessage("You have been defeated!");
     this.time.delayedCall(2000, () => {
       this.scene.start("GameOver", {
-        name: this.player.name,
-        score: this.player.score,
+        player: this.player,
         victories: this.victories,
-        level: this.player.level,
       });
-    });
-  }
-
-  showMessage(message: string) {
-    this.messageText.setText(message);
-    this.messageText.setVisible(true);
-    this.time.delayedCall(3000, () => {
-      this.messageText.setVisible(false);
     });
   }
 

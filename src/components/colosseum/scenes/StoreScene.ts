@@ -19,12 +19,12 @@ export class StoreScene extends Phaser.Scene {
 
   create() {
     this.add
-      .text(400, 50, "Store", { fontSize: "32px", color: "#fff" })
+      .text(170, 30, "Store", { fontSize: "28px", color: "#fff" })
       .setOrigin(0.5);
 
     this.goldText = this.add
-      .text(400, 100, `Gold: ${this.player.gold}`, {
-        fontSize: "24px",
+      .text(170, 70, `Gold: ${this.player.gold}`, {
+        fontSize: "18px",
         color: "#fff",
       })
       .setOrigin(0.5);
@@ -32,23 +32,7 @@ export class StoreScene extends Phaser.Scene {
     this.createItemDisplay();
 
     this.add
-      .text(400, 550, "Return to Battle", { fontSize: "24px", color: "#fff" })
-      .setOrigin(0.5)
-      .setInteractive()
-      .on("pointerdown", () =>
-        this.scene.start("Battle", { player: this.player }),
-      );
-
-    this.add
-      .text(400, 500, "View Inventory", { fontSize: "24px", color: "#fff" })
-      .setOrigin(0.5)
-      .setInteractive()
-      .on("pointerdown", () =>
-        this.scene.start("Inventory", { player: this.player }),
-      );
-
-    this.add
-      .text(400, 550, "Return to Battle", { fontSize: "24px", color: "#fff" })
+      .text(170, 490, "Return to Battle", { fontSize: "20px", color: "#fff" })
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () =>
@@ -60,10 +44,10 @@ export class StoreScene extends Phaser.Scene {
     this.storeItems.forEach((item, index) => {
       const text = this.add
         .text(
-          100,
-          150 + index * 30,
+          20,
+          110 + index * 40,
           `${item.name} (${item.type}) - ${item.value} gold`,
-          { fontSize: "18px", color: "#fff" },
+          { fontSize: "14px", color: "#fff", wordWrap: { width: 300 } },
         )
         .setInteractive()
         .on("pointerdown", () => this.buyItem(item));
