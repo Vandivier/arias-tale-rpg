@@ -61,6 +61,7 @@ export default class ColosseumScene extends Phaser.Scene {
   isDefending: boolean = false;
   leaderboard: LeaderboardEntry[] = [];
   nameInput: Phaser.GameObjects.DOMElement | null = null;
+  playerClassText!: Phaser.GameObjects.Text;
 
   constructor() {
     super("ColosseumScene");
@@ -127,8 +128,9 @@ export default class ColosseumScene extends Phaser.Scene {
     this.playerSprite = this.physics.add.sprite(100, 300, this.player.class);
     this.enemy = this.createEnemy();
 
-    this.scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
-    this.scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT);
+    const targetHeight = 200;
+    this.scaleSprite(this.playerSprite, targetHeight);
+    this.scaleSprite(this.enemy.sprite, targetHeight);
 
     this.victories = 0;
 
@@ -162,6 +164,14 @@ export default class ColosseumScene extends Phaser.Scene {
       fontSize: "16px",
       color: "#fff",
     });
+
+    // Add player class text
+    this.playerClassText = this.add.text(
+      10,
+      130,
+      `Class: ${this.capitalizeFirstLetter(this.player.class)}`,
+      { fontSize: "16px", color: "#fff" },
+    );
 
     this.messageText = this.add
       .text(400, 550, "", { fontSize: "18px", color: "#fff" })
@@ -537,6 +547,10 @@ export default class ColosseumScene extends Phaser.Scene {
     return items[Phaser.Math.Between(0, items.length - 1)] ?? "";
   }
 
+  capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   updateTexts() {
     this.healthText.setText(
       `Health: ${Math.round(this.player.health)}/${this.player.maxHealth}`,
@@ -548,6 +562,9 @@ export default class ColosseumScene extends Phaser.Scene {
     this.goldText.setText(`Gold: ${this.player.gold}`);
     this.itemsText.setText(`Items: ${this.player.items.join(", ") ?? ""}`);
     this.scoreText.setText(`Score: ${this.player.score}`);
+    this.playerClassText.setText(
+      `Class: ${this.capitalizeFirstLetter(this.player.class)}`,
+    );
     this.enemyInfoText.setText(this.getEnemyInfoText());
   }
 
