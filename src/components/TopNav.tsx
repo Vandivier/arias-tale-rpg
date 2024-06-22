@@ -22,6 +22,12 @@ function TopNav() {
           >
             Game Manual
           </Link>
+          <Link
+            className="my-1 cursor-pointer md:mx-4 md:my-0"
+            href="/colosseum"
+          >
+            Colosseum
+          </Link>
           <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/gallery">
             Gallery
           </Link>
