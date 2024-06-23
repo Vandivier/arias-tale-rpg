@@ -1,10 +1,10 @@
-import Phaser from "phaser";
 import React, { useEffect, useRef } from "react";
-
-import { BattleScene } from "./scenes/BattleScene";
-import { DifficultySelectScene } from "./scenes/DifficultySelectScene";
-import { GameOverScene } from "./scenes/GameOverScene";
+import Phaser from "phaser";
 import { PlayerSelectScene } from "./scenes/PlayerSelectScene";
+import { DifficultySelectScene } from "./scenes/DifficultySelectScene";
+import { BattleScene } from "./scenes/BattleScene";
+import { GameOverScene } from "./scenes/GameOverScene";
+import { PreloadScene } from "./scenes/PreloadScene";
 
 const FighterGame: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
@@ -17,6 +17,7 @@ const FighterGame: React.FC = () => {
         height: 520,
         parent: gameRef.current,
         scene: [
+          PreloadScene,
           PlayerSelectScene,
           DifficultySelectScene,
           BattleScene,
@@ -39,6 +40,9 @@ const FighterGame: React.FC = () => {
             width: 1020,
             height: 1560,
           },
+        },
+        input: {
+          keyboard: true,
         },
       };
 
@@ -63,5 +67,4 @@ const FighterGame: React.FC = () => {
     />
   );
 };
-
 export default FighterGame;
