@@ -5,6 +5,7 @@ import { DifficultySelectScene } from "./scenes/DifficultySelectScene";
 import { BattleScene } from "./scenes/BattleScene";
 import { GameOverScene } from "./scenes/GameOverScene";
 import { PreloadScene } from "./scenes/PreloadScene";
+import { VictoryScene } from "./scenes/VictoryScene";
 
 const FighterGame: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ const FighterGame: React.FC = () => {
           DifficultySelectScene,
           BattleScene,
           GameOverScene,
+          VictoryScene,
         ],
         physics: {
           default: "arcade",

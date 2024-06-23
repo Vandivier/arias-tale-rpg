@@ -10,16 +10,24 @@ export class Tank extends Character {
       health: 150,
       damage: 15,
       specialDamage: 25,
+      jumpForce: 300,
     };
     super(scene, x, y, "tank", data);
     this.createAnimations();
-    this.sprite.setFrame(0);
+    this.playAnimation("tank-idle");
   }
 
   private createAnimations() {
     this.scene.anims.create({
       key: "tank-idle",
-      frames: [{ key: "tank", frame: 0 }],
+      frames: this.scene.anims.generateFrameNumbers("tank", { frames: [0] }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.scene.anims.create({
+      key: "tank-jump",
+      frames: this.scene.anims.generateFrameNumbers("tank", { frames: [1] }),
       frameRate: 10,
       repeat: 0,
     });
@@ -27,7 +35,7 @@ export class Tank extends Character {
     this.scene.anims.create({
       key: "tank-attack",
       frames: this.scene.anims.generateFrameNumbers("tank", {
-        frames: [1, 2, 3, 4],
+        frames: [2, 3, 4, 5],
       }),
       frameRate: 10,
       repeat: 0,
@@ -36,7 +44,7 @@ export class Tank extends Character {
     this.scene.anims.create({
       key: "tank-special",
       frames: this.scene.anims.generateFrameNumbers("tank", {
-        frames: [5, 6, 7, 8],
+        frames: [6, 7, 8, 9],
       }),
       frameRate: 10,
       repeat: 0,
@@ -53,12 +61,29 @@ export class Tank extends Character {
     if (this.specialAttackCooldown > 0) {
       this.specialAttackCooldown -= delta;
     }
+
+    // Update animation based on state
+    if (this.isJumping) {
+      this.playAnimation("tank-jump");
+    } else if (
+      !this.sprite.anims.isPlaying ||
+      this.sprite.anims.getName() === "tank-jump"
+    ) {
+      this.playAnimation("tank-idle");
+    }
+  }
+
+  jump() {
+    super.jump();
+    if (this.isJumping) {
+      this.playAnimation("tank-jump");
+    }
   }
 
   attack(target: Character) {
     if (this.attackCooldown <= 0) {
       super.attack(target);
-      this.sprite.play("tank-attack");
+      this.playAnimation("tank-attack");
 
       // Create spear thrust effect
       const spear = this.scene.add.rectangle(
@@ -93,16 +118,13 @@ export class Tank extends Character {
 
       // Set cooldown
       this.attackCooldown = 1000; // 1 second cooldown
-
-      // Return to idle after attack animation
-      this.scene.time.delayedCall(400, () => this.idle());
     }
   }
 
   specialAttack(target: Character) {
     if (this.specialAttackCooldown <= 0) {
       super.specialAttack(target);
-      this.sprite.play("tank-special");
+      this.playAnimation("tank-special");
 
       // Create spinning spear attack effect
       const spear = this.scene.add.rectangle(
@@ -137,25 +159,6 @@ export class Tank extends Character {
 
       // Set cooldown
       this.specialAttackCooldown = 5000; // 5 seconds cooldown
-
-      // Return to idle after special attack animation
-      this.scene.time.delayedCall(500, () => this.idle());
     }
-  }
-
-  idle() {
-    this.sprite.play("tank-idle");
-  }
-
-  takeDamage(amount: number) {
-    super.takeDamage(amount);
-
-    // Flash red when taking damage
-    this.scene.tweens.add({
-      targets: this.sprite,
-      tint: 0xff0000,
-      duration: 100,
-      yoyo: true,
-    });
   }
 }

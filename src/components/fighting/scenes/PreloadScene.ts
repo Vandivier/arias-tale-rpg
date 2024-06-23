@@ -20,6 +20,10 @@ export class PreloadScene extends Phaser.Scene {
         frameHeight: 100,
       },
     );
+    this.load.image(
+      "background",
+      "assets/fighting-sprites/battle_background.webp",
+    );
   }
 
   create() {

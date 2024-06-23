@@ -1,23 +1,14 @@
 import Phaser from "phaser";
-
-interface Character {
-  sprite: Phaser.Physics.Arcade.Sprite;
-  healthBar: Phaser.GameObjects.Rectangle;
-  health: number;
-  attack: (target: Character) => void;
-  specialAttack: (target: Character) => void;
-}
+import { type Character } from "../characters/Character";
+import { Tank } from "../characters/Tank";
 
 export class BattleScene extends Phaser.Scene {
   private player1!: Character;
   private player2!: Character;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
-  private leftButton!: Phaser.GameObjects.Rectangle;
-  private rightButton!: Phaser.GameObjects.Rectangle;
-  private jumpButton!: Phaser.GameObjects.Rectangle;
-  private attackButton!: Phaser.GameObjects.Rectangle;
-  private specialButton!: Phaser.GameObjects.Rectangle;
-  private difficulty!: string;
+  private jumpKey!: Phaser.Input.Keyboard.Key;
+  private attackKey!: Phaser.Input.Keyboard.Key;
+  private specialKey!: Phaser.Input.Keyboard.Key;
 
   constructor() {
     super("BattleScene");
@@ -25,12 +16,29 @@ export class BattleScene extends Phaser.Scene {
 
   create(data: { character: string; difficulty: string }) {
     const { width, height } = this.scale;
-    this.difficulty = data.difficulty;
 
-    this.add
+    // Add background
+    const background = this.add
       .image(width / 2, height / 2, "background")
-      .setDisplaySize(width, height);
+      .setDepth(-1); // Ensure background is behind other elements
 
+    // Scale the background to cover the entire canvas
+    const scaleX = width / background.width;
+    const scaleY = height / background.height;
+    const scale = Math.max(scaleX, scaleY);
+    background.setScale(scale);
+
+    // Create ground
+    const ground = this.add.rectangle(
+      width / 2,
+      height - 20,
+      width,
+      40,
+      0x00ff00,
+    );
+    this.physics.add.existing(ground, true);
+
+    // Create players
     this.player1 = this.createCharacter(
       data.character,
       width * 0.25,
@@ -42,134 +50,45 @@ export class BattleScene extends Phaser.Scene {
       height * 0.7,
     );
 
-    this.cursors = this.input.keyboard.createCursorKeys();
-
+    // Set up collisions
+    this.physics.add.collider(this.player1.sprite, ground);
+    this.physics.add.collider(this.player2.sprite, ground);
     this.physics.add.collider(this.player1.sprite, this.player2.sprite);
 
-    this.createMobileControls();
-
-    // Add attack buttons for keyboard
-    this.input.keyboard.on("keydown-A", () =>
-      this.player1.attack(this.player2),
+    // Set up input
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.jumpKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE,
     );
-    this.input.keyboard.on("keydown-S", () =>
-      this.player1.specialAttack(this.player2),
+    this.attackKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.A,
+    );
+    this.specialKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.S,
     );
 
     // Set up AI based on difficulty
-    this.setupAI();
+    this.setupAI(data.difficulty);
   }
 
   createCharacter(type: string, x: number, y: number): Character {
-    const sprite = this.physics.add.sprite(x, y, type.toLowerCase());
-    sprite.setCollideWorldBounds(true);
-
-    const healthBar = this.add.rectangle(x, y - 50, 100, 10, 0x00ff00);
-
-    const character: Character = {
-      sprite,
-      healthBar,
-      health: 100,
-      attack: (target: Character) => this.characterAttack(character, target),
-      specialAttack: (target: Character) =>
-        this.characterSpecialAttack(character, target),
-    };
-
-    if (type === "Tank") {
-      character.attack = (target: Character) =>
-        this.tankAttack(character, target);
-      character.specialAttack = (target: Character) =>
-        this.tankSpecialAttack(character, target);
-    } else if (type === "Eidolon") {
-      character.attack = (target: Character) =>
-        this.eidolonAttack(character, target);
-      character.specialAttack = (target: Character) =>
-        this.eidolonSpecialAttack(character, target);
+    switch (type) {
+      case "Tank":
+        return new Tank(this, x, y);
+      // Add cases for other character types
+      default:
+        throw new Error(`Unknown character type: ${type}`);
     }
-
-    return character;
   }
 
   getRandomCharacter(): string {
-    return Math.random() < 0.5 ? "Tank" : "Eidolon";
+    // Logic to select a random character
+    return "Tank"; // For now, always return Tank
   }
 
-  createMobileControls() {
-    const { width, height } = this.scale;
-    const buttonSize = 50;
-    const padding = 10;
-
-    this.leftButton = this.add
-      .rectangle(
-        padding + buttonSize / 2,
-        height - padding - buttonSize / 2,
-        buttonSize,
-        buttonSize,
-        0x0000ff,
-        0.5,
-      )
-      .setInteractive();
-    this.rightButton = this.add
-      .rectangle(
-        padding * 2 + buttonSize * 1.5,
-        height - padding - buttonSize / 2,
-        buttonSize,
-        buttonSize,
-        0x0000ff,
-        0.5,
-      )
-      .setInteractive();
-    this.jumpButton = this.add
-      .rectangle(
-        width - padding - buttonSize / 2,
-        height - padding - buttonSize / 2,
-        buttonSize,
-        buttonSize,
-        0x00ff00,
-        0.5,
-      )
-      .setInteractive();
-    this.attackButton = this.add
-      .rectangle(
-        width - padding * 2 - buttonSize * 1.5,
-        height - padding - buttonSize / 2,
-        buttonSize,
-        buttonSize,
-        0xff0000,
-        0.5,
-      )
-      .setInteractive();
-    this.specialButton = this.add
-      .rectangle(
-        width - padding * 3 - buttonSize * 2.5,
-        height - padding - buttonSize / 2,
-        buttonSize,
-        buttonSize,
-        0xff00ff,
-        0.5,
-      )
-      .setInteractive();
-
-    this.leftButton.on("pointerdown", () => this.player1.setVelocityX(-160));
-    this.leftButton.on("pointerup", () => this.player1.setVelocityX(0));
-    this.rightButton.on("pointerdown", () => this.player1.setVelocityX(160));
-    this.rightButton.on("pointerup", () => this.player1.setVelocityX(0));
-    this.jumpButton.on("pointerdown", () => {
-      if (this.player1.body.touching.down) {
-        this.player1.setVelocityY(-330);
-      }
-    });
-    this.attackButton.on("pointerdown", () =>
-      this.attack(this.player1, this.player2),
-    );
-    this.specialButton.on("pointerdown", () =>
-      this.specialAttack(this.player1, this.player2),
-    );
-  }
-
-  setupAI() {
+  setupAI(difficulty: string) {
     let aiUpdateInterval: number;
-    switch (this.difficulty) {
+    switch (difficulty) {
       case "easy":
         aiUpdateInterval = 2000; // AI updates every 2 seconds
         break;
@@ -219,79 +138,42 @@ export class BattleScene extends Phaser.Scene {
     }
   }
 
-  update() {
-    // Player movement (keyboard)
+  update(time: number, delta: number) {
+    super.update(time, delta);
+    this.player1.update(time, delta);
+    this.player2.update(time, delta);
+
+    // Check for victory or defeat
+    if (this.player2.isDefeated()) {
+      this.scene.start("VictoryScene");
+    } else if (this.player1.isDefeated()) {
+      this.scene.start("GameOverScene");
+    }
+
+    // Handle player 1 movement
     if (this.cursors.left.isDown) {
-      this.player1.sprite.setVelocityX(-160);
+      this.player1.moveLeft();
     } else if (this.cursors.right.isDown) {
-      this.player1.sprite.setVelocityX(160);
-    } else if (
-      !this.leftButton.input.isDown &&
-      !this.rightButton.input.isDown
-    ) {
-      this.player1.sprite.setVelocityX(0);
+      this.player1.moveRight();
+    } else {
+      this.player1.stopHorizontalMovement();
     }
 
-    if (this.cursors.up.isDown && this.player1.sprite.body.touching.down) {
-      this.player1.sprite.setVelocityY(-330);
+    // Handle player 1 jumping
+    if (Phaser.Input.Keyboard.JustDown(this.jumpKey)) {
+      this.player1.jump();
     }
 
-    // Update health bars
-    this.updateHealthBar(this.player1);
-    this.updateHealthBar(this.player2);
-
-    // Check for game over
-    if (this.player1.health <= 0 || this.player2.health <= 0) {
-      this.scene.start("GameOverScene", {
-        winner: this.player1.health > 0 ? "Player 1" : "Player 2",
-      });
+    // Handle player 1 attacks
+    if (Phaser.Input.Keyboard.JustDown(this.attackKey)) {
+      this.player1.attack(this.player2);
     }
-  }
 
-  updateHealthBar(character: Character) {
-    character.healthBar.setPosition(
-      character.sprite.x,
-      character.sprite.y - 50,
-    );
-    character.healthBar.setSize(character.health, 10);
-  }
+    if (Phaser.Input.Keyboard.JustDown(this.specialKey)) {
+      this.player1.specialAttack(this.player2);
+    }
 
-  characterAttack(attacker: Character, defender: Character) {
-    const damage = 10;
-    this.applyDamage(defender, damage);
-  }
-
-  characterSpecialAttack(attacker: Character, defender: Character) {
-    const damage = 20;
-    this.applyDamage(defender, damage);
-  }
-
-  tankAttack(attacker: Character, defender: Character) {
-    const damage = 15;
-    this.applyDamage(defender, damage);
-    // Add spear thrust animation here
-  }
-
-  tankSpecialAttack(attacker: Character, defender: Character) {
-    const damage = 25;
-    this.applyDamage(defender, damage);
-    // Add spinning spear attack animation here
-  }
-
-  eidolonAttack(attacker: Character, defender: Character) {
-    const damage = 12;
-    this.applyDamage(defender, damage);
-    // Add bow shot animation here
-  }
-
-  eidolonSpecialAttack(attacker: Character, defender: Character) {
-    const damage = 22;
-    this.applyDamage(defender, damage);
-    // Add multiple arrow shot animation here
-  }
-
-  applyDamage(character: Character, damage: number) {
-    character.health = Math.max(0, character.health - damage);
-    this.updateHealthBar(character);
+    // Update AI
+    this.updateAI();
   }
 }
