@@ -1,4 +1,10 @@
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "src/components/ui/dropdown-menu";
 
 function TopNav() {
   return (
@@ -22,12 +28,21 @@ function TopNav() {
           >
             Game Manual
           </Link>
-          <Link
-            className="my-1 cursor-pointer md:mx-4 md:my-0"
-            href="/colosseum"
-          >
-            Colosseum
-          </Link>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger className="my-1 cursor-pointer md:mx-4 md:my-0">
+              Games
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild>
+                <Link href="/fighting">Fighting Game</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/colosseum">Colosseum</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/gallery">
             Gallery
           </Link>
