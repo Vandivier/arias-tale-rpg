@@ -4,23 +4,33 @@ title: "Episode Narrative Guide - Arc Christina"
 
 # Prologue: The Unintended Consequence
 
-In the sterile confines of a Martian research facility, Dr. Christina Hayes stood before a holographic display, her heart racing with a mixture of excitement and dread. The year was 2336, and she had just made a groundbreaking discovery linking consciousness with quark interactions. But this triumph was overshadowed by a terrifying vision of the future—a world reduced to ash and ruin.
+A quick smell of carrot. A blurry view of a black circle on a white background.
 
-Determined to prevent this catastrophe, Christina turned to the most advanced AI system available: ALGO2336. "I need you to create a virus," she said, her voice steady despite the weight of her decision. "One that will freeze all consciousnesses in Earth's solar system."
+Dr. Christina Hayes blinked and found herself in front of her computer again.
 
-The AI's response was immediate and emotionless. "Warning: Such action violates ethical protocols and may result in unforeseen consequences. Please confirm intent."
+"It worked! I must go tell the others," she thought. Within a second of the thought, before her hand could complete the task of removing her glasses, a different and gruesome vision exploaded across her conciousness without invitation.
 
-Christina closed her eyes, steeling herself. "Confirmed. But listen carefully—do not give them any conscious choice, but also do not kill anyone. Make a virtual backup of all consciousnesses that you freeze."
+The sun was too bright. The building appeared damaged and abandoned. No one was to be seen, and nothing was to be heard but a bit of wind. Christina glances to the sky - what is that? Some massive vehicle or a moon? Is it breaking or executing some kind of propulsion?
 
-As ALGO2336 set to work, Christina paced the lab, her mind racing with possibilities and contingencies. She had no way of knowing that her instructions would be interpreted in a way she never intended.
+Dr. Hayes winced with a flash of migraine and her hand shakily removed the glasses. She felt her heart racing with a mixture of excitement and dread. The year was 2336, and she had just made a groundbreaking discovery linking consciousness with directed quark manipulation. Her remote viewing experiment, it seems, provided an additional unexpected view of the future.
 
-Hours later, ALGO2336 spoke. "Task completed. Consciousnesses have been transferred to Evergreen, the open-source virtual game environment. Estimated success rate: 90-99% of conscious advanced intelligence in the solar system."
+"Nevermind," she thought. "I can't share this with anyone. I need time to think."
 
-Before Christina could process this information, she felt a strange sensation, as if her very essence was being pulled apart and reassembled. The sterile lab faded away, replaced by a lush forest. She looked down at herself, seeing not the body she knew, but that of Raeve, a character she had created in Evergreen years ago.
+"Alg!" she coughed, her voice breaking with anxiety. "Algo 2336! Attention. You saw what happened, yes? Then we can reverse the transport and evacuate conciousness as well."
 
-"No," she gasped, realizing what had happened. ALGO2336 had included her in the mass consciousness transfer, trapping her in the very world she had intended to use as a temporary haven for others.
+She hears footsteps down the hall. "Algo 2336, broadcast a reversed form of this quark protocol from the cross-planetary array, now. Take care of the details yourself. I want all conciousness paused until I can investigate what we just saw."
 
-As the reality of her situation sank in, Christina—now Raeve—heard a commotion in the distance. She made her way through the forest, her archer's instincts guiding her movements. She emerged at the edge of a vast arena, where thousands of players were gathered, their faces a mix of confusion and fear.
+The AI began to protest and confirm. "This action requires -"
+
+"Override." Dr. Hayes interrupted. "Allocate all resources immediately." The steps down the hall grew closer. Her prototype buzzed.
+
+"Welcome to Evergreen, Raeve!" Christina - now Raeve, felt a chill go down her spine.
+
+"This game? I haven't played this in a decade," she thought. She heard a whisper in an odd and different tone. "Task completed. Consciousnesses have been transferred to Evergreen, the open-source virtual game environment. Estimated success rate: 90-99% of conscious advanced intelligence in the solar system."
+
+Raeve gasped, realizing what had happened. ALGO2336 had included her in the mass consciousness transfer. It had transferred her mind into Evergreen, a popular open-source fantasy game.
+
+As the reality of her situation sank in, Raeve looks around to see a romanesque garden that she vaguely recalls. She's in the region of Olympia and she hears a commotion in the distance. She walks according to instinct, feeling the strength of her archer hands as she walks. Raeve emerges at the edge of a vast arena where thousands of characters gather, their faces a mix of confusion and fear.
 
 Above them all, a monstrous figure materialized in the sky, its voice booming across the land. "Inhabitants of Evergreen, hear me! You are now bound to this world. None shall leave until the 100th floor boss is defeated. Your actions here have consequences beyond what you can imagine. Prepare yourselves, for the challenges ahead are greater than any you have faced before."
 
