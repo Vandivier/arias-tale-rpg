@@ -1,14 +1,13 @@
-import Phaser from "phaser";
 import React, { useEffect, useRef } from "react";
-
+import Phaser from "phaser";
+import { PlayerSelectScene } from "./scenes/PlayerSelectScene";
+import { DifficultySelectScene } from "./scenes/DifficultySelectScene";
 import { BattleScene } from "./scenes/BattleScene";
-import { CharacterCreationScene } from "./scenes/CharacterCreationScene";
 import { GameOverScene } from "./scenes/GameOverScene";
-import { InventoryScene } from "./scenes/InventoryScene";
-import { LeaderboardScene } from "./scenes/LeaderboardScene";
-import { StoreScene } from "./scenes/StoreScene";
+import { PreloadScene } from "./scenes/PreloadScene";
+import { VictoryScene } from "./scenes/VictoryScene";
 
-const ColosseumGame: React.FC = () => {
+const FighterGame: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,16 +18,16 @@ const ColosseumGame: React.FC = () => {
         height: 520,
         parent: gameRef.current,
         scene: [
-          CharacterCreationScene,
+          PreloadScene,
+          PlayerSelectScene,
+          DifficultySelectScene,
           BattleScene,
-          InventoryScene,
-          StoreScene,
           GameOverScene,
-          LeaderboardScene,
+          VictoryScene,
         ],
         physics: {
           default: "arcade",
-          arcade: { gravity: { x: 0, y: 0 } },
+          arcade: { gravity: { x: 0, y: 300 } },
         },
         scale: {
           mode: Phaser.Scale.FIT,
@@ -44,8 +43,8 @@ const ColosseumGame: React.FC = () => {
             height: 1560,
           },
         },
-        dom: {
-          createContainer: true,
+        input: {
+          keyboard: true,
         },
       };
 
@@ -60,9 +59,14 @@ const ColosseumGame: React.FC = () => {
   return (
     <div
       ref={gameRef}
-      style={{ width: "340px", height: "520px", margin: "auto" }}
+      style={{
+        width: "100%",
+        height: "100%",
+        maxWidth: "340px",
+        maxHeight: "520px",
+        margin: "auto",
+      }}
     />
   );
 };
-
-export default ColosseumGame;
+export default FighterGame;
