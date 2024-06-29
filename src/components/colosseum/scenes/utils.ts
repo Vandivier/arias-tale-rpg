@@ -119,32 +119,39 @@ export const typeText = (
 ) => {
   let index = 0;
   let displayedText = "";
-  const typingSound = scene.sound.add("typingSound", { volume: 0.5 }); // Adjust volume as needed
+  const typingSound = scene.sound.add("typingSound", {
+    loop: true,
+    volume: 0.5,
+  });
 
   const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
   const baseDelay = 50;
   const delay = baseDelay + Math.random() * 30 - 15;
 
+  typingSound.play();
+
   const timer = scene.time.addEvent({
     delay,
     callback: () => {
       if (index < text.length) {
-        typingSound.play();
         displayedText += text[index];
         textObject.setText(displayedText);
         index++;
       } else {
         timer.remove();
+        typingSound.stop();
         if (onComplete) onComplete();
       }
     },
     repeat: text.length - 1,
   });
 
-  // Optional: Add a way to skip the typing effect
   scene.input.on("pointerdown", () => {
     timer.remove();
     textObject.setText(text);
+    typingSound.stop();
     if (onComplete) onComplete();
   });
+
+  return textObject;
 };

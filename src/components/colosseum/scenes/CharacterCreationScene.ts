@@ -17,6 +17,7 @@ export class CharacterCreationScene extends Phaser.Scene {
   private selectedClass: PlayerClass | null = null;
   private suggestedName: string = "";
   private suggestedClass: PlayerClass | null = null;
+  private currentTextObject: Phaser.GameObjects.Text | null = null;
 
   constructor() {
     super("CharacterCreation");
@@ -85,14 +86,14 @@ export class CharacterCreationScene extends Phaser.Scene {
   }
 
   showNarrativeText(text: string) {
-    if (this.narrativeText) {
-      this.narrativeText.destroy();
+    if (this.currentTextObject) {
+      this.currentTextObject.destroy();
     }
 
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    typeText(
+    this.currentTextObject = typeText(
       this,
       centerX,
       centerY,
@@ -120,10 +121,14 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.narrativeText.destroy();
     }
 
+    if (this.currentTextObject) {
+      this.currentTextObject.destroy();
+    }
+
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    typeText(
+    this.currentTextObject = typeText(
       this,
       centerX,
       centerY,
@@ -143,29 +148,15 @@ export class CharacterCreationScene extends Phaser.Scene {
     );
   }
 
-  getRandomName(): string {
-    const defaultName = "Aria";
-    const names = [
-      defaultName,
-      "Gabriel",
-      "Zephyr",
-      "Luna",
-      "Orion",
-      "Nova",
-      "Caspian",
-      "Lyra",
-    ];
-    return names[Phaser.Math.Between(0, names.length - 1)] ?? defaultName;
-  }
   rejectSuggestion() {
-    if (this.narrativeText) {
-      this.narrativeText.destroy();
+    if (this.currentTextObject) {
+      this.currentTextObject.destroy();
     }
 
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    typeText(
+    this.currentTextObject = typeText(
       this,
       centerX,
       centerY,
@@ -185,13 +176,26 @@ export class CharacterCreationScene extends Phaser.Scene {
     this.rejectButton.setVisible(false);
   }
 
+  getRandomName(): string {
+    const defaultName = "Aria";
+    const names = [
+      defaultName,
+      "Gabriel",
+      "Zephyr",
+      "Luna",
+      "Orion",
+      "Nova",
+      "Caspian",
+      "Lyra",
+    ];
+    return names[Phaser.Math.Between(0, names.length - 1)] ?? defaultName;
+  }
+
   showNameInput() {
-    // Create the name input field
     this.nameInput = this.add
       .dom(170, 250, "input", "width: 200px; height: 30px;")
       .setOrigin(0.5);
 
-    // Create class selection buttons
     playerClasses.forEach((cls, index) => {
       const button = this.add
         .text(170, 300 + index * 50, cls, { fontSize: "20px", color: "#fff" })
@@ -201,7 +205,6 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.classButtons.push(button);
     });
 
-    // Add confirm button
     this.add
       .text(170, 500, "Confirm", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5)
@@ -233,8 +236,8 @@ export class CharacterCreationScene extends Phaser.Scene {
   }
 
   startGame(name?: string, playerClass?: PlayerClass) {
-    const finalName = name || this.suggestedName;
-    const finalClass = playerClass || this.suggestedClass;
+    const finalName = name ?? this.suggestedName;
+    const finalClass = playerClass ?? this.suggestedClass;
 
     if (!finalName || !finalClass) {
       console.error("Name or class is undefined");

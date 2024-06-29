@@ -6,16 +6,13 @@ export class StartGameScene extends Phaser.Scene {
   }
 
   preload() {
-    // Preload assets here
     this.load.audio("typingSound", "assets/audio/typing.wav");
     this.load.audio("dialogSound", "assets/audio/dialogue.wav");
-    // Add any other assets you want to preload
   }
 
   create() {
     const { width, height } = this.scale;
 
-    // Add a title
     this.add
       .text(width / 2, height / 3, "Evergreen", {
         fontSize: "48px",
@@ -24,7 +21,7 @@ export class StartGameScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     // Add start button
-    const startButton = this.add
+    this.add
       .text(width / 2, height / 2, "Start Game", {
         fontSize: "32px",
         color: "#ffffff",
@@ -36,6 +33,7 @@ export class StartGameScene extends Phaser.Scene {
       .on("pointerdown", () => this.startGame());
 
     // Add text to inform about sound
+    // TODO: SettingsScene w toggle to enable/disable sound
     this.add
       .text(width / 2, (height * 2) / 3, "Click to enable sound", {
         fontSize: "16px",
@@ -52,10 +50,7 @@ export class StartGameScene extends Phaser.Scene {
   }
 
   startGame() {
-    // Play a sound to ensure audio is working
     this.sound.play("typingSound");
-
-    // Transition to the character creation scene
     this.scene.start("CharacterCreation");
   }
 }
