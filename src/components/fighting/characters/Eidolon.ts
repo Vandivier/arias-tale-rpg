@@ -8,6 +8,7 @@ export class Eidolon extends Character {
       health: 100,
       damage: 12,
       specialDamage: 22,
+      jumpForce: 450,
     };
     super(scene, x, y, "eidolon", data);
     this.createAnimations();

@@ -20,7 +20,7 @@ export class BattleScene extends Phaser.Scene {
     // Add background
     const background = this.add
       .image(width / 2, height / 2, "background")
-      .setDepth(-1); // Ensure background is behind other elements
+      .setDepth(-1);
 
     // Scale the background to cover the entire canvas
     const scaleX = width / background.width;
@@ -56,16 +56,20 @@ export class BattleScene extends Phaser.Scene {
     this.physics.add.collider(this.player1.sprite, this.player2.sprite);
 
     // Set up input
-    this.cursors = this.input.keyboard.createCursorKeys();
-    this.jumpKey = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.SPACE,
-    );
-    this.attackKey = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.A,
-    );
-    this.specialKey = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.S,
-    );
+    if (this.input.keyboard) {
+      this.cursors = this.input.keyboard.createCursorKeys();
+      this.jumpKey = this.input.keyboard.addKey(
+        Phaser.Input.Keyboard.KeyCodes.SPACE,
+      );
+      this.attackKey = this.input.keyboard.addKey(
+        Phaser.Input.Keyboard.KeyCodes.A,
+      );
+      this.specialKey = this.input.keyboard.addKey(
+        Phaser.Input.Keyboard.KeyCodes.S,
+      );
+    } else {
+      throw new Error("Keyboard input is not available");
+    }
 
     // Set up AI based on difficulty
     this.setupAI(data.difficulty);
@@ -75,14 +79,12 @@ export class BattleScene extends Phaser.Scene {
     switch (type) {
       case "Tank":
         return new Tank(this, x, y);
-      // Add cases for other character types
       default:
         throw new Error(`Unknown character type: ${type}`);
     }
   }
 
   getRandomCharacter(): string {
-    // Logic to select a random character
     return "Tank"; // For now, always return Tank
   }
 
@@ -90,13 +92,13 @@ export class BattleScene extends Phaser.Scene {
     let aiUpdateInterval: number;
     switch (difficulty) {
       case "easy":
-        aiUpdateInterval = 2000; // AI updates every 2 seconds
+        aiUpdateInterval = 2000;
         break;
       case "medium":
-        aiUpdateInterval = 1000; // AI updates every 1 second
+        aiUpdateInterval = 1000;
         break;
       case "hard":
-        aiUpdateInterval = 500; // AI updates every 0.5 seconds
+        aiUpdateInterval = 500;
         break;
       default:
         aiUpdateInterval = 1000;
@@ -119,20 +121,17 @@ export class BattleScene extends Phaser.Scene {
     );
 
     if (distance < 100) {
-      // If close, attempt to attack
       if (Math.random() < 0.7) {
         this.player2.attack(this.player1);
       } else {
         this.player2.specialAttack(this.player1);
       }
     } else {
-      // If far, move towards the player
       this.player2.sprite.setVelocityX(
         this.player1.sprite.x < this.player2.sprite.x ? -160 : 160,
       );
 
-      // Jump occasionally
-      if (Math.random() < 0.1 && this.player2.sprite.body.touching.down) {
+      if (Math.random() < 0.1 && this.player2.sprite.body?.touching.down) {
         this.player2.sprite.setVelocityY(-330);
       }
     }
@@ -143,14 +142,12 @@ export class BattleScene extends Phaser.Scene {
     this.player1.update(time, delta);
     this.player2.update(time, delta);
 
-    // Check for victory or defeat
     if (this.player2.isDefeated()) {
       this.scene.start("VictoryScene");
     } else if (this.player1.isDefeated()) {
       this.scene.start("GameOverScene");
     }
 
-    // Handle player 1 movement
     if (this.cursors.left.isDown) {
       this.player1.moveLeft();
     } else if (this.cursors.right.isDown) {
@@ -159,12 +156,10 @@ export class BattleScene extends Phaser.Scene {
       this.player1.stopHorizontalMovement();
     }
 
-    // Handle player 1 jumping
     if (Phaser.Input.Keyboard.JustDown(this.jumpKey)) {
       this.player1.jump();
     }
 
-    // Handle player 1 attacks
     if (Phaser.Input.Keyboard.JustDown(this.attackKey)) {
       this.player1.attack(this.player2);
     }
@@ -173,7 +168,6 @@ export class BattleScene extends Phaser.Scene {
       this.player1.specialAttack(this.player2);
     }
 
-    // Update AI
     this.updateAI();
   }
 }

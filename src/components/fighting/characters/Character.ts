@@ -66,7 +66,7 @@ export class Character {
   }
 
   updateJumpState() {
-    if (this.sprite.body.touching.down) {
+    if (this.sprite.body?.touching.down) {
       this.isJumping = false;
     }
   }
