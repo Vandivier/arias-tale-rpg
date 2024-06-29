@@ -5,6 +5,7 @@ import {
   type PlayerCharacter,
   type PlayerClass,
 } from "./types";
+import { typeText } from "./utils";
 
 export class CharacterCreationScene extends Phaser.Scene {
   private currentStep: number = 0;
@@ -83,15 +84,30 @@ export class CharacterCreationScene extends Phaser.Scene {
     }
   }
 
-  preload() {
-    this.load.audio("dialogSound", "assets/audio/dialogue.wav");
-    this.load.audio("typingSound", "assets/audio/typing.wav");
-  }
-
   showNarrativeText(text: string) {
-    this.narrativeText.setText(text);
-    this.continueButton.setVisible(true);
-    this.rejectButton.setVisible(false);
+    if (this.narrativeText) {
+      this.narrativeText.destroy();
+    }
+
+    const centerX = this.cameras.main.width / 2;
+    const centerY = this.cameras.main.height / 2;
+
+    typeText(
+      this,
+      centerX,
+      centerY,
+      text,
+      {
+        fontSize: "16px",
+        color: "#fff",
+        wordWrap: { width: 300 },
+        align: "center",
+      },
+      () => {
+        this.continueButton.setVisible(true);
+        this.rejectButton.setVisible(false);
+      },
+    );
   }
 
   suggestCharacter() {
@@ -100,13 +116,31 @@ export class CharacterCreationScene extends Phaser.Scene {
       "warrior";
     this.suggestedName = this.getRandomName();
 
-    this.narrativeText.setText(
+    if (this.narrativeText) {
+      this.narrativeText.destroy();
+    }
+
+    const centerX = this.cameras.main.width / 2;
+    const centerY = this.cameras.main.height / 2;
+
+    typeText(
+      this,
+      centerX,
+      centerY,
       `He thinks of you, ${this.suggestedClass === "archer" ? "an" : "a"} ${
         this.suggestedClass
       } called ${this.suggestedName}...`,
+      {
+        fontSize: "16px",
+        color: "#fff",
+        wordWrap: { width: 300 },
+        align: "center",
+      },
+      () => {
+        this.continueButton.setVisible(true);
+        this.rejectButton.setVisible(true);
+      },
     );
-    this.continueButton.setVisible(true);
-    this.rejectButton.setVisible(true);
   }
 
   getRandomName(): string {
@@ -123,16 +157,41 @@ export class CharacterCreationScene extends Phaser.Scene {
     ];
     return names[Phaser.Math.Between(0, names.length - 1)] ?? defaultName;
   }
-
   rejectSuggestion() {
-    this.narrativeText.setText("Oh, what is your name then?");
+    if (this.narrativeText) {
+      this.narrativeText.destroy();
+    }
+
+    const centerX = this.cameras.main.width / 2;
+    const centerY = this.cameras.main.height / 2;
+
+    typeText(
+      this,
+      centerX,
+      centerY,
+      "Oh, what is your name then?",
+      {
+        fontSize: "16px",
+        color: "#fff",
+        wordWrap: { width: 300 },
+        align: "center",
+      },
+      () => {
+        this.showNameInput();
+      },
+    );
+
     this.continueButton.setVisible(false);
     this.rejectButton.setVisible(false);
+  }
 
+  showNameInput() {
+    // Create the name input field
     this.nameInput = this.add
       .dom(170, 250, "input", "width: 200px; height: 30px;")
       .setOrigin(0.5);
 
+    // Create class selection buttons
     playerClasses.forEach((cls, index) => {
       const button = this.add
         .text(170, 300 + index * 50, cls, { fontSize: "20px", color: "#fff" })
@@ -142,6 +201,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.classButtons.push(button);
     });
 
+    // Add confirm button
     this.add
       .text(170, 500, "Confirm", { fontSize: "24px", color: "#fff" })
       .setOrigin(0.5)

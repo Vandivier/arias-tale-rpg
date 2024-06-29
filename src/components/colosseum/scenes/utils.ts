@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { type Scene } from "phaser";
+import { type GameObjects, type Scene } from "phaser";
 import {
   type PlayerCharacter,
   type Enemy,
@@ -107,38 +107,44 @@ export function generateStoreItems(): Item[] {
   return items;
 }
 
+// TODO: maybe play a shorter sound for punctuation
+// const punctuationSound = scene.sound.add('punctuationSound', { volume: 0.5 });
 export const typeText = (
-  scene: Scene,
+  scene: Phaser.Scene,
   x: number,
   y: number,
   text: string,
   style: Phaser.Types.GameObjects.Text.TextStyle = {},
-): void => {
+  onComplete?: () => void,
+) => {
+  let index = 0;
   let displayedText = "";
-  let i = 0;
-  const typingSound = scene.sound.add("typingSound");
+  const typingSound = scene.sound.add("typingSound", { volume: 0.5 }); // Adjust volume as needed
+
+  const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
+  const baseDelay = 50;
+  const delay = baseDelay + Math.random() * 30 - 15;
 
   const timer = scene.time.addEvent({
-    delay: 50, // milliseconds between each character
+    delay,
     callback: () => {
-      displayedText += text[i];
-      const textObject = scene.add.text(x, y, displayedText, style);
-
-      if (i > 0) {
-        scene.children.removeAt(
-          scene.children.getIndex(
-            scene.children.list[scene.children.list.length - 2],
-          ),
-        );
-      }
-
-      typingSound.play();
-
-      i++;
-      if (i >= text.length) {
+      if (index < text.length) {
+        typingSound.play();
+        displayedText += text[index];
+        textObject.setText(displayedText);
+        index++;
+      } else {
         timer.remove();
+        if (onComplete) onComplete();
       }
     },
     repeat: text.length - 1,
+  });
+
+  // Optional: Add a way to skip the typing effect
+  scene.input.on("pointerdown", () => {
+    timer.remove();
+    textObject.setText(text);
+    if (onComplete) onComplete();
   });
 };
