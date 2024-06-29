@@ -7,5 +7,8 @@ maybe we will use rollup to get it here on the page, or a CDN?
 thanks to the open source audio and sprite providers:
 
 1. OpenGameArt.org
-2. Kenney.nl
-3. Freesound.org
+2. Freesound.org
+
+Sound credits:
+
+1. [dialogue.wav](https://freesound.org/people/lulyc/sounds/346118/)
