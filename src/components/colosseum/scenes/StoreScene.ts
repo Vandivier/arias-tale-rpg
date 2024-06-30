@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { type PlayerCharacter, type Item } from "./types";
-import { generateStoreItems } from "./utils";
+import { generateStoreItems } from "./utils/main";
 
 export class StoreScene extends Phaser.Scene {
   private player!: PlayerCharacter;

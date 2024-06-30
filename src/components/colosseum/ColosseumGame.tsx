@@ -7,6 +7,7 @@ import { GameOverScene } from "./scenes/GameOverScene";
 import { InventoryScene } from "./scenes/InventoryScene";
 import { LeaderboardScene } from "./scenes/LeaderboardScene";
 import { StoreScene } from "./scenes/StoreScene";
+import { StartGameScene } from "./scenes/StartGameScene";
 
 const ColosseumGame: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,7 @@ const ColosseumGame: React.FC = () => {
         height: 520,
         parent: gameRef.current,
         scene: [
+          StartGameScene,
           CharacterCreationScene,
           BattleScene,
           InventoryScene,

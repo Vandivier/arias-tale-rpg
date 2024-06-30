@@ -1,4 +1,7 @@
-export type PlayerClass = "warrior" | "mage" | "archer";
+export const defaultClass = "warrior" as const;
+export const playerClasses = ["warrior", "mage", "archer"] as const;
+
+export type PlayerClass = (typeof playerClasses)[number];
 export type EnemyRarity = "Common" | "Uncommon" | "Rare";
 export type EnemyTier =
   | "F"
