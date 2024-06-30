@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 type TextType = "typing" | "dialogue";
 
 interface AnimationState {
@@ -8,6 +10,78 @@ interface AnimationState {
   displayedText: string;
   index: number;
   onComplete?: () => void;
+}
+
+export class TextAnimationManager {
+  private currentAnimation: ReturnType<typeof animateText> | null = null;
+  private errorText: Phaser.GameObjects.Text | null = null;
+
+  constructor(private scene: Phaser.Scene) {}
+
+  clearCurrentText() {
+    console.log("Clearing current text");
+    if (this.currentAnimation) {
+      this.currentAnimation.destroy();
+      this.currentAnimation = null;
+    }
+    this.clearErrorText();
+  }
+
+  showNarrativeText(text: string, onComplete?: () => void) {
+    console.log("showNarrativeText called with:", text);
+
+    this.clearCurrentText();
+    const centerX = this.scene.cameras.main.width / 2;
+    const centerY = this.scene.cameras.main.height / 2;
+
+    try {
+      this.currentAnimation = animateText(
+        this.scene,
+        centerX,
+        centerY,
+        text,
+        "typing",
+        {
+          fontSize: "16px",
+          color: "#fff",
+          wordWrap: { width: 300 },
+          align: "center",
+        },
+        () => {
+          console.log("Text animation complete callback");
+          if (onComplete) onComplete();
+        },
+      );
+    } catch (error) {
+      console.error("Error during text animation:", error);
+    }
+  }
+
+  showErrorText(message: string) {
+    this.clearErrorText();
+    const centerX = this.scene.cameras.main.width / 2;
+    const bottomY = this.scene.cameras.main.height - 20;
+
+    this.errorText = this.scene.add
+      .text(centerX, bottomY, message, {
+        fontSize: "16px",
+        color: "#ff0000",
+        wordWrap: { width: this.scene.cameras.main.width * 0.8 },
+        align: "center",
+        backgroundColor: "#ffffff",
+        padding: { x: 10, y: 5 },
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true })
+      .on("pointerdown", () => this.clearErrorText());
+  }
+
+  private clearErrorText() {
+    if (this.errorText) {
+      this.errorText.destroy();
+      this.errorText = null;
+    }
+  }
 }
 
 function playSound(state: AnimationState, textType: TextType) {
@@ -58,7 +132,7 @@ function skipAnimation(state: AnimationState) {
   if (state.onComplete) state.onComplete();
 }
 
-export function animateText(
+function animateText(
   scene: Phaser.Scene,
   x: number,
   y: number,
