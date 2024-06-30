@@ -4,8 +4,7 @@ import {
   type EquipmentSlot,
   type Item,
   type PlayerCharacter,
-} from "./types";
-type TextType = "typing" | "dialogue";
+} from "../types";
 
 export const AVATAR_MAX_HEIGHT = 200;
 
@@ -107,85 +106,6 @@ export function generateStoreItems(): Item[] {
   return items;
 }
 
-export const animateText = (
-  scene: Phaser.Scene,
-  x: number,
-  y: number,
-  text: string,
-  textType: TextType = "typing",
-  style: Phaser.Types.GameObjects.Text.TextStyle = {},
-  onComplete?: () => void,
-) => {
-  let index = 0;
-  let displayedText = "";
-  const typingSounds = [
-    "typingSound1",
-    "typingSound2",
-    "typingSound3",
-    "typingSound4",
-  ];
-  const dialogueSounds = ["dialogSound1", "dialogSound2", "dialogSound3"];
-
-  const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
-  const baseDelay = 50;
-
-  const playSound = () => {
-    const soundArray = textType === "typing" ? typingSounds : dialogueSounds;
-    const randomSound = Phaser.Math.RND.pick(soundArray);
-    scene.sound.play(randomSound, { volume: 0.5 });
-  };
-
-  const animateNextCharacter = () => {
-    if (index < text.length) {
-      if (text[index] !== " ") {
-        playSound();
-      }
-      displayedText += text[index];
-      textObject.setText(displayedText);
-      index++;
-
-      scene.time.delayedCall(
-        baseDelay + Math.random() * 30 - 15,
-        animateNextCharacter,
-      );
-    } else {
-      console.log("Text animation complete");
-      onComplete?.();
-    }
-  };
-
-  // Start the animation
-  animateNextCharacter();
-
-  // Add input listener for skipping animation
-  const skipHandler = () => skipAnimation(scene, textObject, text, onComplete);
-  scene.input.on("pointerdown", skipHandler);
-
-  return {
-    textObject,
-    destroy: () => {
-      console.log("Destroying text animation");
-      scene?.sys?.isActive() && scene.time.removeAllEvents();
-      scene.input.off("pointerdown", skipHandler);
-      textObject?.destroy();
-    },
-  };
-};
-
-export const skipAnimation = (
-  scene: Phaser.Scene,
-  textObject: Phaser.GameObjects.Text,
-  text: string,
-  onComplete?: () => void,
-) => {
-  if (scene?.sys?.isActive()) {
-    console.log("Animation skipped");
-    scene.time.removeAllEvents();
-    textObject.setText(text);
-    onComplete?.();
-  }
-};
-
 export const createButton = (
   scene: Phaser.Scene,
   text: string,
@@ -203,10 +123,10 @@ export const createButton = (
     .setOrigin(0.5)
     .setInteractive({ useHandCursor: true })
     .on("pointerover", () => {
-      button.setStyle({ backgroundColor: "#ccc", color: "#000" });
+      button.setStyle({ backgroundColor: "#555" });
     })
     .on("pointerout", () => {
-      button.setStyle({ backgroundColor: "#333", color: "#fff" });
+      button.setStyle({ backgroundColor: "#333" });
     })
     .on("pointerdown", callback)
     .setVisible(false);

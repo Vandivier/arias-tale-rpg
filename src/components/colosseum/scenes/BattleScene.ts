@@ -12,7 +12,7 @@ import {
   calculateDamage,
   calculateEnemyDamage,
   generateLoot,
-} from "./utils";
+} from "./utils/main";
 
 export class BattleScene extends Phaser.Scene {
   private player!: PlayerCharacter;
