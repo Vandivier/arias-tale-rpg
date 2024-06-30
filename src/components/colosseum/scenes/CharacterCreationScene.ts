@@ -45,7 +45,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       .setVisible(false);
 
     this.rejectButton = this.add
-      .text(170, 500, "Shout: 'Hey, that's not me!'", {
+      .text(170, 400, "Shout: 'Hey, that's not me!'", {
         fontSize: "20px",
         color: "#fff",
         backgroundColor: "#333",
