@@ -9,7 +9,6 @@ import { animateText } from "./utils";
 
 export class CharacterCreationScene extends Phaser.Scene {
   private currentStep: number = 0;
-  private narrativeText!: Phaser.GameObjects.Text;
   private continueButton!: Phaser.GameObjects.Text;
   private rejectButton!: Phaser.GameObjects.Text;
   private nameInput!: Phaser.GameObjects.DOMElement;
@@ -17,52 +16,73 @@ export class CharacterCreationScene extends Phaser.Scene {
   private selectedClass: PlayerClass | null = null;
   private suggestedName: string = "";
   private suggestedClass: PlayerClass | null = null;
-  private currentTextObject: Phaser.GameObjects.Text | null = null;
+  private currentTextAnimation: ReturnType<typeof animateText> | null = null;
 
   constructor() {
     super("CharacterCreation");
   }
 
   create() {
-    this.narrativeText = this.add
-      .text(170, 100, "", {
-        fontSize: "16px",
-        color: "#fff",
-        wordWrap: { width: 300 },
-      })
-      .setOrigin(0.5);
+    // render view
+    this.createButtons();
 
+    // set up listeners
+    this.events.once("sceneReady", this.onSceneReady, this);
+
+    // emit ready
+    this.events.emit("sceneReady");
+  }
+
+  private createButtons() {
     this.continueButton = this.add
-      .text(170, 450, "Continue listening", {
-        fontSize: "20px",
-        color: "#fff",
-        backgroundColor: "#333",
-        padding: { x: 10, y: 5 },
-      })
+      .text(
+        this.cameras.main.width / 2,
+        this.cameras.main.height - 70,
+        "Continue listening",
+        {
+          fontSize: "20px",
+          color: "#fff",
+          backgroundColor: "#333",
+          padding: { x: 10, y: 5 },
+        },
+      )
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () => this.nextStep())
       .setVisible(false);
 
     this.rejectButton = this.add
-      .text(170, 400, "Shout: 'Hey, that's not me!'", {
-        fontSize: "20px",
-        color: "#fff",
-        backgroundColor: "#333",
-        padding: { x: 10, y: 5 },
-      })
+      .text(
+        this.cameras.main.width / 2,
+        this.cameras.main.height - 120,
+        "Shout: 'Hey, that's not me!'",
+        {
+          fontSize: "20px",
+          color: "#fff",
+          backgroundColor: "#333",
+          padding: { x: 10, y: 5 },
+        },
+      )
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () => this.rejectSuggestion())
       .setVisible(false);
+  }
 
+  private onSceneReady() {
+    console.log("CharacterCreationScene is ready");
     this.nextStep();
   }
 
   nextStep() {
+    console.log("nextStep called, currentStep:", this.currentStep);
+
     this.currentStep++;
+    this.clearCurrentText();
+
     switch (this.currentStep) {
       case 1:
+        console.log("About to show first narrative text");
         this.showNarrativeText(
           "Anyone who speaks to The Great Dreamer in their mind has exited their plane, because The Great Dreamer lives outside of the planes.",
         );
@@ -81,55 +101,54 @@ export class CharacterCreationScene extends Phaser.Scene {
         this.suggestCharacter();
         break;
       default:
+        console.log("Reached default case in nextStep");
         this.startGame();
     }
   }
 
   showNarrativeText(text: string) {
-    if (this.currentTextObject) {
-      this.currentTextObject.destroy();
-    }
+    console.log("showNarrativeText called with:", text);
 
+    this.clearCurrentText();
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    this.currentTextObject = animateText(
-      this,
-      centerX,
-      centerY,
-      text,
-      "typing",
-      {
-        fontSize: "16px",
-        color: "#fff",
-        wordWrap: { width: 300 },
-        align: "center",
-      },
-      () => {
-        this.continueButton.setVisible(true);
-        this.rejectButton.setVisible(false);
-      },
-    );
+    console.log("About to call animateText");
+    try {
+      this.currentTextAnimation = animateText(
+        this,
+        centerX,
+        centerY,
+        text,
+        "typing",
+        {
+          fontSize: "16px",
+          color: "#fff",
+          wordWrap: { width: 300 },
+          align: "center",
+        },
+        () => {
+          console.log("Text animation complete");
+          this.continueButton.setVisible(true);
+        },
+      );
+    } catch (error) {
+      console.error("Error during text animation:", error);
+    }
+    console.log("After calling animateText");
   }
 
   suggestCharacter() {
+    this.clearCurrentText();
     this.suggestedClass =
       playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
       "warrior";
     this.suggestedName = this.getRandomName();
 
-    if (this.narrativeText) {
-      this.narrativeText.destroy();
-    }
-
-    if (this.currentTextObject) {
-      this.currentTextObject.destroy();
-    }
-
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    this.currentTextObject = animateText(
+    this.currentTextAnimation = animateText(
       this,
       centerX,
       centerY,
@@ -144,21 +163,31 @@ export class CharacterCreationScene extends Phaser.Scene {
         align: "center",
       },
       () => {
-        this.continueButton.setVisible(true);
-        this.rejectButton.setVisible(true);
+        if (this.continueButton) this.continueButton.setVisible(true);
+        if (this.rejectButton) this.rejectButton.setVisible(true);
       },
     );
   }
 
-  rejectSuggestion() {
-    if (this.currentTextObject) {
-      this.currentTextObject.destroy();
+  clearCurrentText() {
+    if (this.currentTextAnimation) {
+      this.currentTextAnimation.destroy();
+      this.currentTextAnimation = null;
     }
+    if (this.continueButton) {
+      this.continueButton.setVisible(false);
+    }
+    if (this.rejectButton) {
+      this.rejectButton.setVisible(false);
+    }
+  }
 
+  rejectSuggestion() {
+    this.clearCurrentText();
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    this.currentTextObject = animateText(
+    this.currentTextAnimation = animateText(
       this,
       centerX,
       centerY,
@@ -171,12 +200,26 @@ export class CharacterCreationScene extends Phaser.Scene {
         align: "center",
       },
       () => {
-        this.showNameInput();
+        this.showNameButton();
       },
     );
+  }
 
-    this.continueButton.setVisible(false);
-    this.rejectButton.setVisible(false);
+  showNameButton() {
+    const buttonY = this.cameras.main.height / 2 + 50;
+
+    this.add
+      .text(this.cameras.main.width / 2, buttonY, "My name is...", {
+        fontSize: "20px",
+        color: "#fff",
+        backgroundColor: "#333",
+        padding: { x: 10, y: 5 },
+      })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on("pointerdown", () => {
+        this.showNameInput();
+      });
   }
 
   getRandomName(): string {
@@ -195,13 +238,21 @@ export class CharacterCreationScene extends Phaser.Scene {
   }
 
   showNameInput() {
+    this.clearCurrentText();
+    const centerX = this.cameras.main.width / 2;
+    const centerY = this.cameras.main.height / 2;
+
     this.nameInput = this.add
-      .dom(170, 250, "input", "width: 200px; height: 30px;")
+      .dom(centerX, centerY - 50, "input", "width: 200px; height: 30px;")
       .setOrigin(0.5);
 
+    this.classButtons = [];
     playerClasses.forEach((cls, index) => {
       const button = this.add
-        .text(170, 300 + index * 50, cls, { fontSize: "20px", color: "#fff" })
+        .text(centerX, centerY + index * 50, cls, {
+          fontSize: "20px",
+          color: "#fff",
+        })
         .setOrigin(0.5)
         .setInteractive()
         .on("pointerdown", () => this.selectClass(cls));
@@ -209,7 +260,10 @@ export class CharacterCreationScene extends Phaser.Scene {
     });
 
     this.add
-      .text(170, 500, "Confirm", { fontSize: "24px", color: "#fff" })
+      .text(centerX, this.cameras.main.height - 70, "Confirm", {
+        fontSize: "24px",
+        color: "#fff",
+      })
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () => this.confirmCustomCharacter());
@@ -218,7 +272,7 @@ export class CharacterCreationScene extends Phaser.Scene {
   selectClass(cls: PlayerClass) {
     this.selectedClass = cls;
     this.classButtons.forEach((button) => {
-      if (button && this.children.exists(button)) {
+      if (button?.scene) {
         button.setColor(button.text === cls ? "#ff0" : "#fff");
       }
     });
@@ -228,10 +282,15 @@ export class CharacterCreationScene extends Phaser.Scene {
     const name = (this.nameInput.node as HTMLInputElement).value.trim();
     if (!name || !this.selectedClass) {
       this.add
-        .text(170, 550, "Please enter a name and select a class", {
-          fontSize: "16px",
-          color: "#ff0000",
-        })
+        .text(
+          this.cameras.main.width / 2,
+          this.cameras.main.height - 20,
+          "Please enter a name and select a class",
+          {
+            fontSize: "16px",
+            color: "#ff0000",
+          },
+        )
         .setOrigin(0.5);
       return;
     }

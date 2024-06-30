@@ -112,23 +112,19 @@ export const animateText = (
   x: number,
   y: number,
   text: string,
-  textType: TextType = "typing",
+  textType: "typing" | "dialogue" = "typing",
   style: Phaser.Types.GameObjects.Text.TextStyle = {},
   onComplete?: () => void,
 ) => {
   let index = 0;
   let displayedText = "";
   const typingSounds = [
-    scene.sound.add("typingSound1"),
-    scene.sound.add("typingSound2"),
-    scene.sound.add("typingSound3"),
-    scene.sound.add("typingSound4"),
+    "typingSound1",
+    "typingSound2",
+    "typingSound3",
+    "typingSound4",
   ];
-  const dialogueSounds = [
-    scene.sound.add("dialogSound1"),
-    scene.sound.add("dialogSound2"),
-    scene.sound.add("dialogSound3"),
-  ];
+  const dialogueSounds = ["dialogSound1", "dialogSound2", "dialogSound3"];
 
   const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
   const baseDelay = 50;
@@ -136,42 +132,48 @@ export const animateText = (
   const playSound = () => {
     const soundArray = textType === "typing" ? typingSounds : dialogueSounds;
     const randomSound = Phaser.Math.RND.pick(soundArray);
-    randomSound.play({ volume: 0.5 });
+    scene.sound.play(randomSound, { volume: 0.5 });
   };
 
-  const timer = scene.time.addEvent({
-    delay: baseDelay,
-    callback: () => {
-      if (index < text.length) {
-        if (text[index] !== " ") {
-          playSound();
-        }
-        displayedText += text[index];
-        textObject.setText(displayedText);
-        index++;
-
-        // Randomize the delay for the next character
-        timer.delay = baseDelay + Math.random() * 30 - 15;
-
-        // If this is the last character, call onComplete
-        if (index === text.length && onComplete) {
-          onComplete();
-        }
-      } else {
-        timer.remove();
+  const animateNextCharacter = () => {
+    if (index < text.length) {
+      if (text[index] !== " ") {
+        playSound();
       }
-    },
-    repeat: text.length - 1,
-  });
+      displayedText += text[index];
+      textObject.setText(displayedText);
+      index++;
 
-  const skipAnimation = () => {
-    timer.remove();
-    textObject.setText(text);
-    if (onComplete) onComplete();
-    scene.input.off("pointerdown", skipAnimation); // Remove the listener
+      scene.time.delayedCall(
+        baseDelay + Math.random() * 30 - 15,
+        animateNextCharacter,
+      );
+    } else {
+      console.log("Text animation complete");
+      if (onComplete) onComplete();
+    }
   };
 
-  scene.input.on("pointerdown", skipAnimation);
+  // Start the animation
+  animateNextCharacter();
 
-  return textObject;
+  // TODO: fix skipping animation
+  // const skipAnimation = () => {
+  //   console.log("Animation skipped");
+  //   scene.time.removeAllEvents();
+  //   textObject.setText(text);
+  //   if (onComplete) onComplete();
+  // };
+
+  // const skipHandler = scene.input.once("pointerdown", skipAnimation);
+
+  return {
+    textObject,
+    destroy: () => {
+      console.log("Destroying text animation");
+      scene.time.removeAllEvents();
+      // skipHandler.destroy();
+      textObject.destroy();
+    },
+  };
 };
