@@ -112,7 +112,7 @@ export const animateText = (
   x: number,
   y: number,
   text: string,
-  textType: "typing" | "dialogue" = "typing",
+  textType: TextType = "typing",
   style: Phaser.Types.GameObjects.Text.TextStyle = {},
   onComplete?: () => void,
 ) => {
@@ -184,4 +184,32 @@ export const skipAnimation = (
     textObject.setText(text);
     onComplete?.();
   }
+};
+
+export const createButton = (
+  scene: Phaser.Scene,
+  text: string,
+  x: number,
+  y: number,
+  callback: () => void,
+): Phaser.GameObjects.Text => {
+  const button = scene.add
+    .text(x, y, text, {
+      fontSize: "20px",
+      color: "#fff",
+      backgroundColor: "#333",
+      padding: { x: 10, y: 5 },
+    })
+    .setOrigin(0.5)
+    .setInteractive({ useHandCursor: true })
+    .on("pointerover", () => {
+      button.setStyle({ backgroundColor: "#ccc", color: "#000" });
+    })
+    .on("pointerout", () => {
+      button.setStyle({ backgroundColor: "#333", color: "#fff" });
+    })
+    .on("pointerdown", callback)
+    .setVisible(false);
+
+  return button;
 };
