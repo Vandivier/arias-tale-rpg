@@ -157,15 +157,16 @@ export const animateText = (
   // Start the animation
   animateNextCharacter();
 
-  scene.input.once("pointerdown", () =>
-    skipAnimation(scene, textObject, text, onComplete),
-  );
+  // Add input listener for skipping animation
+  const skipHandler = () => skipAnimation(scene, textObject, text, onComplete);
+  scene.input.on("pointerdown", skipHandler);
 
   return {
     textObject,
     destroy: () => {
       console.log("Destroying text animation");
       scene?.sys?.isActive() && scene.time.removeAllEvents();
+      scene.input.off("pointerdown", skipHandler);
       textObject?.destroy();
     },
   };
