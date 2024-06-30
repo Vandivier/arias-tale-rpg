@@ -3,6 +3,7 @@ import Phaser from "phaser";
 type TextType = "typing" | "dialogue";
 
 interface AnimationState {
+  isComplete: boolean;
   isSkipped: boolean;
   textObject: Phaser.GameObjects.Text;
   scene: Phaser.Scene;
@@ -15,8 +16,11 @@ interface AnimationState {
 export class TextAnimationManager {
   private currentAnimation: ReturnType<typeof animateText> | null = null;
   private errorText: Phaser.GameObjects.Text | null = null;
+  private managedTextObjects: Set<Phaser.GameObjects.Text>;
 
-  constructor(private scene: Phaser.Scene) {}
+  constructor(private scene: Phaser.Scene) {
+    this.managedTextObjects = new Set<Phaser.GameObjects.Text>();
+  }
 
   clearCurrentText() {
     console.log("Clearing current text");
@@ -25,17 +29,29 @@ export class TextAnimationManager {
       this.currentAnimation = null;
     }
     this.clearErrorText();
+
+    this.managedTextObjects.forEach((textObject) => {
+      console.log("Removing managed text object:", textObject.name);
+      textObject.destroy();
+    });
+    this.managedTextObjects.clear();
+  }
+
+  isComplete() {
+    return this.currentAnimation?.state.isComplete ?? false;
   }
 
   showNarrativeText(text: string, onComplete?: () => void) {
     console.log("showNarrativeText called with:", text);
 
     this.clearCurrentText();
+
     const centerX = this.scene.cameras.main.width / 2;
     const centerY = this.scene.cameras.main.height / 2;
 
     try {
       this.currentAnimation = animateText(
+        this,
         this.scene,
         centerX,
         centerY,
@@ -52,6 +68,7 @@ export class TextAnimationManager {
           if (onComplete) onComplete();
         },
       );
+      this.makeTextClickable(this.currentAnimation.textObject);
     } catch (error) {
       console.error("Error during text animation:", error);
     }
@@ -74,13 +91,43 @@ export class TextAnimationManager {
       .setOrigin(0.5)
       .setInteractive({ useHandCursor: true })
       .on("pointerdown", () => this.clearErrorText());
+
+    this.errorText.name = "TAM_ErrorText";
+    this.managedTextObjects.add(this.errorText);
   }
 
   private clearErrorText() {
     if (this.errorText) {
+      this.managedTextObjects.delete(this.errorText);
       this.errorText.destroy();
       this.errorText = null;
     }
+  }
+
+  addManagedTextObject(textObject: Phaser.GameObjects.Text) {
+    this.managedTextObjects.add(textObject);
+  }
+
+  removeManagedTextObject(textObject: Phaser.GameObjects.Text) {
+    this.managedTextObjects.delete(textObject);
+  }
+
+  skipCurrentAnimation() {
+    if (this.currentAnimation) {
+      this.currentAnimation.skip();
+    }
+  }
+
+  completeCurrentAnimation() {
+    if (this.currentAnimation) {
+      this.currentAnimation.complete();
+    }
+  }
+
+  makeTextClickable(textObject: Phaser.GameObjects.Text) {
+    textObject
+      .setInteractive({ useHandCursor: true })
+      .on("pointerdown", () => this.completeCurrentAnimation());
   }
 }
 
@@ -102,7 +149,7 @@ function animateNextCharacter(state: AnimationState, textType: TextType) {
   if (state.isSkipped) return;
 
   if (state.index < state.fullText.length) {
-    if (state.fullText[state.index] !== " ") {
+    if (state.fullText[state.index] !== " " && state.index % 2 === 0) {
       playSound(state, textType);
     }
     state.displayedText += state.fullText[state.index];
@@ -114,12 +161,64 @@ function animateNextCharacter(state: AnimationState, textType: TextType) {
     }
     state.index++;
 
-    state.scene.time.delayedCall(100, () =>
+    state.scene.time.delayedCall(40, () =>
       animateNextCharacter(state, textType),
     );
   } else {
     if (state.onComplete) state.onComplete();
   }
+}
+
+function animateText(
+  manager: TextAnimationManager,
+  scene: Phaser.Scene,
+  x: number,
+  y: number,
+  text: string,
+  textType: TextType = "typing",
+  style: Phaser.Types.GameObjects.Text.TextStyle = {},
+  onComplete?: () => void,
+) {
+  const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
+  textObject.name = `TAM_NarrativeText_${Date.now()}`;
+  manager.addManagedTextObject(textObject);
+  console.log("Created new managed text object:", textObject.name);
+
+  const state: AnimationState = {
+    isComplete: false,
+    isSkipped: false,
+    textObject,
+    scene,
+    fullText: text,
+    displayedText: "",
+    index: 0,
+    onComplete,
+  };
+
+  console.log("Starting text animation");
+  scene.time.delayedCall(0, () => animateNextCharacter(state, textType));
+
+  return {
+    textObject,
+    skip: () => {
+      console.log("Skip method called");
+      skipAnimation(state);
+    },
+    state,
+    complete: () => {
+      console.log("Complete method called");
+      completeAnimation(state);
+    },
+    destroy: () => {
+      state.isSkipped = true;
+      scene.time.removeAllEvents();
+      if (state.textObject?.scene) {
+        console.log("Destroying managed text object:", state.textObject.name);
+        manager.removeManagedTextObject(state.textObject);
+        state.textObject.destroy();
+      }
+    },
+  };
 }
 
 function skipAnimation(state: AnimationState) {
@@ -132,46 +231,13 @@ function skipAnimation(state: AnimationState) {
   if (state.onComplete) state.onComplete();
 }
 
-function animateText(
-  scene: Phaser.Scene,
-  x: number,
-  y: number,
-  text: string,
-  textType: TextType = "typing",
-  style: Phaser.Types.GameObjects.Text.TextStyle = {},
-  onComplete?: () => void,
-) {
-  const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
-
-  const state: AnimationState = {
-    isSkipped: false,
-    textObject,
-    scene,
-    fullText: text,
-    displayedText: "",
-    index: 0,
-    onComplete,
-  };
-
-  const skipHandler = () => skipAnimation(state);
-  const skipKey = scene.input.keyboard?.addKey(
-    Phaser.Input.Keyboard.KeyCodes.SPACE,
-  );
-  skipKey?.on("down", skipHandler);
-  scene.input.on("pointerdown", skipHandler);
-
-  scene.time.delayedCall(0, () => animateNextCharacter(state, textType));
-
-  return {
-    textObject,
-    destroy: () => {
-      state.isSkipped = true;
-      scene.time.removeAllEvents();
-      scene.input.off("pointerdown", skipHandler);
-      skipKey?.off("down", skipHandler);
-      if (state.textObject?.scene) {
-        state.textObject.destroy();
-      }
-    },
-  };
+function completeAnimation(state: AnimationState) {
+  if (state.isSkipped) return;
+  state.isComplete = true;
+  state.isSkipped = true;
+  state.scene.time.removeAllEvents();
+  if (state.textObject?.scene) {
+    state.textObject.setText(state.fullText);
+  }
+  if (state.onComplete) state.onComplete();
 }

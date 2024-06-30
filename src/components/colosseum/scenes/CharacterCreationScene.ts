@@ -5,20 +5,21 @@ import {
   type PlayerCharacter,
   type PlayerClass,
 } from "./types";
-import { animateText } from "./utils/animateText";
 import { createButton } from "./utils/main";
+import { TextAnimationManager } from "./services/TextAnimationManager";
 
 export class CharacterCreationScene extends Phaser.Scene {
   private currentStep: number = 0;
   private continueButton!: Phaser.GameObjects.Text;
   private rejectButton!: Phaser.GameObjects.Text;
+  private skipButton!: Phaser.GameObjects.Text;
   private nameButton!: Phaser.GameObjects.Text;
   private nameInput!: Phaser.GameObjects.DOMElement;
   private classButtons: Phaser.GameObjects.Text[] = [];
   private selectedClass: PlayerClass | null = null;
   private suggestedName: string = "";
   private suggestedClass: PlayerClass | null = null;
-  private currentTextAnimation: ReturnType<typeof animateText> | null = null;
+  private textAnimationManager!: TextAnimationManager;
 
   constructor() {
     super("CharacterCreation");
@@ -26,11 +27,12 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   create() {
     console.log("CharacterCreationScene create started");
+    this.textAnimationManager = new TextAnimationManager(this);
     this.createButtons();
     this.nextStep();
   }
 
-  createButtons() {
+  private createButtons() {
     const centerX = this.cameras.main.width / 2;
 
     this.continueButton = createButton(
@@ -38,7 +40,14 @@ export class CharacterCreationScene extends Phaser.Scene {
       "Continue listening",
       centerX,
       this.cameras.main.height - 70,
-      () => this.nextStep(),
+      () => {
+        console.log("Continue button clicked");
+        if (this.textAnimationManager.isComplete()) {
+          this.nextStep();
+        } else {
+          this.textAnimationManager.completeCurrentAnimation();
+        }
+      },
     );
 
     this.rejectButton = createButton(
@@ -46,30 +55,64 @@ export class CharacterCreationScene extends Phaser.Scene {
       "Hey, that's not me!",
       centerX,
       this.cameras.main.height - 120,
-      () => this.rejectSuggestion(),
+      () => {
+        console.log("Reject button clicked");
+        this.textAnimationManager.completeCurrentAnimation();
+        this.rejectSuggestion();
+      },
     );
+
+    this.skipButton = createButton(
+      this,
+      "Skip Text",
+      this.cameras.main.width - 70,
+      30,
+      () => {
+        console.log("Skip button clicked");
+        this.textAnimationManager.skipCurrentAnimation();
+      },
+    );
+
+    this.rejectButton.setVisible(false);
+    this.skipButton.setVisible(false);
   }
 
   nextStep() {
     console.log("nextStep called, currentStep:", this.currentStep);
-
     this.currentStep++;
-    this.clearCurrentText();
+    this.continueButton.setVisible(true);
+    this.rejectButton.setVisible(false);
+    this.skipButton.setVisible(true);
 
     switch (this.currentStep) {
       case 1:
-        this.showNarrativeText(
+        this.textAnimationManager.showNarrativeText(
           "Anyone who speaks to The Great Dreamer in their mind has exited their plane, because The Great Dreamer lives outside of the planes.",
+          () => {
+            console.log("Animation complete, showing continue button");
+            this.continueButton.setVisible(true);
+            this.skipButton.setVisible(false);
+          },
         );
         break;
       case 2:
-        this.showNarrativeText(
+        this.textAnimationManager.showNarrativeText(
           'The Dreamer wonders "What is it like outside of the planes, where I am? Are there plants and towns and people here too?"',
+          () => {
+            console.log("Animation complete, showing continue button");
+            this.continueButton.setVisible(true);
+            this.skipButton.setVisible(false);
+          },
         );
         break;
       case 3:
-        this.showNarrativeText(
+        this.textAnimationManager.showNarrativeText(
           "The Dreamer thinks of many such things that could be outside of the planes, and so they begin to appear...",
+          () => {
+            console.log("Animation complete, showing continue button");
+            this.continueButton.setVisible(true);
+            this.skipButton.setVisible(false);
+          },
         );
         break;
       case 4:
@@ -81,96 +124,31 @@ export class CharacterCreationScene extends Phaser.Scene {
     }
   }
 
-  showNarrativeText(text: string) {
-    console.log("showNarrativeText called with:", text);
+  rejectSuggestion() {
+    this.continueButton.setVisible(false);
+    this.rejectButton.setVisible(false);
 
-    this.clearCurrentText();
-    const centerX = this.cameras.main.width / 2;
-    const centerY = this.cameras.main.height / 2;
-
-    try {
-      this.currentTextAnimation = animateText(
-        this,
-        centerX,
-        centerY,
-        text,
-        "typing",
-        {
-          fontSize: "16px",
-          color: "#fff",
-          wordWrap: { width: 300 },
-          align: "center",
-        },
-        () => {
-          console.log("Text animation complete callback");
-          this.continueButton.setVisible(true);
-        },
-      );
-    } catch (error) {
-      console.error("Error during text animation:", error);
-    }
-  }
-
-  clearCurrentText() {
-    console.log("Clearing current text");
-    if (this.currentTextAnimation) {
-      this.currentTextAnimation.destroy();
-      this.currentTextAnimation = null;
-    }
-    this.continueButton?.setVisible(false);
-    this.rejectButton?.setVisible(false);
+    this.textAnimationManager.showNarrativeText(
+      "Oh, what's your name then?",
+      () => {
+        this.showNameButton();
+      },
+    );
   }
 
   suggestCharacter() {
-    this.clearCurrentText();
     this.suggestedClass =
       playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
       "warrior";
     this.suggestedName = this.getRandomName();
 
-    const centerX = this.cameras.main.width / 2;
-    const centerY = this.cameras.main.height / 2;
-
-    this.currentTextAnimation = animateText(
-      this,
-      centerX,
-      centerY,
+    this.textAnimationManager.showNarrativeText(
       `He thinks of you, ${this.suggestedClass === "archer" ? "an" : "a"} ${
         this.suggestedClass
       } called ${this.suggestedName}...`,
-      "typing",
-      {
-        fontSize: "16px",
-        color: "#fff",
-        wordWrap: { width: 300 },
-        align: "center",
-      },
       () => {
-        if (this.continueButton) this.continueButton.setVisible(true);
-        if (this.rejectButton) this.rejectButton.setVisible(true);
-      },
-    );
-  }
-
-  rejectSuggestion() {
-    this.clearCurrentText();
-    const centerX = this.cameras.main.width / 2;
-    const centerY = this.cameras.main.height / 2 - 100;
-
-    this.currentTextAnimation = animateText(
-      this,
-      centerX,
-      centerY,
-      "Oh, what's your name then?",
-      "typing",
-      {
-        fontSize: "16px",
-        color: "#fff",
-        wordWrap: { width: 300 },
-        align: "center",
-      },
-      () => {
-        this.showNameButton();
+        this.continueButton.setVisible(true);
+        this.rejectButton.setVisible(true);
       },
     );
   }
@@ -180,7 +158,6 @@ export class CharacterCreationScene extends Phaser.Scene {
     const centerX = this.cameras.main.width / 2;
     const buttonY = this.cameras.main.height / 2 + 50;
 
-    // this block is needed, although I'm not sure why...
     if (this.nameButton) {
       this.nameButton.destroy();
     }
@@ -191,8 +168,9 @@ export class CharacterCreationScene extends Phaser.Scene {
       centerX,
       buttonY,
       () => {
-        this.showNameInput();
+        console.log("Name button clicked");
         this.nameButton.destroy();
+        this.showNameInput();
       },
     );
 
@@ -216,7 +194,7 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   showNameInput() {
     console.log("showNameInput called");
-    this.clearCurrentText();
+    this.textAnimationManager.clearCurrentText();
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2 - 50;
 
@@ -288,7 +266,9 @@ export class CharacterCreationScene extends Phaser.Scene {
   confirmCustomCharacter() {
     const name = (this.nameInput.node as HTMLInputElement).value.trim();
     if (!name || !this.selectedClass) {
-      this.showErrorMessage("Please enter a name and select a class");
+      this.textAnimationManager.showErrorText(
+        "Please enter a name and select a class",
+      );
       return;
     }
     this.startGame(name, this.selectedClass);
