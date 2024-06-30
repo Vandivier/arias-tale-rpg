@@ -150,30 +150,37 @@ export const animateText = (
       );
     } else {
       console.log("Text animation complete");
-      if (onComplete) onComplete();
+      onComplete?.();
     }
   };
 
   // Start the animation
   animateNextCharacter();
 
-  // TODO: fix skipping animation
-  // const skipAnimation = () => {
-  //   console.log("Animation skipped");
-  //   scene.time.removeAllEvents();
-  //   textObject.setText(text);
-  //   if (onComplete) onComplete();
-  // };
-
-  // const skipHandler = scene.input.once("pointerdown", skipAnimation);
+  scene.input.once("pointerdown", () =>
+    skipAnimation(scene, textObject, text, onComplete),
+  );
 
   return {
     textObject,
     destroy: () => {
       console.log("Destroying text animation");
-      scene.time.removeAllEvents();
-      // skipHandler.destroy();
-      textObject.destroy();
+      scene?.sys?.isActive() && scene.time.removeAllEvents();
+      textObject?.destroy();
     },
   };
+};
+
+export const skipAnimation = (
+  scene: Phaser.Scene,
+  textObject: Phaser.GameObjects.Text,
+  text: string,
+  onComplete?: () => void,
+) => {
+  if (scene?.sys?.isActive()) {
+    console.log("Animation skipped");
+    scene.time.removeAllEvents();
+    textObject.setText(text);
+    onComplete?.();
+  }
 };
