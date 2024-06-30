@@ -309,8 +309,9 @@ export class BattleScene extends Phaser.Scene {
 
   getPlayerStatsString(): string {
     return [
-      `HP: ${this.player.health}/${this.player.maxHealth}`,
+      `Name: ${this.player.name}`,
       `Class: ${this.player.class}`,
+      `HP: ${this.player.health}/${this.player.maxHealth}`,
       `Level: ${this.player.level}`,
       `XP: ${this.player.experience}`,
       `Score: ${this.player.score}`,
