@@ -5,7 +5,7 @@ import {
   type PlayerCharacter,
   type PlayerClass,
 } from "./types";
-import { typeText } from "./utils";
+import { animateText } from "./utils";
 
 export class CharacterCreationScene extends Phaser.Scene {
   private currentStep: number = 0;
@@ -64,7 +64,7 @@ export class CharacterCreationScene extends Phaser.Scene {
     switch (this.currentStep) {
       case 1:
         this.showNarrativeText(
-          "Anyone who contacts The Great Dreamer through their mind in the game is operating outside of their plane, because their thought travels to The Great Dreamer who lives across planes and also outside of them.",
+          "Anyone who speaks to The Great Dreamer in their mind has exited their plane, because The Great Dreamer lives outside of the planes.",
         );
         break;
       case 2:
@@ -93,11 +93,12 @@ export class CharacterCreationScene extends Phaser.Scene {
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    this.currentTextObject = typeText(
+    this.currentTextObject = animateText(
       this,
       centerX,
       centerY,
       text,
+      "typing",
       {
         fontSize: "16px",
         color: "#fff",
@@ -128,13 +129,14 @@ export class CharacterCreationScene extends Phaser.Scene {
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    this.currentTextObject = typeText(
+    this.currentTextObject = animateText(
       this,
       centerX,
       centerY,
       `He thinks of you, ${this.suggestedClass === "archer" ? "an" : "a"} ${
         this.suggestedClass
       } called ${this.suggestedName}...`,
+      "typing",
       {
         fontSize: "16px",
         color: "#fff",
@@ -156,11 +158,12 @@ export class CharacterCreationScene extends Phaser.Scene {
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
-    this.currentTextObject = typeText(
+    this.currentTextObject = animateText(
       this,
       centerX,
       centerY,
       "Oh, what is your name then?",
+      "typing",
       {
         fontSize: "16px",
         color: "#fff",

@@ -1,11 +1,11 @@
 import Phaser from "phaser";
-import { type GameObjects, type Scene } from "phaser";
 import {
-  type PlayerCharacter,
   type Enemy,
-  type Item,
   type EquipmentSlot,
+  type Item,
+  type PlayerCharacter,
 } from "./types";
+type TextType = "typing" | "dialogue";
 
 export const AVATAR_MAX_HEIGHT = 200;
 
@@ -107,51 +107,71 @@ export function generateStoreItems(): Item[] {
   return items;
 }
 
-// TODO: maybe play a shorter sound for punctuation
-// const punctuationSound = scene.sound.add('punctuationSound', { volume: 0.5 });
-export const typeText = (
+export const animateText = (
   scene: Phaser.Scene,
   x: number,
   y: number,
   text: string,
+  textType: TextType = "typing",
   style: Phaser.Types.GameObjects.Text.TextStyle = {},
   onComplete?: () => void,
 ) => {
   let index = 0;
   let displayedText = "";
-  const typingSound = scene.sound.add("typingSound", {
-    loop: true,
-    volume: 0.5,
-  });
+  const typingSounds = [
+    scene.sound.add("typingSound1"),
+    scene.sound.add("typingSound2"),
+    scene.sound.add("typingSound3"),
+    scene.sound.add("typingSound4"),
+  ];
+  const dialogueSounds = [
+    scene.sound.add("dialogSound1"),
+    scene.sound.add("dialogSound2"),
+    scene.sound.add("dialogSound3"),
+  ];
 
   const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
   const baseDelay = 50;
-  const delay = baseDelay + Math.random() * 30 - 15;
 
-  typingSound.play();
+  const playSound = () => {
+    const soundArray = textType === "typing" ? typingSounds : dialogueSounds;
+    const randomSound = Phaser.Math.RND.pick(soundArray);
+    randomSound.play({ volume: 0.5 });
+  };
 
   const timer = scene.time.addEvent({
-    delay,
+    delay: baseDelay,
     callback: () => {
       if (index < text.length) {
+        if (text[index] !== " ") {
+          playSound();
+        }
         displayedText += text[index];
         textObject.setText(displayedText);
         index++;
+
+        // Randomize the delay for the next character
+        timer.delay = baseDelay + Math.random() * 30 - 15;
+
+        // If this is the last character, call onComplete
+        if (index === text.length && onComplete) {
+          onComplete();
+        }
       } else {
         timer.remove();
-        typingSound.stop();
-        if (onComplete) onComplete();
       }
     },
     repeat: text.length - 1,
   });
 
-  scene.input.on("pointerdown", () => {
+  const skipAnimation = () => {
     timer.remove();
     textObject.setText(text);
-    typingSound.stop();
     if (onComplete) onComplete();
-  });
+    scene.input.off("pointerdown", skipAnimation); // Remove the listener
+  };
+
+  scene.input.on("pointerdown", skipAnimation);
 
   return textObject;
 };

@@ -6,8 +6,13 @@ export class StartGameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.audio("typingSound", "assets/audio/typing.wav");
-    this.load.audio("dialogSound", "assets/audio/dialogue.wav");
+    this.load.audio("typingSound1", "assets/audio/typing_1.mp3");
+    this.load.audio("typingSound2", "assets/audio/typing_2.mp3");
+    this.load.audio("typingSound3", "assets/audio/typing_3.mp3");
+    this.load.audio("typingSound4", "assets/audio/typing_4.mp3");
+    this.load.audio("dialogSound1", "assets/audio/dialogue_1.mp3");
+    this.load.audio("dialogSound2", "assets/audio/dialogue_2.mp3");
+    this.load.audio("dialogSound3", "assets/audio/dialogue_3.mp3");
   }
 
   create() {
@@ -50,7 +55,6 @@ export class StartGameScene extends Phaser.Scene {
   }
 
   startGame() {
-    this.sound.play("typingSound");
     this.scene.start("CharacterCreation");
   }
 }
