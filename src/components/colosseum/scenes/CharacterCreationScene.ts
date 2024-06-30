@@ -188,6 +188,11 @@ export class CharacterCreationScene extends Phaser.Scene {
     const centerX = this.cameras.main.width / 2;
     const buttonY = this.cameras.main.height / 2 + 50;
 
+    // this block is needed, although I'm not sure why...
+    if (this.nameButton) {
+      this.nameButton.destroy();
+    }
+
     this.nameButton = createButton(
       this,
       "My name is...",
@@ -195,8 +200,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       buttonY,
       () => {
         this.showNameInput();
-        this.nameButton.setVisible(false);
-        console.log("got here!");
+        this.nameButton.destroy();
       },
     );
 
