@@ -16,11 +16,8 @@ export function scaleSprite(
   sprite.setScale(scale);
 }
 
-export function calculateDamage(player: PlayerCharacter): number {
-  const baseDamage = Phaser.Math.Between(5, 15);
-  const classMultiplier =
-    player.class === "warrior" ? 1.2 : player.class === "mage" ? 1.5 : 1.3;
-  return Math.round(baseDamage * classMultiplier);
+export function calculateDamage(_player: PlayerCharacter): number {
+  return Phaser.Math.Between(1, 20);
 }
 
 export function calculateEnemyDamage(enemy: Enemy): number {
@@ -133,3 +130,94 @@ export const createButton = (
 
   return button;
 };
+
+export const battlers = [
+  {
+    id: 2,
+    class: "archer",
+    eyeColor: "black",
+    hairColor: "black",
+    gender: "female",
+    fileName: "female-archer-black-hair.webp",
+  },
+  {
+    id: 3,
+    class: "mage",
+    eyeColor: "black",
+    hairColor: "black",
+    gender: "female",
+    fileName: "female-black-holy-mage.webp",
+  },
+  {
+    id: 4,
+    class: "archer",
+    eyeColor: "brown",
+    hairColor: "brown",
+    gender: "male",
+    fileName: "male-archer-brown-hair.webp",
+  },
+  {
+    id: 5,
+    class: "archer",
+    eyeColor: "blue",
+    hairColor: "blonde",
+    gender: "male",
+    fileName: "male-blonde-archer.webp",
+  },
+  {
+    id: 6,
+    class: "mage",
+    eyeColor: "gray",
+    hairColor: "gray",
+    gender: "male",
+    fileName: "male-mage-gray-hair.webp",
+  },
+  {
+    id: 7,
+    class: "mage",
+    eyeColor: "red",
+    hairColor: "red",
+    gender: "male",
+    fileName: "male-red-mage.webp",
+  },
+  {
+    id: 8,
+    class: "warrior",
+    eyeColor: "black",
+    hairColor: "black",
+    gender: "male",
+    fileName: "swordsman-black-hair.webp",
+  },
+  {
+    id: 9,
+    class: "warrior",
+    eyeColor: "brown",
+    hairColor: "brown",
+    gender: "male",
+    fileName: "swordsman-brown-hair.webp",
+  },
+  {
+    id: 10,
+    class: "warrior",
+    eyeColor: "gray",
+    hairColor: "gray",
+    gender: "male",
+    fileName: "swordsman-gray-hair.webp",
+  },
+  {
+    id: 11,
+    class: "warrior",
+    eyeColor: "blue",
+    hairColor: "blonde",
+    gender: "female",
+    fileName: "swordswoman-blonde.webp",
+  },
+  {
+    id: 12,
+    class: "warrior",
+    eyeColor: "brown",
+    hairColor: "two-color",
+    gender: "female",
+    fileName: "swordswoman-two-color-hair.webp",
+  },
+];

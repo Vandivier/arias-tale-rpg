@@ -36,18 +36,19 @@ export interface Equipment {
 }
 
 export interface PlayerCharacter {
-  name: string;
+  battlerId: number;
   class: PlayerClass;
   effects?: {
     poisonedSmog?: number;
   };
-  health: number;
-  maxHealth: number;
-  level: number;
+  equipment: Equipment;
   experience: number;
   gold: number;
+  health: number;
   inventory: Item[];
-  equipment: Equipment;
+  level: number;
+  maxHealth: number;
+  name: string;
   score: number;
 }
 

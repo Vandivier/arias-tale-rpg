@@ -5,20 +5,25 @@ import {
   type PlayerCharacter,
   type PlayerClass,
 } from "./types";
-import { createButton } from "./utils/main";
+import { battlers, createButton } from "./utils/main";
 import { TextAnimationManager } from "./services/TextAnimationManager";
 
 export class CharacterCreationScene extends Phaser.Scene {
-  private currentStep: number = 0;
+  private battlerImage!: Phaser.GameObjects.Image;
+  private classButtons: Phaser.GameObjects.Text[] = [];
+  private confirmButton!: Phaser.GameObjects.Text;
   private continueButton!: Phaser.GameObjects.Text;
-  private rejectButton!: Phaser.GameObjects.Text;
-  private skipButton!: Phaser.GameObjects.Text;
+  private currentBattlerIndex: number = 0;
+  private currentStep: number = 0;
+  private errorText!: Phaser.GameObjects.Text;
   private nameButton!: Phaser.GameObjects.Text;
   private nameInput!: Phaser.GameObjects.DOMElement;
-  private classButtons: Phaser.GameObjects.Text[] = [];
+  private rejectButton!: Phaser.GameObjects.Text;
+  private rejectImageButton!: Phaser.GameObjects.Text; // New button for rejecting image
+  private selectedBattlerId: number = 0; // Store the selected battler ID
   private selectedClass: PlayerClass | null = null;
+  private skipButton!: Phaser.GameObjects.Text;
   private suggestedName: string = "";
-  private suggestedClass: PlayerClass | null = null;
   private textAnimationManager!: TextAnimationManager;
 
   constructor() {
@@ -57,8 +62,18 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.cameras.main.height - 120,
       () => {
         console.log("Reject button clicked");
-        this.textAnimationManager.completeCurrentAnimation();
         this.rejectSuggestion();
+      },
+    );
+
+    this.rejectImageButton = createButton(
+      this,
+      "That's not me",
+      centerX,
+      this.cameras.main.height - 120,
+      () => {
+        console.log("Reject image button clicked");
+        this.nextBattlerImage();
       },
     );
 
@@ -74,43 +89,29 @@ export class CharacterCreationScene extends Phaser.Scene {
     );
 
     this.rejectButton.setVisible(false);
+    this.rejectImageButton.setVisible(false); // Hide by default
     this.skipButton.setVisible(false);
   }
 
   nextStep() {
     console.log("nextStep called, currentStep:", this.currentStep);
     this.currentStep++;
+
+    // Set default button visibility
     this.continueButton.setVisible(true);
     this.rejectButton.setVisible(false);
-    this.skipButton.setVisible(true);
+    this.rejectImageButton.setVisible(false);
+    this.skipButton.setVisible(false);
 
     switch (this.currentStep) {
       case 1:
-        this.textAnimationManager.showNarrativeText(
-          "Anyone who speaks to The Great Dreamer in their mind has exited their plane, because The Great Dreamer lives outside of the planes.",
-          () => {
-            console.log("Animation complete, showing continue button");
-            this.continueButton.setVisible(true);
-            this.skipButton.setVisible(false);
-          },
-        );
-        break;
       case 2:
-        this.textAnimationManager.showNarrativeText(
-          'The Dreamer wonders "What is it like outside of the planes, where I am? Are there plants and towns and people here too?"',
-          () => {
-            console.log("Animation complete, showing continue button");
-            this.continueButton.setVisible(true);
-            this.skipButton.setVisible(false);
-          },
-        );
-        break;
       case 3:
+        this.skipButton.setVisible(true);
         this.textAnimationManager.showNarrativeText(
-          "The Dreamer thinks of many such things that could be outside of the planes, and so they begin to appear...",
+          this.getNarrativeText(this.currentStep),
           () => {
-            console.log("Animation complete, showing continue button");
-            this.continueButton.setVisible(true);
+            console.log("Animation complete, continue button already visible");
             this.skipButton.setVisible(false);
           },
         );
@@ -118,10 +119,83 @@ export class CharacterCreationScene extends Phaser.Scene {
       case 4:
         this.suggestCharacter();
         break;
+      case 5:
+        this.showBattlerImageConfirmation();
+        break;
       default:
         console.log("Reached default case in nextStep");
         this.startGame();
     }
+  }
+
+  getNarrativeText(step: number): string {
+    switch (step) {
+      case 1:
+        return "Anyone who speaks to The Great Dreamer in their mind has exited their plane, because The Great Dreamer lives outside of the planes.";
+      case 2:
+        return 'The Dreamer wonders "What is it like outside of the planes, where I am? Are there plants and towns and people here too?"';
+      case 3:
+        return "The Dreamer thinks of many such things that could be outside of the planes, and so they begin to appear...";
+      default:
+        return "";
+    }
+  }
+
+  suggestCharacter() {
+    this.selectedClass =
+      playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
+      "warrior";
+    this.suggestedName = this.getRandomName();
+
+    this.textAnimationManager.showNarrativeText(
+      `He thinks of you, ${this.selectedClass === "archer" ? "an" : "a"} ${
+        this.selectedClass
+      } called ${this.suggestedName}...`,
+      () => {
+        this.rejectButton.setVisible(true);
+      },
+    );
+  }
+
+  showBattlerImageConfirmation() {
+    const battlersForClass = battlers.filter(
+      (battler) => battler.class === this.selectedClass,
+    );
+
+    if (battlersForClass.length === 0) {
+      console.error("No battlers found for the selected class");
+      return;
+    }
+
+    const battler = battlersForClass[this.currentBattlerIndex];
+    if (!battler) {
+      console.error("Battler not found");
+      return;
+    }
+    const battlerImageKey = `battler-${battler.id}`;
+
+    if (this.battlerImage) {
+      this.battlerImage.destroy();
+    }
+
+    this.load.image(battlerImageKey, `assets/battlers/${battler.fileName}`);
+    this.load.once("complete", () => {
+      this.battlerImage = this.add
+        .image(
+          this.cameras.main.width / 2,
+          this.cameras.main.height / 2 - 50,
+          battlerImageKey,
+        )
+        .setScale(0.25);
+
+      this.continueButton.setText("Right, that's me!");
+      this.continueButton.setVisible(true);
+      this.continueButton.off("pointerdown");
+      this.continueButton.on("pointerdown", () => this.nextStep());
+      this.rejectImageButton.setVisible(true);
+      this.selectedBattlerId = battler.id;
+    });
+    this.load.start();
   }
 
   rejectSuggestion() {
@@ -132,23 +206,6 @@ export class CharacterCreationScene extends Phaser.Scene {
       "Oh, what's your name then?",
       () => {
         this.showNameButton();
-      },
-    );
-  }
-
-  suggestCharacter() {
-    this.suggestedClass =
-      playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
-      "warrior";
-    this.suggestedName = this.getRandomName();
-
-    this.textAnimationManager.showNarrativeText(
-      `He thinks of you, ${this.suggestedClass === "archer" ? "an" : "a"} ${
-        this.suggestedClass
-      } called ${this.suggestedName}...`,
-      () => {
-        this.continueButton.setVisible(true);
-        this.rejectButton.setVisible(true);
       },
     );
   }
@@ -209,15 +266,30 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.classButtons.push(button);
     });
 
-    const confirmButton = createButton(
+    this.confirmButton = createButton(
       this,
       "Confirm",
       centerX,
       this.cameras.main.height - 70,
-      () => this.confirmCustomCharacter(),
+      () => {
+        if (this.confirmCustomCharacter()) {
+          this.clearCustomCharacterUI();
+          this.nextStep();
+        }
+      },
     );
 
-    confirmButton.setVisible(true);
+    this.confirmButton.setVisible(true);
+
+    // Create error text (initially invisible)
+    this.errorText = this.add
+      .text(centerX, this.cameras.main.height - 120, "", {
+        fontSize: "16px",
+        color: "#ff0000",
+        align: "center",
+      })
+      .setOrigin(0.5)
+      .setVisible(false);
   }
 
   createClassButton(cls: PlayerClass, x: number, y: number) {
@@ -263,44 +335,43 @@ export class CharacterCreationScene extends Phaser.Scene {
     });
   }
 
-  confirmCustomCharacter() {
+  confirmCustomCharacter(): boolean {
     const name = (this.nameInput.node as HTMLInputElement).value.trim();
     if (!name || !this.selectedClass) {
-      this.textAnimationManager.showErrorText(
-        "Please enter a name and select a class",
-      );
-      return;
+      this.showError("Please enter a name and select a class");
+      return false;
     }
-    this.startGame(name, this.selectedClass);
+    this.suggestedName = name; // Store the custom name
+    return true;
   }
 
-  showErrorMessage(message: string) {
-    const existingError = this.children.getByName("errorMessage");
-    if (existingError) {
-      existingError.destroy();
-    }
-
-    this.add
-      .text(
-        this.cameras.main.width / 2,
-        this.cameras.main.height - 20,
-        message,
-        {
-          fontSize: "16px",
-          color: "#ff0000",
-          wordWrap: { width: this.cameras.main.width * 0.8 },
-          align: "center",
-        },
-      )
-      .setOrigin(0.5)
-      .setName("errorMessage");
+  showError(message: string) {
+    this.errorText.setText(message).setVisible(true);
+    // Hide the error after 3 seconds
+    this.time.delayedCall(3000, () => {
+      this.errorText.setVisible(false);
+    });
   }
 
-  startGame(name?: string, playerClass?: PlayerClass) {
-    const finalName = name ?? this.suggestedName;
-    const finalClass = playerClass ?? this.suggestedClass;
+  clearCustomCharacterUI() {
+    this.nameInput.destroy();
+    this.classButtons.forEach((button) => button.destroy());
+    this.confirmButton.destroy();
+    this.errorText.destroy();
+  }
 
-    if (!finalName || !finalClass) {
+  nextBattlerImage() {
+    const battlersForClass = battlers.filter(
+      (battler) => battler.class === this.selectedClass,
+    );
+
+    this.currentBattlerIndex =
+      (this.currentBattlerIndex + 1) % battlersForClass.length;
+    this.showBattlerImageConfirmation();
+  }
+
+  startGame() {
+    if (!this.suggestedName || !this.selectedClass) {
       console.error("Name or class is undefined");
       return;
     }
@@ -314,8 +385,8 @@ export class CharacterCreationScene extends Phaser.Scene {
     };
 
     const player: PlayerCharacter = {
-      name: finalName,
-      class: finalClass,
+      name: this.suggestedName,
+      class: this.selectedClass,
       health: 100,
       maxHealth: 100,
       level: 1,
@@ -324,6 +395,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       inventory: [],
       equipment: initialEquipment,
       score: 0,
+      battlerId: this.selectedBattlerId,
     };
 
     this.scene.start("Battle", { player });

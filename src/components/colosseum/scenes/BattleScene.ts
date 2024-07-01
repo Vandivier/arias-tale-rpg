@@ -1,31 +1,36 @@
 import Phaser from "phaser";
 import {
-  type PlayerCharacter,
   type Enemy,
   type EnemyRarity,
   type EnemyTier,
   type Item,
+  type PlayerCharacter,
 } from "./types";
 import {
   AVATAR_MAX_HEIGHT,
-  scaleSprite,
+  battlers,
   calculateDamage,
   calculateEnemyDamage,
+  createButton,
   generateLoot,
+  scaleSprite,
 } from "./utils/main";
 
+const BASE_EXPERIENCE = 10;
+
 export class BattleScene extends Phaser.Scene {
-  private player!: PlayerCharacter;
-  private enemy!: Enemy;
-  private playerSprite!: Phaser.Physics.Arcade.Sprite;
   private actionButtons: Phaser.GameObjects.Text[] = [];
-  private messageText!: Phaser.GameObjects.Text;
-  private playerStatsText!: Phaser.GameObjects.Text;
+  private continueButton!: Phaser.GameObjects.Text;
+  private enemy!: Enemy;
   private enemyStatsText!: Phaser.GameObjects.Text;
-  private victories: number = 0;
   private itemSelectionTexts: Phaser.GameObjects.Text[] = [];
   private messageLog: string[] = [];
   private messageLogText!: Phaser.GameObjects.Text;
+  private player!: PlayerCharacter;
+  private playerSprite!: Phaser.Physics.Arcade.Sprite;
+  private playerStatsText!: Phaser.GameObjects.Text;
+  private playerTurn: boolean = true;
+  private victories: number = 0;
 
   constructor() {
     super("Battle");
@@ -36,10 +41,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("warrior", "searchable-images/16-eidolon.png");
-    this.load.image("mage", "searchable-images/16-eidolon.png");
-    this.load.image("archer", "searchable-images/16-eidolon.png");
-    this.load.image("enemy", "searchable-images/16-eidolon.png");
+    this.load.audio("defaultAttackSound", "assets/audio/slam.mp3");
   }
 
   create() {
@@ -48,11 +50,26 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    this.createPlayerSprite();
-    this.createEnemy();
-    this.createHUD();
-    this.createActionButtons();
-    this.createMessageLog();
+    this.loadPlayerSprite();
+  }
+
+  loadPlayerSprite() {
+    const battler = battlers.find((b) => b.id === this.player.battlerId);
+    if (!battler) {
+      console.error("No battler found for the player");
+      return;
+    }
+
+    this.load.image("playerImage", `assets/battlers/${battler.fileName}`);
+    this.load.once("complete", () => {
+      this.createPlayerSprite();
+      this.createHUD();
+      this.createEnemy();
+      this.createActionButtons();
+      this.createMessageLog();
+      this.createContinueButton();
+    });
+    this.load.start();
   }
 
   createHUD() {
@@ -63,7 +80,7 @@ export class BattleScene extends Phaser.Scene {
       this.getPlayerStatsString(),
       { fontSize: "10px", color: "#fff" },
     );
-    this.enemyStatsText = this.add.text(180, hudY, this.getEnemyStatsString(), {
+    this.enemyStatsText = this.add.text(180, hudY, "", {
       fontSize: "10px",
       color: "#fff",
     });
@@ -73,20 +90,16 @@ export class BattleScene extends Phaser.Scene {
     const actions = ["Attack", "Defend", "Run", "Use Item"];
     const buttonWidth = 155;
     const buttonHeight = 40;
+    const startX = this.cameras.main.width / 2 - buttonWidth + 60;
     const startY = 350;
 
     actions.forEach((action, index) => {
-      const x = 10 + (index % 2) * (buttonWidth + 10);
-      const y = startY + Math.floor(index / 2) * (buttonHeight + 10);
-      const button = this.add
-        .text(x, y, action, {
-          fontSize: "16px",
-          color: "#fff",
-          backgroundColor: "#333",
-          padding: { x: 10, y: 5 },
-        })
-        .setInteractive()
-        .on("pointerdown", () => this.handleAction(action));
+      const x = startX + (index % 2) * (buttonWidth + 20);
+      const y = startY + Math.floor(index / 2) * (buttonHeight + 20);
+      const button = createButton(this, action, x, y, () =>
+        this.handleAction(action),
+      );
+      button.setVisible(true);
       this.actionButtons.push(button);
     });
   }
@@ -101,20 +114,63 @@ export class BattleScene extends Phaser.Scene {
   }
 
   createPlayerSprite() {
-    this.playerSprite = this.physics.add.sprite(85, 200, this.player.class);
-    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT * 0.6); // Further reduced size
+    this.playerSprite = this.physics.add.sprite(85, 200, "playerImage");
+    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT * 0.6);
   }
 
   createEnemy() {
     const enemyConfig = this.generateEnemyConfig();
-    this.enemy = {
-      ...enemyConfig,
-      sprite: this.physics.add.sprite(255, 200, "enemy"),
-    };
-    scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.6); // Further reduced size
+    const randomBattler = battlers[Phaser.Math.Between(0, battlers.length - 1)];
+    if (!randomBattler) {
+      console.error("No battler found for the enemy");
+      return;
+    }
+
+    // Destroy previous enemy sprite if it exists
+    if (this.enemy?.sprite) {
+      this.enemy.sprite.destroy();
+    }
+
+    // Unload the previous enemy image to force refresh
+    this.textures.remove("enemyImage");
+
+    // Load the new enemy image
+    this.load.image("enemyImage", `assets/battlers/${randomBattler.fileName}`);
+    this.load.once("complete", () => {
+      // Create the new enemy sprite
+      this.enemy = {
+        ...enemyConfig,
+        sprite: this.physics.add.sprite(255, 200, "enemyImage"),
+      };
+      scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.6);
+      this.updateHUD();
+      this.playerTurn = true;
+    });
+    this.load.start();
+  }
+
+  createContinueButton() {
+    const centerX = this.cameras.main.width / 2;
+    const centerY = this.cameras.main.height / 2 + 20;
+    this.continueButton = createButton(
+      this,
+      "Continue",
+      centerX,
+      centerY,
+      () => {
+        this.continueButton.setVisible(false);
+        this.playerTurn = true;
+        this.updateHUD();
+        this.createEnemy();
+      },
+    );
+    this.continueButton.setVisible(false);
   }
 
   handleAction(action: string) {
+    if (!this.playerTurn) return;
+    this.playerTurn = false;
+
     switch (action) {
       case "Attack":
         this.attack();
@@ -147,6 +203,10 @@ export class BattleScene extends Phaser.Scene {
   attack() {
     const damage = calculateDamage(this.player);
     this.enemy.health -= damage;
+
+    this.sound.play("defaultAttackSound");
+    this.animateAttack(this.enemy.sprite);
+
     this.showDamageText(this.enemy.sprite, damage);
     this.showMessage(`You dealt ${damage} damage to the enemy!`);
 
@@ -179,10 +239,37 @@ export class BattleScene extends Phaser.Scene {
     this.showMessage(message);
     this.showDamageText(this.playerSprite, damage);
 
+    this.sound.play("defaultAttackSound");
+    this.animateAttack(this.playerSprite);
+
     if (this.player.health <= 0) {
       this.handleDefeat();
+    } else {
+      this.time.delayedCall(0, () => {
+        this.playerTurn = true;
+        this.updateHUD();
+      });
     }
-    this.updateHUD();
+  }
+
+  animateAttack(sprite: Phaser.Physics.Arcade.Sprite) {
+    this.tweens.add({
+      targets: sprite,
+      x: sprite.x - 10,
+      yoyo: true,
+      duration: 100,
+      repeat: 3,
+      onComplete: () => {
+        this.flashSprite(sprite);
+      },
+    });
+  }
+
+  flashSprite(sprite: Phaser.Physics.Arcade.Sprite) {
+    sprite.setTint(0xffffff);
+    this.time.delayedCall(100, () => {
+      sprite.clearTint();
+    });
   }
 
   defend() {
@@ -193,7 +280,7 @@ export class BattleScene extends Phaser.Scene {
   run() {
     if (Math.random() < 0.5) {
       this.showMessage("You successfully fled!");
-      this.createEnemy();
+      this.createEncounter();
     } else {
       this.showMessage("You failed to run away!");
       this.enemyTurn();
@@ -201,9 +288,18 @@ export class BattleScene extends Phaser.Scene {
     this.updateHUD();
   }
 
+  createEncounter() {
+    if (Math.random() < 0.5) {
+      this.createEnemy();
+    } else {
+      this.scene.start("Encounter", { player: this.player });
+    }
+  }
+
   showItemSelection() {
     if (this.player.inventory.length === 0) {
       this.showMessage("You don't have any items!");
+      this.playerTurn = true;
       return;
     }
 
@@ -322,6 +418,9 @@ export class BattleScene extends Phaser.Scene {
   }
 
   getEnemyStatsString(): string {
+    if (!this.enemy) {
+      return "No enemy";
+    }
     return [
       `Enemy HP: ${this.enemy.health}/${this.enemy.maxHealth}`,
       `Rarity: ${this.enemy.rarity}`,
@@ -330,8 +429,16 @@ export class BattleScene extends Phaser.Scene {
   }
 
   updateHUD() {
-    this.playerStatsText.setText(this.getPlayerStatsString());
-    this.enemyStatsText.setText(this.getEnemyStatsString());
+    if (this.playerStatsText) {
+      this.playerStatsText.setText(this.getPlayerStatsString());
+    }
+    if (this.enemyStatsText) {
+      if (this.enemy) {
+        this.enemyStatsText.setText(this.getEnemyStatsString());
+      } else {
+        this.enemyStatsText.setText("");
+      }
+    }
   }
 
   handleVictory() {
@@ -339,7 +446,10 @@ export class BattleScene extends Phaser.Scene {
 
     const rarityMultiplier = this.getRarityMultiplier(this.enemy.rarity);
 
-    const expGained = Math.floor(Phaser.Math.Between(8, 12) * rarityMultiplier);
+    const expGained = Math.floor(
+      Phaser.Math.Between(BASE_EXPERIENCE * 0.5, BASE_EXPERIENCE * 1.5) *
+        rarityMultiplier,
+    );
     const goldGained = Math.floor(Phaser.Math.Between(4, 6) * rarityMultiplier);
     const scoreGained = Math.floor(100 * rarityMultiplier);
 
@@ -361,16 +471,21 @@ export class BattleScene extends Phaser.Scene {
       );
     }
 
+    this.checkLevelUp();
     this.updateHUD();
+    this.continueButton.setVisible(true);
+  }
 
-    this.time.delayedCall(2000, () => {
-      if (Math.random() < 0.05) {
-        this.scene.start("Store", { player: this.player });
-      } else {
-        this.createEnemy();
-        this.updateHUD();
-      }
-    });
+  checkLevelUp() {
+    const levelUpXp = (this.player.level ^ 1.5) * BASE_EXPERIENCE;
+    if (this.player.experience >= levelUpXp) {
+      this.player.level++;
+      this.player.maxHealth += 10;
+      this.player.health = this.player.maxHealth;
+      this.showMessage(
+        `Congratulations! You've reached level ${this.player.level}!`,
+      );
+    }
   }
 
   getRarityMultiplier(rarity: EnemyRarity): number {

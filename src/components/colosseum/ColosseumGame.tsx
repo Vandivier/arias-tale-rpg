@@ -3,11 +3,12 @@ import React, { useEffect, useRef } from "react";
 
 import { BattleScene } from "./scenes/BattleScene";
 import { CharacterCreationScene } from "./scenes/CharacterCreationScene";
+import { EncounterScene } from "./scenes/EncounterScene";
 import { GameOverScene } from "./scenes/GameOverScene";
 import { InventoryScene } from "./scenes/InventoryScene";
 import { LeaderboardScene } from "./scenes/LeaderboardScene";
-import { StoreScene } from "./scenes/StoreScene";
 import { StartGameScene } from "./scenes/StartGameScene";
+import { StoreScene } from "./scenes/StoreScene";
 
 const ColosseumGame: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
@@ -23,8 +24,9 @@ const ColosseumGame: React.FC = () => {
           StartGameScene,
           CharacterCreationScene,
           BattleScene,
-          InventoryScene,
+          EncounterScene,
           StoreScene,
+          InventoryScene,
           GameOverScene,
           LeaderboardScene,
         ],

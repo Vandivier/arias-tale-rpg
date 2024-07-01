@@ -36,7 +36,7 @@ export class EncounterScene extends Phaser.Scene {
   }
 
   randomEncounter() {
-    const encounterType = Phaser.Math.Between(1, 5);
+    const encounterType = Phaser.Math.Between(1, 10);
     switch (encounterType) {
       case 1:
         this.friendlyCharacter();
@@ -53,6 +53,12 @@ export class EncounterScene extends Phaser.Scene {
       case 5:
         this.dangerousTrap();
         break;
+      case 6:
+      case 7:
+      case 8:
+      case 9:
+      case 10:
+        this.scene.start("Store", { player: this.player });
     }
   }
 
