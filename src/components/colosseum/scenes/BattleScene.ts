@@ -16,6 +16,8 @@ import {
   scaleSprite,
 } from "./utils/main";
 
+const BASE_EXPERIENCE = 10;
+
 export class BattleScene extends Phaser.Scene {
   private actionButtons: Phaser.GameObjects.Text[] = [];
   private continueButton!: Phaser.GameObjects.Text;
@@ -61,8 +63,8 @@ export class BattleScene extends Phaser.Scene {
     this.load.image("playerImage", `assets/battlers/${battler.fileName}`);
     this.load.once("complete", () => {
       this.createPlayerSprite();
-      this.createEnemy();
       this.createHUD();
+      this.createEnemy();
       this.createActionButtons();
       this.createMessageLog();
       this.createContinueButton();
@@ -123,8 +125,19 @@ export class BattleScene extends Phaser.Scene {
       console.error("No battler found for the enemy");
       return;
     }
+
+    // Destroy previous enemy sprite if it exists
+    if (this.enemy?.sprite) {
+      this.enemy.sprite.destroy();
+    }
+
+    // Unload the previous enemy image to force refresh
+    this.textures.remove("enemyImage");
+
+    // Load the new enemy image
     this.load.image("enemyImage", `assets/battlers/${randomBattler.fileName}`);
     this.load.once("complete", () => {
+      // Create the new enemy sprite
       this.enemy = {
         ...enemyConfig,
         sprite: this.physics.add.sprite(255, 200, "enemyImage"),
@@ -286,6 +299,7 @@ export class BattleScene extends Phaser.Scene {
   showItemSelection() {
     if (this.player.inventory.length === 0) {
       this.showMessage("You don't have any items!");
+      this.playerTurn = true;
       return;
     }
 
@@ -415,11 +429,15 @@ export class BattleScene extends Phaser.Scene {
   }
 
   updateHUD() {
-    this.playerStatsText.setText(this.getPlayerStatsString());
-    if (this.enemy) {
-      this.enemyStatsText.setText(this.getEnemyStatsString());
-    } else {
-      this.enemyStatsText.setText("");
+    if (this.playerStatsText) {
+      this.playerStatsText.setText(this.getPlayerStatsString());
+    }
+    if (this.enemyStatsText) {
+      if (this.enemy) {
+        this.enemyStatsText.setText(this.getEnemyStatsString());
+      } else {
+        this.enemyStatsText.setText("");
+      }
     }
   }
 
@@ -428,7 +446,10 @@ export class BattleScene extends Phaser.Scene {
 
     const rarityMultiplier = this.getRarityMultiplier(this.enemy.rarity);
 
-    const expGained = Math.floor(Phaser.Math.Between(8, 12) * rarityMultiplier);
+    const expGained = Math.floor(
+      Phaser.Math.Between(BASE_EXPERIENCE * 0.5, BASE_EXPERIENCE * 1.5) *
+        rarityMultiplier,
+    );
     const goldGained = Math.floor(Phaser.Math.Between(4, 6) * rarityMultiplier);
     const scoreGained = Math.floor(100 * rarityMultiplier);
 
@@ -456,7 +477,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   checkLevelUp() {
-    const levelUpXp = (this.player.level ^ 2) * 10;
+    const levelUpXp = (this.player.level ^ 1.5) * BASE_EXPERIENCE;
     if (this.player.experience >= levelUpXp) {
       this.player.level++;
       this.player.maxHealth += 10;
