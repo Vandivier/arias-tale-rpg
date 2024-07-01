@@ -1,19 +1,19 @@
 import Phaser from "phaser";
 import {
-  type PlayerCharacter,
   type Enemy,
   type EnemyRarity,
   type EnemyTier,
   type Item,
+  type PlayerCharacter,
 } from "./types";
 import {
   AVATAR_MAX_HEIGHT,
   battlers,
-  scaleSprite,
   calculateDamage,
   calculateEnemyDamage,
-  generateLoot,
   createButton,
+  generateLoot,
+  scaleSprite,
 } from "./utils/main";
 
 export class BattleScene extends Phaser.Scene {
