@@ -18,6 +18,7 @@ import {
 
 export class BattleScene extends Phaser.Scene {
   private actionButtons: Phaser.GameObjects.Text[] = [];
+  private continueButton!: Phaser.GameObjects.Text;
   private enemy!: Enemy;
   private enemyStatsText!: Phaser.GameObjects.Text;
   private itemSelectionTexts: Phaser.GameObjects.Text[] = [];
@@ -38,7 +39,6 @@ export class BattleScene extends Phaser.Scene {
   }
 
   preload() {
-    // Preload the attack sound
     this.load.audio("defaultAttackSound", "assets/audio/slam.mp3");
   }
 
@@ -65,6 +65,7 @@ export class BattleScene extends Phaser.Scene {
       this.createHUD();
       this.createActionButtons();
       this.createMessageLog();
+      this.createContinueButton();
     });
     this.load.start();
   }
@@ -77,7 +78,7 @@ export class BattleScene extends Phaser.Scene {
       this.getPlayerStatsString(),
       { fontSize: "10px", color: "#fff" },
     );
-    this.enemyStatsText = this.add.text(180, hudY, this.getEnemyStatsString(), {
+    this.enemyStatsText = this.add.text(180, hudY, "", {
       fontSize: "10px",
       color: "#fff",
     });
@@ -130,8 +131,27 @@ export class BattleScene extends Phaser.Scene {
       };
       scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.6);
       this.updateHUD();
+      this.playerTurn = true;
     });
     this.load.start();
+  }
+
+  createContinueButton() {
+    const centerX = this.cameras.main.width / 2;
+    const centerY = this.cameras.main.height / 2 + 20;
+    this.continueButton = createButton(
+      this,
+      "Continue",
+      centerX,
+      centerY,
+      () => {
+        this.continueButton.setVisible(false);
+        this.playerTurn = true;
+        this.updateHUD();
+        this.createEnemy();
+      },
+    );
+    this.continueButton.setVisible(false);
   }
 
   handleAction(action: string) {
@@ -247,13 +267,20 @@ export class BattleScene extends Phaser.Scene {
   run() {
     if (Math.random() < 0.5) {
       this.showMessage("You successfully fled!");
-      this.playerTurn = true;
-      this.createEnemy();
+      this.createEncounter();
     } else {
       this.showMessage("You failed to run away!");
       this.enemyTurn();
     }
     this.updateHUD();
+  }
+
+  createEncounter() {
+    if (Math.random() < 0.5) {
+      this.createEnemy();
+    } else {
+      this.scene.start("Encounter", { player: this.player });
+    }
   }
 
   showItemSelection() {
@@ -392,7 +419,7 @@ export class BattleScene extends Phaser.Scene {
     if (this.enemy) {
       this.enemyStatsText.setText(this.getEnemyStatsString());
     } else {
-      this.enemyStatsText.setText("No enemy");
+      this.enemyStatsText.setText("");
     }
   }
 
@@ -423,16 +450,21 @@ export class BattleScene extends Phaser.Scene {
       );
     }
 
+    this.checkLevelUp();
     this.updateHUD();
+    this.continueButton.setVisible(true);
+  }
 
-    this.time.delayedCall(2000, () => {
-      if (Math.random() < 0.05) {
-        this.scene.start("Store", { player: this.player });
-      } else {
-        this.createEnemy();
-        this.updateHUD();
-      }
-    });
+  checkLevelUp() {
+    const levelUpXp = (this.player.level ^ 2) * 10;
+    if (this.player.experience >= levelUpXp) {
+      this.player.level++;
+      this.player.maxHealth += 10;
+      this.player.health = this.player.maxHealth;
+      this.showMessage(
+        `Congratulations! You've reached level ${this.player.level}!`,
+      );
+    }
   }
 
   getRarityMultiplier(rarity: EnemyRarity): number {

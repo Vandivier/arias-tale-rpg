@@ -16,11 +16,8 @@ export function scaleSprite(
   sprite.setScale(scale);
 }
 
-export function calculateDamage(player: PlayerCharacter): number {
-  const baseDamage = Phaser.Math.Between(5, 15);
-  const classMultiplier =
-    player.class === "warrior" ? 1.2 : player.class === "mage" ? 1.5 : 1.3;
-  return Math.round(baseDamage * classMultiplier);
+export function calculateDamage(_player: PlayerCharacter): number {
+  return Phaser.Math.Between(1, 20);
 }
 
 export function calculateEnemyDamage(enemy: Enemy): number {
