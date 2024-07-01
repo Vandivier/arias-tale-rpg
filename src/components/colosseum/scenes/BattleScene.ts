@@ -8,10 +8,12 @@ import {
 } from "./types";
 import {
   AVATAR_MAX_HEIGHT,
+  battlers,
   scaleSprite,
   calculateDamage,
   calculateEnemyDamage,
   generateLoot,
+  createButton,
 } from "./utils/main";
 
 export class BattleScene extends Phaser.Scene {
@@ -36,10 +38,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("warrior", "searchable-images/16-eidolon.png");
-    this.load.image("mage", "searchable-images/16-eidolon.png");
-    this.load.image("archer", "searchable-images/16-eidolon.png");
-    this.load.image("enemy", "searchable-images/16-eidolon.png");
+    this.load.audio("defaultAttackSound", "assets/audio/slam.mp3");
   }
 
   create() {
@@ -48,11 +47,25 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    this.createPlayerSprite();
-    this.createEnemy();
-    this.createHUD();
-    this.createActionButtons();
-    this.createMessageLog();
+    this.loadPlayerSprite();
+  }
+
+  loadPlayerSprite() {
+    const battler = battlers.find((b) => b.id === this.player.battlerId);
+    if (!battler) {
+      console.error("No battler found for the player");
+      return;
+    }
+
+    this.load.image("playerImage", `assets/battlers/${battler.fileName}`);
+    this.load.once("complete", () => {
+      this.createPlayerSprite();
+      this.createEnemy();
+      this.createHUD();
+      this.createActionButtons();
+      this.createMessageLog();
+    });
+    this.load.start();
   }
 
   createHUD() {
@@ -73,20 +86,16 @@ export class BattleScene extends Phaser.Scene {
     const actions = ["Attack", "Defend", "Run", "Use Item"];
     const buttonWidth = 155;
     const buttonHeight = 40;
+    const startX = this.cameras.main.width / 2 - buttonWidth + 60;
     const startY = 350;
 
     actions.forEach((action, index) => {
-      const x = 10 + (index % 2) * (buttonWidth + 10);
-      const y = startY + Math.floor(index / 2) * (buttonHeight + 10);
-      const button = this.add
-        .text(x, y, action, {
-          fontSize: "16px",
-          color: "#fff",
-          backgroundColor: "#333",
-          padding: { x: 10, y: 5 },
-        })
-        .setInteractive()
-        .on("pointerdown", () => this.handleAction(action));
+      const x = startX + (index % 2) * (buttonWidth + 20);
+      const y = startY + Math.floor(index / 2) * (buttonHeight + 20);
+      const button = createButton(this, action, x, y, () =>
+        this.handleAction(action),
+      );
+      button.setVisible(true);
       this.actionButtons.push(button);
     });
   }
@@ -101,17 +110,27 @@ export class BattleScene extends Phaser.Scene {
   }
 
   createPlayerSprite() {
-    this.playerSprite = this.physics.add.sprite(85, 200, this.player.class);
-    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT * 0.6); // Further reduced size
+    this.playerSprite = this.physics.add.sprite(85, 200, "playerImage");
+    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT * 0.6);
   }
 
   createEnemy() {
     const enemyConfig = this.generateEnemyConfig();
-    this.enemy = {
-      ...enemyConfig,
-      sprite: this.physics.add.sprite(255, 200, "enemy"),
-    };
-    scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.6); // Further reduced size
+    const randomBattler = battlers[Phaser.Math.Between(0, battlers.length - 1)];
+    if (!randomBattler) {
+      console.error("No random battler found");
+      return;
+    }
+    this.load.image("enemyImage", `assets/battlers/${randomBattler.fileName}`);
+    this.load.once("complete", () => {
+      this.enemy = {
+        ...enemyConfig,
+        sprite: this.physics.add.sprite(255, 200, "enemyImage"),
+      };
+      scaleSprite(this.enemy.sprite, AVATAR_MAX_HEIGHT * 0.6);
+      this.updateHUD();
+    });
+    this.load.start();
   }
 
   handleAction(action: string) {
@@ -147,6 +166,10 @@ export class BattleScene extends Phaser.Scene {
   attack() {
     const damage = calculateDamage(this.player);
     this.enemy.health -= damage;
+
+    this.sound.play("defaultAttackSound");
+    this.animateAttack(this.enemy.sprite);
+
     this.showDamageText(this.enemy.sprite, damage);
     this.showMessage(`You dealt ${damage} damage to the enemy!`);
 
@@ -179,10 +202,33 @@ export class BattleScene extends Phaser.Scene {
     this.showMessage(message);
     this.showDamageText(this.playerSprite, damage);
 
+    this.sound.play("defaultAttackSound");
+    this.animateAttack(this.playerSprite);
+
     if (this.player.health <= 0) {
       this.handleDefeat();
     }
     this.updateHUD();
+  }
+
+  animateAttack(sprite: Phaser.Physics.Arcade.Sprite) {
+    this.tweens.add({
+      targets: sprite,
+      x: sprite.x - 10,
+      yoyo: true,
+      duration: 100,
+      repeat: 3,
+      onComplete: () => {
+        this.flashSprite(sprite);
+      },
+    });
+  }
+
+  flashSprite(sprite: Phaser.Physics.Arcade.Sprite) {
+    sprite.setTint(0xffffff);
+    this.time.delayedCall(100, () => {
+      sprite.clearTint();
+    });
   }
 
   defend() {
@@ -322,6 +368,9 @@ export class BattleScene extends Phaser.Scene {
   }
 
   getEnemyStatsString(): string {
+    if (!this.enemy) {
+      return "No enemy";
+    }
     return [
       `Enemy HP: ${this.enemy.health}/${this.enemy.maxHealth}`,
       `Rarity: ${this.enemy.rarity}`,
@@ -331,7 +380,11 @@ export class BattleScene extends Phaser.Scene {
 
   updateHUD() {
     this.playerStatsText.setText(this.getPlayerStatsString());
-    this.enemyStatsText.setText(this.getEnemyStatsString());
+    if (this.enemy) {
+      this.enemyStatsText.setText(this.getEnemyStatsString());
+    } else {
+      this.enemyStatsText.setText("No enemy");
+    }
   }
 
   handleVictory() {

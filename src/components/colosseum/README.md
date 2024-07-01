@@ -12,3 +12,4 @@ thanks to the open source audio and sprite providers:
 Sound credits:
 
 1. [dialogue.wav](https://freesound.org/people/lulyc/sounds/346118/)
+2. [slam.mp3](https://freesound.org/people/Jofae/sounds/361636/)
