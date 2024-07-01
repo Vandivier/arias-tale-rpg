@@ -5,20 +5,23 @@ import {
   type PlayerCharacter,
   type PlayerClass,
 } from "./types";
-import { createButton } from "./utils/main";
+import { battlers, createButton } from "./utils/main";
 import { TextAnimationManager } from "./services/TextAnimationManager";
 
 export class CharacterCreationScene extends Phaser.Scene {
-  private currentStep: number = 0;
+  private battlerImage!: Phaser.GameObjects.Image;
+  private classButtons: Phaser.GameObjects.Text[] = [];
   private continueButton!: Phaser.GameObjects.Text;
-  private rejectButton!: Phaser.GameObjects.Text;
-  private skipButton!: Phaser.GameObjects.Text;
+  private currentBattlerIndex: number = 0;
+  private currentStep: number = 0;
   private nameButton!: Phaser.GameObjects.Text;
   private nameInput!: Phaser.GameObjects.DOMElement;
-  private classButtons: Phaser.GameObjects.Text[] = [];
+  private rejectButton!: Phaser.GameObjects.Text;
+  private rejectImageButton!: Phaser.GameObjects.Text; // New button for rejecting image
+  private selectedBattlerId: number = 0; // Store the selected battler ID
   private selectedClass: PlayerClass | null = null;
+  private skipButton!: Phaser.GameObjects.Text;
   private suggestedName: string = "";
-  private suggestedClass: PlayerClass | null = null;
   private textAnimationManager!: TextAnimationManager;
 
   constructor() {
@@ -57,8 +60,18 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.cameras.main.height - 120,
       () => {
         console.log("Reject button clicked");
-        this.textAnimationManager.completeCurrentAnimation();
         this.rejectSuggestion();
+      },
+    );
+
+    this.rejectImageButton = createButton(
+      this,
+      "That's not me",
+      centerX,
+      this.cameras.main.height - 170,
+      () => {
+        console.log("Reject image button clicked");
+        this.nextBattlerImage();
       },
     );
 
@@ -74,6 +87,7 @@ export class CharacterCreationScene extends Phaser.Scene {
     );
 
     this.rejectButton.setVisible(false);
+    this.rejectImageButton.setVisible(false); // Hide by default
     this.skipButton.setVisible(false);
   }
 
@@ -82,6 +96,7 @@ export class CharacterCreationScene extends Phaser.Scene {
     this.currentStep++;
     this.continueButton.setVisible(true);
     this.rejectButton.setVisible(false);
+    this.rejectImageButton.setVisible(false); // Hide image rejection button initially
     this.skipButton.setVisible(true);
 
     switch (this.currentStep) {
@@ -118,6 +133,9 @@ export class CharacterCreationScene extends Phaser.Scene {
       case 4:
         this.suggestCharacter();
         break;
+      case 5:
+        this.showBattlerImageConfirmation();
+        break;
       default:
         console.log("Reached default case in nextStep");
         this.startGame();
@@ -137,14 +155,14 @@ export class CharacterCreationScene extends Phaser.Scene {
   }
 
   suggestCharacter() {
-    this.suggestedClass =
+    this.selectedClass =
       playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
       "warrior";
     this.suggestedName = this.getRandomName();
 
     this.textAnimationManager.showNarrativeText(
-      `He thinks of you, ${this.suggestedClass === "archer" ? "an" : "a"} ${
-        this.suggestedClass
+      `He thinks of you, ${this.selectedClass === "archer" ? "an" : "a"} ${
+        this.selectedClass
       } called ${this.suggestedName}...`,
       () => {
         this.continueButton.setVisible(true);
@@ -214,7 +232,10 @@ export class CharacterCreationScene extends Phaser.Scene {
       "Confirm",
       centerX,
       this.cameras.main.height - 70,
-      () => this.confirmCustomCharacter(),
+      () => {
+        this.confirmCustomCharacter();
+        confirmButton.destroy();
+      },
     );
 
     confirmButton.setVisible(true);
@@ -271,34 +292,64 @@ export class CharacterCreationScene extends Phaser.Scene {
       );
       return;
     }
-    this.startGame(name, this.selectedClass);
+    this.nameInput.destroy();
+    this.classButtons.forEach((button) => button.destroy());
+    this.currentBattlerIndex = 0;
+    this.showBattlerImageConfirmation();
   }
 
-  showErrorMessage(message: string) {
-    const existingError = this.children.getByName("errorMessage");
-    if (existingError) {
-      existingError.destroy();
+  showBattlerImageConfirmation() {
+    const battlersForClass = battlers.filter(
+      (battler) => battler.class === this.selectedClass,
+    );
+
+    if (battlersForClass.length === 0) {
+      console.error("No battlers found for the selected class");
+      return;
     }
 
-    this.add
-      .text(
-        this.cameras.main.width / 2,
-        this.cameras.main.height - 20,
-        message,
-        {
-          fontSize: "16px",
-          color: "#ff0000",
-          wordWrap: { width: this.cameras.main.width * 0.8 },
-          align: "center",
-        },
-      )
-      .setOrigin(0.5)
-      .setName("errorMessage");
+    const battler = battlersForClass[this.currentBattlerIndex];
+    if (!battler) {
+      console.error("Battler not found");
+      return;
+    }
+    const battlerImageKey = `battler-${battler.id}`;
+
+    if (this.battlerImage) {
+      this.battlerImage.destroy();
+    }
+
+    this.load.image(battlerImageKey, `assets/battlers/${battler.fileName}`);
+    this.load.once("complete", () => {
+      this.battlerImage = this.add
+        .image(
+          this.cameras.main.width / 2,
+          this.cameras.main.height / 2 - 50,
+          battlerImageKey,
+        )
+        .setScale(0.25);
+
+      this.continueButton.setText("Right, that's me!");
+      this.rejectImageButton.setVisible(true);
+      this.continueButton.setVisible(true);
+      this.selectedBattlerId = battler.id;
+    });
+    this.load.start();
+  }
+
+  nextBattlerImage() {
+    const battlersForClass = battlers.filter(
+      (battler) => battler.class === this.selectedClass,
+    );
+
+    this.currentBattlerIndex =
+      (this.currentBattlerIndex + 1) % battlersForClass.length;
+    this.showBattlerImageConfirmation();
   }
 
   startGame(name?: string, playerClass?: PlayerClass) {
     const finalName = name ?? this.suggestedName;
-    const finalClass = playerClass ?? this.suggestedClass;
+    const finalClass = playerClass ?? this.selectedClass;
 
     if (!finalName || !finalClass) {
       console.error("Name or class is undefined");
@@ -324,6 +375,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       inventory: [],
       equipment: initialEquipment,
       score: 0,
+      battlerId: this.selectedBattlerId,
     };
 
     this.scene.start("Battle", { player });
