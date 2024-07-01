@@ -17,17 +17,17 @@ import {
 } from "./utils/main";
 
 export class BattleScene extends Phaser.Scene {
-  private player!: PlayerCharacter;
-  private enemy!: Enemy;
-  private playerSprite!: Phaser.Physics.Arcade.Sprite;
   private actionButtons: Phaser.GameObjects.Text[] = [];
-  private messageText!: Phaser.GameObjects.Text;
-  private playerStatsText!: Phaser.GameObjects.Text;
+  private enemy!: Enemy;
   private enemyStatsText!: Phaser.GameObjects.Text;
-  private victories: number = 0;
   private itemSelectionTexts: Phaser.GameObjects.Text[] = [];
   private messageLog: string[] = [];
   private messageLogText!: Phaser.GameObjects.Text;
+  private player!: PlayerCharacter;
+  private playerSprite!: Phaser.Physics.Arcade.Sprite;
+  private playerStatsText!: Phaser.GameObjects.Text;
+  private playerTurn: boolean = true;
+  private victories: number = 0;
 
   constructor() {
     super("Battle");
@@ -38,6 +38,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   preload() {
+    // Preload the attack sound
     this.load.audio("defaultAttackSound", "assets/audio/slam.mp3");
   }
 
@@ -118,7 +119,7 @@ export class BattleScene extends Phaser.Scene {
     const enemyConfig = this.generateEnemyConfig();
     const randomBattler = battlers[Phaser.Math.Between(0, battlers.length - 1)];
     if (!randomBattler) {
-      console.error("No random battler found");
+      console.error("No battler found for the enemy");
       return;
     }
     this.load.image("enemyImage", `assets/battlers/${randomBattler.fileName}`);
@@ -134,6 +135,9 @@ export class BattleScene extends Phaser.Scene {
   }
 
   handleAction(action: string) {
+    if (!this.playerTurn) return;
+    this.playerTurn = false;
+
     switch (action) {
       case "Attack":
         this.attack();
@@ -207,8 +211,12 @@ export class BattleScene extends Phaser.Scene {
 
     if (this.player.health <= 0) {
       this.handleDefeat();
+    } else {
+      this.time.delayedCall(0, () => {
+        this.playerTurn = true;
+        this.updateHUD();
+      });
     }
-    this.updateHUD();
   }
 
   animateAttack(sprite: Phaser.Physics.Arcade.Sprite) {
@@ -239,6 +247,7 @@ export class BattleScene extends Phaser.Scene {
   run() {
     if (Math.random() < 0.5) {
       this.showMessage("You successfully fled!");
+      this.playerTurn = true;
       this.createEnemy();
     } else {
       this.showMessage("You failed to run away!");
