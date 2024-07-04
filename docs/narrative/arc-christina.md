@@ -2,7 +2,11 @@
 title: "Episode Narrative Guide - Arc Christina"
 ---
 
-<!-- TODO: incorporate https://chatgpt.com/c/5bfb38fd-fcb2-4bb1-bad8-d3eafa39a60a -->
+<!--
+TODO: incorporate:
+- https://chatgpt.com/c/5bfb38fd-fcb2-4bb1-bad8-d3eafa39a60a
+- https://claude.ai/chat/366136d2-75ac-4260-9fa6-1a99f7e0deba
+-->
 
 # Prologue: The Unintended Consequence
 
@@ -266,6 +270,7 @@ As Raeve and Athena faced off, the air crackling with tension and magical energy
 Raeve stood at the edge of a precipice, her eyes fixed on the swirling vortex of darkness before her. The Abyssal Gate lived up to its name, a yawning maw of pitch-black energy that seemed to devour light itself. Beside her, Athena's usual air of confidence was tempered with a grim determination.
 
 "I've seen many dangers in my time," Athena murmured, her gray eyes reflecting the gate's ominous glow, "but this... this is something else entirely."
+
 Their two companions, hardened warriors chosen for their skill and bravery, shifted uneasily. The absence of Lysander, their scout who had failed to return, weighed heavily on all of them.
 
 Raeve felt a chill run down her spine, a stark reminder that despite her avatar's abilities, she was still Christina at her core – a researcher thrust into a world more dangerous than she could have imagined. She turned to Athena, "What's our plan of approach?"
