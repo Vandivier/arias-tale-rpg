@@ -108,7 +108,7 @@ class MapScene extends Phaser.Scene {
   private tileSize: number = 32;
 
   constructor() {
-    super("Map");
+    super("LevelMap");
   }
 
   init(data: { player: PlayerCharacter }) {

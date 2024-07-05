@@ -1,7 +1,9 @@
 import Phaser from "phaser";
 import {
+  type CharacterClassType,
   type Enemy,
   type EquipmentSlot,
+  type GenderTypes,
   type Item,
   type PlayerCharacter,
 } from "../types";
@@ -129,6 +131,36 @@ export const createButton = (
     .setVisible(false);
 
   return button;
+};
+
+type Sprite = {
+  spriteFile: string;
+  spriteStartHorizontal: number;
+  spriteStartVertical: number;
+};
+
+const defaultSprite: Sprite = {
+  spriteFile: "spritesheet-1.png",
+  spriteStartHorizontal: 0,
+  spriteStartVertical: 0,
+};
+
+export const spriteMap: {
+  [GenderType in GenderTypes]: { [ClassType in CharacterClassType]?: Sprite };
+} = {
+  female: {},
+  male: {
+    warrior: defaultSprite,
+  },
+};
+
+export const getSprite = (
+  gender: GenderTypes,
+  combatClass: CharacterClassType,
+): Sprite => {
+  const genderKey = gender;
+  const classKey = combatClass;
+  return spriteMap[genderKey]?.[classKey] ?? defaultSprite;
 };
 
 export const battlers = [

@@ -1,9 +1,9 @@
 import Phaser from "phaser";
 import {
-  playerClasses,
+  basicClasses,
   type Equipment,
   type PlayerCharacter,
-  type PlayerClass,
+  type CharacterClassType,
 } from "./types";
 import { battlers, createButton } from "./utils/main";
 import { TextAnimationManager } from "./services/TextAnimationManager";
@@ -19,9 +19,9 @@ export class CharacterCreationScene extends Phaser.Scene {
   private nameButton!: Phaser.GameObjects.Text;
   private nameInput!: Phaser.GameObjects.DOMElement;
   private rejectButton!: Phaser.GameObjects.Text;
-  private rejectImageButton!: Phaser.GameObjects.Text; // New button for rejecting image
-  private selectedBattlerId: number = 0; // Store the selected battler ID
-  private selectedClass: PlayerClass | null = null;
+  private rejectImageButton!: Phaser.GameObjects.Text;
+  private selectedBattlerId: number = 0;
+  private selectedClass: CharacterClassType | null = null;
   private skipButton!: Phaser.GameObjects.Text;
   private suggestedName: string = "";
   private textAnimationManager!: TextAnimationManager;
@@ -143,7 +143,7 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   suggestCharacter() {
     this.selectedClass =
-      playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
+      basicClasses[Phaser.Math.Between(0, basicClasses.length - 1)] ??
       "warrior";
     this.suggestedName = this.getRandomName();
 
@@ -260,7 +260,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.classButtons = [];
-    playerClasses.forEach((cls, index) => {
+    basicClasses.forEach((cls, index) => {
       const buttonY = centerY + 50 + index * 50;
       const button = this.createClassButton(cls, centerX, buttonY);
       this.classButtons.push(button);
@@ -398,6 +398,6 @@ export class CharacterCreationScene extends Phaser.Scene {
       battlerId: this.selectedBattlerId,
     };
 
-    this.scene.start("Battle", { player });
+    this.scene.start("LevelMap", { player });
   }
 }
