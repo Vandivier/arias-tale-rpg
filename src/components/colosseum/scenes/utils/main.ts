@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import {
+  type Battler,
   type CharacterClassType,
   type Enemy,
   type EquipmentSlot,
@@ -154,24 +155,20 @@ export const spriteMap: {
   },
 };
 
-export const getSprite = (
-  gender: GenderTypes,
-  combatClass: CharacterClassType,
-): Sprite => {
-  const genderKey = gender;
-  const classKey = combatClass;
-  return spriteMap[genderKey]?.[classKey] ?? defaultSprite;
+export const getSprite = (battler: Battler): Sprite =>
+  spriteMap[battler.gender]?.[battler.class] ?? defaultSprite;
+
+export const defaultBattler: Battler = {
+  id: 2,
+  class: "archer",
+  eyeColor: "black",
+  hairColor: "black",
+  gender: "female",
+  fileName: "female-archer-black-hair.webp",
 };
 
-export const battlers = [
-  {
-    id: 2,
-    class: "archer",
-    eyeColor: "black",
-    hairColor: "black",
-    gender: "female",
-    fileName: "female-archer-black-hair.webp",
-  },
+export const battlers: Battler[] = [
+  defaultBattler,
   {
     id: 3,
     class: "mage",

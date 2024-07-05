@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { type PlayerCharacter } from "./types";
+import { AVATAR_MAX_HEIGHT, getSprite, scaleSprite } from "./utils/main";
 
 export const TileKinds = [
   "GRASS",
@@ -105,6 +106,14 @@ class LevelMap {
 class MapScene extends Phaser.Scene {
   private map!: LevelMap;
   private player!: PlayerCharacter;
+  private playerSprite!: Phaser.Physics.Arcade.Sprite;
+  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  private wasdKeys!: {
+    W: Phaser.Input.Keyboard.Key;
+    A: Phaser.Input.Keyboard.Key;
+    S: Phaser.Input.Keyboard.Key;
+    D: Phaser.Input.Keyboard.Key;
+  };
   private tileSize: number = 32;
 
   constructor() {
@@ -113,6 +122,14 @@ class MapScene extends Phaser.Scene {
 
   init(data: { player: PlayerCharacter }) {
     this.player = data.player;
+  }
+
+  preload() {
+    const sprite = getSprite(this.player.battler);
+    this.load.spritesheet("player", sprite.spriteFile, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
   }
 
   create() {
@@ -125,6 +142,9 @@ class MapScene extends Phaser.Scene {
     this.map.generate(seed, isInterior);
 
     this.renderMap();
+    this.createPlayer();
+    this.setupCamera();
+    this.setupControls();
   }
 
   private generateSeed(name: string): number {
@@ -182,9 +202,76 @@ class MapScene extends Phaser.Scene {
     }
   }
 
+  private createPlayer() {
+    const sprite = getSprite(this.player.battler);
+    this.playerSprite = this.physics.add.sprite(
+      this.tileSize,
+      this.tileSize,
+      "player",
+      sprite.spriteStartVertical * 3 + sprite.spriteStartHorizontal,
+    );
+    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
+    this.playerSprite.setCollideWorldBounds(true);
+  }
+
+  private setupCamera() {
+    this.cameras.main.setBounds(
+      0,
+      0,
+      this.map.width * this.tileSize,
+      this.map.height * this.tileSize,
+    );
+    this.cameras.main.startFollow(this.playerSprite, true, 0.5, 0.5);
+  }
+
+  private setupControls() {
+    if (this.input.keyboard) {
+      this.cursors = this.input.keyboard.createCursorKeys();
+      this.wasdKeys = this.input.keyboard.addKeys("W,A,S,D") as {
+        W: Phaser.Input.Keyboard.Key;
+        A: Phaser.Input.Keyboard.Key;
+        S: Phaser.Input.Keyboard.Key;
+        D: Phaser.Input.Keyboard.Key;
+      };
+    } else {
+      throw new Error("Keyboard input is not available");
+    }
+  }
+
   update() {
-    // Handle player movement and interactions here
+    const speed = 160;
+    let velocityX = 0;
+    let velocityY = 0;
+
+    if (this.cursors.left.isDown || this.wasdKeys.A.isDown) {
+      velocityX = -speed;
+    } else if (this.cursors.right.isDown || this.wasdKeys.D.isDown) {
+      velocityX = speed;
+    }
+
+    if (this.cursors.up.isDown || this.wasdKeys.W.isDown) {
+      velocityY = -speed;
+    } else if (this.cursors.down.isDown || this.wasdKeys.S.isDown) {
+      velocityY = speed;
+    }
+
+    this.playerSprite.setVelocity(velocityX, velocityY);
+
+    // Check for dangerous tiles
+    const playerTileX = Math.floor(this.playerSprite.x / this.tileSize);
+    const playerTileY = Math.floor(this.playerSprite.y / this.tileSize);
+    if (this.map.isDangerous(playerTileX, playerTileY)) {
+      this.startBattle();
+    }
+  }
+
+  private startBattle() {
+    // Stop the player's movement
+    this.playerSprite.setVelocity(0, 0);
+
+    // Transition to the Battle scene
+    this.scene.start("Battle", { player: this.player });
   }
 }
 
-export { MapScene, LevelMap };
+export { LevelMap, MapScene };

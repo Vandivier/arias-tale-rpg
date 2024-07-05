@@ -5,7 +5,7 @@ import {
   type PlayerCharacter,
   type CharacterClassType,
 } from "./types";
-import { battlers, createButton } from "./utils/main";
+import { battlers, createButton, defaultBattler } from "./utils/main";
 import { TextAnimationManager } from "./services/TextAnimationManager";
 
 export class CharacterCreationScene extends Phaser.Scene {
@@ -385,11 +385,10 @@ export class CharacterCreationScene extends Phaser.Scene {
     };
 
     const player: PlayerCharacter = {
-      battlerId: this.selectedBattlerId,
+      battler: battlers[this.selectedBattlerId] ?? defaultBattler,
       class: this.selectedClass,
       equipment: initialEquipment,
       experience: 0,
-      gender: "male",
       gold: 0,
       health: 100,
       inventory: [],

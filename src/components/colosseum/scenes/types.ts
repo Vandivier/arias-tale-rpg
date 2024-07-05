@@ -42,14 +42,13 @@ export interface Equipment {
 }
 
 export interface PlayerCharacter {
-  battlerId: number;
+  battler: Battler;
   class: CharacterClassType;
   effects?: {
     poisonedSmog?: number;
   };
   equipment: Equipment;
   experience: number;
-  gender: GenderTypes;
   gold: number;
   health: number;
   inventory: Item[];
@@ -67,3 +66,12 @@ export interface Enemy {
   tier: EnemyTier;
   loot?: Item[];
 }
+
+export type Battler = {
+  id: number;
+  class: CharacterClassType;
+  eyeColor: string;
+  fileName: string;
+  gender: GenderTypes;
+  hairColor: string;
+};
