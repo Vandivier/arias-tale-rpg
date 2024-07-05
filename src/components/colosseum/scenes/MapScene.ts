@@ -2,6 +2,14 @@ import Phaser from "phaser";
 import { type PlayerCharacter } from "./types";
 import { AVATAR_MAX_HEIGHT, getSprite, scaleSprite } from "./utils/main";
 
+export interface MapData {
+  seed: number;
+  playerPosition: {
+    x: number;
+    y: number;
+  };
+}
+
 export const TileKinds = [
   "GRASS",
   "TREE",
@@ -115,36 +123,58 @@ class MapScene extends Phaser.Scene {
     D: Phaser.Input.Keyboard.Key;
   };
   private tileSize: number = 32;
+  private mapSeed!: number;
+  private isInterior!: boolean;
+  private canEncounter: boolean = false;
 
   constructor() {
     super("LevelMap");
   }
 
-  init(data: { player: PlayerCharacter }) {
+  init(data: { player: PlayerCharacter; mapData?: MapData }) {
     this.player = data.player;
+    if (data.mapData) {
+      this.mapSeed = data.mapData.seed;
+      const returnPosition = data.mapData.playerPosition;
+      this.playerSprite?.setPosition(returnPosition.x, returnPosition.y);
+    } else {
+      this.mapSeed = this.generateSeed(this.player.name);
+    }
+    this.isInterior = this.determineIsInterior(this.mapSeed);
+    this.canEncounter = false;
+  }
+
+  private determineIsInterior(seed: number): boolean {
+    const rng = new Phaser.Math.RandomDataGenerator([seed.toString()]);
+    return rng.frac() < 0.5;
   }
 
   preload() {
     const sprite = getSprite(this.player.battler);
     this.load.spritesheet("player", sprite.spriteFile, {
-      frameWidth: 32,
-      frameHeight: 32,
+      startFrame: sprite.spriteStartVertical * 3 + sprite.spriteStartHorizontal,
+      frameWidth: 16,
+      frameHeight: 18,
     });
   }
 
   create() {
     const mapWidth = 20;
     const mapHeight = 15;
-    const seed = this.generateSeed(this.player.name);
-    const isInterior = Math.random() < 0.5; // 50% chance of interior map
 
     this.map = new LevelMap(mapWidth, mapHeight);
-    this.map.generate(seed, isInterior);
+    this.map.generate(this.mapSeed, this.isInterior);
 
     this.renderMap();
     this.createPlayer();
     this.setupCamera();
     this.setupControls();
+
+    // If returning to a specific position
+    const returnPosition = this.scene.settings.data?.returnPosition;
+    if (returnPosition) {
+      this.playerSprite.setPosition(returnPosition.x, returnPosition.y);
+    }
   }
 
   private generateSeed(name: string): number {
@@ -257,11 +287,18 @@ class MapScene extends Phaser.Scene {
 
     this.playerSprite.setVelocity(velocityX, velocityY);
 
-    // Check for dangerous tiles
-    const playerTileX = Math.floor(this.playerSprite.x / this.tileSize);
-    const playerTileY = Math.floor(this.playerSprite.y / this.tileSize);
-    if (this.map.isDangerous(playerTileX, playerTileY)) {
-      this.startEncounter();
+    // Enable encounters after the player has moved
+    if (!this.canEncounter && (velocityX !== 0 || velocityY !== 0)) {
+      this.canEncounter = true;
+    }
+
+    // Check for dangerous tiles only if encounters are enabled
+    if (this.canEncounter) {
+      const playerTileX = Math.floor(this.playerSprite.x / this.tileSize);
+      const playerTileY = Math.floor(this.playerSprite.y / this.tileSize);
+      if (this.map.isDangerous(playerTileX, playerTileY)) {
+        this.startEncounter();
+      }
     }
   }
 
@@ -269,11 +306,19 @@ class MapScene extends Phaser.Scene {
     // Stop the player's movement
     this.playerSprite.setVelocity(0, 0);
 
+    const mapData: MapData = {
+      seed: this.mapSeed,
+      playerPosition: {
+        x: this.playerSprite.x,
+        y: this.playerSprite.y,
+      },
+    };
+
     // Transition to Battle or Encounter
     if (Math.random() < 0.5) {
-      this.scene.start("Battle", { player: this.player, fromMap: [] });
+      this.scene.start("Battle", { player: this.player, mapData });
     } else {
-      this.scene.start("Encounter", { player: this.player, fromMap: [] });
+      this.scene.start("Encounter", { player: this.player, mapData });
     }
   }
 }
