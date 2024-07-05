@@ -261,16 +261,20 @@ class MapScene extends Phaser.Scene {
     const playerTileX = Math.floor(this.playerSprite.x / this.tileSize);
     const playerTileY = Math.floor(this.playerSprite.y / this.tileSize);
     if (this.map.isDangerous(playerTileX, playerTileY)) {
-      this.startBattle();
+      this.startEncounter();
     }
   }
 
-  private startBattle() {
+  private startEncounter() {
     // Stop the player's movement
     this.playerSprite.setVelocity(0, 0);
 
-    // Transition to the Battle scene
-    this.scene.start("Battle", { player: this.player });
+    // Transition to Battle or Encounter
+    if (Math.random() < 0.5) {
+      this.scene.start("Battle", { player: this.player, fromMap: [] });
+    } else {
+      this.scene.start("Encounter", { player: this.player, fromMap: [] });
+    }
   }
 }
 

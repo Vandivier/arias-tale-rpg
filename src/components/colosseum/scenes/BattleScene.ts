@@ -54,7 +54,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   loadPlayerSprite() {
-    const battler = battlers.find((b) => b.id === this.player.battlerId);
+    const battler = this.player.battler;
     if (!battler) {
       console.error("No battler found for the player");
       return;
@@ -286,14 +286,6 @@ export class BattleScene extends Phaser.Scene {
       this.enemyTurn();
     }
     this.updateHUD();
-  }
-
-  createEncounter() {
-    if (Math.random() < 0.5) {
-      this.createEnemy();
-    } else {
-      this.scene.start("Encounter", { player: this.player });
-    }
   }
 
   showItemSelection() {

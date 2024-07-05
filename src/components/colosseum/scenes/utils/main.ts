@@ -141,7 +141,7 @@ type Sprite = {
 };
 
 const defaultSprite: Sprite = {
-  spriteFile: "spritesheet-1.png",
+  spriteFile: "assets/battlers/spritesheet-1.png",
   spriteStartHorizontal: 0,
   spriteStartVertical: 0,
 };
