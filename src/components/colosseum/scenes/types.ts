@@ -49,6 +49,7 @@ export interface PlayerCharacter {
   };
   equipment: Equipment;
   experience: number;
+  gender: GenderTypes;
   gold: number;
   health: number;
   inventory: Item[];

@@ -292,7 +292,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       .setVisible(false);
   }
 
-  createClassButton(cls: PlayerClass, x: number, y: number) {
+  createClassButton(cls: CharacterClassType, x: number, y: number) {
     const button = this.add
       .text(x, y, cls, {
         fontSize: "20px",
@@ -318,7 +318,7 @@ export class CharacterCreationScene extends Phaser.Scene {
     return button;
   }
 
-  selectClass(cls: PlayerClass) {
+  selectClass(cls: CharacterClassType) {
     this.selectedClass = cls;
     this.updateClassButtonStyles();
   }
@@ -385,17 +385,18 @@ export class CharacterCreationScene extends Phaser.Scene {
     };
 
     const player: PlayerCharacter = {
-      name: this.suggestedName,
-      class: this.selectedClass,
-      health: 100,
-      maxHealth: 100,
-      level: 1,
-      experience: 0,
-      gold: 0,
-      inventory: [],
-      equipment: initialEquipment,
-      score: 0,
       battlerId: this.selectedBattlerId,
+      class: this.selectedClass,
+      equipment: initialEquipment,
+      experience: 0,
+      gender: "male",
+      gold: 0,
+      health: 100,
+      inventory: [],
+      level: 1,
+      maxHealth: 100,
+      name: this.suggestedName,
+      score: 0,
     };
 
     this.scene.start("LevelMap", { player });
