@@ -18,7 +18,7 @@ function TopNav() {
           </Link>
         </div>
 
-        <div className="flex flex-col md:mx-6 md:flex-row">
+        <div className="flex flex-col items-center justify-center md:mx-6 md:flex-row">
           <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/">
             Home
           </Link>
