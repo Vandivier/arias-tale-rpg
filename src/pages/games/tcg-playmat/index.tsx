@@ -20,19 +20,36 @@ const cards: Card[] = [
   { id: 163, name: "Angel Dogs", slug: "angel-dogs.jpeg" },
 ];
 
-const ZoomedCard = ({ card, onClose }: { card: Card; onClose: () => void }) => (
+const ZoomedCard = ({
+  card,
+  onClose,
+  onPlay,
+}: {
+  card: Card;
+  onClose: () => void;
+  onPlay: () => void;
+}) => (
   <div
-    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    className="fixed inset-0 z-50 flex flex-row items-center justify-center bg-black bg-opacity-50"
     onClick={onClose}
   >
     <div className="rounded-lg bg-white p-5">
       <Image
         src={`/searchable-images/${card.id}-${card.slug}`}
         alt={card.name}
-        width={300}
-        height={420}
+        width={820}
+        height={614}
         className="rounded-lg"
       />
+      <div className="text-black">
+        <h2 className="text-2xl font-bold">{card.name}</h2>
+        <button className="mx-4 my-2" onClick={onClose}>
+          Close
+        </button>
+        <button className="mx-4 my-2" onClick={onPlay}>
+          Play
+        </button>
+      </div>
     </div>
   </div>
 );
@@ -129,7 +146,15 @@ const TcgPlaymat: React.FC = () => {
         </div>
 
         {zoomedCard && (
-          <ZoomedCard card={zoomedCard} onClose={() => setZoomedCard(null)} />
+          <ZoomedCard
+            card={zoomedCard}
+            onClose={() => setZoomedCard(null)}
+            onPlay={
+              cardsOnPlaymat.some((c) => c.id === zoomedCard.id)
+                ? () => handleRemoveCard(zoomedCard)
+                : () => setCardsOnPlaymat((prev) => [...prev, zoomedCard])
+            }
+          />
         )}
       </div>
     </CustomPage>
