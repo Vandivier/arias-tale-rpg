@@ -19,10 +19,9 @@ export class CharacterCreationScene extends Phaser.Scene {
   private nameButton!: Phaser.GameObjects.Text;
   private nameInput!: Phaser.GameObjects.DOMElement;
   private rejectButton!: Phaser.GameObjects.Text;
-  private rejectImageButton!: Phaser.GameObjects.Text; // New button for rejecting image
-  private selectedBattlerId: number = 0; // Store the selected battler ID
+  private rejectImageButton!: Phaser.GameObjects.Text;
+  private selectedBattlerId: number = 0;
   private selectedClass: PlayerClass | null = null;
-  private skipButton!: Phaser.GameObjects.Text;
   private suggestedName: string = "";
   private textAnimationManager!: TextAnimationManager;
 
@@ -77,20 +76,8 @@ export class CharacterCreationScene extends Phaser.Scene {
       },
     );
 
-    this.skipButton = createButton(
-      this,
-      "Skip Text",
-      this.cameras.main.width - 70,
-      30,
-      () => {
-        console.log("Skip button clicked");
-        this.textAnimationManager.skipCurrentAnimation();
-      },
-    );
-
     this.rejectButton.setVisible(false);
-    this.rejectImageButton.setVisible(false); // Hide by default
-    this.skipButton.setVisible(false);
+    this.rejectImageButton.setVisible(false);
   }
 
   nextStep() {
@@ -101,18 +88,15 @@ export class CharacterCreationScene extends Phaser.Scene {
     this.continueButton.setVisible(true);
     this.rejectButton.setVisible(false);
     this.rejectImageButton.setVisible(false);
-    this.skipButton.setVisible(false);
 
     switch (this.currentStep) {
       case 1:
       case 2:
       case 3:
-        this.skipButton.setVisible(true);
         this.textAnimationManager.showNarrativeText(
           this.getNarrativeText(this.currentStep),
           () => {
             console.log("Animation complete, continue button already visible");
-            this.skipButton.setVisible(false);
           },
         );
         break;
