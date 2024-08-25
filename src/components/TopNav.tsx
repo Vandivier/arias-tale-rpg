@@ -18,7 +18,7 @@ function TopNav() {
           </Link>
         </div>
 
-        <div className="flex flex-col md:mx-6 md:flex-row">
+        <div className="flex flex-col items-center justify-center md:mx-6 md:flex-row">
           <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/">
             Home
           </Link>
@@ -35,10 +35,13 @@ function TopNav() {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem asChild>
-                <Link href="/fighting">Fighting Game</Link>
+                <Link href="/games/colosseum">Colosseum</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/colosseum">Colosseum</Link>
+                <Link href="/games/fighting">Fighting Game</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/games/tcg-playmat">TCG Playmat</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

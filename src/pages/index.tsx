@@ -7,7 +7,13 @@ export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from Aria's Tale!" });
 
   return (
-    <CustomPage mainHeading="Embark on an Epic Journey with Aria's Tale!">
+    <CustomPage
+      mainHeading={
+        <h1 className="font-extrabold tracking-tight text-white sm:text-[2rem]">
+          Embark on an Epic Journey with Aria's Tale!
+        </h1>
+      }
+    >
       <>
         <div className="flex items-center">
           <Image

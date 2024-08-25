@@ -162,7 +162,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.battlerImage.destroy();
     }
 
-    this.load.image(battlerImageKey, `assets/battlers/${battler.fileName}`);
+    this.load.image(battlerImageKey, `/assets/battlers/${battler.fileName}`);
     this.load.once("complete", () => {
       this.battlerImage = this.add
         .image(
