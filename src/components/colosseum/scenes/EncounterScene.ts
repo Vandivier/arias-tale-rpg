@@ -1,8 +1,17 @@
 import Phaser from "phaser";
 import { type PlayerCharacter } from "./types";
 
+interface MapData {
+  seed: number;
+  playerPosition: {
+    x: number;
+    y: number;
+  };
+}
+
 export class EncounterScene extends Phaser.Scene {
   private player!: PlayerCharacter;
+  private mapData!: MapData;
   private encounterText!: Phaser.GameObjects.Text;
   private continueButton!: Phaser.GameObjects.Text;
 
@@ -10,13 +19,14 @@ export class EncounterScene extends Phaser.Scene {
     super("Encounter");
   }
 
-  init(data: { player: PlayerCharacter }) {
+  init(data: { player: PlayerCharacter; mapData: MapData }) {
     this.player = data.player;
+    this.mapData = data.mapData;
   }
 
   create() {
     this.encounterText = this.add
-      .text(170, 200, "", {
+      .text(this.cameras.main.centerX, 200, "", {
         fontSize: "18px",
         color: "#fff",
         align: "center",
@@ -25,12 +35,15 @@ export class EncounterScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.continueButton = this.add
-      .text(170, 450, "Continue", { fontSize: "20px", color: "#fff" })
+      .text(this.cameras.main.centerX, 450, "Continue", {
+        fontSize: "20px",
+        color: "#fff",
+      })
       .setOrigin(0.5)
-      .setInteractive()
-      .on("pointerdown", () =>
-        this.scene.start("Battle", { player: this.player }),
-      );
+      .setInteractive({ useHandCursor: true })
+      .on("pointerdown", () => this.handleContinue())
+      .on("pointerover", () => this.continueButton.setStyle({ fill: "#ff0" }))
+      .on("pointerout", () => this.continueButton.setStyle({ fill: "#fff" }));
 
     this.randomEncounter();
   }
@@ -53,13 +66,14 @@ export class EncounterScene extends Phaser.Scene {
       case 5:
         this.dangerousTrap();
         break;
-      case 6:
-      case 7:
-      case 8:
-      case 9:
-      case 10:
-        this.scene.start("Store", { player: this.player });
+      default:
+        this.scene.start("Store", {
+          player: this.player,
+          mapData: this.mapData,
+        });
+        return; // Exit the method to prevent showing the continue button
     }
+    this.continueButton.setVisible(true);
   }
 
   friendlyCharacter() {
@@ -109,5 +123,12 @@ export class EncounterScene extends Phaser.Scene {
         this.encounterText.text + " You barely survive with 1 HP remaining.",
       );
     }
+  }
+
+  handleContinue() {
+    this.scene.start("LevelMap", {
+      player: this.player,
+      mapData: this.mapData,
+    });
   }
 }

@@ -1,14 +1,6 @@
 import Phaser from "phaser";
-import { type PlayerCharacter } from "./types";
+import { type MapData, type PlayerCharacter } from "./types";
 import { AVATAR_MAX_HEIGHT, getSprite, scaleSprite } from "./utils/main";
-
-export interface MapData {
-  seed: number;
-  playerPosition: {
-    x: number;
-    y: number;
-  };
-}
 
 export const TileKinds = [
   "GRASS",
@@ -126,6 +118,7 @@ class MapScene extends Phaser.Scene {
   private mapSeed!: number;
   private isInterior!: boolean;
   private canEncounter: boolean = false;
+  private animsCreated: boolean = false;
 
   constructor() {
     super("LevelMap");
@@ -135,8 +128,8 @@ class MapScene extends Phaser.Scene {
     this.player = data.player;
     if (data.mapData) {
       this.mapSeed = data.mapData.seed;
-      const returnPosition = data.mapData.playerPosition;
-      this.playerSprite?.setPosition(returnPosition.x, returnPosition.y);
+      // Store the return position to be used in create()
+      this.returnPosition = data.mapData.playerPosition;
     } else {
       this.mapSeed = this.generateSeed(this.player.name);
     }
@@ -152,7 +145,6 @@ class MapScene extends Phaser.Scene {
   preload() {
     const sprite = getSprite(this.player.battler);
     this.load.spritesheet("player", sprite.spriteFile, {
-      startFrame: sprite.spriteStartVertical * 3 + sprite.spriteStartHorizontal,
       frameWidth: 16,
       frameHeight: 18,
     });
@@ -169,11 +161,14 @@ class MapScene extends Phaser.Scene {
     this.createPlayer();
     this.setupCamera();
     this.setupControls();
+    this.createAnimations();
 
-    // If returning to a specific position
-    const returnPosition = this.scene.settings.data?.returnPosition;
-    if (returnPosition) {
-      this.playerSprite.setPosition(returnPosition.x, returnPosition.y);
+    // Use the stored return position if it exists
+    if (this.returnPosition) {
+      this.playerSprite.setPosition(
+        this.returnPosition.x,
+        this.returnPosition.y,
+      );
     }
   }
 
@@ -232,13 +227,43 @@ class MapScene extends Phaser.Scene {
     }
   }
 
+  private createAnimations() {
+    this.anims.create({
+      key: "walk-up",
+      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 2 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "walk-right",
+      frames: this.anims.generateFrameNumbers("player", { start: 3, end: 5 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "walk-down",
+      frames: this.anims.generateFrameNumbers("player", { start: 6, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: "walk-left",
+      frames: this.anims.generateFrameNumbers("player", { start: 9, end: 11 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.animsCreated = true;
+  }
+
   private createPlayer() {
-    const sprite = getSprite(this.player.battler);
     this.playerSprite = this.physics.add.sprite(
       this.tileSize,
       this.tileSize,
       "player",
-      sprite.spriteStartVertical * 3 + sprite.spriteStartHorizontal,
     );
     scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
     this.playerSprite.setCollideWorldBounds(true);
@@ -274,14 +299,18 @@ class MapScene extends Phaser.Scene {
     let velocityY = 0;
 
     if (this.cursors.left.isDown || this.wasdKeys.A.isDown) {
+      this.playerSprite.anims.play("walk-left", true);
       velocityX = -speed;
     } else if (this.cursors.right.isDown || this.wasdKeys.D.isDown) {
+      this.playerSprite.anims.play("walk-right", true);
       velocityX = speed;
     }
 
     if (this.cursors.up.isDown || this.wasdKeys.W.isDown) {
+      this.playerSprite.anims.play("walk-up", true);
       velocityY = -speed;
     } else if (this.cursors.down.isDown || this.wasdKeys.S.isDown) {
+      this.playerSprite.anims.play("walk-down", true);
       velocityY = speed;
     }
 
@@ -315,7 +344,7 @@ class MapScene extends Phaser.Scene {
     };
 
     // Transition to Battle or Encounter
-    if (Math.random() < 0.5) {
+    if (Math.random() < 0.05) {
       this.scene.start("Battle", { player: this.player, mapData });
     } else {
       this.scene.start("Encounter", { player: this.player, mapData });

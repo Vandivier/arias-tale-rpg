@@ -75,3 +75,11 @@ export type Battler = {
   gender: GenderTypes;
   hairColor: string;
 };
+
+export interface MapData {
+  seed: number;
+  playerPosition: {
+    x: number;
+    y: number;
+  };
+}

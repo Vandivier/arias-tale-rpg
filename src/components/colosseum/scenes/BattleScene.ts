@@ -4,6 +4,7 @@ import {
   type EnemyRarity,
   type EnemyTier,
   type Item,
+  type MapData,
   type PlayerCharacter,
 } from "./types";
 import {
@@ -31,13 +32,15 @@ export class BattleScene extends Phaser.Scene {
   private playerStatsText!: Phaser.GameObjects.Text;
   private playerTurn: boolean = true;
   private victories: number = 0;
+  private mapData!: MapData;
 
   constructor() {
     super("Battle");
   }
 
-  init(data: { player: PlayerCharacter }) {
+  init(data: { player: PlayerCharacter; mapData: MapData }) {
     this.player = data.player;
+    this.mapData = data.mapData;
   }
 
   preload() {
@@ -280,7 +283,13 @@ export class BattleScene extends Phaser.Scene {
   run() {
     if (Math.random() < 0.5) {
       this.showMessage("You successfully fled!");
-      this.createEncounter();
+      this.time.delayedCall(1000, () => {
+        this.scene.start("LevelMap", {
+          player: this.player,
+          returnPosition: this.mapData.playerPosition,
+          seed: this.mapData.seed,
+        });
+      });
     } else {
       this.showMessage("You failed to run away!");
       this.enemyTurn();

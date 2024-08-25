@@ -136,14 +136,10 @@ export const createButton = (
 
 type Sprite = {
   spriteFile: string;
-  spriteStartHorizontal: number;
-  spriteStartVertical: number;
 };
 
 const defaultSprite: Sprite = {
-  spriteFile: "assets/battlers/spritesheet-1.png",
-  spriteStartHorizontal: 0,
-  spriteStartVertical: 0,
+  spriteFile: "assets/map-sprites/male-warrior.png",
 };
 
 export const spriteMap: {
