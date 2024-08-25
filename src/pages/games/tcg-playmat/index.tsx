@@ -42,6 +42,7 @@ const TcgPlaymat: React.FC = () => {
 
   return (
     <CustomPage
+      innerPageClassName="my-4"
       metaDescription="Play with your TCG cards on this virtual playmat."
       mainHeading="Card Game Playmat"
       title="TCG Playmat - Aria's Tale"
@@ -62,7 +63,7 @@ const TcgPlaymat: React.FC = () => {
               <Image
                 src={`/searchable-images/${card.id}-${card.slug}`}
                 alt={card.name}
-                width={100}
+                width={200}
                 height={140}
                 className="rounded-lg"
               />
@@ -77,9 +78,9 @@ const TcgPlaymat: React.FC = () => {
               className="transition-transform duration-300 ease-in-out hover:scale-110"
             >
               <Image
-                src={`/searchable-images/${card.id}-${card.slug}.jpg`}
+                src={`/searchable-images/${card.id}-${card.slug}`}
                 alt={card.name}
-                width={100}
+                width={200}
                 height={140}
                 className="rounded-lg"
               />
