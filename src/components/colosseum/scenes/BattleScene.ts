@@ -41,7 +41,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.audio("defaultAttackSound", "assets/audio/slam.mp3");
+    this.load.audio("defaultAttackSound", "/assets/audio/slam.mp3");
   }
 
   create() {
@@ -60,7 +60,7 @@ export class BattleScene extends Phaser.Scene {
       return;
     }
 
-    this.load.image("playerImage", `assets/battlers/${battler.fileName}`);
+    this.load.image("playerImage", `/assets/battlers/${battler.fileName}`);
     this.load.once("complete", () => {
       this.createPlayerSprite();
       this.createHUD();
@@ -135,7 +135,7 @@ export class BattleScene extends Phaser.Scene {
     this.textures.remove("enemyImage");
 
     // Load the new enemy image
-    this.load.image("enemyImage", `assets/battlers/${randomBattler.fileName}`);
+    this.load.image("enemyImage", `/assets/battlers/${randomBattler.fileName}`);
     this.load.once("complete", () => {
       // Create the new enemy sprite
       this.enemy = {
