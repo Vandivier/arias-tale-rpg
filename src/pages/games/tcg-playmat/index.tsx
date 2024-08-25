@@ -4,14 +4,12 @@ import Image from "next/image";
 import React, { useState, type DragEvent } from "react";
 import { CustomPage } from "~/components/CustomPage";
 
-// Define types for our cards
 interface Card {
   id: number;
   name: string;
   slug: string;
 }
 
-// List of cards we've discussed and for which images have been generated
 const cards: Card[] = [
   { id: 157, name: "Atlantean Guardian", slug: "atlantean-guardian" },
   { id: 158, name: "Quantum Voyagers", slug: "quantum-voyagers" },
