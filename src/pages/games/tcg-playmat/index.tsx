@@ -11,12 +11,13 @@ interface Card {
 }
 
 const cards: Card[] = [
-  { id: 157, name: "Atlantean Guardian", slug: "atlantean-guardian" },
-  { id: 158, name: "Quantum Voyagers", slug: "quantum-voyagers" },
-  { id: 159, name: "Synthetic Enforcer", slug: "synthetic-enforcer" },
-  { id: 160, name: "Forgotten Warrior", slug: "forgotten-warrior" },
-  { id: 161, name: "Temporal Anomaly", slug: "temporal-anomaly" },
-  { id: 162, name: "Quantum Sovereign", slug: "quantum-sovereign" },
+  { id: 157, name: "Atlantean Guardian", slug: "atlantean-guardian.jpeg" },
+  { id: 158, name: "Quantum Voyagers", slug: "quantum-voyagers.jpeg" },
+  { id: 159, name: "Synthetic Enforcer", slug: "synthetic-enforcer.jpeg" },
+  { id: 160, name: "Forgotten Warrior", slug: "forgotten-warrior.jpeg" },
+  { id: 161, name: "Temporal Anomaly", slug: "temporal-anomaly.jpeg" },
+  { id: 162, name: "Quantum Sovereign", slug: "quantum-sovereign.jpeg" },
+  { id: 163, name: "Angel Dogs", slug: "angel-dogs.jpeg" },
 ];
 
 const TcgPlaymat: React.FC = () => {
@@ -59,7 +60,7 @@ const TcgPlaymat: React.FC = () => {
               className="cursor-move border-2 border-dashed border-gray-300 p-2"
             >
               <Image
-                src={`/searchable-images/${card.id}-${card.slug}.jpg`}
+                src={`/searchable-images/${card.id}-${card.slug}`}
                 alt={card.name}
                 width={100}
                 height={140}
