@@ -25,6 +25,12 @@ export class CharacterCreationScene extends Phaser.Scene {
   private skipButton!: Phaser.GameObjects.Text;
   private suggestedName: string = "";
   private textAnimationManager!: TextAnimationManager;
+  private currentTextIndex: number = 0;
+  private narrativeTexts: string[] = [
+    "Anyone who speaks to The Great Dreamer in their mind has exited their plane, because The Great Dreamer lives outside of the planes.",
+    'The Dreamer wonders "What is it like outside of the planes, where I am? Are there plants and towns and people here too?"',
+    "The Dreamer thinks of many such things that could be outside of the planes, and so they begin to appear...",
+  ];
 
   constructor() {
     super("CharacterCreation");
@@ -32,7 +38,9 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   create() {
     console.log("CharacterCreationScene create started");
-    this.textAnimationManager = new TextAnimationManager(this);
+    this.textAnimationManager = new TextAnimationManager(this, () =>
+      this.handleTextClick(),
+    );
     this.createButtons();
     this.nextStep();
   }
@@ -47,11 +55,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.cameras.main.height - 70,
       () => {
         console.log("Continue button clicked");
-        if (this.textAnimationManager.isComplete()) {
-          this.nextStep();
-        } else {
-          this.textAnimationManager.completeCurrentAnimation();
-        }
+        this.progressNarrative();
       },
     );
 
@@ -84,7 +88,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       30,
       () => {
         console.log("Skip button clicked");
-        this.textAnimationManager.skipCurrentAnimation();
+        this.handleSkipButton();
       },
     );
 
@@ -93,8 +97,49 @@ export class CharacterCreationScene extends Phaser.Scene {
     this.skipButton.setVisible(false);
   }
 
-  nextStep() {
-    console.log("nextStep called, currentStep:", this.currentStep);
+  private handleAnimationComplete() {
+    console.log("Animation complete");
+    this.skipButton.setVisible(false);
+    this.continueButton.setVisible(true);
+  }
+
+  private handleContinueButton() {
+    console.log("Continue button clicked");
+    if (this.textAnimationManager.isComplete()) {
+      this.nextStep();
+    } else {
+      this.textAnimationManager.completeCurrentAnimation();
+    }
+  }
+
+  private handleSkipButton() {
+    if (!this.textAnimationManager.isComplete()) {
+      this.textAnimationManager.completeCurrentAnimation();
+    } else {
+      this.handleContinueButton();
+    }
+  }
+
+  private handleTextClick() {
+    console.log("Text clicked");
+    if (this.textAnimationManager.isComplete()) {
+      console.log("Animation complete, progressing narrative");
+      this.progressNarrative();
+    } else {
+      console.log("Completing current animation");
+      this.textAnimationManager.completeCurrentAnimation();
+    }
+  }
+
+  private progressNarrative() {
+    console.log("Progressing narrative");
+    this.currentTextIndex++;
+    this.textAnimationManager.resetSkippedState();
+    this.nextStep();
+  }
+
+  private nextStep() {
+    console.log("Next step called, current index:", this.currentTextIndex);
     this.currentStep++;
 
     // Set default button visibility
@@ -108,13 +153,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       case 2:
       case 3:
         this.skipButton.setVisible(true);
-        this.textAnimationManager.showNarrativeText(
-          this.getNarrativeText(this.currentStep),
-          () => {
-            console.log("Animation complete, continue button already visible");
-            this.skipButton.setVisible(false);
-          },
-        );
+        this.showNextText();
         break;
       case 4:
         this.suggestCharacter();
@@ -125,6 +164,24 @@ export class CharacterCreationScene extends Phaser.Scene {
       default:
         console.log("Reached default case in nextStep");
         this.startGame();
+    }
+  }
+
+  private showNextText() {
+    console.log("Showing next text, current index:", this.currentTextIndex);
+    if (this.currentTextIndex < this.narrativeTexts.length) {
+      const currentText = this.narrativeTexts[this.currentTextIndex];
+      if (!currentText) {
+        console.error("Current text is undefined");
+        return;
+      }
+      this.textAnimationManager.showNarrativeText(currentText, () => {
+        console.log("Text animation complete");
+        this.handleAnimationComplete();
+      });
+    } else {
+      console.log("No more text to show");
+      // Handle end of narrative
     }
   }
 

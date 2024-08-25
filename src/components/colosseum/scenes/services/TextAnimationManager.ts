@@ -14,42 +14,31 @@ interface AnimationState {
 }
 
 export class TextAnimationManager {
+  private currentText: Phaser.GameObjects.Text | null = null;
+  private isAnimationComplete: boolean = false;
+  private fullText: string = "";
+  private onCompleteCallback: (() => void) | null = null;
+  private managedTextObjects: Set<Phaser.GameObjects.Text> = new Set();
   private currentAnimation: ReturnType<typeof animateText> | null = null;
-  private errorText: Phaser.GameObjects.Text | null = null;
-  private managedTextObjects: Set<Phaser.GameObjects.Text>;
+  private animationQueue: (() => void)[] = [];
+  private onTextClickCallback: (() => void) | null = null;
 
-  constructor(private scene: Phaser.Scene) {
-    this.managedTextObjects = new Set<Phaser.GameObjects.Text>();
-  }
-
-  clearCurrentText() {
-    console.log("Clearing current text");
-    if (this.currentAnimation) {
-      this.currentAnimation.destroy();
-      this.currentAnimation = null;
-    }
-    this.clearErrorText();
-
-    this.managedTextObjects.forEach((textObject) => {
-      console.log("Removing managed text object:", textObject.name);
-      textObject.destroy();
-    });
-    this.managedTextObjects.clear();
-  }
-
-  isComplete() {
-    return this.currentAnimation?.state.isComplete ?? false;
+  constructor(
+    private scene: Phaser.Scene,
+    onTextClick?: () => void,
+  ) {
+    this.onTextClickCallback = onTextClick || null;
   }
 
   showNarrativeText(text: string, onComplete?: () => void) {
     console.log("showNarrativeText called with:", text);
 
-    this.clearCurrentText();
+    const animateNext = () => {
+      this.clearCurrentText();
 
-    const centerX = this.scene.cameras.main.width / 2;
-    const centerY = this.scene.cameras.main.height / 2;
+      const centerX = this.scene.cameras.main.width / 2;
+      const centerY = this.scene.cameras.main.height / 2;
 
-    try {
       this.currentAnimation = animateText(
         this,
         this.scene,
@@ -69,47 +58,61 @@ export class TextAnimationManager {
         },
       );
       this.makeTextClickable(this.currentAnimation.textObject);
-    } catch (error) {
-      console.error("Error during text animation:", error);
+    };
+
+    if (this.currentAnimation) {
+      this.animationQueue.push(animateNext);
+    } else {
+      animateNext();
     }
   }
 
-  showErrorText(message: string) {
-    this.clearErrorText();
-    const centerX = this.scene.cameras.main.width / 2;
-    const bottomY = this.scene.cameras.main.height - 20;
+  clearCurrentText() {
+    if (this.currentAnimation) {
+      console.log("Clearing current text");
+      if (this.currentAnimation.textObject?.scene) {
+        this.currentAnimation.textObject.destroy();
+      }
+      this.currentAnimation = null;
+    }
+  }
 
-    this.errorText = this.scene.add
-      .text(centerX, bottomY, message, {
-        fontSize: "16px",
-        color: "#ff0000",
-        wordWrap: { width: this.scene.cameras.main.width * 0.8 },
-        align: "center",
-        backgroundColor: "#ffffff",
-        padding: { x: 10, y: 5 },
-      })
-      .setOrigin(0.5)
+  resetSkippedState() {
+    if (this.currentAnimation) {
+      this.currentAnimation.state.isSkipped = false;
+      console.log("Reset skipped state for current animation");
+    }
+  }
+
+  private processNextAnimation() {
+    console.log("Processing next animation");
+    this.clearCurrentText();
+    this.currentAnimation = null;
+    if (this.animationQueue.length > 0) {
+      const nextAnimation = this.animationQueue.shift();
+      if (nextAnimation) {
+        console.log("Starting next animation");
+        nextAnimation();
+      }
+    } else {
+      console.log("No more animations in queue");
+    }
+  }
+
+  makeTextClickable(textObject: Phaser.GameObjects.Text) {
+    textObject
       .setInteractive({ useHandCursor: true })
-      .on("pointerdown", () => this.clearErrorText());
-
-    this.errorText.name = "TAM_ErrorText";
-    this.managedTextObjects.add(this.errorText);
+      .on("pointerdown", () => this.handleTextClick());
   }
 
-  private clearErrorText() {
-    if (this.errorText) {
-      this.managedTextObjects.delete(this.errorText);
-      this.errorText.destroy();
-      this.errorText = null;
+  private handleTextClick() {
+    if (this.isComplete()) {
+      if (this.onTextClickCallback) {
+        this.onTextClickCallback();
+      }
+    } else {
+      this.completeCurrentAnimation();
     }
-  }
-
-  addManagedTextObject(textObject: Phaser.GameObjects.Text) {
-    this.managedTextObjects.add(textObject);
-  }
-
-  removeManagedTextObject(textObject: Phaser.GameObjects.Text) {
-    this.managedTextObjects.delete(textObject);
   }
 
   skipCurrentAnimation() {
@@ -124,10 +127,16 @@ export class TextAnimationManager {
     }
   }
 
-  makeTextClickable(textObject: Phaser.GameObjects.Text) {
-    textObject
-      .setInteractive({ useHandCursor: true })
-      .on("pointerdown", () => this.completeCurrentAnimation());
+  isComplete(): boolean {
+    return this.isAnimationComplete;
+  }
+
+  addManagedTextObject(textObject: Phaser.GameObjects.Text) {
+    this.managedTextObjects.add(textObject);
+  }
+
+  removeManagedTextObject(textObject: Phaser.GameObjects.Text) {
+    this.managedTextObjects.delete(textObject);
   }
 }
 
@@ -155,6 +164,7 @@ function animateNextCharacter(state: AnimationState, textType: TextType) {
     state.displayedText += state.fullText[state.index];
     if (state.textObject?.scene) {
       state.textObject.setText(state.displayedText);
+      console.log("Updated text:", state.textObject.text);
     } else {
       state.isSkipped = true;
       return;
@@ -179,14 +189,20 @@ function animateText(
   style: Phaser.Types.GameObjects.Text.TextStyle = {},
   onComplete?: () => void,
 ) {
-  const textObject = scene.add.text(x, y, "", style).setOrigin(0.5);
+  const textObject = scene.add
+    .text(x, y, "", {
+      ...style,
+      wordWrap: { width: 300 },
+    })
+    .setOrigin(0.5);
   textObject.name = `TAM_NarrativeText_${Date.now()}`;
   manager.addManagedTextObject(textObject);
   console.log("Created new managed text object:", textObject.name);
+  console.log("Text object created:", textObject.text, "at position:", x, y);
 
   const state: AnimationState = {
     isComplete: false,
-    isSkipped: false,
+    isSkipped: false, // Reset for each new narrative segment
     textObject,
     scene,
     fullText: text,
@@ -227,8 +243,12 @@ function skipAnimation(state: AnimationState) {
   state.scene.time.removeAllEvents();
   if (state.textObject?.scene) {
     state.textObject.setText(state.fullText);
+    console.log("Skipped. Full text set:", state.textObject.text);
   }
-  if (state.onComplete) state.onComplete();
+  if (state.onComplete) {
+    console.log("Calling onComplete after skip");
+    state.onComplete();
+  }
 }
 
 function completeAnimation(state: AnimationState) {
