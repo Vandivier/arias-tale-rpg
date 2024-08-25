@@ -1,8 +1,8 @@
 // pages/games/tcg-playmat/index.tsx
 
-import React, { useState, type DragEvent } from "react";
-import Head from "next/head";
 import Image from "next/image";
+import React, { useState, type DragEvent } from "react";
+import { CustomPage } from "~/components/CustomPage";
 
 // Define types for our cards
 interface Card {
@@ -42,22 +42,16 @@ const TcgPlaymat: React.FC = () => {
   };
 
   return (
-    <div
-      className="p-5 text-center"
-      onDrop={handleDrop}
-      onDragOver={(e) => e.preventDefault()}
+    <CustomPage
+      metaDescription="Play with your TCG cards on this virtual playmat."
+      mainHeading="Card Game Playmat"
+      title="TCG Playmat - Aria's Tale"
     >
-      <Head>
-        <title>TCG Playmat - Aria's Tale</title>
-        <meta
-          name="description"
-          content="Play with your TCG cards on this virtual playmat."
-        />
-      </Head>
-
-      <main className="mx-auto max-w-7xl">
-        <h1 className="mb-5 text-4xl font-bold">Card Game Playmat</h1>
-
+      <div
+        className="mx-auto max-w-7xl p-5 text-center"
+        onDrop={handleDrop}
+        onDragOver={(e) => e.preventDefault()}
+      >
         <div className="mb-5 flex flex-wrap justify-center gap-2">
           {cards.map((card) => (
             <div
@@ -93,8 +87,8 @@ const TcgPlaymat: React.FC = () => {
             </div>
           ))}
         </div>
-      </main>
-    </div>
+      </div>
+    </CustomPage>
   );
 };
 
