@@ -35,10 +35,13 @@ function TopNav() {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem asChild>
+                <Link href="/colosseum">Colosseum</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
                 <Link href="/fighting">Fighting Game</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/colosseum">Colosseum</Link>
+                <Link href="/tcg-playmat">TCG Playmat</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
