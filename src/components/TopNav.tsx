@@ -1,3 +1,4 @@
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,8 +12,8 @@ function TopNav() {
   return (
     <nav className="w-full bg-white text-custom-primary shadow">
       <div className="container mx-auto px-6 py-3 md:flex md:items-center md:justify-between">
-        <div className="flex">
-          <Link className="m-auto block" href="/" title="Home Page Link">
+        <div className="flex items-center">
+          <Link className="mr-auto block" href="/" title="Home Page Link">
             <Image
               alt="Aria's Tale Dice Logo"
               height={40}
@@ -20,9 +21,13 @@ function TopNav() {
               src="/arias-tale-d20-logo.png"
             />
           </Link>
+
+          <Link className="ml-auto block md:hidden" href="/mobile-menu">
+            <HamburgerMenuIcon className="h-6 w-6" />
+          </Link>
         </div>
 
-        <div className="flex flex-col items-center justify-center md:mx-6 md:flex-row">
+        <div className="hidden flex-col items-center justify-center md:mx-6 md:flex md:flex-row">
           <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/gallery">
             Gallery
           </Link>
