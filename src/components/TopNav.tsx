@@ -22,6 +22,9 @@ function TopNav() {
           <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/">
             Home
           </Link>
+          <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/gallery">
+            Gallery
+          </Link>
           <Link
             className="my-1 cursor-pointer md:mx-4 md:my-0"
             href="/game-manual"
@@ -46,9 +49,6 @@ function TopNav() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link className="my-1 cursor-pointer md:mx-4 md:my-0" href="/gallery">
-            Gallery
-          </Link>
           <Link
             className="my-1 cursor-pointer md:mx-4 md:my-0"
             href="https://github.com/Vandivier/arias-tale-rpg"
@@ -56,6 +56,15 @@ function TopNav() {
           >
             GitHub
           </Link>
+
+          <Link
+            className="my-1 cursor-pointer md:mx-4 md:my-0"
+            href="https://suno.com/playlist/1d9534bc-ed44-493d-8e02-71ef60b37707"
+            target="_blank"
+          >
+            Music
+          </Link>
+
           <Link
             className="my-1 cursor-pointer md:mx-4 md:my-0"
             href="https://www.tiktok.com/@arias.tale.game"
