@@ -46,13 +46,13 @@ export const CustomPage = ({
 
     <style>
       {`
-          .dice-logo {
+          .dice-logo-spinning {
             cursor: pointer;
             max-width: 60px;
             transition: transform 0.3s ease;
           }
 
-          .dice-logo:hover {
+          .dice-logo-spinning:hover {
             transform: rotate(360deg);
           }
       `}
