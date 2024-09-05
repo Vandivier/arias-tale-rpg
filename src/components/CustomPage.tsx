@@ -14,7 +14,7 @@ interface CustomPageProps {
 export const CustomPage = ({
   children,
   contentBeforeTitle,
-  innerPageClassName = "container m-auto my-4 flex w-full flex-col items-center gap-6 px-4 py-2 md:w-1/2 md:py-8",
+  innerPageClassName = "container m-auto my-4 flex w-full flex-col items-center gap-6 px-8 py-2 md:w-2/3 md:py-8",
   mainHeading,
   metaDescription = `A Tech-Forward Emergent AI-Assisted TRPG Game and Community!`,
   title = `Aria's Tale`,
@@ -77,13 +77,13 @@ export const CustomPage = ({
         </div>
       </div>
     </main>
-    <footer className="flex items-center justify-center gap-4 py-4 text-2xl text-custom-primary">
+    <footer className="text-md flex items-center justify-center gap-4 px-8 py-4 text-custom-primary">
       <Link href="https://github.com/Vandivier/arias-tale-rpg" target="_blank">
         GitHub
       </Link>
       {" | "}
       <Link href="https://ladderly.io" target="_blank">
-        ladderly.io
+        Ladderly.io
       </Link>
       {" | "}
       <Link href="https://ariastale.com/privacy-policy" target="_blank">
