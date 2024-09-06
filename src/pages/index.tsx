@@ -17,21 +17,35 @@ export default function Home() {
     >
       <>
         <div className="flex items-center">
-          <Image
-            alt="Aria's Tale Dice Logo"
-            className="dice-logo-spinning mr-2"
-            height={50}
-            width={50}
-            src="/arias-tale-d20-logo.png"
-          />
+          <style jsx>{`
+            .dice-logo-wrapper {
+              cursor: pointer;
+              display: inline-block;
+              transition: transform 0.3s ease;
+            }
+
+            .dice-logo-wrapper:hover {
+              transform: rotate(360deg);
+            }
+          `}</style>
+
+          <div className="dice-logo-wrapper mr-2">
+            <Image
+              alt="Aria's Tale Dice Logo"
+              height={50}
+              width={50}
+              src="/arias-tale-d20-logo.png"
+            />
+          </div>
           <p>{hello.data ? hello.data.greeting : "Loading..."}</p>
-          <Image
-            alt="Aria's Tale Dice Logo"
-            className="dice-logo-spinning ml-2"
-            height={50}
-            width={50}
-            src="/arias-tale-d20-logo.png"
-          />
+          <div className="dice-logo-wrapper ml-2">
+            <Image
+              alt="Aria's Tale Dice Logo"
+              height={50}
+              width={50}
+              src="/arias-tale-d20-logo.png"
+            />
+          </div>
         </div>
 
         <AuthShowcase />
