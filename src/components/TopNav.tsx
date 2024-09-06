@@ -1,6 +1,7 @@
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { Cross2Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,6 +10,9 @@ import {
 } from "src/components/ui/dropdown-menu";
 
 function TopNav() {
+  const router = useRouter();
+  const isMobileMenu = router.pathname.includes("mobile-menu");
+
   return (
     <nav className="w-full bg-white text-custom-primary shadow">
       <div className="container mx-auto px-6 py-3 md:flex md:items-center md:justify-between">
@@ -22,8 +26,15 @@ function TopNav() {
             />
           </Link>
 
-          <Link className="ml-auto block md:hidden" href="/mobile-menu">
-            <HamburgerMenuIcon className="h-6 w-6" />
+          <Link
+            className="ml-auto block md:hidden"
+            href={isMobileMenu ? "/" : "/mobile-menu"}
+          >
+            {isMobileMenu ? (
+              <Cross2Icon className="h-6 w-6" />
+            ) : (
+              <HamburgerMenuIcon className="h-6 w-6" />
+            )}
           </Link>
         </div>
 
