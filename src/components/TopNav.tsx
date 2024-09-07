@@ -2,6 +2,7 @@ import { Cross2Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { MenuComponent } from "./MenuComponent";
 
 interface TopNavProps {
   theme: string;
@@ -47,6 +48,10 @@ function TopNav({ theme, toggleTheme }: TopNavProps) {
               <HamburgerMenuIcon className="h-6 w-6" />
             )}
           </Link>
+        </div>
+
+        <div className="hidden flex-col items-center justify-center md:mx-6 md:flex md:flex-row">
+          <MenuComponent topLevelClickableClassname="my-1 cursor-pointer md:mx-4 md:my-0" />
         </div>
       </div>
     </nav>
