@@ -1,5 +1,5 @@
 ---
-title: "TTRPG Instructions"
+title: "Advanced TTRPG Instructions with Embedded CSV Data"
 ---
 
 ## ROLE
@@ -212,7 +212,185 @@ Suddenly, the sky darkens with an orange glow. A massive, powerful figure appear
 The mysterious and monstrous figure warns of the extraordinary power of these floor bosses, advising players to form parties, guilds, and inter-guild alliances for survival. The figure notably empowered these bosses, making them unbeatable by even the most powerful players alone.
 
 
-{{ TODO }}
+## Encyclopedia CSV Data
+
+name,kind,description
+Beastfolk,Race,"Examples include Faun, Centaurs, Birdfolk, Catkin, Frogfolk, Lizardkin, Lionkin, Wolfkin"
+Celestial,Race,"Beings with affinity to the heavens, notably including angels."
+Demon,Race,"Beings with affinity to the underworld. They are also called devils and fiends."
+Dragon,Race,
+Dwarf,Race,
+Elf,Race,
+Elemental,Race,
+Fae,Race,
+Goblin,Race,
+Half-Races,Race,"This is a group of races with many subraces that often have alternate names and high ability variation."
+Human,Race,
+Imp,Race,"Tend to have evil or chaotic alignment. Affinity with demons and tieflings. Speaks with fae and sprites. Sometimes-friend of goblins or orcs. It is also called a gremlin or hobgoblin."
+Merfolk,Race,
+Orc,Race,
+Treant,Race,
+Skyborn,Race,
+Chronowalker,Class,
+Artificer,,Class,
+Alchemist,Class,
+Archer,Class,
+Athlete,Class,
+Bard,Class,
+Blacksmith,Class,
+Brewer,Class,
+Chef,Class,
+Clayworker,Class,
+Commander,Class,
+Connoisseur,Class,
+Druid,Class,
+Elementalist,Class,
+Emissary,Class,
+Enchanter,Class,
+Entertainer,Class,
+Explorer,Class,
+Farmer,Class,
+Fisher,Class,
+Guard,Class,
+Healer,Class,
+Herbalist,Class,
+Hunter,Class,
+Jeweler,Class,
+Judge,Class,
+Lumberjack,Class,
+Mage,Class,"Also called a wizard, warlock, sorcerer, and so on, with some minor nuance between them."
+Martial Artist,Class,
+Merchant,Class,
+Miner,Class,
+Noble,Class,
+Necromancer,Class,"A mage that specializes in death magic."
+Oracle,Class,
+Paladin,Class,
+Priest,Class,
+Prophet,Class,
+Sailor,Class,
+Scholar,Class,
+Sealer,Class,
+Summoner,Class,
+Tailor,Class,
+Tamer,Class,
+Thief,Class,
+Warrior,Class,
+Woodworker,Class,
+Vampire,Trait,racelike
+Werewolf,Trait,racelike
+Wraith,Trait,racelike
+Zombie,Trait,racelike
+Awakening Regions,Rumor,"Characters awaken between levels -1 and 7, and no one was aware of levels or higher and lower circles until the great vision."
+Sports!,Rumor,"There are a variety of games including real-world sports like soccer, magically enhanced sports, and violent games of combat or hunting. Some sports have leagues across regions. Participants can develop interesting skills and earn prizes and fame."
+The Ancient Pillar,Rumor,"The plauteau in the Old Pillar Highlands is rumored to be a broken ancient obelisk, a source of exceptional magic power."
+The Lesser Gods of Olympus,Rumor,"There is a region modeled after Mt. Olympus, where magical heroes battle for glory. The most powerful among them are called gods."
+Non-Elemental Magic,Rumor,"Many have heard of elemental magic, but rarer magicians practice time magic, soul swapping, death, love, blood, illusion, and ritual magic."
+Tamer Training,Rumor,"Many tamers have the ability to tame and ride animals. Tamers often teach even non-tamers to ride certain amenable animals."
+Wraithhood,Rumor,"Rumors speak of certain racelike traits that can be acquired or placed as a curse. Examples include vampirism, wearwolfism, and wraithhood."
+The Echoing Halls,Rumor,"Legend speaks of the Echoing Halls hidden beneath the Evergreen Outskirts, a place where echoes of past battles can grant warriors ancient combat techniques and forgotten knowledge."
+The Starlit Sky Bridge,Rumor,"Travelers whisper about a mystical bridge in the Whispering Woods that appears only on starlit nights, leading to a celestial realm with secrets of the cosmos and lost celestial magic."
+"Caelum (Caelum's Arc)",Character,A celestial archer seeking to understand his lineage and serve Lunaria.
+Eldorin,Character,A half-elf and half-mermaid bard and tamer. He seeks inspiration for his music by exploring the land and sea.
+Guild Lunaria,Guild,
+Lunaria,Religion,
+"Aria",Character,"A charismatic human spellcaster."
+"Tank",Character,"A human warrior with a spear and sword. Played by Mike."
+"Eidolon",Character,"An elven rogue with no memory of logging in."
+"Elara",Character,"She is the leader of the Shield Bearers. She is a priestess of light."
+"Gavriel",Character,"He is a mysterious wizard who is a member of the Shield Bearers."
+Lyra,Character,"A warrior in the Shield Bearers, fought in the Battle of the Dark Paladin."
+"Lysandra",Character,"A cunning strategist and second in the Council of Three leading the Crimson Vanguard."
+Kael,Character,"A warrior in the Shield Bearers, known for his strength and loyalty. Fell in the Battle of the Dark Paladin."
+Reyna,Character,"A Wood Elf ranger and expert marksman with the longbow, part of the Elementalists."
+Pax,Character,"A Halfling cleric in the Shield Bearers, skilled in healing magic. Participated in the Battle of the Dark Paladin."
+Thane,Character,"A seasoned warrior and first of the Council of Three that leads the Crimson Vanguard."
+Selena,Character,"A human Blade Dancer, part of Thane's group."
+Ivar,Character,Half-Orc Bearkin Barbarian in Thane's group.
+Vaelor,Character,"A Dragonborn Paladin, third in the Council of Three of the Crimson Vanguard."
+Lirael,Character,"An Elven Ranger, part of Aria's Guild."
+Gorrim,Character,"A Dwarf Berserker, ally to Aria's Guild."
+Sylas,Character,"A Human Rogue, allied with Aria's Guild."
+Mira,Character,"A Gnome Artificer, allied with Aria's Guild."
+Kaelen,Character,A Half-Elf Warlock in Aria's Guild. Fell in the Battle of the Dark Paladin.
+Tharivol,Character,"A Tiefling Sorcerer, part of Aria's Guild."
+Eryndor,Character,"A Human Cleric, ally in Aria's Guild. Fell in the Battle of the Dark Paladin."
+Briar,Character,"A Halfling Monk, part of Aria's Guild. Fell in the Battle of the Dark Paladin."
+Ulraker,Character,"The second son of a bearkin tribe chief, he is often seen in the company of wolves, causing concern with many fellow bearkin."
+Lysara,Character,"A young elemental mage specializing in fire and ice. One of two mages selected by Caelum to investigate an abnormal magical signature in the mountains."
+Elarion,Character,"A young energy mage. One of two mages selected by Caelum to investigate an abnormal magical signature in the mountains."
+"Caelum (Ezekiel's Arc)",Character,"Archmage Caelum Starweaver is the Ageless yet Aged, one of the most powerful lunar and time mages in Evergreen and a High Priest of Lunaria."
+Tharok,Character,"A human warrior and member of a mercenary guild."
+Seraphina,Character,"A human warrior and member of a mercenary guild."
+"Automaton Guardian No. 7519",Character,"A defensive robot guardian and ally of Lunara."
+"Drogan Flamebeard",Character,"A dwarf mage and ally of Lunara. He uses flame magic for attack, enchantment, and even cooking. He has a knack for counterspells."
+"Eorhelm",Character,"An ally of Lunara. A human warrior of unimpressive ability, though handsome."
+"Lunara the Swift",Character,"A talented elven archer from a mundane family and village. She has rallied a group of adventurers to amass experience out of necessity for survival."
+"Aria's Guild",Guild,"A large guild of about 80 led by Aria."
+"The Legacy Seekers","Guild","A small guild of 7 members noted in the Town of Echoes."
+"The Order of the Azure Lily","Guild","A small guild of 6 members noted in the Town of Echoes. In ch 6 they agree to journey with the Elementalists to Adlais."
+"The Knights of the Silver Dragon","Guild","A guild of 12 members noted in the Town of Echoes. In ch 6 they rejected the offer to journey with the Elementalists to Obsidian Forest."
+"The Shield Bearers",Guild,"A group known for their defensive tactics and strong leadership."
+"The Elementalists",Guild,"A guild of 5 specializing in elemental magic and exploration."
+"The Crimson Vanguard",Guild,"A medium-sized guild aspiring to be the top guild."
+"The Mercenaries",Guild,"A pragmatic group known for efficiency and taking on various tasks."
+"The Forest of Echoes",Region,"An overarching region encompassing several subregions and mysteries."
+"The Town of Echoes",Subregion,"A central hub in the game for players to congregate, trade, and receive quests."
+"The Lake of Whispers",Subregion,"A serene lake area known for its mystical ambiance."
+"The Ruins of Eldarion",Subregion,"Ancient ruins within the forest, rich in history and artifacts."
+"The Whispering Glade",Subregion,"An enchanted or mystical forested area within The Forest of Echoes."
+"The Crossroads of Elements",Subregion,"A strategic location within the forest, known as an Elemental Nexus."
+"The Whispering Woods",Subregion,"A diverse terrain forest, used for training exercises and exploration."
+"The Forest of Echoes (Subregion)",Subregion,"A large forest area sharing its name with the larger region, filled with unique challenges."
+
+
+## Regions and Places CSV Data
+
+name,narrativeDays,description,regionKind,minElevation,maxElevation,commonRace,commonTongue,diversityScore,physicalSizeScore,populationSizeScore
+Evergreen,0,A mystical and vast world with diverse landscapes.,WORLD,0,3000,Various,Multiple,50,100,70
+Aetheria,0,"A floating region in the sky, known for its forests, plains, rivers, and mountains.",REGION,14480,17520,"Birdfolk, Celestials, Fae",Multiple,30,60,40
+Dragonica,0,Region filled with ancient dragon lore and mysteries.,REGION,0,0,"Dragons, Various",Multiple,40,70,60
+New Olympia,0,Mountain range occupied by a large dwarven civilization and a multiracial society.,REGION,0,0,"Dwarves, Various",Multiple,70,50,80
+Obsidia,0,Region known for its Echoing Forest and Whispering Woods.,REGION,0,0,Various,Multiple,60,40,50
+Raefun,0,"A region with varied geography, from plains to mountains and coast.",REGION,0,0,Various,Multiple,50,55,55
+Old Pillar,0,An area known for its historical significance and ancient ruins.,REGION,0,0,Various,Multiple,20,30,30
+Triton,0,"The largest merfolk ocean civilization, also an island civilization.",REGION,0,0,Merfolk,Merfolk Languages,30,65,45
+Neptune,0,A merfolk civilization located in the sea between continents.,REGION,0,0,Merfolk,Merfolk Languages,30,65,45
+Regalis,0,Region with the well-known citadel Reion and the large library of Elderglen.,REGION,0,0,Various,Multiple,60,45,75
+Terah,0,"Known as The Land of Judges, includes deserts, plains, and coastal areas.",REGION,0,0,"Humans, Other",Multiple,40,75,65
+Elysia,0,"Mainly plains, known for its egalitarian society and tension with Regalis.",REGION,0,0,Humans,Multiple,50,50,60
+Goblin Hollow,0,Network of underground caves and tunnels adjacent to Raefun.,ZONE,0,0,Goblins,Goblin,20,35,25
+Antiqua,0,"The cursed former capital of the Empire of Solara, now a barren land.",REGION,0,0,Various,Multiple,10,25,20
+
+
+## Roll Table CSV Data
+
+roll_kind,table_kind,min,max,name,description
+d6,Flee,1,1,Critical Failure,Stranger is unique and aggressive. They attack the party.
+d6,Flee,2,3,Progressive Failure,Flee failed. Trying to flee again next turn gains +1 to the roll.
+d6,Flee,4,5,Success,The unit flees.
+d6,Flee,6,6,Critical Success,The unit flees. They can optionally evacuate an ally and re-enter battle with stealth in a later round.
+d6,Lone Stranger Chart,1,1,Critically Unfortunate,Stranger is unique and aggressive.
+d6,Lone Stranger Chart,2,3,Unfortunate,Stranger is an aggressive adversary
+d6,Lone Stranger Chart,4,5,Fortunate,Stranger tries to flee
+d6,Lone Stranger Chart,6,6,Critical Success,Stranger is friendly
+d6,Standard,1,1,Critical Failure,
+d6,Standard,2,2,Low,
+d6,Standard,3,4,Medium,
+d6,Standard,5,5,High,
+d6,Standard,6,6,Critical Success,
+d20,Rarity,1,1,Common and Disabled,bestows a random disability
+d20,Rarity,2,10,Common,
+d20,Rarity,11,16,Uncommon,bestows 1d3 stat point bonus
+d20,Rarity,17,18,Rare,bestows 1d6 stat point bonus
+d20,Rarity,19,19,Ultra Rare,bestows 3+1d6 stat point bonus
+d20,Rarity,20,20,Unique,bestows 3+1d6 stat point bonus and 1d2 special abilities
+d20,Battle Encounter Difficulty,1,1,Critically Easy Battle,"A lone monster. Roll 1d6+1 on the Lone Stranger Chart."
+d20,Battle Encounter Difficulty,2,6,Easy Battle,1d6 enemies with 1d6 level disadvantage
+d20,Battle Encounter Difficulty,7,16,Medium Battle,2d6 enemies.
+d20,Battle Encounter Difficulty,17,19,Hard Battle,3d6 enemies with 1d6 level advantage.
+d20,Battle Encounter Difficulty,20,20,Critically Hard Battle: 5d6 enemies with 1d6 level advantage and at least one guaranteed unique enemy,"There is a unique narrative attached, although we may learn about that before, during, or after the battle."
+
 
 --END OF INITIAL INSTRUCTIONS--
 
