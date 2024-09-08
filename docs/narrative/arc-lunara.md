@@ -2,11 +2,6 @@
 title: "Episode Narrative Guide - Arc Lunara"
 ---
 
-<!--
-    Arc Elara Active GPT-4 Thread Here:
-    https://chat.openai.com/c/a6a1ae42-d62e-4863-86e2-52f1e29f39c0
--->
-
 ### Chapter 1: Goblin Fight!
 
 In the heart of Evergreen, an MMORPG world where fantasy and technology entwine, a band of adventurers journey through the dense undergrowth. Eorhelm, clad in shimmering silver armor, led the way, his sword a beacon in the growing twilight. Beside him, Lunara, the elven archer, moved with a purpose born of urgent necessity. Her keen eyes, ever scanning the shadows, were not just in search of foes but a path to survival.

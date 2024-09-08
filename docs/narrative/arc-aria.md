@@ -2,18 +2,7 @@
 title: "Episode Narrative Guide - Arc Aria"
 ---
 
-<!--
-    Taken from:
-    - [Summarizing common types.](https://chat.openai.com/share/b3307f98-eebc-4883-89af-ef2eed6e7623)
-    - Quest for Johan's Revival
-    - Purple Gate in Forest
-    - Player Units' Stats Setup
-    - Hex Grid RPG Encounter
-    - https://chat.openai.com/share/8eeaadfa-db38-4841-92b7-795c9dd64818
-    - https://chat.openai.com/c/841a04ba-9575-4f59-998c-4621e85db7c4
--->
-
-## Chapter 1 Summary: The Monstrous Vision
+## Chapter 1: The Monstrous Vision
 
 One bright afternoon, a warrior takes a seat on a stump in a safe, shaded region of the Forest of Echoes. He carries a spear and shield across his back, while he carries a bag of freshly picked berries and walnuts in his hand. He tosses a berry into his mouth and reaches for a second when he hears a faint doorbell.
 
