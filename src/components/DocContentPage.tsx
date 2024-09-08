@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { CustomPage } from "./CustomPage";
 import Link from "next/link";
@@ -20,6 +21,27 @@ export const DocContentPage = ({
   rawMarkdownUrl,
   title,
 }: DocContentPageProps) => {
+  const [copyMessage, setCopyMessage] = useState<string>("");
+
+  const handleCopyToClipboard = () => {
+    if (content) {
+      navigator.clipboard.writeText(content).then(
+        () => {
+          setCopyMessage("Copied!");
+          setTimeout(() => setCopyMessage(""), 2000);
+        },
+        (err) => {
+          setCopyMessage("Failed to copy!");
+          setTimeout(() => setCopyMessage(""), 2000);
+          console.error("Failed to copy!", err);
+        },
+      );
+    } else {
+      setCopyMessage("Failed to copy!");
+      setTimeout(() => setCopyMessage(""), 2000);
+    }
+  };
+
   const components: Record<string, React.ElementType> = {
     code({ className, children, ...props }: CodeProps) {
       return (
@@ -63,7 +85,23 @@ export const DocContentPage = ({
       mainHeading={title}
       contentBeforeTitle={
         rawMarkdownUrl && (
-          <div className="flex w-full justify-center bg-white align-middle">
+          <div className="flex w-full flex-col items-center justify-center bg-white align-middle">
+            <button
+              className="ml-4 cursor-pointer p-2"
+              onClick={handleCopyToClipboard}
+            >
+              Copy Content to Clipboard
+            </button>
+            {copyMessage && (
+              <div
+                className={`ml-2 ${
+                  copyMessage === "Copied!" ? "text-green-500" : "text-red-500"
+                }`}
+                style={{ alignSelf: "center" }}
+              >
+                {copyMessage}
+              </div>
+            )}
             <Link
               className="p-2"
               href={rawMarkdownUrl}
