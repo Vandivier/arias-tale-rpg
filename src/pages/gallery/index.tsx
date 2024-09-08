@@ -24,6 +24,14 @@ export default function GalleryPage() {
 
         */}
         <li className={`my-6 text-2xl`}>
+          <Link
+            href="https://suno.com/playlist/1d9534bc-ed44-493d-8e02-71ef60b37707"
+            target="_blank"
+          >
+            Music
+          </Link>
+        </li>
+        <li className={`my-6 text-2xl`}>
           <Link href={`/gallery/random`}>Random Image</Link>
         </li>
         <li className={`my-6 text-2xl`}>

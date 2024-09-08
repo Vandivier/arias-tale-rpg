@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsx scripts/generate-sitemap.ts && next build",
+    "build": "tsx scripts/build-webdocs.ts && tsx scripts/generate-sitemap.ts && next build",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",

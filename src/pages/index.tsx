@@ -56,8 +56,27 @@ export default function Home() {
             fantasy, science fiction, and isekai.
           </p>
           <p>
-            Experience the Aria's Tale universe through novels, games, art, and
-            dialogue.
+            Experience the Aria's Tale universe through{" "}
+            <Link className="underline" href="/game-manual/narrative">
+              novels
+            </Link>
+            ,{" "}
+            <Link className="underline" href="/game-manual/quick-start">
+              games
+            </Link>
+            ,{" "}
+            <Link className="underline" href="/gallery">
+              art
+            </Link>
+            , and{" "}
+            <Link
+              className="underline"
+              href="https://www.tiktok.com/@arias.tale.game"
+              target="_blank"
+            >
+              dialogue
+            </Link>
+            .
           </p>
           <p>
             Aria's Tale is an{" "}
