@@ -11,8 +11,10 @@ import path from "path";
 import { DocContentPage } from "~/components/DocContentPage";
 import { DocIndexPage } from "~/components/DocIndexPage";
 
+const DOCS_OUTPUT_DIR = "docs/dist";
+
 const GitHubRawRoot =
-  "https://raw.githubusercontent.com/Vandivier/arias-tale-rpg/main/docs/";
+  "https://raw.githubusercontent.com/Vandivier/arias-tale-rpg/main/docs/dist/";
 
 interface DocPageProps {
   content?: string;
@@ -59,7 +61,7 @@ async function getFiles(dir: string): Promise<string[]> {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const docsDirectory = path.join(process.cwd(), "docs");
+  const docsDirectory = path.join(process.cwd(), DOCS_OUTPUT_DIR);
   const files = await getFiles(docsDirectory);
 
   const paths = files.map((filePath) => {
@@ -109,7 +111,7 @@ async function isDirectory(path: string) {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const filename = context.params?.filename ?? [];
-  const filePath = path.join(process.cwd(), "docs", ...filename);
+  const filePath = path.join(process.cwd(), DOCS_OUTPUT_DIR, ...filename);
 
   if (await isDirectory(filePath)) {
     const fileNameWithExtension = await fs.promises.readdir(filePath);
@@ -128,7 +130,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const markdownFileName = `${
     Array.isArray(filename) ? filename.join("/") : filename
   }.md`;
-  const markdownFile = path.join(process.cwd(), "docs", markdownFileName);
+  const markdownFile = path.join(
+    process.cwd(),
+    DOCS_OUTPUT_DIR,
+    markdownFileName,
+  );
   const fileContents = fs.readFileSync(markdownFile, "utf8");
   const { content, data } = matter(fileContents);
 
