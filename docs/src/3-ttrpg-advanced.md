@@ -1,5 +1,9 @@
 ---
-title: "Complex TTRPG Instructions"
+title: "TTRPG Instructions"
 ---
 
-TODO: output this file from ttrpg plus CSV data
+{{ ttrpg-core }}
+
+{{ TODO: incorporate data }}
+
+{{ end-of-instructions-marker }}

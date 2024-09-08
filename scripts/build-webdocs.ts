@@ -1,15 +1,14 @@
 import fs from "fs";
 import path from "path";
 
-const END_OF_INSTRUCTIONS_MARKER = "--END OF INITIAL INSTRUCTIONS--";
-
+// Function to replace template variables and insert component content
 function buildFileFromTemplate(
   sourceTemplate: string,
   destination: string,
   replacements: Record<string, string>,
-) {
+): void {
   if (fs.existsSync(sourceTemplate)) {
-    let templateContent = fs.readFileSync(sourceTemplate, "utf-8");
+    let templateContent: string = fs.readFileSync(sourceTemplate, "utf-8");
 
     // Replace template variables with actual content
     for (const [key, value] of Object.entries(replacements)) {
@@ -19,29 +18,41 @@ function buildFileFromTemplate(
       );
     }
 
-    // Handle ttrpg-core content
-    if (templateContent.includes("{{ ttrpg-core }}")) {
-      const coreContentPath = path.join("docs/src/components", "ttrpg-core.md");
-      if (fs.existsSync(coreContentPath)) {
-        const coreContent = fs.readFileSync(coreContentPath, "utf-8");
-        templateContent = templateContent.replace(
-          "{{ ttrpg-core }}",
-          coreContent,
-        );
-      } else {
-        console.warn(
-          `Warning: Could not find ttrpg-core content at ${coreContentPath}`,
-        );
-      }
-    }
+    // Replace template components with corresponding content
+    templateContent = templateContent.replace(
+      /{{ ([a-zA-Z0-9-_]+) }}/g,
+      (match: string, componentName: string): string => {
+        const componentPath: string = path.join("docs/src/components");
 
-    // Replace end-of-instructions marker if present
-    if (templateContent.includes("{{ end-of-instructions-marker }}")) {
-      templateContent = templateContent.replace(
-        "{{ end-of-instructions-marker }}",
-        END_OF_INSTRUCTIONS_MARKER,
-      );
-    }
+        // Find all files with the matching component name (regardless of extension)
+        const componentFiles: string[] = fs
+          .readdirSync(componentPath)
+          .filter(
+            (file: string) =>
+              path.basename(file, path.extname(file)) === componentName,
+          );
+
+        if (componentFiles.length === 0) {
+          console.warn(
+            `Warning: Could not find component ${componentName} in docs/src/components`,
+          );
+          return match; // Keep the original placeholder if not found
+        } else if (componentFiles.length > 1) {
+          throw new Error(
+            `Error: Multiple files found for component ${componentName} in docs/src/components. Component names must be unique.`,
+          );
+        }
+
+        // Read the content of the matching component file (regardless of extension)
+        const componentFile: string = componentFiles[0] ?? "";
+        const componentContent: string = fs.readFileSync(
+          path.join(componentPath, componentFile),
+          { encoding: "utf-8" },
+        );
+
+        return componentContent;
+      },
+    );
 
     fs.writeFileSync(destination, templateContent, "utf-8");
   } else {
@@ -49,7 +60,11 @@ function buildFileFromTemplate(
   }
 }
 
-function buildFoldersAndTemplateFiles(source: string, destination: string) {
+// Function to recursively copy folders and files from source to destination, excluding components
+function buildFoldersAndTemplateFiles(
+  source: string,
+  destination: string,
+): void {
   if (fs.existsSync(source)) {
     if (fs.lstatSync(source).isDirectory()) {
       // Create the directory in the destination (if it doesn't exist)
@@ -58,8 +73,8 @@ function buildFoldersAndTemplateFiles(source: string, destination: string) {
       }
 
       // Process files and subdirectories, excluding components directory
-      fs.readdirSync(source).forEach((file) => {
-        const filePath = path.join(source, file);
+      fs.readdirSync(source).forEach((file: string): void => {
+        const filePath: string = path.join(source, file);
         if (fs.lstatSync(filePath).isDirectory() && file !== "components") {
           buildFoldersAndTemplateFiles(filePath, path.join(destination, file));
         } else {
@@ -82,10 +97,9 @@ function buildFoldersAndTemplateFiles(source: string, destination: string) {
   }
 }
 
-// Delete contents of dist directory before building
+// Main execution: remove the dist folder if it exists, then build files and folders
 if (fs.existsSync("docs/dist")) {
   fs.rmSync("docs/dist", { recursive: true, force: true });
 }
 
-// Example usage
 buildFoldersAndTemplateFiles("docs/src", "docs/dist");
