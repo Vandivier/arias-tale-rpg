@@ -4,6 +4,8 @@ title: "Experimental TTRPG Instructions with Embedded Data"
 
 {{ ttrpg-core }}
 
+{{ places }}
+
 {{ narrative-* }}
 
 {{ ttrpg-experimental }}

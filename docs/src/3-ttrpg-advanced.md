@@ -4,6 +4,8 @@ title: "Advanced TTRPG Instructions with Embedded Data"
 
 {{ ttrpg-core }}
 
+{{ places }}
+
 {{ narrative-* }}
 
 ## Encyclopedia CSV Data
