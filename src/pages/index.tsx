@@ -61,7 +61,7 @@ export default function Home() {
               novels
             </Link>
             ,{" "}
-            <Link className="underline" href="/game-manual/quick-start">
+            <Link className="underline" href="/game-manual/1-quick-start">
               games
             </Link>
             ,{" "}
