@@ -1,5 +1,5 @@
-import React from "react";
 import dynamic from "next/dynamic";
+import React from "react";
 import { CustomPage } from "~/components/CustomPage";
 
 const DynamicColosseumGame = dynamic(
@@ -9,8 +9,10 @@ const DynamicColosseumGame = dynamic(
 
 const GameComponent: React.FC = () => {
   return (
-    <CustomPage mainHeading="Aria's Tale Colosseum">
-      <DynamicColosseumGame />
+    <CustomPage innerPageClassName="my-4" mainHeading="Aria's Tale Colosseum">
+      <div className="my-4">
+        <DynamicColosseumGame />
+      </div>
     </CustomPage>
   );
 };

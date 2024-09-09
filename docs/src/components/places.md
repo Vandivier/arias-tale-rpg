@@ -2,15 +2,10 @@
 title: "Placebook"
 ---
 
-<!-- Regional Lore Threads
-   - Wendigo in snowy forest
-   - Iron Flame Book Summary
--->
-
 1. Evergreen
 
    1. Aetheria, a floating continent. It moves around a bit throughout the year, influenced by weather, celestial events, and seasons, but it generally hovers around the equator.
-   2. Dragonica
+   2. Dragonica is a vast and diverse land where the powerful dragons reign over mountains, forests, and seas. To the north, human settlements dot the landscape, forming a border of villages and towns where humans live under the looming presence of the dragons, forging alliances and defending against threats from the wild lands. The west is home to scattered demon outposts, where demonic forces seek a foothold in the region, clashing with the natural order and drawing suspicion from the other inhabitants, and sometimes forming alliances with the dragons and dwarves that occupy the western mountains of Dragonic. Between these borders lies the heart of Dragonica: towering mountain ranges and occasional plains and desert. Lakes and forests are rare. There is a region of desert in the west of Dragonica that remains disputed between the Dragons and the humans. Dragons, both wild and tamed, soar above, while deep ancient magic stirs beneath the surface, waiting to be uncovered by daring adventurers.
    3. New Olympia, a mountain range internally occupied by a large dwarven civilization. A multiracial and highly competitive society lives above ground. Regalis is a smaller civilization its northeast and Elysia is to its southeast.
    4. Obsidia
       - Coast of Echoes
