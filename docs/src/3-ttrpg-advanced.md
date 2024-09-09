@@ -1,8 +1,10 @@
 ---
-title: "Advanced TTRPG Instructions with Embedded CSV Data"
+title: "Advanced TTRPG Instructions with Embedded Data"
 ---
 
 {{ ttrpg-core }}
+
+{{ narrative-* }}
 
 ## Encyclopedia CSV Data
 

@@ -18,6 +18,41 @@ function buildFileFromTemplate(
       );
     }
 
+    // Handle the magic string for narrative replacement: {{ narrative-* }}
+    templateContent = templateContent.replace(
+      /{{ narrative-\* }}/g,
+      (): string => {
+        const narrativePath: string = path.join("docs/src/narrative");
+
+        // Check if narrative directory exists
+        if (
+          !fs.existsSync(narrativePath) ||
+          !fs.lstatSync(narrativePath).isDirectory()
+        ) {
+          console.warn(
+            `Warning: Narrative directory not found: ${narrativePath}`,
+          );
+          return "{{ narrative-* }}"; // Return the original placeholder if not found
+        }
+
+        // Get all files in the narrative directory
+        const narrativeFiles: string[] = fs
+          .readdirSync(narrativePath)
+          .filter((file) =>
+            fs.lstatSync(path.join(narrativePath, file)).isFile(),
+          );
+
+        // Concatenate content of all narrative files
+        const narrativeContent = narrativeFiles
+          .map((file) =>
+            fs.readFileSync(path.join(narrativePath, file), "utf-8"),
+          )
+          .join("\n");
+
+        return narrativeContent || "{{ narrative-* }}"; // Return combined content or placeholder if empty
+      },
+    );
+
     // Replace template components with corresponding content
     templateContent = templateContent.replace(
       /{{ ([a-zA-Z0-9-_]+) }}/g,

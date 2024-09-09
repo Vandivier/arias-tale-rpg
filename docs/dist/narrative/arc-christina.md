@@ -2,13 +2,6 @@
 title: "Episode Narrative Guide - Arc Christina"
 ---
 
-<!--
-TODO: incorporate:
-- https://chatgpt.com/c/5bfb38fd-fcb2-4bb1-bad8-d3eafa39a60a
-- https://claude.ai/chat/366136d2-75ac-4260-9fa6-1a99f7e0deba
-- https://chatgpt.com/c/4929f520-5bd8-43f8-bb00-e1493eaa213b
--->
-
 # Prologue: The Unintended Consequence
 
 A quick smell of carrot. A blurry view of a black circle on a white background.

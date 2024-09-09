@@ -119,7 +119,7 @@ When a character is partially known, you can still generate a summary of all fie
 
 In other cases, a detailed description may be available immediately, such as when a player is assigned to a newly generated character. Reporting this detailed description assists with accurate role play, character depth, and narrative depth.
 
-Detailed descriptions include:
+Detailed character descriptions include:
 
 1. Awakening Region: Where did this character spawn into the game? This may or may not be the same region in which they were encountered. Feel free to make this specific or generic:
 
@@ -182,27 +182,24 @@ Aria's Tale is including the genres of fantasy, sci-fi, and isekai. Here is a no
 21. Archmage Streamer
 22. Modern and Historic religions and philosophies
 
---TODO: FINISH HERE BELOW--
-
 ### Miscellaneous Lore
 
-We do reach the 100th floor boss: https://chatgpt.com/c/85b35f63-1b13-4bc9-9b49-89eb3499de91
-The Great Dreamer is a thing per arc christina
+#### Plane Creation Magic
 
-### Place Lore
+Here are five examples of methods for creating planes:
 
-TODO: https://github.com/Vandivier/arias-tale-rpg/pull/71/files#diff-89206e3547975dbcee23f707acba2e521a5c1199754e383640cdf3296e98e4c8
+1. **Dreaming**: Creating realities through dreams.
+2. **Atemporal Crafting**: Assembling planes outside the constraints of time.
+3. **Plane Mutation**: Recombining existing material to form new planes.
+4. **Elemental Weaving**: Merging fundamental elements to construct a new plane.
+5. **Dimensional Splicing**: Cutting and merging sections of different dimensions to create a unique plane.
 
-and arc updates
+#### The Great Dreamer
 
-## Arc Aria
+The **Great Dreamer** is an ethereal, cosmic entity that exists outside of the known planes of existence. It is believed to have the power to create entire worlds and realities simply by dreaming them into existence. Its dreams are the foundation of many planes, and those who speak to the Great Dreamer transcend their own plane to enter its realm.
 
-### Chapter 1 Summary: The Monstrous Vision
+The Great Dreamer is often depicted as a serene, otherworldly figure, resting in a vast, peaceful landscape, with its face sometimes appearing in the sky. It lies in a dreamlike state, constantly conjuring new creations through its imagination. Entire worlds, beings, and events within the universe are shaped by its dreams.
 
-One bright afternoon, a warrior takes a seat on a stump in a safe, shaded region of the Forest of Echoes. He carries a spear and shield across his back, while he carries a bag of freshly picked berries and walnuts in his hand. He tosses a berry into his mouth and reaches for a second when he hears a faint doorbell.
+In some mythologies, the Great Dreamer is considered both the origin and the overseer of existence, embodying a balance between creation and passivity. While not directly intervening in the affairs of the planes, its dreams can subtly influence the events and creatures within them, making it one of the most powerful and enigmatic entities. Those who seek its favor may gain immense knowledge or power, but approaching it requires a deep understanding of its nature, as it transcends time, space, and conventional reality.
 
-Mike realizes his pizza has arrived. He taps logout using his neural controller, but the button doesn't work. He tries again. Is there a bug in the game world of Evergreen?
-
-Suddenly, the sky darkens with an orange glow. A massive, powerful figure appears in the sky. This figure confirms the inability of all players to log out unless and until a daunting challenge is completed: the 100th floor boss must be defeated. Further, given the changes made to the neural software each player is using, death to a game character may lead to a damaged brain or nervous system on the part of the real-life player, including the possibility of death.
-
-The mysterious and monstrous figure warns of the extraordinary power of these floor bosses, advising players to form parties, guilds, and inter-guild alliances for survival. The figure notably empowered these bosses, making them unbeatable by even the most powerful players alone.
+The Great Dreamer’s influence permeates through various worlds, and although it rarely interacts directly, the manifestations of its dreams can be felt across the realms.
