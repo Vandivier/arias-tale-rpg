@@ -1,5 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { CustomPage } from "~/components/CustomPage";
 import { api } from "~/utils/api";
 
@@ -7,71 +8,105 @@ export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from Aria's Tale!" });
 
   return (
-    <CustomPage mainHeading="Embark on an Epic Journey with Aria's Tale!">
+    <CustomPage
+      mainHeading={
+        <h1 className="font-extrabold tracking-tight text-white sm:text-[2rem]">
+          Embark on an Epic Journey with Aria's Tale!
+        </h1>
+      }
+    >
       <>
         <div className="flex items-center">
-          <Image
-            alt="Aria's Tale Dice Logo"
-            className="dice-logo mr-2"
-            height={50}
-            width={50}
-            src="/arias-tale-d20-logo.png"
-          />
+          <style jsx>{`
+            .dice-logo-wrapper {
+              cursor: pointer;
+              display: inline-block;
+              transition: transform 0.3s ease;
+            }
+
+            .dice-logo-wrapper:hover {
+              transform: rotate(360deg);
+            }
+          `}</style>
+
+          <div className="dice-logo-wrapper mr-2">
+            <Image
+              alt="Aria's Tale Dice Logo"
+              height={50}
+              width={50}
+              src="/arias-tale-d20-logo.png"
+            />
+          </div>
           <p>{hello.data ? hello.data.greeting : "Loading..."}</p>
-          <Image
-            alt="Aria's Tale Dice Logo"
-            className="dice-logo ml-2"
-            height={50}
-            width={50}
-            src="/arias-tale-d20-logo.png"
-          />
+          <div className="dice-logo-wrapper ml-2">
+            <Image
+              alt="Aria's Tale Dice Logo"
+              height={50}
+              width={50}
+              src="/arias-tale-d20-logo.png"
+            />
+          </div>
         </div>
 
         <AuthShowcase />
 
         <div className="text-l my-4 flex flex-col gap-8 text-white">
-          <p>Join our vibrant community of adventurers and shape the story!</p>
           <p>
-            Read the living narrative of Aria's Tale{" "}
-            <a
+            Aria's Tale is an emergent narrative world drawing on elements of
+            fantasy, science fiction, and isekai.
+          </p>
+          <p>
+            Experience the Aria's Tale universe through{" "}
+            <Link className="underline" href="/game-manual/narrative">
+              novels
+            </Link>
+            ,{" "}
+            <Link className="underline" href="/game-manual/1-quick-start">
+              games
+            </Link>
+            ,{" "}
+            <Link className="underline" href="/gallery">
+              art
+            </Link>
+            , and{" "}
+            <Link
               className="underline"
-              href="https://www.ariastale.com/game-manual/narrative"
+              href="https://www.tiktok.com/@arias.tale.game"
+              target="_blank"
             >
-              here
-            </a>
-            , get started playing now with the{" "}
-            <a
-              className="underline"
-              href="https://www.ariastale.com/game-manual/quick-start"
-            >
-              Quick Start Guide
-            </a>
-            , or dive into the technical details with the{" "}
-            <a
-              className="underline"
-              href="https://www.ariastale.com/game-manual/metagame"
-            >
-              Game Manual
-            </a>
+              dialogue
+            </Link>
             .
           </p>
           <p>
-            This website is in development. In the future, you will be able to
-            play Aria's Tale through this website. For now, Aria's Tale is
-            played over social media and during periodic streams, as mentioned
-            in the{" "}
-            <a
+            Aria's Tale is an{" "}
+            <Link
               className="underline"
-              href="https://www.ariastale.com/game-manual/quick-start"
+              href="https://github.com/Vandivier/arias-tale-rpg"
+              target="_blank"
             >
-              Quick Start Guide
-            </a>
-            .
+              open source
+            </Link>{" "}
+            experiment in gaming, social media, and generative artificial
+            intelligence that is maintained by the{" "}
+            <Link
+              className="underline"
+              href="https://www.ladderly.io/"
+              target="_blank"
+            >
+              Ladderly.io
+            </Link>{" "}
+            community.{" "}
           </p>
           <p>
-            Join the waitlist to be notified when the game is ready to play
-            through this site, and to indicate whether you are interested in
-            joining a live stream!
+            <Link
+              className="underline"
+              href="https://www.ladderly.io/blog/2023-12-25-arias-tale"
+              target="_blank"
+            >
+              Learn more about Aria's Tale here
+            </Link>
+            !
           </p>
         </div>
       </>

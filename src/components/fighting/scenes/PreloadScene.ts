@@ -6,7 +6,7 @@ export class PreloadScene extends Phaser.Scene {
   preload() {
     this.load.spritesheet(
       "tank",
-      "assets/fighting-sprites/tank_spritesheet.webp",
+      "/assets/fighting-sprites/tank_spritesheet.webp",
       {
         frameWidth: 100,
         frameHeight: 100,
@@ -14,7 +14,7 @@ export class PreloadScene extends Phaser.Scene {
     );
     this.load.spritesheet(
       "eidolon",
-      "assets/fighting-sprites/eidolon_spritesheet.webp",
+      "/assets/fighting-sprites/eidolon_spritesheet.webp",
       {
         frameWidth: 100,
         frameHeight: 100,
@@ -22,7 +22,7 @@ export class PreloadScene extends Phaser.Scene {
     );
     this.load.image(
       "background",
-      "assets/fighting-sprites/battle_background.webp",
+      "/assets/fighting-sprites/battle_background.webp",
     );
   }
 

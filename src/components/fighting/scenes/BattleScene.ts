@@ -77,6 +77,8 @@ export class BattleScene extends Phaser.Scene {
 
   createCharacter(type: string, x: number, y: number): Character {
     switch (type) {
+      case "Eidolon":
+        return new Tank(this, x, y);
       case "Tank":
         return new Tank(this, x, y);
       default:

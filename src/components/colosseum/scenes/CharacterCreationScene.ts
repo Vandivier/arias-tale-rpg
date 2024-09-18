@@ -1,11 +1,11 @@
 import Phaser from "phaser";
 import {
-  basicClasses,
+  playerClasses,
   type Equipment,
   type PlayerCharacter,
-  type CharacterClassType,
+  type PlayerClass,
 } from "./types";
-import { battlers, createButton, defaultBattler } from "./utils/main";
+import { battlers, createButton } from "./utils/main";
 import { TextAnimationManager } from "./services/TextAnimationManager";
 
 export class CharacterCreationScene extends Phaser.Scene {
@@ -21,16 +21,9 @@ export class CharacterCreationScene extends Phaser.Scene {
   private rejectButton!: Phaser.GameObjects.Text;
   private rejectImageButton!: Phaser.GameObjects.Text;
   private selectedBattlerId: number = 0;
-  private selectedClass: CharacterClassType | null = null;
-  private skipButton!: Phaser.GameObjects.Text;
+  private selectedClass: PlayerClass | null = null;
   private suggestedName: string = "";
   private textAnimationManager!: TextAnimationManager;
-  private currentTextIndex: number = 0;
-  private narrativeTexts: string[] = [
-    "Anyone who speaks to The Great Dreamer in their mind has exited their plane, because The Great Dreamer lives outside of the planes.",
-    'The Dreamer wonders "What is it like outside of the planes, where I am? Are there plants and towns and people here too?"',
-    "The Dreamer thinks of many such things that could be outside of the planes, and so they begin to appear...",
-  ];
 
   constructor() {
     super("CharacterCreation");
@@ -38,9 +31,7 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   create() {
     console.log("CharacterCreationScene create started");
-    this.textAnimationManager = new TextAnimationManager(this, () =>
-      this.handleTextClick(),
-    );
+    this.textAnimationManager = new TextAnimationManager(this);
     this.createButtons();
     this.nextStep();
   }
@@ -55,7 +46,11 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.cameras.main.height - 70,
       () => {
         console.log("Continue button clicked");
-        this.progressNarrative();
+        if (this.textAnimationManager.isComplete()) {
+          this.nextStep();
+        } else {
+          this.textAnimationManager.completeCurrentAnimation();
+        }
       },
     );
 
@@ -81,79 +76,29 @@ export class CharacterCreationScene extends Phaser.Scene {
       },
     );
 
-    this.skipButton = createButton(
-      this,
-      "Skip Text",
-      this.cameras.main.width - 70,
-      30,
-      () => {
-        console.log("Skip button clicked");
-        this.handleSkipButton();
-      },
-    );
-
     this.rejectButton.setVisible(false);
-    this.rejectImageButton.setVisible(false); // Hide by default
-    this.skipButton.setVisible(false);
+    this.rejectImageButton.setVisible(false);
   }
 
-  private handleAnimationComplete() {
-    console.log("Animation complete");
-    this.skipButton.setVisible(false);
-    this.continueButton.setVisible(true);
-  }
-
-  private handleContinueButton() {
-    console.log("Continue button clicked");
-    if (this.textAnimationManager.isComplete()) {
-      this.nextStep();
-    } else {
-      this.textAnimationManager.completeCurrentAnimation();
-    }
-  }
-
-  private handleSkipButton() {
-    if (!this.textAnimationManager.isComplete()) {
-      this.textAnimationManager.completeCurrentAnimation();
-    } else {
-      this.handleContinueButton();
-    }
-  }
-
-  private handleTextClick() {
-    console.log("Text clicked");
-    if (this.textAnimationManager.isComplete()) {
-      console.log("Animation complete, progressing narrative");
-      this.progressNarrative();
-    } else {
-      console.log("Completing current animation");
-      this.textAnimationManager.completeCurrentAnimation();
-    }
-  }
-
-  private progressNarrative() {
-    console.log("Progressing narrative");
-    this.currentTextIndex++;
-    this.textAnimationManager.resetSkippedState();
-    this.nextStep();
-  }
-
-  private nextStep() {
-    console.log("Next step called, current index:", this.currentTextIndex);
+  nextStep() {
+    console.log("nextStep called, currentStep:", this.currentStep);
     this.currentStep++;
 
     // Set default button visibility
     this.continueButton.setVisible(true);
     this.rejectButton.setVisible(false);
     this.rejectImageButton.setVisible(false);
-    this.skipButton.setVisible(false);
 
     switch (this.currentStep) {
       case 1:
       case 2:
       case 3:
-        this.skipButton.setVisible(true);
-        this.showNextText();
+        this.textAnimationManager.showNarrativeText(
+          this.getNarrativeText(this.currentStep),
+          () => {
+            console.log("Animation complete, continue button already visible");
+          },
+        );
         break;
       case 4:
         this.suggestCharacter();
@@ -164,24 +109,6 @@ export class CharacterCreationScene extends Phaser.Scene {
       default:
         console.log("Reached default case in nextStep");
         this.startGame();
-    }
-  }
-
-  private showNextText() {
-    console.log("Showing next text, current index:", this.currentTextIndex);
-    if (this.currentTextIndex < this.narrativeTexts.length) {
-      const currentText = this.narrativeTexts[this.currentTextIndex];
-      if (!currentText) {
-        console.error("Current text is undefined");
-        return;
-      }
-      this.textAnimationManager.showNarrativeText(currentText, () => {
-        console.log("Text animation complete");
-        this.handleAnimationComplete();
-      });
-    } else {
-      console.log("No more text to show");
-      // Handle end of narrative
     }
   }
 
@@ -200,7 +127,7 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   suggestCharacter() {
     this.selectedClass =
-      basicClasses[Phaser.Math.Between(0, basicClasses.length - 1)] ??
+      playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
       "warrior";
     this.suggestedName = this.getRandomName();
 
@@ -235,7 +162,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       this.battlerImage.destroy();
     }
 
-    this.load.image(battlerImageKey, `assets/battlers/${battler.fileName}`);
+    this.load.image(battlerImageKey, `/assets/battlers/${battler.fileName}`);
     this.load.once("complete", () => {
       this.battlerImage = this.add
         .image(
@@ -317,7 +244,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.classButtons = [];
-    basicClasses.forEach((cls, index) => {
+    playerClasses.forEach((cls, index) => {
       const buttonY = centerY + 50 + index * 50;
       const button = this.createClassButton(cls, centerX, buttonY);
       this.classButtons.push(button);
@@ -349,7 +276,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       .setVisible(false);
   }
 
-  createClassButton(cls: CharacterClassType, x: number, y: number) {
+  createClassButton(cls: PlayerClass, x: number, y: number) {
     const button = this.add
       .text(x, y, cls, {
         fontSize: "20px",
@@ -375,7 +302,7 @@ export class CharacterCreationScene extends Phaser.Scene {
     return button;
   }
 
-  selectClass(cls: CharacterClassType) {
+  selectClass(cls: PlayerClass) {
     this.selectedClass = cls;
     this.updateClassButtonStyles();
   }
@@ -442,19 +369,19 @@ export class CharacterCreationScene extends Phaser.Scene {
     };
 
     const player: PlayerCharacter = {
-      battler: battlers[this.selectedBattlerId] ?? defaultBattler,
+      name: this.suggestedName,
       class: this.selectedClass,
-      equipment: initialEquipment,
+      health: 100,
+      maxHealth: 100,
+      level: 1,
       experience: 0,
       gold: 0,
-      health: 100,
       inventory: [],
-      level: 1,
-      maxHealth: 100,
-      name: this.suggestedName,
+      equipment: initialEquipment,
       score: 0,
+      battlerId: this.selectedBattlerId,
     };
 
-    this.scene.start("LevelMap", { player });
+    this.scene.start("Battle", { player });
   }
 }
