@@ -139,7 +139,7 @@ type Sprite = {
 };
 
 const defaultSprite: Sprite = {
-  spriteFile: "assets/map-sprites/male-warrior.png",
+  spriteFile: "/assets/map-sprites/male-warrior.png",
 };
 
 export const spriteMap: {

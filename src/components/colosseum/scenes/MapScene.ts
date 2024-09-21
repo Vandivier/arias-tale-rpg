@@ -119,6 +119,7 @@ class MapScene extends Phaser.Scene {
   private isInterior!: boolean;
   private canEncounter: boolean = false;
   private animsCreated: boolean = false;
+  private returnPosition?: { x: number; y: number };
 
   constructor() {
     super("LevelMap");
@@ -128,7 +129,6 @@ class MapScene extends Phaser.Scene {
     this.player = data.player;
     if (data.mapData) {
       this.mapSeed = data.mapData.seed;
-      // Store the return position to be used in create()
       this.returnPosition = data.mapData.playerPosition;
     } else {
       this.mapSeed = this.generateSeed(this.player.name);
@@ -228,35 +228,32 @@ class MapScene extends Phaser.Scene {
   }
 
   private createAnimations() {
-    this.anims.create({
-      key: "walk-up",
-      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 2 }),
-      frameRate: 10,
-      repeat: -1,
-    });
+    if (!this.animsCreated) {
+      const createAnim = (key: string, start: number, end: number) => {
+        this.anims.create({
+          key: key,
+          frames: this.anims.generateFrameNumbers("player", {
+            start: start,
+            end: end,
+          }),
+          frameRate: 10,
+          repeat: -1,
+        });
+      };
 
-    this.anims.create({
-      key: "walk-right",
-      frames: this.anims.generateFrameNumbers("player", { start: 3, end: 5 }),
-      frameRate: 10,
-      repeat: -1,
-    });
+      createAnim("walk-up", 0, 2);
+      createAnim("walk-right", 6, 8);
+      createAnim("walk-down", 0, 2);
+      createAnim("walk-left", 3, 5);
 
-    this.anims.create({
-      key: "walk-down",
-      frames: this.anims.generateFrameNumbers("player", { start: 6, end: 8 }),
-      frameRate: 10,
-      repeat: -1,
-    });
+      this.animsCreated = true;
+    }
+  }
 
-    this.anims.create({
-      key: "walk-left",
-      frames: this.anims.generateFrameNumbers("player", { start: 9, end: 11 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    this.animsCreated = true;
+  private playAnimation(key: string) {
+    if (this.playerSprite.anims.currentAnim?.key !== key) {
+      this.playerSprite.anims.play(key, true);
+    }
   }
 
   private createPlayer() {
@@ -265,7 +262,8 @@ class MapScene extends Phaser.Scene {
       this.tileSize,
       "player",
     );
-    scaleSprite(this.playerSprite, AVATAR_MAX_HEIGHT);
+
+    this.playerSprite.setDisplaySize(this.tileSize, this.tileSize);
     this.playerSprite.setCollideWorldBounds(true);
   }
 
@@ -299,22 +297,26 @@ class MapScene extends Phaser.Scene {
     let velocityY = 0;
 
     if (this.cursors.left.isDown || this.wasdKeys.A.isDown) {
-      this.playerSprite.anims.play("walk-left", true);
       velocityX = -speed;
+      this.playAnimation("walk-left");
     } else if (this.cursors.right.isDown || this.wasdKeys.D.isDown) {
-      this.playerSprite.anims.play("walk-right", true);
       velocityX = speed;
+      this.playAnimation("walk-right");
     }
 
     if (this.cursors.up.isDown || this.wasdKeys.W.isDown) {
-      this.playerSprite.anims.play("walk-up", true);
       velocityY = -speed;
+      this.playAnimation("walk-up");
     } else if (this.cursors.down.isDown || this.wasdKeys.S.isDown) {
-      this.playerSprite.anims.play("walk-down", true);
       velocityY = speed;
+      this.playAnimation("walk-down");
     }
 
     this.playerSprite.setVelocity(velocityX, velocityY);
+
+    if (velocityX === 0 && velocityY === 0) {
+      this.playerSprite.anims.stop();
+    }
 
     // Enable encounters after the player has moved
     if (!this.canEncounter && (velocityX !== 0 || velocityY !== 0)) {
