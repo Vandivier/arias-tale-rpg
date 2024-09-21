@@ -241,10 +241,10 @@ class MapScene extends Phaser.Scene {
         });
       };
 
-      createAnim("walk-up", 0, 2);
-      createAnim("walk-right", 6, 8);
-      createAnim("walk-down", 0, 2);
-      createAnim("walk-left", 3, 5);
+      createAnim("walk-up", 0, 1);
+      createAnim("walk-right", 2, 3);
+      createAnim("walk-down", 4, 5);
+      createAnim("walk-left", 6, 7);
 
       this.animsCreated = true;
     }
@@ -296,20 +296,31 @@ class MapScene extends Phaser.Scene {
     let velocityX = 0;
     let velocityY = 0;
 
+    const currentTileX = Math.floor(this.playerSprite.x / this.tileSize);
+    const currentTileY = Math.floor(this.playerSprite.y / this.tileSize);
+
     if (this.cursors.left.isDown || this.wasdKeys.A.isDown) {
-      velocityX = -speed;
-      this.playAnimation("walk-left");
+      if (this.map.isTraversable(currentTileX - 1, currentTileY)) {
+        velocityX = -speed;
+        this.playAnimation("walk-left");
+      }
     } else if (this.cursors.right.isDown || this.wasdKeys.D.isDown) {
-      velocityX = speed;
-      this.playAnimation("walk-right");
+      if (this.map.isTraversable(currentTileX + 1, currentTileY)) {
+        velocityX = speed;
+        this.playAnimation("walk-right");
+      }
     }
 
     if (this.cursors.up.isDown || this.wasdKeys.W.isDown) {
-      velocityY = -speed;
-      this.playAnimation("walk-up");
+      if (this.map.isTraversable(currentTileX, currentTileY - 1)) {
+        velocityY = -speed;
+        this.playAnimation("walk-up");
+      }
     } else if (this.cursors.down.isDown || this.wasdKeys.S.isDown) {
-      velocityY = speed;
-      this.playAnimation("walk-down");
+      if (this.map.isTraversable(currentTileX, currentTileY + 1)) {
+        velocityY = speed;
+        this.playAnimation("walk-down");
+      }
     }
 
     this.playerSprite.setVelocity(velocityX, velocityY);
@@ -318,14 +329,15 @@ class MapScene extends Phaser.Scene {
       this.playerSprite.anims.stop();
     }
 
-    const currentTileX = Math.floor(this.playerSprite.x / this.tileSize);
-    const currentTileY = Math.floor(this.playerSprite.y / this.tileSize);
+    // Update current position after movement
+    const newTileX = Math.floor(this.playerSprite.x / this.tileSize);
+    const newTileY = Math.floor(this.playerSprite.y / this.tileSize);
 
     // Check if player has moved to a new tile
     if (
       this.lastEncounterTile &&
-      (currentTileX !== this.lastEncounterTile.x ||
-        currentTileY !== this.lastEncounterTile.y)
+      (newTileX !== this.lastEncounterTile.x ||
+        newTileY !== this.lastEncounterTile.y)
     ) {
       this.safeMovesAfterEncounter--;
       if (this.safeMovesAfterEncounter <= 0) {
@@ -334,10 +346,7 @@ class MapScene extends Phaser.Scene {
     }
 
     // Check for dangerous tiles only if not in cooldown
-    if (
-      !this.lastEncounterTile &&
-      this.map.isDangerous(currentTileX, currentTileY)
-    ) {
+    if (!this.lastEncounterTile && this.map.isDangerous(newTileX, newTileY)) {
       this.startEncounter();
     }
   }
