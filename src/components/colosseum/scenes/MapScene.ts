@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { type MapData, type PlayerCharacter } from "./types";
-import { AVATAR_MAX_HEIGHT, getSprite, scaleSprite } from "./utils/main";
+import { getSprite } from "./utils/main";
 
 export const TileKinds = [
   "GRASS",
@@ -104,22 +104,23 @@ class LevelMap {
 }
 
 class MapScene extends Phaser.Scene {
+  private animsCreated: boolean = false;
+  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  private isInterior!: boolean;
+  private lastEncounterTile: { x: number; y: number } | null = null;
   private map!: LevelMap;
+  private mapSeed!: number;
   private player!: PlayerCharacter;
   private playerSprite!: Phaser.Physics.Arcade.Sprite;
-  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  private returnPosition?: { x: number; y: number };
+  private safeMovesAfterEncounter: number = 2;
+  private tileSize: number = 32;
   private wasdKeys!: {
     W: Phaser.Input.Keyboard.Key;
     A: Phaser.Input.Keyboard.Key;
     S: Phaser.Input.Keyboard.Key;
     D: Phaser.Input.Keyboard.Key;
   };
-  private tileSize: number = 32;
-  private mapSeed!: number;
-  private isInterior!: boolean;
-  private canEncounter: boolean = false;
-  private animsCreated: boolean = false;
-  private returnPosition?: { x: number; y: number };
 
   constructor() {
     super("LevelMap");
@@ -134,7 +135,6 @@ class MapScene extends Phaser.Scene {
       this.mapSeed = this.generateSeed(this.player.name);
     }
     this.isInterior = this.determineIsInterior(this.mapSeed);
-    this.canEncounter = false;
   }
 
   private determineIsInterior(seed: number): boolean {
@@ -318,18 +318,27 @@ class MapScene extends Phaser.Scene {
       this.playerSprite.anims.stop();
     }
 
-    // Enable encounters after the player has moved
-    if (!this.canEncounter && (velocityX !== 0 || velocityY !== 0)) {
-      this.canEncounter = true;
+    const currentTileX = Math.floor(this.playerSprite.x / this.tileSize);
+    const currentTileY = Math.floor(this.playerSprite.y / this.tileSize);
+
+    // Check if player has moved to a new tile
+    if (
+      this.lastEncounterTile &&
+      (currentTileX !== this.lastEncounterTile.x ||
+        currentTileY !== this.lastEncounterTile.y)
+    ) {
+      this.safeMovesAfterEncounter--;
+      if (this.safeMovesAfterEncounter <= 0) {
+        this.lastEncounterTile = null; // Reset cooldown
+      }
     }
 
-    // Check for dangerous tiles only if encounters are enabled
-    if (this.canEncounter) {
-      const playerTileX = Math.floor(this.playerSprite.x / this.tileSize);
-      const playerTileY = Math.floor(this.playerSprite.y / this.tileSize);
-      if (this.map.isDangerous(playerTileX, playerTileY)) {
-        this.startEncounter();
-      }
+    // Check for dangerous tiles only if not in cooldown
+    if (
+      !this.lastEncounterTile &&
+      this.map.isDangerous(currentTileX, currentTileY)
+    ) {
+      this.startEncounter();
     }
   }
 
@@ -344,6 +353,11 @@ class MapScene extends Phaser.Scene {
         y: this.playerSprite.y,
       },
     };
+
+    const currentTileX = Math.floor(this.playerSprite.x / this.tileSize);
+    const currentTileY = Math.floor(this.playerSprite.y / this.tileSize);
+    this.lastEncounterTile = { x: currentTileX, y: currentTileY };
+    this.safeMovesAfterEncounter = 1;
 
     // Transition to Battle or Encounter
     if (Math.random() < 0.05) {
