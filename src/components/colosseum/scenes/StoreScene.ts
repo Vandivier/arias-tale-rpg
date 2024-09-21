@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { type PlayerCharacter, type Item } from "./types";
+import { type Item, type MapData, type PlayerCharacter } from "./types";
 import { generateStoreItems } from "./utils/main";
 
 export class StoreScene extends Phaser.Scene {
@@ -7,12 +7,14 @@ export class StoreScene extends Phaser.Scene {
   private storeItems: Item[] = [];
   private itemTexts: Phaser.GameObjects.Text[] = [];
   private goldText!: Phaser.GameObjects.Text;
+  private mapData!: MapData;
 
   constructor() {
     super("Store");
   }
 
-  init(data: { player: PlayerCharacter }) {
+  init(data: { player: PlayerCharacter; mapData: MapData }) {
+    this.mapData = data.mapData;
     this.player = data.player;
     this.storeItems = generateStoreItems();
   }
@@ -32,11 +34,15 @@ export class StoreScene extends Phaser.Scene {
     this.createItemDisplay();
 
     this.add
-      .text(170, 490, "Return to Battle", { fontSize: "20px", color: "#fff" })
+      .text(170, 490, "Leave Store", { fontSize: "20px", color: "#fff" })
       .setOrigin(0.5)
       .setInteractive()
       .on("pointerdown", () =>
-        this.scene.start("Battle", { player: this.player }),
+        this.scene.start("LevelMap", {
+          player: this.player,
+          returnPosition: this.mapData.playerPosition,
+          seed: this.mapData.seed,
+        }),
       );
   }
 

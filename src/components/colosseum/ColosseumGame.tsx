@@ -9,6 +9,7 @@ import { InventoryScene } from "./scenes/InventoryScene";
 import { LeaderboardScene } from "./scenes/LeaderboardScene";
 import { StartGameScene } from "./scenes/StartGameScene";
 import { StoreScene } from "./scenes/StoreScene";
+import { MapScene } from "./scenes/MapScene";
 
 const ColosseumGame: React.FC = () => {
   const gameRef = useRef<HTMLDivElement>(null);
@@ -24,6 +25,7 @@ const ColosseumGame: React.FC = () => {
           StartGameScene,
           CharacterCreationScene,
           BattleScene,
+          MapScene,
           EncounterScene,
           StoreScene,
           InventoryScene,

@@ -1,12 +1,12 @@
 import Phaser from "phaser";
+import { TextAnimationManager } from "./services/TextAnimationManager";
 import {
-  playerClasses,
+  basicClasses,
+  type CharacterClassType,
   type Equipment,
   type PlayerCharacter,
-  type PlayerClass,
 } from "./types";
-import { battlers, createButton } from "./utils/main";
-import { TextAnimationManager } from "./services/TextAnimationManager";
+import { battlers, createButton, defaultBattler } from "./utils/main";
 
 export class CharacterCreationScene extends Phaser.Scene {
   private battlerImage!: Phaser.GameObjects.Image;
@@ -21,7 +21,7 @@ export class CharacterCreationScene extends Phaser.Scene {
   private rejectButton!: Phaser.GameObjects.Text;
   private rejectImageButton!: Phaser.GameObjects.Text;
   private selectedBattlerId: number = 0;
-  private selectedClass: PlayerClass | null = null;
+  private selectedClass: CharacterClassType | null = null;
   private suggestedName: string = "";
   private textAnimationManager!: TextAnimationManager;
 
@@ -127,7 +127,7 @@ export class CharacterCreationScene extends Phaser.Scene {
 
   suggestCharacter() {
     this.selectedClass =
-      playerClasses[Phaser.Math.Between(0, playerClasses.length - 1)] ??
+      basicClasses[Phaser.Math.Between(0, basicClasses.length - 1)] ??
       "warrior";
     this.suggestedName = this.getRandomName();
 
@@ -244,7 +244,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.classButtons = [];
-    playerClasses.forEach((cls, index) => {
+    basicClasses.forEach((cls, index) => {
       const buttonY = centerY + 50 + index * 50;
       const button = this.createClassButton(cls, centerX, buttonY);
       this.classButtons.push(button);
@@ -276,7 +276,7 @@ export class CharacterCreationScene extends Phaser.Scene {
       .setVisible(false);
   }
 
-  createClassButton(cls: PlayerClass, x: number, y: number) {
+  createClassButton(cls: CharacterClassType, x: number, y: number) {
     const button = this.add
       .text(x, y, cls, {
         fontSize: "20px",
@@ -302,7 +302,7 @@ export class CharacterCreationScene extends Phaser.Scene {
     return button;
   }
 
-  selectClass(cls: PlayerClass) {
+  selectClass(cls: CharacterClassType) {
     this.selectedClass = cls;
     this.updateClassButtonStyles();
   }
@@ -369,19 +369,19 @@ export class CharacterCreationScene extends Phaser.Scene {
     };
 
     const player: PlayerCharacter = {
-      name: this.suggestedName,
+      battler: battlers[this.selectedBattlerId] ?? defaultBattler,
       class: this.selectedClass,
-      health: 100,
-      maxHealth: 100,
-      level: 1,
+      equipment: initialEquipment,
       experience: 0,
       gold: 0,
+      health: 100,
       inventory: [],
-      equipment: initialEquipment,
+      level: 1,
+      maxHealth: 100,
+      name: this.suggestedName,
       score: 0,
-      battlerId: this.selectedBattlerId,
     };
 
-    this.scene.start("Battle", { player });
+    this.scene.start("LevelMap", { player });
   }
 }

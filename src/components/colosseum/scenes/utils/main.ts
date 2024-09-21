@@ -1,7 +1,10 @@
 import Phaser from "phaser";
 import {
+  type Battler,
+  type CharacterClassType,
   type Enemy,
   type EquipmentSlot,
+  type GenderTypes,
   type Item,
   type PlayerCharacter,
 } from "../types";
@@ -131,15 +134,37 @@ export const createButton = (
   return button;
 };
 
-export const battlers = [
-  {
-    id: 2,
-    class: "archer",
-    eyeColor: "black",
-    hairColor: "black",
-    gender: "female",
-    fileName: "female-archer-black-hair.webp",
+type Sprite = {
+  spriteFile: string;
+};
+
+const defaultSprite: Sprite = {
+  spriteFile: "/assets/map-sprites/male-warrior.png",
+};
+
+export const spriteMap: {
+  [GenderType in GenderTypes]: { [ClassType in CharacterClassType]?: Sprite };
+} = {
+  female: {},
+  male: {
+    warrior: defaultSprite,
   },
+};
+
+export const getSprite = (battler: Battler): Sprite =>
+  spriteMap[battler.gender]?.[battler.class] ?? defaultSprite;
+
+export const defaultBattler: Battler = {
+  id: 2,
+  class: "archer",
+  eyeColor: "black",
+  hairColor: "black",
+  gender: "female",
+  fileName: "female-archer-black-hair.webp",
+};
+
+export const battlers: Battler[] = [
+  defaultBattler,
   {
     id: 3,
     class: "mage",

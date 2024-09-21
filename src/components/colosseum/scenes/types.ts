@@ -1,7 +1,13 @@
 export const defaultClass = "warrior" as const;
-export const playerClasses = ["warrior", "mage", "archer"] as const;
+export const basicClasses = ["warrior", "mage", "archer"] as const;
+export const nonBasicClasses = ["healer", "ninja", "merchant"] as const;
+export const allCharacterClasses = [
+  ...basicClasses,
+  ...nonBasicClasses,
+] as const;
+export type CharacterClassType = (typeof allCharacterClasses)[number];
 
-export type PlayerClass = (typeof playerClasses)[number];
+export type GenderTypes = "female" | "male";
 export type EnemyRarity = "Common" | "Uncommon" | "Rare";
 export type EnemyTier =
   | "F"
@@ -36,8 +42,8 @@ export interface Equipment {
 }
 
 export interface PlayerCharacter {
-  battlerId: number;
-  class: PlayerClass;
+  battler: Battler;
+  class: CharacterClassType;
   effects?: {
     poisonedSmog?: number;
   };
@@ -59,4 +65,21 @@ export interface Enemy {
   rarity: EnemyRarity;
   tier: EnemyTier;
   loot?: Item[];
+}
+
+export type Battler = {
+  id: number;
+  class: CharacterClassType;
+  eyeColor: string;
+  fileName: string;
+  gender: GenderTypes;
+  hairColor: string;
+};
+
+export interface MapData {
+  seed: number;
+  playerPosition: {
+    x: number;
+    y: number;
+  };
 }
