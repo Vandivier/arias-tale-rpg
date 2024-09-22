@@ -46,16 +46,19 @@ model Session {
 }
 
 model User {
-    id              String           @id @default(cuid())
+    id              String              @id @default(cuid())
     name            String?
-    email           String?          @unique
+    email           String?             @unique
     emailVerified   DateTime?
     image           String?
+    password        String?
     accounts        Account[]
     sessions        Session[]
     posts           Post[]
     userGameCards   UserGameCard[]
     userCustomDecks UserCustomDeck[]
+    purchases       Purchase[]
+    gameSessions    GameSessionPlayer[]
 
     willPlayStream       Boolean @default(false)
     willReviewLiterature Boolean @default(false)
@@ -88,18 +91,22 @@ model GameCard {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name        String         @unique
-    description String         @unique
+    title       String
+    description String
     isGeneric   Boolean
     rarity      CardRarityEnum
 
-    battlerPower  Int?
-    battlerHealth Int?
+    isBattler  Boolean @default(false)
+    powerLevel Int?
 
     image            SearchableImage    @relation(fields: [imageId], references: [id])
     imageId          Int                @unique
     userGameCards    UserGameCard[]
     pokerCardMapping PokerCardMapping[]
+    purchase         Purchase           @relation(fields: [purchaseId], references: [id])
+    purchaseId       Int
+
+    @@unique([title, imageId])
 }
 
 model UserGameCard {
@@ -123,11 +130,12 @@ model UserCustomDeck {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    user        User           @relation(fields: [userId], references: [id])
-    userId      String
-    name        String
-    description String
-    gameCards   UserGameCard[]
+    user              User                @relation(fields: [userId], references: [id])
+    userId            String
+    name              String
+    description       String
+    gameCards         UserGameCard[]
+    GameSessionPlayer GameSessionPlayer[]
 }
 
 model Tag {
@@ -177,6 +185,48 @@ enum CardRarityEnum {
     RARE
     ULTRA_RARE
     UNIQUE
+}
+
+model Purchase {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    user            User       @relation(fields: [userId], references: [id])
+    userId          String
+    gameCards       GameCard[]
+    isFoil          Boolean
+    isDemo          Boolean    @default(false)
+    stripePaymentId String?
+
+    @@index([userId])
+}
+
+model GameSession {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    gameState Json
+
+    players GameSessionPlayer[] // Relation to players
+}
+
+model GameSessionPlayer {
+    id            Int            @id @default(autoincrement())
+    gameSession   GameSession    @relation(fields: [gameSessionId], references: [id])
+    gameSessionId String
+    user          User?          @relation(fields: [userId], references: [id])
+    userId        String?
+    playerType    PlayerType     @default(COMPUTER) // HUMAN or COMPUTER
+    deck          UserCustomDeck @relation(fields: [deckId], references: [id])
+    deckId        Int
+
+    @@index([gameSessionId])
+}
+
+enum PlayerType {
+    HUMAN
+    COMPUTER
 }
 
 enum RegionKind {

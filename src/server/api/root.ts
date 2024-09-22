@@ -10,6 +10,7 @@ import { searchableImageRouter } from "./routers/searchableImageRouter";
  */
 export const appRouter = createTRPCRouter({
   art: artRouter,
+  gameSession: gameSessionRouter,
   image: searchableImageRouter,
   post: postRouter,
 });
