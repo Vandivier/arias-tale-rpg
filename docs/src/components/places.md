@@ -64,7 +64,7 @@ title: "Placebook"
 
 ### Region 15: Sylara
 
-Sylara is known as the "Veil of Mirrors," a region of mysterious and shifting landscapes. Characterized by its abundant enchanted lakes and mirror-like pools, Sylara's geography is ever-changing due to an ancient magic that distorts and blends its features over time. Travelers often find themselves lost in its reflective waters, and legends tell of those who have walked into the lakes, only to emerge years later without having aged a day.
+Sylara is known as "Mist and Mirrors," a region of mysterious and shifting landscapes. Characterized by its abundant enchanted lakes and mirror-like pools, Sylara's geography is ever-changing due to an ancient magic that distorts and blends its features over time. Travelers often find themselves lost in its reflective waters, and legends tell of those who have walked into the lakes, only to emerge years later without having aged a day.
 
 #### Notable Towns and Regions
 
