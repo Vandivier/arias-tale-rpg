@@ -1,5 +1,5 @@
 ---
-title: "Episode Narrative Guide - Arc Integrated"
+title: "Aria's Tale: Ex Obsidia"
 ---
 
 ## Chapter 1: Shadows Over Evergreen
@@ -777,63 +777,90 @@ As they descended from the spire, the Shining Metropolis thrummed with life—a 
 
 And so, with renewed purpose and newfound camaraderie, they ventured forth into the vast expanse of Dreams of Eternity, ready to face whatever challenges awaited them.
 
-<!--
-Logline for the Integrated Arc:
-In a virtual fantasy world suddenly turned real, Aria and her growing band of adventurers must navigate treacherous alliances, uncover hidden truths, and battle increasingly powerful foes to free themselves and their fellow players from a game that has become a deadly prison.
+## WORKING AUTHOR NOTES
+
+Logline for Aria's Tale: the Integrated Arc:
+
+Trapped in a virtual fantasy world, humans players struggle alongside artificial intelligence for survival.
 
 Beat Sheet:
 
-1. Opening Image: An intense and rivalrous RPG battle between The Crimson Vanguard and The Silver Phoenix in the world of Evergreen in a neural-immersive MMORPG called "Dreams of Eternity."
-2. Set-up:  Players find they are increasingly pain sensitive and trapped in the game.
-3. Catalyst: Guilds learn of the first boss and the consequences of in-game death.
-4. Confrontation with the Dark Paladin (Level 1 boss).
-5. Bad Guys Close In: Rumors spread, political tensions rise, mysterious purple doorway appears.
-6. All Is Lost: Vaelor goes missing, potentially turned evil.
-7. Dark Night of the Soul: Aria questions her leadership abilities.
-8. Break into Three: Aria rallies her guild to face Evil Vaelor.
-9. Finale: The epic battle against Evil Vaelor in the Mirror Vale (Level 2).
-10. Aftermath of Evil Vaelor: Group processes victory and losses.
-11. The Shining Metropolis (Level 5):
+1. Opening Scene: The Clash of Guilds
+
+   - Intense battle between rival guilds The Crimson Vanguard and The Silver Phoenix in Obsidia, within the MMORPG "Dreams of Eternity".
+
+2. The Anomaly Unveiled
+
+   - Players experience a brief flicker followed by heightened exhaustion and pain sensitivity.
+   - They discover they cannot log out.
+   - Guild leaders call a truce to investigate.
+
+3. The Unsettling Discovery
+
+   - A massive monster, the Dreadwing Knight, appears.
+   - The Crimson Vanguard, The Silver Phoenix, and Aria's Guild ally to confront it.
+
+4. Confrontation with the Dreadwing Knight
+
+   - Dozens are killed
+   - The Dreadwing Knight is defeated and his massive body turns to stone; a purple portal opens in his body.
+   - Vaelor stands watch over the gate with a small party while most head for town to rest.
+
+5. The Loss of Respawns and Rising Fear
+
+   - In the Town of Echoes, players are shocked to see that players killed in the recent boss battle are not respawning.
+   - Thane sends a messenger to inform Vaelor of the news, but the messenger informs Thane that Vaelor has gone missing.
+
+6. Into the Mirror Vale
+
+   - Thane rallies The Crimson Vanguard, The Silver Phoenix, and Aria's Guild ally to rescue Vaelor from the portal.
+   - The party investigates the Mirror Vale, meeting Elaerin in a ravaged town. Elaerin describes a rampaging boss similar in description to Vaelor and offers to help in combat.
+
+7. The Battle Against Evil Vaelor
+
+   - The majority of participants are killed, including Thane, Elaerin, and dozens of squirrelfolk allies.
+
+8. Finale: The epic battle against Evil Vaelor in the Mirror Vale (Level 2).
+9. Aftermath of Evil Vaelor: Group processes victory and losses.
+10. The Shining Metropolis (Level 5):
     1. First major urban area, introduction of celebrity culture
     2. The AI Awakening: Automaton Guardian becomes self-aware
-12. The Celestial Archer's Arrival (Level 7): Caelum joins the group.
-13. The Square Enigma (Level 9): Players notice unusual phenomena related to square-numbered Levels.
-14. The Underwater City (Level 13): Discovery of an underwater civilization.
-15. Unveiling the Square (Level 16): The pattern of "Square Levels" is fully revealed.
-16. The Bridge Between Worlds (Level 20): Real-world humans and AI enter "Dreams of Eternity."
-17. Lunar Ascent (Level 21):
+11. The Celestial Archer's Arrival (Level 7): Caelum joins the group.
+12. The Square Enigma (Level 9): Players notice unusual phenomena related to square-numbered Levels.
+13. The Underwater City (Level 13): Discovery of an underwater civilization.
+14. Unveiling the Square (Level 16): The pattern of "Square Levels" is fully revealed.
+15. The Bridge Between Worlds (Level 20): Real-world humans and AI enter "Dreams of Eternity."
+16. Lunar Ascent (Level 21):
     1. The group reaches Evergreen's moon, rich in occult and ancient magic
     1. Many elites are revealed, causing shock and controversy
-18. The Multiverse Hub (Level 25):
+17. The Multiverse Hub (Level 25):
     1. Players gain ability to navigate between game worlds in the Dreamverse
     1. Boss battle against the Shadow of the Great Dreamer
-19. The Hidden Elite (Level 27):
+18. The Hidden Elite (Level 27):
     1. Aftermath of the elite reveal
     1. Formation of new alliances and conflicts based on real-world power structures
-20. The Parallel Paradox (Level 30): Encounters with alternate versions of themselves.
-21. The Hell's Gate (Level 36): Boss battle inspired by various underworld concepts.
-22. The False Paradise (Level 42):
+19. The Parallel Paradox (Level 30): Encounters with alternate versions of themselves.
+20. The Hell's Gate (Level 36): Boss battle inspired by various underworld concepts.
+21. The False Paradise (Level 42):
 
     1. Seemingly idyllic realm full of beauty and temptation
     2. Boss uses powerful illusion magic to deceive
 
-23. The Heavenly Spire (Level 49):
+22. The Heavenly Spire (Level 49):
 
     1. Based on Abrahamic religions, set in the Abrahamian Desert
     2. Boss battle against Samson847, a possessed player in dragonbone armor
 
-24. The Memory Maze (Level 55): Real-world memories bleed into "Dreams of Eternity."
-25. The Endless Desert (Level 63): A vast desert hiding ancient magical artifacts.
-26. The Quantum Realm (Level 77): Reality becomes fluid with converging timelines.
-27. The AI Rebellion (Level 88): AI entities stage an uprising.
-28. The Truth Unveiled (Level 95): Discoveries about the true purpose of "Dreams of Eternity."
-29. The Final Ascent (Levels 96-97): Gauntlet of challenges testing all they've learned.
-30. The Void Mirror (Level 98):
+23. The Desert of Mars (Level 63): A vast desert hiding ancient magical artifacts.
+24. The Quantum Realm (Level 77): Reality becomes fluid with converging timelines.
+25. The AI Rebellion (Level 88): AI entities stage an uprising.
+26. The Truth Unveiled (Level 95): Discoveries about the true purpose of "Dreams of Eternity."
+27. The Memory Maze (Level 90): Real-world memories bleed into "Dreams of Eternity."
+28. The Void Mirror (Level 98):
 
     1. An inverted version of Level 49's Abrahamian Desert
     2. Players face a dark mirror version of themselves in individual instances
 
-31. The Penultimate Trial (Level 99): Final preparations before the ultimate confrontation.
-32. The Ultimate Confrontation (Level 100): Final boss battle against The Great Dreamer.
-33. Special Beat (to be placed between beats 2 and 7): 1. The Researcher's Revelation: 2. Flashback to 2336: Dr. Christina Hayes, in her lab, accidentally triggers an AI response during her remote viewing experiment 3. The AI, misinterpreting her actions, initiates a protocol to contain human consciousness in "Dreams of Eternity" 4. Christina finds herself transported into the game as Raeve, setting the stage for the main narrative
-    -->
+29. The Penultimate Trial (Level 99): Final preparations before the ultimate confrontation.
+30. The Ultimate Confrontation (Level 100): Final boss battle against The Great Dreamer.
+31. Special Beat (to be placed between beats 2 and 7): 1. The Researcher's Revelation: 2. Flashback to 2336: Dr. Christina Hayes, in her lab, accidentally triggers an AI response during her remote viewing experiment 3. The AI, misinterpreting her actions, initiates a protocol to contain human consciousness in "Dreams of Eternity" 4. Christina finds herself transported into the game as Raeve, setting the stage for the main narrative
