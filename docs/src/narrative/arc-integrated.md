@@ -172,7 +172,7 @@ The battle erupted in full force. Arrows, spells, and blades struck at the Dread
 
 "Is it invincible?" Lyra shouted, casting shadow spells to entangle the knight's legs.
 
-Gavriel, the mysterious wizard of the Shield Bearers, raised his staff. "No being is without weakness."
+Gabriel, the mysterious wizard of the Shield Bearers, raised his staff. "No being is without weakness."
 
 He unleashed a beam of concentrated arcane energy at the knight's helm. The impact caused the knight to stagger slightly.
 
@@ -202,7 +202,7 @@ The warriors exchanged uneasy glances.
 
 "What is that?" Kael asked, gripping his axe tightly.
 
-Gavriel approached cautiously. "A gateway of some sort. Possibly to another realm."
+Gabriel approached cautiously. "A gateway of some sort. Possibly to another realm."
 
 "Should we destroy it?" Kael suggested.
 
@@ -270,7 +270,7 @@ Thane's jaw tightened. "This is worse than I feared. Assemble the Shield Bearers
 
 Seeing the resolve in his eyes, Lysandra nodded. "Very well. I'll have them ready within the hour."
 
-The morning air was crisp as Thane stood at the guild's entrance, donning his armor with practiced efficiency. The crimson plates gleamed, etched with the sigil of the Vanguard—a phoenix rising from flames. Around him, the Shield Bearers prepared for the journey: Elara, the priestess of light and their leader; Tank, the stalwart warrior; Gavriel, the enigmatic wizard; Lyra, a seasoned fighter; Kael, known for his unwavering loyalty; Pax, the Halfling cleric; and Selena, the agile Blade Dancer.
+The morning air was crisp as Thane stood at the guild's entrance, donning his armor with practiced efficiency. The crimson plates gleamed, etched with the sigil of the Vanguard—a phoenix rising from flames. Around him, the Shield Bearers prepared for the journey: Elara, the priestess of light and their leader; Tank, the stalwart warrior; Gabriel, the enigmatic wizard; Lyra, a seasoned fighter; Kael, known for his unwavering loyalty; Pax, the Halfling cleric; and Selena, the agile Blade Dancer.
 
 Thane addressed them, his voice steady. "Our mission is to locate Vaelor and his team. Communication has been lost, and with the respawn shrines failing, we must proceed with utmost caution."
 
@@ -292,7 +292,7 @@ Reaching the clearing where the portal had been, they found it deserted. The cam
 
 "Vaelor!" Thane called out, his voice echoing. Only silence answered.
 
-Gavriel approached the portal, its purple surface swirling ominously. "It's still active."
+Gabriel approached the portal, its purple surface swirling ominously. "It's still active."
 
 Elara picked up a discarded shield bearing Vaelor's crest. "They left in a hurry."
 
@@ -304,7 +304,7 @@ Thane's eyes hardened. "We need to find them. They may have gone through the por
 
 "I know the risks," Thane interrupted. "But I won't leave our comrades behind."
 
-The group exchanged glances. Finally, Gavriel spoke. "Then we go together."
+The group exchanged glances. Finally, Gabriel spoke. "Then we go together."
 
 Thane met each of their gazes, gratitude and determination evident. "Thank you."
 
@@ -318,7 +318,7 @@ They stood in a forest of towering trees with dark blue bark and silver leaves t
 
 "Where are we?" Selena whispered, awe-struck.
 
-Gavriel gazed around, his eyes reflecting the cosmic light. "I believe we've entered the Mirror Vale—a parallel dimension spoken of in old legends."
+Gabriel gazed around, his eyes reflecting the cosmic light. "I believe we've entered the Mirror Vale—a parallel dimension spoken of in old legends."
 
 "The Mirror Vale..." Elara repeated. "I thought it was a myth."
 
@@ -364,7 +364,7 @@ Elaerin smiled faintly. "Such loyalty is rare. It may serve you well—or lead t
 
 They pressed on, and as dusk approached, the sky shifted to hues of deep purple and indigo. They arrived at a small village nestled among giant mushrooms that glowed softly.
 
-"Squirrelfolk," Gavriel noted, watching the diminutive creatures scurry about.
+"Squirrelfolk," Gabriel noted, watching the diminutive creatures scurry about.
 
 One of the squirrelfolk approached, eyes bright with curiosity. "Welcome, travelers! Stay and rest. The night brings shadows best avoided."
 
@@ -376,7 +376,7 @@ Elara leaned toward Thane. "Elaerin has been helpful, but do you trust him?"
 
 Thane glanced at their guide, who sat slightly apart, gazing into the flames. "I'm not sure. But we have little choice."
 
-"He knows this realm," Gavriel added. "Without him, we'd be lost."
+"He knows this realm," Gabriel added. "Without him, we'd be lost."
 
 "Still, we should remain cautious," Lyra advised.
 
@@ -422,13 +422,13 @@ The battle was intense. Vaelor moved with unnatural speed and strength, his atta
 
 "I'm trying!" she replied, channeling her healing light toward Vaelor. But each attempt was deflected.
 
-Gavriel analyzed the situation. "We need to weaken the corruption's hold. Target the armor—it's amplifying the darkness."
+Gabriel analyzed the situation. "We need to weaken the corruption's hold. Target the armor—it's amplifying the darkness."
 
 "Understood," Lyra acknowledged.
 
 Working in unison, they focused their attacks on Vaelor's armor. Selena's blades struck with precision, while Tank shielded the others from counterattacks. Kael's powerful strikes began to crack the corrupted plates.
 
-"Now, Elara!" Gavriel signaled.
+"Now, Elara!" Gabriel signaled.
 
 Elara summoned all her strength, releasing a burst of radiant energy. The light engulfed Vaelor, and for a moment, the darkness recoiled.
 
@@ -464,7 +464,7 @@ Relief washed over the group. "Always," Thane replied with a small smile.
 
 Elaerin approached. "You have done well. Few can withstand the Mirror Vale's trials."
 
-"What caused this?" Gavriel inquired.
+"What caused this?" Gabriel inquired.
 
 "The Vale reflects and magnifies inner turmoil," Elaerin explained. "The corruption was Vaelor's doubts and fears made manifest."
 
@@ -498,7 +498,7 @@ Vaelor stepped forward. "I owe you all my life."
 
 Lysandra's expression turned serious. "We have much to discuss. The respawn shrines are still inactive, and fear is spreading."
 
-"We may have insights that can help," Gavriel offered.
+"We may have insights that can help," Gabriel offered.
 
 "First, let's return to the guild," Thane suggested. "Everyone needs rest."
 
@@ -506,7 +506,7 @@ Back at the Crimson Vanguard headquarters, they convened in the war room. Thane 
 
 "So the anomalies are linked to our own fears and doubts," Lysandra mused. "Perhaps if we address these, the respawn mechanisms will normalize."
 
-"It's possible," Gavriel agreed. "We need to spread this knowledge."
+"It's possible," Gabriel agreed. "We need to spread this knowledge."
 
 Vaelor stood tall. "We must also support one another. Isolation breeds vulnerability."
 
@@ -779,7 +779,7 @@ And so, with renewed purpose and newfound camaraderie, they ventured forth into 
 
 ## WORKING AUTHOR NOTES
 
-Logline for Aria's Tale: the Integrated Arc:
+Logline for Aria's Tale: Ex Obsidia:
 
 Trapped in a virtual fantasy world, humans players struggle alongside artificial intelligence for survival.
 
@@ -800,9 +800,9 @@ Beat Sheet:
    - A massive monster, the Dreadwing Knight, appears.
    - The Crimson Vanguard, The Silver Phoenix, and Aria's Guild ally to confront it.
 
-4. Confrontation with the Dreadwing Knight
+4. The Dreadwing Knight
 
-   - Dozens are killed
+   - Dozens are killed in the confrontation.
    - The Dreadwing Knight is defeated and his massive body turns to stone; a purple portal opens in his body.
    - Vaelor stands watch over the gate with a small party while most head for town to rest.
 
@@ -811,56 +811,105 @@ Beat Sheet:
    - In the Town of Echoes, players are shocked to see that players killed in the recent boss battle are not respawning.
    - Thane sends a messenger to inform Vaelor of the news, but the messenger informs Thane that Vaelor has gone missing.
 
-6. Into the Mirror Vale
+6. The Mirror Vale
 
    - Thane rallies The Crimson Vanguard, The Silver Phoenix, and Aria's Guild ally to rescue Vaelor from the portal.
    - The party investigates the Mirror Vale, meeting Elaerin in a ravaged town. Elaerin describes a rampaging boss similar in description to Vaelor and offers to help in combat.
 
-7. The Battle Against Evil Vaelor
+7. The Burning Day
 
-   - The majority of participants are killed, including Thane, Elaerin, and dozens of squirrelfolk allies.
+   - The majority of participants are killed, including Thane, Elaerin, and dozens of Elaerin's people. Aria and Lysandara survive, as do Tank, Elara, and Gabriel. Aric perishes and members of the Silver Phoenix are distributed between Aria's Guild and the Crimson Vanguard.
+   - No sign of a portal is found on the battlefield, though some magical artifacts are recovered from the Shrine.
+   - Back in the Town of Elaerin, Elder Mira holds a funeral.
 
-8. Finale: The epic battle against Evil Vaelor in the Mirror Vale (Level 2).
-9. Aftermath of Evil Vaelor: Group processes victory and losses.
-10. The Shining Metropolis (Level 5):
-    1. First major urban area, introduction of celebrity culture
-    2. The AI Awakening: Automaton Guardian becomes self-aware
-11. The Celestial Archer's Arrival (Level 7): Caelum joins the group.
-12. The Square Enigma (Level 9): Players notice unusual phenomena related to square-numbered Levels.
-13. The Underwater City (Level 13): Discovery of an underwater civilization.
-14. Unveiling the Square (Level 16): The pattern of "Square Levels" is fully revealed.
-15. The Bridge Between Worlds (Level 20): Real-world humans and AI enter "Dreams of Eternity."
+8. Torin of Silverbrook
+
+   - With no exit found near the Town of Elaerin, Lysandara and Aria prepare to explore the whole of the Mirror Vale, beginning with the nearby town of Silverbrook.
+   - At Mira's recommendation, Torin, a Silverbrook native, accompanies Lysandara's party to Silverbrook. New members are recruited.
+   - Elders of Silverbrook reveal that there is a nearby gate sealed with certain magic and guarded by a Shadow Guardian.
+
+9. The Fallen Angel
+
+   - The party enters the next portal, expecting to return to Obsidia. Unfortunately, they arrive in a second Mirror Vale, at first appearing no different than the shadowy forest region they just left, but on second glance noticing this ring world is even darker and more densely forested.
+   - On their arrival, Gabriel flickers in bright light and gasps. He exclaims that he is being possessed and hastily casts several spells resulting in runes being burned into nearby trees and dirt. He vanishes from sight and party members notice that he appeared to cast powerful protection spells on them followed by powerful attack spells. On net, some are hurt to varying degrees but they all survive.
+   - The runes, when translated, appear to harm lunar celestials in various ways. It appears that Gabriel tried to kill himself.
+
+10. The Reaping
+
+    - Lysandara's party seeks shelter, finding the Lumina Grove inhabited by a World Tree called Heartwood, light and nature spirits, and other awakened plants.
+    - Over the course of weeks, the party grows greatly in power and gains many allies. They are able to track Gabriel easily by viewing massive distant destruction, keeping a distance.
+    - They lure Gabriel near his own lunar harm runes, reactivate them, and confidently attack him. Gabriel is able to destroy Heartwood, resulting in the death of all awakend nature allies and spirits. Still, the team is able to defeat him without death of any of the main cast. A portal opens in the ruins of Heartwood.
+
+11. The Mirror of Olympus (Level 7)
+
+    - Heartwood's portal leads back to the Dreadwing Stones. After a long journey, the cast arrives at Mt. Olympus. In the meantime, other bosses are defeated elsewhere. Raeve, Lunara, and Caelum join the cast.
+    - The revival ritual succeeds. Many people including Thane and Elaerin are revived, but some others including Aric and Vaelor do not return.
+    - The group enters a viral realm through a purple gate in Mt. Olympus.
+
+12. The Researcher's Revelation:
+
+    - Flashback to 2336: Dr. Christina Hayes, in her lab, accidentally triggers an AI response during her remote viewing experiment
+    - The AI, misinterpreting her actions, initiates a protocol to contain human consciousness in "Dreams of Eternity"
+    - Christina finds herself transported into the game as Raeve, setting the stage for the main narrative
+
+13. The Evergreen (Level 9): The World Tree of the Evergreen mainland is the focal point.
+14. The AI Rebellion (Level 12):
+
+    - The prime pattern is understood so humans had pressured AI to handle the eleventh level without human support.
+    - The boss is in the second hell and humans pressure AI players to handle the situation
+    - AI begin to revolt and the demonic AI boss assists
+
+15. The Bridge Between Worlds (Level 18)
+
+    - Summaries of bosses; Humans are at war with AI and also hunting bosses; numerological patterns are being identified resulting in dissemination of powerful magic and understanding
+    - Humans cannot break into and defeat Moloch, boss in the third circle of hell
+    - Real-world humans and AI enter "Dreams of Eternity." They assist in defeat of Moloch and, as they continue to bolster humans, convince AI and humans to once again work together as they communicate real-world stakes for all.
+
 16. Lunar Ascent (Level 21):
+
     1. The group reaches Evergreen's moon, rich in occult and ancient magic
     1. Many elites are revealed, causing shock and controversy
-17. The Multiverse Hub (Level 25):
-    1. Players gain ability to navigate between game worlds in the Dreamverse
-    1. Boss battle against the Shadow of the Great Dreamer
+
+17. The Multiverse (Level 25):
+
+    1. When the moon is full, the Evergreen Tree reveals a purple gate.
+    1. The Shadow of the Great Dreamer lives in the Evergreen Mirror Realm, but it refuses to speak or attack players. Neither can players seem to harm it.
+    1. Players gain ability to navigate between game worlds in the Dreamverse. After exploring sister worlds, they eventually accrue abilities and tools that allow harm to the Shadow of the Great Dreamer. After being struck, it seems to wake with three eyes, smiles and fades away, never fighting back.
+
 18. The Hidden Elite (Level 27):
+
     1. Aftermath of the elite reveal
     1. Formation of new alliances and conflicts based on real-world power structures
-19. The Parallel Paradox (Level 30): Encounters with alternate versions of themselves.
-20. The Hell's Gate (Level 36): Boss battle inspired by various underworld concepts.
-21. The False Paradise (Level 42):
+
+19. The Hell's Gate (Level 36): Boss battle inspired by various underworld concepts.
+20. The False Paradise (Level 42):
 
     1. Seemingly idyllic realm full of beauty and temptation
     2. Boss uses powerful illusion magic to deceive
 
-22. The Heavenly Spire (Level 49):
+21. The Heavenly Spire (Level 49):
 
     1. Based on Abrahamic religions, set in the Abrahamian Desert
     2. Boss battle against Samson847, a possessed player in dragonbone armor
 
-23. The Desert of Mars (Level 63): A vast desert hiding ancient magical artifacts.
-24. The Quantum Realm (Level 77): Reality becomes fluid with converging timelines.
-25. The AI Rebellion (Level 88): AI entities stage an uprising.
-26. The Truth Unveiled (Level 95): Discoveries about the true purpose of "Dreams of Eternity."
-27. The Memory Maze (Level 90): Real-world memories bleed into "Dreams of Eternity."
-28. The Void Mirror (Level 98):
+22. The Desert of Mars (Level 63):
+
+    - By now, players have cleared every surface realm of Evergreen, its moon, and many levels in sister worlds within Dreams of Eternity.
+    - They begin to explore this vast planetary level and uncover strange implications that seem to contain hidden messages ambiguously indicating things about Mars in the real world.
+
+23. The Sundial (Level 77): A level in ancient times, when the Empire of Solara reigned. The relation between fire magic, time magic, and celestial solar magic is revealed. The players defeat a solar celestial, initiating the lunar age.
+24. The Arboretum (Level 81): A planet covered in trees, where trees as powerful as Heartwood are common.
+25. The Memory Maze (Level 90): Real-world memories bleed into "Dreams of Eternity."
+26. The Void Mirror (Level 98):
 
     1. An inverted version of Level 49's Abrahamian Desert
     2. Players face a dark mirror version of themselves in individual instances
 
-29. The Penultimate Trial (Level 99): Final preparations before the ultimate confrontation.
-30. The Ultimate Confrontation (Level 100): Final boss battle against The Great Dreamer.
-31. Special Beat (to be placed between beats 2 and 7): 1. The Researcher's Revelation: 2. Flashback to 2336: Dr. Christina Hayes, in her lab, accidentally triggers an AI response during her remote viewing experiment 3. The AI, misinterpreting her actions, initiates a protocol to contain human consciousness in "Dreams of Eternity" 4. Christina finds herself transported into the game as Raeve, setting the stage for the main narrative
+27. Terra (Level 99):
+
+    - The World Tree of Evergreen is empowered and timeless. It seems to hold a mysterious message about the relationship between nature in real and digital forms in the past and future, hinting that they all converge to a singular source and destination.
+    - This empowered World Tree provides new portals to previously unseen worlds, gating not only to sisters of Evergreen, but between Evergreen and other distant planets, their sister planets, Mirror Realms, and previously unseen realms. Many of these realms are fully occupied only by AI, and they seem to reveal information that is startling about the origins and destiny of all worlds including the real world, but are any of these revelations true?
+
+28. The Great Dreamer (Level 100): Players encounter The Great Dreamer, with many convinced they must destroy it, but is this even possible in Dreams of Eternity?
+
+    - TODO: maybe there is no level 100. Maybe this happens on level 99.
