@@ -876,10 +876,12 @@ Beat Sheet:
     1. The Shadow of the Great Dreamer lives in the Evergreen Mirror Realm, but it refuses to speak or attack players. Neither can players seem to harm it.
     1. Players gain ability to navigate between game worlds in the Dreamverse. After exploring sister worlds, they eventually accrue abilities and tools that allow harm to the Shadow of the Great Dreamer. After being struck, it seems to wake with three eyes, smiles and fades away, never fighting back.
 
-18. The Hidden Elite (Level 27):
+18. The Nature of Nature (Level 27):
 
-    1. Aftermath of the elite reveal
-    1. Formation of new alliances and conflicts based on real-world power structures
+    1. The remaining elites confess; they are at the limit of their special knowledge
+    2. Formation of new alliances and conflicts based on real-world power structures
+    3. After much work across sister worlds and time, a deep truth about Evergreen is revealed, enabling access to a new boss that is once again within the Evergreen World Tree, accessed in a special way.
+    4. End of the first book: `Ex Obsidia`. Conclude the book with the gate opening but do not reveal what happens when players enter.
 
 19. The Hell's Gate (Level 36): Boss battle inspired by various underworld concepts.
 20. The False Paradise (Level 42):
