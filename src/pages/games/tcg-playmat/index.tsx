@@ -3,14 +3,24 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { CustomPage } from "~/components/CustomPage";
+import { Button } from "~/components/ui/button";
+import { Card } from "~/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "~/components/ui/dialog";
 
-interface Card {
+interface CardType {
   id: number;
   name: string;
   slug: string;
 }
 
-const cards: Card[] = [
+const cards: CardType[] = [
   { id: 157, name: "Atlantean Guardian", slug: "atlantean-guardian.jpeg" },
   { id: 158, name: "Quantum Voyagers", slug: "quantum-voyagers.jpeg" },
   { id: 159, name: "Synthetic Enforcer", slug: "synthetic-enforcer.jpeg" },
@@ -25,46 +35,48 @@ const ZoomedCard = ({
   onClose,
   onPlay,
 }: {
-  card: Card;
+  card: CardType;
   onClose: () => void;
   onPlay: () => void;
 }) => (
-  <div
-    className="fixed inset-0 z-50 flex flex-row items-center justify-center bg-black bg-opacity-50"
-    onClick={onClose}
-  >
-    <div className="rounded-lg bg-white p-5">
-      <Image
-        src={`/searchable-images/${card.id}-${card.slug}`}
-        alt={card.name}
-        width={820}
-        height={614}
-        className="rounded-lg"
-      />
-      <div className="text-black">
-        <h2 className="text-2xl font-bold">{card.name}</h2>
-        <button className="mx-4 my-2" onClick={onClose}>
+  <Dialog open={true} onOpenChange={onClose}>
+    <DialogContent className="max-w-md">
+      <DialogHeader>
+        <DialogTitle>{card.name}</DialogTitle>
+        <DialogDescription>
+          <Image
+            src={`/searchable-images/${card.id}-${card.slug}`}
+            alt={card.name}
+            width={820}
+            height={614}
+            className="rounded-lg"
+          />
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <Button variant="outline" onClick={onClose}>
           Close
-        </button>
-        <button className="mx-4 my-2" onClick={onPlay}>
-          Play
-        </button>
-      </div>
-    </div>
-  </div>
+        </Button>
+        <Button onClick={onPlay}>
+          {/* Conditional text based on whether the card is already on the playmat */}
+          {`Play`}
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
 );
 
 const TcgPlaymat: React.FC = () => {
-  const [cardsOnPlaymat, setCardsOnPlaymat] = useState<Card[]>([]);
-  const [zoomedCard, setZoomedCard] = useState<Card | null>(null);
+  const [cardsOnPlaymat, setCardsOnPlaymat] = useState<CardType[]>([]);
+  const [zoomedCard, setZoomedCard] = useState<CardType | null>(null);
 
-  const handleCardClick = (card: Card) => {
+  const handleCardClick = (card: CardType) => {
     setZoomedCard(card);
   };
 
   const handleCardKeyUp = (
     event: React.KeyboardEvent<HTMLDivElement>,
-    card: Card,
+    card: CardType,
   ) => {
     if (event.key === "Enter") {
       setZoomedCard(card);
@@ -73,7 +85,7 @@ const TcgPlaymat: React.FC = () => {
 
   const handleDragStart = (
     event: React.DragEvent<HTMLDivElement>,
-    card: Card,
+    card: CardType,
   ) => {
     event.dataTransfer.setData("text/plain", card.id.toString());
   };
@@ -88,7 +100,7 @@ const TcgPlaymat: React.FC = () => {
     }
   };
 
-  const handleRemoveCard = (card: Card) => {
+  const handleRemoveCard = (card: CardType) => {
     setCardsOnPlaymat((prev) => prev.filter((c) => c.id !== card.id));
   };
 
@@ -100,17 +112,17 @@ const TcgPlaymat: React.FC = () => {
       title="TCG Playmat - Aria's Tale"
     >
       <div className="mx-auto max-w-7xl p-5 text-center">
+        {/* Card Selection Area */}
         <div className="mb-5 flex flex-wrap justify-center gap-2">
           {cards.map((card) => (
-            <div
-              className="cursor-pointer border-2 border-dashed border-gray-300 p-2"
-              data-card-id={card.id}
-              draggable
+            <Card
               key={card.id}
+              className="cursor-pointer border-2 border-dashed border-gray-300 p-2"
               onDragStart={(e) => handleDragStart(e, card)}
               onClick={() => handleCardClick(card)}
               onKeyUp={(e) => handleCardKeyUp(e, card)}
               tabIndex={0}
+              draggable
             >
               <Image
                 src={`/searchable-images/${card.id}-${card.slug}`}
@@ -119,20 +131,21 @@ const TcgPlaymat: React.FC = () => {
                 height={280}
                 className="rounded-lg"
               />
-            </div>
+            </Card>
           ))}
         </div>
 
+        {/* Playmat Area */}
         <div
           className="flex min-h-[300px] flex-wrap items-center justify-center gap-2 border-4 border-gray-800 bg-green-800 p-5"
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
         >
           {cardsOnPlaymat.map((card) => (
-            <div
+            <Card
               key={card.id}
-              onClick={() => handleRemoveCard(card)}
               className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
+              onClick={() => handleRemoveCard(card)}
             >
               <Image
                 src={`/searchable-images/${card.id}-${card.slug}`}
@@ -141,10 +154,11 @@ const TcgPlaymat: React.FC = () => {
                 height={280}
                 className="rounded-lg"
               />
-            </div>
+            </Card>
           ))}
         </div>
 
+        {/* Zoomed Card Modal */}
         {zoomedCard && (
           <ZoomedCard
             card={zoomedCard}
