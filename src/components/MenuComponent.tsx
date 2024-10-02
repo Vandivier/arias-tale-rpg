@@ -36,6 +36,7 @@ const defaultMenuData = [
     items: [
       { label: "Colosseum", href: "/games/colosseum" },
       { label: "Fighting Game", href: "/games/fighting" },
+      { label: "TCG", href: "/games/tcg" },
       { label: "TCG Playmat", href: "/games/tcg-playmat" },
     ],
   },
@@ -68,7 +69,7 @@ export const MenuComponent = ({
             <DropdownMenuTrigger className={topLevelClickableClassname}>
               {item.label}
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="flex flex-col items-center">
+            <DropdownMenuContent className="flex flex-col">
               {item.items.map((subItem, subIndex) => (
                 <DropdownMenuItem key={subIndex} asChild>
                   <Link href={subItem.href}>{subItem.label}</Link>
