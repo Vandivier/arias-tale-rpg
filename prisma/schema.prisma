@@ -8,13 +8,12 @@ datasource db {
 }
 
 model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    createdBy   User   @relation(fields: [createdById], references: [id])
+    id          Int      @id @default(autoincrement())
+    name        String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
     createdById String
+    createdBy   User     @relation(fields: [createdById], references: [id])
 
     @@index([name])
 }
@@ -46,21 +45,20 @@ model Session {
 }
 
 model User {
-    id              String              @id @default(cuid())
-    name            String?
-    email           String?             @unique
-    emailVerified   DateTime?
-    image           String?
-    accounts        Account[]
-    sessions        Session[]
-    posts           Post[]
-    userGameCards   UserGameCard[]
-    userCustomDecks UserCustomDeck[]
-    purchases       Purchase[]
-    gameSessions    GameSessionPlayer[]
-
-    willPlayStream       Boolean @default(false)
-    willReviewLiterature Boolean @default(false)
+    id                   String             @id @default(cuid())
+    name                 String?
+    email                String?            @unique
+    emailVerified        DateTime?
+    gameSessionPlayer    GameSessionPlayer?
+    image                String?
+    willPlayStream       Boolean            @default(false)
+    willReviewLiterature Boolean            @default(false)
+    accounts             Account[]
+    posts                Post[]
+    purchases            Purchase[]
+    sessions             Session[]
+    userCustomDecks      UserCustomDeck[]
+    userGameCards        UserGameCard[]
 }
 
 model VerificationToken {
@@ -72,104 +70,91 @@ model VerificationToken {
 }
 
 model SearchableImage {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    description   String @unique
-    imageFileName String @unique
-
-    tags          Tag[]
+    id            Int            @id @default(autoincrement())
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    description   String         @unique
     title         String         @unique
+    imageFileName String         @unique
     gameCard      GameCard?
     userGameCards UserGameCard[]
+    tags          Tag[]          @relation("SearchableImageToTag")
 }
 
 model GameCard {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    title       String
-    description String
-    isGeneric   Boolean
-    rarity      CardRarityEnum
-
-    isBattler  Boolean @default(false)
-    powerLevel Int?
-
-    image            SearchableImage    @relation(fields: [imageId], references: [id])
+    id               Int                @id @default(autoincrement())
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    name             String             @unique
+    description      String             @unique
+    isGeneric        Boolean
+    rarity           CardRarityEnum
+    battlerPower     Int?
+    battlerHealth    Int?
     imageId          Int                @unique
-    userGameCards    UserGameCard[]
+    image            SearchableImage    @relation(fields: [imageId], references: [id])
     pokerCardMapping PokerCardMapping[]
+    userGameCards    UserGameCard[]
     purchase         Purchase           @relation(fields: [purchaseId], references: [id])
     purchaseId       Int
-
-    @@unique([title, imageId])
 }
 
 model UserGameCard {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    isFoil     Boolean
-    gameCard   GameCard @relation(fields: [gameCardId], references: [id])
-    gameCardId Int
-
-    user            User             @relation(fields: [userId], references: [id])
+    id              Int              @id @default(autoincrement())
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+    isFoil          Boolean
+    gameCardId      Int
     userId          String
-    cardBackImage   SearchableImage  @relation(fields: [cardBackImageId], references: [id])
     cardBackImageId Int
-    customDecks     UserCustomDeck[]
+    cardBackImage   SearchableImage  @relation(fields: [cardBackImageId], references: [id])
+    gameCard        GameCard         @relation(fields: [gameCardId], references: [id])
+    user            User             @relation(fields: [userId], references: [id])
+    customDecks     UserCustomDeck[] @relation("UserCustomDeckToUserGameCard")
 }
 
 model UserCustomDeck {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    user              User                @relation(fields: [userId], references: [id])
+    id                Int                @id @default(autoincrement())
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
     userId            String
     name              String
     description       String
-    gameCards         UserGameCard[]
-    GameSessionPlayer GameSessionPlayer[]
+    user              User               @relation(fields: [userId], references: [id])
+    gameCards         UserGameCard[]     @relation("UserCustomDeckToUserGameCard")
+    gameSessionPlayer GameSessionPlayer?
 }
 
 model Tag {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
+    id               Int               @id @default(autoincrement())
+    createdAt        DateTime          @default(now())
+    updatedAt        DateTime          @updatedAt
     name             String            @unique
     isPrintedTag     Boolean
-    characters       Character[]
-    searchableImages SearchableImage[]
-    regionSnapshots  RegionSnapshot[]
+    characters       Character?
+    regionSnapshots  RegionSnapshot?
+    searchableImages SearchableImage[] @relation("SearchableImageToTag")
 }
 
 model StandardDeck {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
+    id                Int                @id @default(autoincrement())
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
     name              String             @unique
     description       String
     pokerCardMappings PokerCardMapping[]
 }
 
 model PokerCardMapping {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    pokerCard      PokerCard     @relation(fields: [pokerCardName], references: [name])
+    id             Int           @id @default(autoincrement())
+    createdAt      DateTime      @default(now())
+    updatedAt      DateTime      @updatedAt
     pokerCardName  String
-    gameCard       GameCard      @relation(fields: [gameCardId], references: [id])
     gameCardId     Int
-    StandardDeck   StandardDeck? @relation(fields: [standardDeckId], references: [id])
     standardDeckId Int?
+    gameCard       GameCard      @relation(fields: [gameCardId], references: [id])
+    pokerCard      PokerCard     @relation(fields: [pokerCardName], references: [name])
+    StandardDeck   StandardDeck? @relation(fields: [standardDeckId], references: [id])
 }
 
 model PokerCard {
@@ -178,151 +163,73 @@ model PokerCard {
     mappings PokerCardMapping[]
 }
 
-enum CardRarityEnum {
-    COMMON
-    UNCOMMON
-    RARE
-    ULTRA_RARE
-    UNIQUE
-}
-
-model Purchase {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
-
-    user            User       @relation(fields: [userId], references: [id])
-    userId          String
-    gameCards       GameCard[]
-    isFoil          Boolean
-    isDemo          Boolean    @default(false)
-    stripePaymentId String?
-
-    @@index([userId])
-}
-
-model GameSession {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    gameState Json
-
-    players GameSessionPlayer[] // Relation to players
-}
-
-model GameSessionPlayer {
-    id            Int            @id @default(autoincrement())
-    gameSession   GameSession    @relation(fields: [gameSessionId], references: [id])
-    gameSessionId String
-    user          User?          @relation(fields: [userId], references: [id])
-    userId        String?
-    playerType    PlayerType     @default(COMPUTER) // HUMAN or COMPUTER
-    deck          UserCustomDeck @relation(fields: [deckId], references: [id])
-    deckId        Int
-
-    @@index([gameSessionId])
-}
-
-enum PlayerType {
-    HUMAN
-    COMPUTER
-}
-
-enum RegionKind {
-    UNIVERSE
-    SUPERCLUSTER
-    GALAXY
-    WORLD
-    SUPERREGION
-    REGION
-    SUBREGION
-    // zones include towns, dungeons, encounter areas, building interiors, and so on
-    ZONE
-}
-
 model RegionSnapshot {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    name          String
-    // days before or after the monstrous vision
-    narrativeDays Int
-    description   String
-    mainImageTag  Tag    @relation(fields: [tagId], references: [id])
-    tagId         Int    @unique
-
-    commonRace   String
-    commonTongue String
-    // elevation is in meters
-    maxElavation Int
-    minElevation Int
-    regionKind   RegionKind
-
-    // score ratings are 1 to 100
-    // diversityScore influences racial, religious, economic, political, and other diversity
-    diversityScore      Int
-    // Evergreen and Earth are both size 100
-    physicalSizeScore   Int
-    populationSizeScore Int
-
-    subregions     RegionSnapshot[] @relation("RegionHierarchy")
-    parentRegion   RegionSnapshot?  @relation("RegionHierarchy", fields: [parentRegionId], references: [id])
+    id             Int              @id @default(autoincrement())
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    name           String
+    narrativeDays  Int
+    description    String
+    tagId          Int              @unique
+    regionKind     RegionKind
+    minElevation   Int
+    maxElavation   Int
+    commonRace     String
+    commonTongue   String
+    diversityScore Int
     parentRegionId Int?
+    parentRegion   RegionSnapshot?  @relation("RegionHierarchy", fields: [parentRegionId], references: [id])
+    subregions     RegionSnapshot[] @relation("RegionHierarchy")
+    mainImageTag   Tag              @relation(fields: [tagId], references: [id])
 
     @@unique([name, narrativeDays])
 }
 
 model Character {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    name         String
-    description  String
-    mainImageTag Tag    @relation(fields: [tagId], references: [id])
-    tagId        Int    @unique
-    rarity       String
-    race         String
-
-    appearance            CharacterAppearance @relation(fields: [appearanceId], references: [id])
-    appearanceId          Int                 @unique
-    combatStatistics      CombatStatistics    @relation(fields: [combatStatisticsId], references: [id])
-    combatStatisticsId    Int
-    gender                String
-    noncombatStatistics   NoncombatStatistics @relation(fields: [noncombatStatisticsId], references: [id])
-    noncombatStatisticsId Int                 @unique
-    socialAffinities      CharacterAffinities @relation(fields: [socialAffinitiesId], references: [id])
-    socialAffinitiesId    Int
-
+    id                      Int                 @id @default(autoincrement())
+    createdAt               DateTime            @default(now())
+    updatedAt               DateTime            @updatedAt
+    name                    String
+    description             String
+    tagId                   Int                 @unique
+    rarity                  String
+    race                    String
+    appearanceId            Int                 @unique
+    combatStatisticsId      Int
+    gender                  String
+    noncombatStatisticsId   Int                 @unique
+    socialAffinitiesId      Int
     awakeningRegion         String
-    characterBackstory      String           @unique
+    characterBackstory      String              @unique
     initialLevel            Int
     initialAge              Int
-    initialClasses          BattleClass[]
-    initialSpecialAbilities SpecialAbility[]
     initialMemories         String
     irlBackstory            String
+    initialClasses          BattleClass[]
+    appearance              CharacterAppearance @relation(fields: [appearanceId], references: [id])
+    combatStatistics        CombatStatistics    @relation(fields: [combatStatisticsId], references: [id])
+    noncombatStatistics     NoncombatStatistics @relation(fields: [noncombatStatisticsId], references: [id])
+    socialAffinities        CharacterAffinities @relation(fields: [socialAffinitiesId], references: [id])
+    mainImageTag            Tag                 @relation(fields: [tagId], references: [id])
+    initialSpecialAbilities SpecialAbility[]
 }
 
 model CharacterSnapshot {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
+    id               Int              @id @default(autoincrement())
+    createdAt        DateTime         @default(now())
+    updatedAt        DateTime         @updatedAt
     name             String
     narrativeArc     String
     narrativeChapter Int
     narrativeDays    Int
-
     age              Int
     awakeningRegion  String
-    classes          BattleClass[]
-    currentState     CharacterState   @relation(fields: [currentStateId], references: [id])
     currentStateId   Int              @unique
     description      String
-    itemsHeld        ItemHeld[]
     level            Int
+    classes          BattleClass[]
+    currentState     CharacterState   @relation(fields: [currentStateId], references: [id])
+    itemsHeld        ItemHeld[]
     specialAbilities SpecialAbility[]
 
     @@unique([name, narrativeDays])
@@ -341,10 +248,10 @@ model CharacterAppearance {
 
 model CharacterAffinities {
     id              Int          @id @default(autoincrement())
-    characters      Character[]
     cultures        String[]
     guildMembership String
     religions       String[]
+    characters      Character[]
     reputations     Reputation[]
 }
 
@@ -352,10 +259,10 @@ model SpecialAbility {
     id                  Int                @id @default(autoincrement())
     name                String             @unique
     description         String
-    character           Character?         @relation(fields: [characterId], references: [id])
     characterId         Int?
-    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
     characterSnapshotId Int?
+    character           Character?         @relation(fields: [characterId], references: [id])
+    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
 }
 
 model CombatStatistics {
@@ -369,10 +276,8 @@ model CombatStatistics {
 }
 
 model NoncombatStatistics {
-    id Int @id @default(autoincrement())
-
+    id                Int        @id @default(autoincrement())
     agreeableness     Int
-    character         Character?
     charisma          Int
     conscientiousness Int
     dexterity         Int
@@ -381,6 +286,7 @@ model NoncombatStatistics {
     neuroticism       Int
     openness          Int
     strength          Int
+    character         Character?
 }
 
 model CharacterState {
@@ -395,10 +301,10 @@ model CharacterState {
 model BattleClass {
     id                  Int                @id @default(autoincrement())
     name                String
-    character           Character?         @relation(fields: [characterId], references: [id])
     characterId         Int?
-    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
     characterSnapshotId Int?
+    character           Character?         @relation(fields: [characterId], references: [id])
+    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
 }
 
 model ItemHeld {
@@ -408,10 +314,71 @@ model ItemHeld {
     character   CharacterSnapshot @relation(fields: [characterId], references: [id])
 }
 
+model Purchase {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    user            User       @relation(fields: [userId], references: [id])
+    userId          String
+    gameCards       GameCard[]
+    isFoil          Boolean
+    isDemo          Boolean    @default(false)
+    stripePaymentId String?
+
+    @@index([userId])
+}
+
 model Reputation {
     id           Int                 @id @default(autoincrement())
     name         String
     reputation   String
     affinitiesId Int
     affinities   CharacterAffinities @relation(fields: [affinitiesId], references: [id])
+}
+
+enum CardRarityEnum {
+    COMMON
+    UNCOMMON
+    RARE
+    ULTRA_RARE
+    UNIQUE
+}
+
+enum RegionKind {
+    UNIVERSE
+    SUPERCLUSTER
+    GALAXY
+    WORLD
+    SUPERREGION
+    REGION
+    SUBREGION
+    ZONE
+}
+
+enum PlayerType {
+    HUMAN
+    COMPUTER
+}
+
+model GameSession {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    gameState Json
+
+    players GameSessionPlayer[]
+}
+
+model GameSessionPlayer {
+    id            Int            @id @default(autoincrement())
+    gameSession   GameSession    @relation(fields: [gameSessionId], references: [id])
+    gameSessionId String
+    user          User           @relation(fields: [userId], references: [id])
+    userId        String         @unique
+    playerType    PlayerType     @default(COMPUTER)
+    deck          UserCustomDeck @relation(fields: [deckId], references: [id])
+    deckId        Int            @unique
+
+    @@index([gameSessionId])
 }
