@@ -45,22 +45,24 @@ model Session {
 }
 
 model User {
-    id                   String             @id @default(cuid())
+    id                   String    @id @default(cuid())
     name                 String?
-    email                String?            @unique
+    email                String?   @unique
     emailVerified        DateTime?
-    gameSessionPlayer    GameSessionPlayer?
     image                String?
-    willPlayStream       Boolean            @default(false)
-    willReviewLiterature Boolean            @default(false)
+    willPlayStream       Boolean   @default(false)
+    willReviewLiterature Boolean   @default(false)
     accounts             Account[]
-    posts                Post[]
-    purchases            Purchase[]
-    sessions             Session[]
-    userCustomDecks      UserCustomDeck[]
-    userGameCards        UserGameCard[]
-    sentInvitations      Invitation[]       @relation("Inviter")
-    receivedInvitations  Invitation[]       @relation("Invitee")
+
+    // gameSessionPlayers should always be len 0 or 1 but Prisma can't support that yet, so we handle in biz logic
+    gameSessionPlayers  GameSessionPlayer[]
+    posts               Post[]
+    purchases           Purchase[]
+    sessions            Session[]
+    userCustomDecks     UserCustomDeck[]
+    userGameCards       UserGameCard[]
+    sentInvitations     Invitation[]        @relation("Inviter")
+    receivedInvitations Invitation[]        @relation("Invitee")
 }
 
 model VerificationToken {
@@ -384,11 +386,13 @@ model GameSessionPlayer {
     id            Int            @id @default(autoincrement())
     gameSession   GameSession    @relation(fields: [gameSessionId], references: [id])
     gameSessionId String
-    user          User           @relation(fields: [userId], references: [id])
-    userId        String         @unique
+    user          User?          @relation(fields: [userId], references: [id])
+    userId        String? // Optional, expected for HUMAN players
     playerType    PlayerType     @default(COMPUTER)
     deck          UserCustomDeck @relation(fields: [deckId], references: [id])
     deckId        Int            @unique
+
+    computerDeckDefinition Json?
 
     @@index([gameSessionId])
 }
