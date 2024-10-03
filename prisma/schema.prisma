@@ -59,6 +59,8 @@ model User {
     sessions             Session[]
     userCustomDecks      UserCustomDeck[]
     userGameCards        UserGameCard[]
+    sentInvitations      Invitation[]       @relation("Inviter")
+    receivedInvitations  Invitation[]       @relation("Invitee")
 }
 
 model VerificationToken {
@@ -362,12 +364,20 @@ enum PlayerType {
 }
 
 model GameSession {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id        String     @id @default(cuid())
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
     gameState Json
+    status    GameStatus @default(LOBBY)
 
-    players GameSessionPlayer[]
+    invitations Invitation[]
+    players     GameSessionPlayer[]
+}
+
+enum GameStatus {
+    LOBBY
+    STARTED
+    COMPLETED
 }
 
 model GameSessionPlayer {
@@ -381,4 +391,27 @@ model GameSessionPlayer {
     deckId        Int            @unique
 
     @@index([gameSessionId])
+}
+
+model Invitation {
+    id            Int              @id @default(autoincrement())
+    gameSession   GameSession      @relation(fields: [gameSessionId], references: [id])
+    gameSessionId String
+    inviter       User             @relation("Inviter", fields: [inviterId], references: [id])
+    inviterId     String
+    invitee       User             @relation("Invitee", fields: [inviteeId], references: [id])
+    inviteeId     String
+    status        InvitationStatus @default(PENDING)
+    createdAt     DateTime         @default(now())
+    updatedAt     DateTime         @updatedAt
+
+    @@index([gameSessionId])
+    @@index([inviterId])
+    @@index([inviteeId])
+}
+
+enum InvitationStatus {
+    PENDING
+    ACCEPTED
+    DECLINED
 }
