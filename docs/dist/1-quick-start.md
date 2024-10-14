@@ -19,11 +19,11 @@ Please review the section on Proposing Canon if you are interested in making a n
 
 ## Play a Web Game
 
-Click the Games item in the site navigation menu!
+Visit [ariastale.com](https://www.ariastale.com/) and click the Games item in the site navigation menu!
 
 ## Play a TTRPG Session
 
-Visit the [TTRPG Game Manual](/game-manual/2-ttrpg), copy the contents to clipboard, and paste the instructions into your favorite large language model!
+Visit the [TTRPG Game Manual](https://www.ariastale.com/game-manual/ttrpg), copy the contents to clipboard, and paste the instructions into your favorite large language model!
 
 Aria's Tale TTRPG is optimized for large language models with a context window size of more than 30k tokens. Optionally, using multimodal models with a code compiler for programmatically fair die rolls and image generation capabilities may further improve your experience. Here is a list of models that are known to work well:
 
@@ -35,8 +35,8 @@ Aria's Tale TTRPG is optimized for large language models with a context window s
 
 For advanced play using a code compiler, consider using two two alternative rule sets:
 
-1. [Advanced Mode](/game-manual/3-ttrpg-advanced), featuring CSV roll tables and encyclopedia data for more consistent gameplay
-2. [Experimental Mode](/game-manual/4-ttrpg-experimental), featuring:
+1. Advanced Mode, featuring CSV roll tables and encyclopedia data for more consistent gameplay
+2. Experimental Mode, featuring:
    1. Detailed character JSON files allowing for software-driven gaming and lower level strategy
    2. Alternative and work-in-progress battle modes such as strategic rpg battles with positional character data
 
