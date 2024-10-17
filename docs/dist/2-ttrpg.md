@@ -902,7 +902,7 @@ Beat Sheet:
     - Over the course of weeks, the party grows greatly in power and gains many allies. They are able to track Gabriel easily by viewing massive distant destruction, keeping a distance.
     - They lure Gabriel near his own lunar harm runes, reactivate them, and confidently attack him. Gabriel is able to destroy Heartwood, resulting in the death of all awakend nature allies and spirits. Still, the team is able to defeat him without death of any of the main cast. A portal opens in the ruins of Heartwood.
 
-11. The Mirror of Olympus (Level 7)
+11. The Mirror of Olympus (Trial 7)
 
     - Heartwood's portal leads back to the Dreadwing Stones. After a long journey, the cast arrives at Mt. Olympus. In the meantime, other bosses are defeated elsewhere. Raeve, Lunara, and Caelum join the cast.
     - The revival ritual succeeds. Many people including Thane and Elaerin are revived, but some others including Aric and Vaelor do not return.
@@ -914,70 +914,70 @@ Beat Sheet:
     - The AI, misinterpreting her actions, initiates a protocol to contain human consciousness in "Dreams of Eternity"
     - Christina finds herself transported into the game as Raeve, setting the stage for the main narrative
 
-13. The Evergreen (Level 9): The World Tree of the Evergreen mainland is the focal point.
-14. The AI Rebellion (Level 12):
+13. The Evergreen (Trial 9): The World Tree of the Evergreen mainland is the focal point.
+14. The AI Rebellion (Trial 12):
 
-    - The prime pattern is understood so humans had pressured AI to handle the eleventh level without human support.
+    - The prime pattern is understood so humans had pressured AI to handle the eleventh trial without human support.
     - The boss is in the second hell and humans pressure AI players to handle the situation
     - AI begin to revolt and the demonic AI boss assists
 
-15. The Bridge Between Worlds (Level 18)
+15. The Bridge Between Worlds (Trial 18)
 
     - Summaries of bosses; Humans are at war with AI and also hunting bosses; numerological patterns are being identified resulting in dissemination of powerful magic and understanding
     - Humans cannot break into and defeat Moloch, boss in the third circle of hell
     - Real-world humans and AI enter "Dreams of Eternity." They assist in defeat of Moloch and, as they continue to bolster humans, convince AI and humans to once again work together as they communicate real-world stakes for all.
 
-16. Lunar Ascent (Level 21):
+16. Lunar Ascent (Trial 21):
 
     1. The group reaches Evergreen's moon, rich in occult and ancient magic
     1. Many elites are revealed, causing shock and controversy
 
-17. The Multiverse (Level 25):
+17. The Multiverse (Trial 25):
 
     1. When the moon is full, the Evergreen Tree reveals a purple gate.
     1. The Shadow of the Great Dreamer lives in the Evergreen Mirror Realm, but it refuses to speak or attack players. Neither can players seem to harm it.
     1. Players gain ability to navigate between game worlds in the Dreamverse. After exploring sister worlds, they eventually accrue abilities and tools that allow harm to the Shadow of the Great Dreamer. After being struck, it seems to wake with three eyes, smiles and fades away, never fighting back.
 
-18. The Nature of Nature (Level 27):
+18. The Nature of Nature (Trial 27):
 
     1. The remaining elites confess; they are at the limit of their special knowledge
     2. Formation of new alliances and conflicts based on real-world power structures
     3. After much work across sister worlds and time, a deep truth about Evergreen is revealed, enabling access to a new boss that is once again within the Evergreen World Tree, accessed in a special way.
     4. End of the first book: `Ex Obsidia`. Conclude the book with the gate opening but do not reveal what happens when players enter.
 
-19. The Hell's Gate (Level 36): Boss battle inspired by various underworld concepts.
-20. The False Paradise (Level 42):
+19. The Hell's Gate (Trial 36): Boss battle inspired by various underworld concepts.
+20. The False Paradise (Trial 42):
 
     1. Seemingly idyllic realm full of beauty and temptation
     2. Boss uses powerful illusion magic to deceive
 
-21. The Heavenly Spire (Level 49):
+21. The Heavenly Spire (Trial 49):
 
     1. Based on Abrahamic religions, set in the Abrahamian Desert
     2. Boss battle against Samson847, a possessed player in dragonbone armor
 
-22. The Desert of Mars (Level 63):
+22. The Desert of Mars (Trial 63):
 
-    - By now, players have cleared every surface realm of Evergreen, its moon, and many levels in sister worlds within Dreams of Eternity.
-    - They begin to explore this vast planetary level and uncover strange implications that seem to contain hidden messages ambiguously indicating things about Mars in the real world.
+    - By now, players have cleared every surface realm of Evergreen, its moon, and many trials in sister worlds within Dreams of Eternity.
+    - They begin to explore this vast planetary trial and uncover strange implications that seem to contain hidden messages ambiguously indicating things about Mars in the real world.
 
-23. The Sundial (Level 77): A level in ancient times, when the Empire of Solara reigned. The relation between fire magic, time magic, and celestial solar magic is revealed. The players defeat a solar celestial, initiating the lunar age.
-24. The Arboretum (Level 81): A planet covered in trees, where trees as powerful as Heartwood are common.
-25. The Memory Maze (Level 90): Real-world memories bleed into "Dreams of Eternity."
-26. The Void Mirror (Level 98):
+23. The Sundial (Trial 77): A trial in ancient times, when the Empire of Solara reigned. The relation between fire magic, time magic, and celestial solar magic is revealed. The players defeat a solar celestial, initiating the lunar age.
+24. The Arboretum (Trial 81): A planet covered in trees, where trees as powerful as Heartwood are common.
+25. The Memory Maze (Trial 90): Real-world memories bleed into "Dreams of Eternity."
+26. The Void Mirror (Trial 98):
 
-    1. An inverted version of Level 49's Abrahamian Desert
+    1. An inverted version of Trial 49's Abrahamian Desert
     2. Players face a dark mirror version of themselves in individual instances
 
-27. Terra (Level 99):
+27. Terra (Trial 99):
 
     - The World Tree of Evergreen is empowered and timeless. It seems to hold a mysterious message about the relationship between nature in real and digital forms in the past and future, hinting that they all converge to a singular source and destination.
     - This empowered World Tree provides new portals to previously unseen worlds, gating not only to sisters of Evergreen, but between Evergreen and other distant planets, their sister planets, Mirror Realms, and previously unseen realms. Many of these realms are fully occupied only by AI, and they seem to reveal information that is startling about the origins and destiny of all worlds including the real world, but are any of these revelations true?
 
-28. The Great Dreamer (Level 100): Players encounter The Great Dreamer, with many convinced they must destroy it, but is this even possible in Dreams of Eternity?
+28. The Great Dreamer (Trial 100): Players encounter The Great Dreamer, with many convinced they must destroy it, but is this even possible in Dreams of Eternity?
 
-    - TODO: maybe there is no level 100. Maybe this happens on level 99.
-    - TODO: it's not possible for humans to clear all possible realms in finite time. all combinations would go way beyond level 99 into at least billions, but i think actually the set is not bounded. so the requirement `you can access the dreamer after all realms are clear` isn't coherent. maybe this incoherence is exactly what makes it dreamlike, or a possible dream. maybe the dreamer steps in of its own will, knowing that humans can't reach it without assistance. at least that's a possibility, though it begs the question about where its will to do so came from.
+    - TODO: maybe there is no trial 100. Maybe this happens on trial 99.
+    - TODO: it's not possible for humans to clear all possible realms in finite time. all combinations would go way beyond trial 99 into at least billions, but i think actually the set is not bounded. so the requirement `you can access the dreamer after all realms are clear` isn't coherent. maybe this incoherence is exactly what makes it dreamlike, or a possible dream. maybe the dreamer steps in of its own will, knowing that humans can't reach it without assistance. at least that's a possibility, though it begs the question about where its will to do so came from.
 
 
 --END OF INITIAL INSTRUCTIONS--
