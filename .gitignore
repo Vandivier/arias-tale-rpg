@@ -43,3 +43,6 @@ yarn-error.log*
 
 # python
 .venv
+
+# git
+.git
