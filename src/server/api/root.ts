@@ -1,6 +1,7 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createTRPCRouter } from "~/server/api/trpc";
 import { artRouter } from "./routers/artRouter";
+import { gameSessionRouter } from "./routers/gameSession";
 import { searchableImageRouter } from "./routers/searchableImageRouter";
 
 /**
@@ -10,6 +11,7 @@ import { searchableImageRouter } from "./routers/searchableImageRouter";
  */
 export const appRouter = createTRPCRouter({
   art: artRouter,
+  gameSession: gameSessionRouter,
   image: searchableImageRouter,
   post: postRouter,
 });

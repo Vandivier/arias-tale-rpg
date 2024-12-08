@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
+    provider = "sqlite"
     url      = env("POSTGRES_PRISMA_URL")
 }
 
@@ -92,7 +92,7 @@ model GameCard {
     name             String             @unique
     description      String             @unique
     isGeneric        Boolean
-    rarity           CardRarityEnum
+    rarity           String
     battlerPower     Int?
     battlerHealth    Int?
     imageId          Int                @unique
@@ -175,7 +175,7 @@ model RegionSnapshot {
     narrativeDays  Int
     description    String
     tagId          Int              @unique
-    regionKind     RegionKind
+    regionKind     String
     minElevation   Int
     maxElavation   Int
     commonRace     String
@@ -341,45 +341,15 @@ model Reputation {
     affinities   CharacterAffinities @relation(fields: [affinitiesId], references: [id])
 }
 
-enum CardRarityEnum {
-    COMMON
-    UNCOMMON
-    RARE
-    ULTRA_RARE
-    UNIQUE
-}
-
-enum RegionKind {
-    UNIVERSE
-    SUPERCLUSTER
-    GALAXY
-    WORLD
-    SUPERREGION
-    REGION
-    SUBREGION
-    ZONE
-}
-
-enum PlayerType {
-    HUMAN
-    COMPUTER
-}
-
 model GameSession {
-    id        String     @id @default(cuid())
-    createdAt DateTime   @default(now())
-    updatedAt DateTime   @updatedAt
-    gameState Json
-    status    GameStatus @default(LOBBY)
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    gameState String?
+    status    String   @default("LOBBY")
 
     invitations Invitation[]
     players     GameSessionPlayer[]
-}
-
-enum GameStatus {
-    LOBBY
-    STARTED
-    COMPLETED
 }
 
 model GameSessionPlayer {
@@ -388,34 +358,28 @@ model GameSessionPlayer {
     gameSessionId String
     user          User?          @relation(fields: [userId], references: [id])
     userId        String? // Optional, expected for HUMAN players
-    playerType    PlayerType     @default(COMPUTER)
+    playerType    String         @default("COMPUTER")
     deck          UserCustomDeck @relation(fields: [deckId], references: [id])
     deckId        Int            @unique
 
-    computerDeckDefinition Json?
+    computerDeckDefinition String?
 
     @@index([gameSessionId])
 }
 
 model Invitation {
-    id            Int              @id @default(autoincrement())
-    gameSession   GameSession      @relation(fields: [gameSessionId], references: [id])
+    id            Int         @id @default(autoincrement())
+    gameSession   GameSession @relation(fields: [gameSessionId], references: [id])
     gameSessionId String
-    inviter       User             @relation("Inviter", fields: [inviterId], references: [id])
+    inviter       User        @relation("Inviter", fields: [inviterId], references: [id])
     inviterId     String
-    invitee       User             @relation("Invitee", fields: [inviteeId], references: [id])
+    invitee       User        @relation("Invitee", fields: [inviteeId], references: [id])
     inviteeId     String
-    status        InvitationStatus @default(PENDING)
-    createdAt     DateTime         @default(now())
-    updatedAt     DateTime         @updatedAt
+    status        String      @default("PENDING")
+    createdAt     DateTime    @default(now())
+    updatedAt     DateTime    @updatedAt
 
     @@index([gameSessionId])
     @@index([inviterId])
     @@index([inviteeId])
-}
-
-enum InvitationStatus {
-    PENDING
-    ACCEPTED
-    DECLINED
 }
