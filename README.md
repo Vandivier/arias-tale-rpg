@@ -13,9 +13,24 @@ see this [Aria's Tale YouTube Playlist](https://www.youtube.com/playlist?list=PL
 ## Setup, Install, and Run
 
 1. `cp .env.example .env`
-   1. Then, populate your local file appropriately. You will need a postgres db and Discord API credentials
-2. `npm i && npm run db:migrate && npm run db:seed`
+   1. Then, populate your local file appropriately.
+   2. This project is configure for offline support by default with a sqlite db. If you would like authentication features and a postgres db, you will need to update the .env file appropriately.
+2. `npm i && npm run db:generate:offline`
+   a. or, for online development, `npm i && npm run db:migrate && npm run db:seed`
 3. `npm run dev`
+
+### Offline Development Data Model Notes
+
+Some postgres featurs are not supported by sqlite. Namely:
+
+1. JSON values
+2. Enum types
+3. Primitive arrays like `String[]`
+
+The compatability approach prefered in this project is to stringify such entities.
+In a few cases, then, the code will perform a csv parse when reading values to an array.
+
+In addition, the online db migration set will not be compatible with the offline db. In the future, we may create a sqlite migration set if needed.
 
 ## Developer Notes
 

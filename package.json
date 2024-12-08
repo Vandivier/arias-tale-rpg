@@ -1,10 +1,12 @@
 {
   "name": "arias-tale-rpg",
   "version": "0.2.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "scripts": {
     "build": "tsx scripts/build-webdocs.ts && tsx scripts/generate-sitemap.ts && next build",
+    "db:generate:offline": "prisma generate --schema=prisma/schema.offline.prisma",
+    "db:migrate:offline": "prisma migrate dev --schema=prisma/schema.offline.prisma",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",

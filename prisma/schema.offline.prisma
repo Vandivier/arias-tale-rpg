@@ -1,0 +1,385 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("POSTGRES_PRISMA_URL")
+}
+
+model Post {
+    id          Int      @id @default(autoincrement())
+    name        String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    createdById String
+    createdBy   User     @relation(fields: [createdById], references: [id])
+
+    @@index([name])
+}
+
+model Account {
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String?
+    access_token      String?
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String?
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+    id                   String    @id @default(cuid())
+    name                 String?
+    email                String?   @unique
+    emailVerified        DateTime?
+    image                String?
+    willPlayStream       Boolean   @default(false)
+    willReviewLiterature Boolean   @default(false)
+    accounts             Account[]
+
+    // gameSessionPlayers should always be len 0 or 1 but Prisma can't support that yet, so we handle in biz logic
+    gameSessionPlayers  GameSessionPlayer[]
+    posts               Post[]
+    purchases           Purchase[]
+    sessions            Session[]
+    userCustomDecks     UserCustomDeck[]
+    userGameCards       UserGameCard[]
+    sentInvitations     Invitation[]        @relation("Inviter")
+    receivedInvitations Invitation[]        @relation("Invitee")
+}
+
+model VerificationToken {
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}
+
+model SearchableImage {
+    id            Int            @id @default(autoincrement())
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    description   String         @unique
+    title         String         @unique
+    imageFileName String         @unique
+    gameCard      GameCard?
+    userGameCards UserGameCard[]
+    tags          Tag[]          @relation("SearchableImageToTag")
+}
+
+model GameCard {
+    id               Int                @id @default(autoincrement())
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    name             String             @unique
+    description      String             @unique
+    isGeneric        Boolean
+    rarity           String
+    battlerPower     Int?
+    battlerHealth    Int?
+    imageId          Int                @unique
+    image            SearchableImage    @relation(fields: [imageId], references: [id])
+    pokerCardMapping PokerCardMapping[]
+    userGameCards    UserGameCard[]
+    purchase         Purchase           @relation(fields: [purchaseId], references: [id])
+    purchaseId       Int
+}
+
+model UserGameCard {
+    id              Int              @id @default(autoincrement())
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+    isFoil          Boolean
+    gameCardId      Int
+    userId          String
+    cardBackImageId Int
+    cardBackImage   SearchableImage  @relation(fields: [cardBackImageId], references: [id])
+    gameCard        GameCard         @relation(fields: [gameCardId], references: [id])
+    user            User             @relation(fields: [userId], references: [id])
+    customDecks     UserCustomDeck[] @relation("UserCustomDeckToUserGameCard")
+}
+
+model UserCustomDeck {
+    id                Int                @id @default(autoincrement())
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
+    userId            String
+    name              String
+    description       String
+    user              User               @relation(fields: [userId], references: [id])
+    gameCards         UserGameCard[]     @relation("UserCustomDeckToUserGameCard")
+    gameSessionPlayer GameSessionPlayer?
+}
+
+model Tag {
+    id               Int               @id @default(autoincrement())
+    createdAt        DateTime          @default(now())
+    updatedAt        DateTime          @updatedAt
+    name             String            @unique
+    isPrintedTag     Boolean
+    characters       Character?
+    regionSnapshots  RegionSnapshot?
+    searchableImages SearchableImage[] @relation("SearchableImageToTag")
+}
+
+model StandardDeck {
+    id                Int                @id @default(autoincrement())
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
+    name              String             @unique
+    description       String
+    pokerCardMappings PokerCardMapping[]
+}
+
+model PokerCardMapping {
+    id             Int           @id @default(autoincrement())
+    createdAt      DateTime      @default(now())
+    updatedAt      DateTime      @updatedAt
+    pokerCardName  String
+    gameCardId     Int
+    standardDeckId Int?
+    gameCard       GameCard      @relation(fields: [gameCardId], references: [id])
+    pokerCard      PokerCard     @relation(fields: [pokerCardName], references: [name])
+    StandardDeck   StandardDeck? @relation(fields: [standardDeckId], references: [id])
+}
+
+model PokerCard {
+    name     String             @unique
+    suit     String
+    mappings PokerCardMapping[]
+}
+
+model RegionSnapshot {
+    id             Int              @id @default(autoincrement())
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    name           String
+    narrativeDays  Int
+    description    String
+    tagId          Int              @unique
+    regionKind     String
+    minElevation   Int
+    maxElavation   Int
+    commonRace     String
+    commonTongue   String
+    diversityScore Int
+    parentRegionId Int?
+    parentRegion   RegionSnapshot?  @relation("RegionHierarchy", fields: [parentRegionId], references: [id])
+    subregions     RegionSnapshot[] @relation("RegionHierarchy")
+    mainImageTag   Tag              @relation(fields: [tagId], references: [id])
+
+    @@unique([name, narrativeDays])
+}
+
+model Character {
+    id                      Int                 @id @default(autoincrement())
+    createdAt               DateTime            @default(now())
+    updatedAt               DateTime            @updatedAt
+    name                    String
+    description             String
+    tagId                   Int                 @unique
+    rarity                  String
+    race                    String
+    appearanceId            Int                 @unique
+    combatStatisticsId      Int
+    gender                  String
+    noncombatStatisticsId   Int                 @unique
+    socialAffinitiesId      Int
+    awakeningRegion         String
+    characterBackstory      String              @unique
+    initialLevel            Int
+    initialAge              Int
+    initialMemories         String
+    irlBackstory            String
+    initialClasses          BattleClass[]
+    appearance              CharacterAppearance @relation(fields: [appearanceId], references: [id])
+    combatStatistics        CombatStatistics    @relation(fields: [combatStatisticsId], references: [id])
+    noncombatStatistics     NoncombatStatistics @relation(fields: [noncombatStatisticsId], references: [id])
+    socialAffinities        CharacterAffinities @relation(fields: [socialAffinitiesId], references: [id])
+    mainImageTag            Tag                 @relation(fields: [tagId], references: [id])
+    initialSpecialAbilities SpecialAbility[]
+}
+
+model CharacterSnapshot {
+    id               Int              @id @default(autoincrement())
+    createdAt        DateTime         @default(now())
+    updatedAt        DateTime         @updatedAt
+    name             String
+    narrativeArc     String
+    narrativeChapter Int
+    narrativeDays    Int
+    age              Int
+    awakeningRegion  String
+    currentStateId   Int              @unique
+    description      String
+    level            Int
+    classes          BattleClass[]
+    currentState     CharacterState   @relation(fields: [currentStateId], references: [id])
+    itemsHeld        ItemHeld[]
+    specialAbilities SpecialAbility[]
+
+    @@unique([name, narrativeDays])
+}
+
+model CharacterAppearance {
+    id                     Int        @id @default(autoincrement())
+    eyeColor               String
+    hairColor              String
+    skinTone               String
+    physicalSize           String
+    physicalBuild          String
+    notableCharacteristics String
+    character              Character?
+}
+
+model CharacterAffinities {
+    id              Int          @id @default(autoincrement())
+    cultures        String[]
+    guildMembership String
+    religions       String[]
+    characters      Character[]
+    reputations     Reputation[]
+}
+
+model SpecialAbility {
+    id                  Int                @id @default(autoincrement())
+    name                String             @unique
+    description         String
+    characterId         Int?
+    characterSnapshotId Int?
+    character           Character?         @relation(fields: [characterId], references: [id])
+    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
+}
+
+model CombatStatistics {
+    id           Int         @id @default(autoincrement())
+    healthPoints Int
+    attack       Int
+    defense      Int
+    speed        Int
+    magicDefense Int
+    character    Character[]
+}
+
+model NoncombatStatistics {
+    id                Int        @id @default(autoincrement())
+    agreeableness     Int
+    charisma          Int
+    conscientiousness Int
+    dexterity         Int
+    extraversion      Int
+    intelligence      Int
+    neuroticism       Int
+    openness          Int
+    strength          Int
+    character         Character?
+}
+
+model CharacterState {
+    id              Int                @id @default(autoincrement())
+    healthStatus    String
+    ailmentsEffects String
+    hungerStatus    String
+    fatigueStatus   String
+    character       CharacterSnapshot?
+}
+
+model BattleClass {
+    id                  Int                @id @default(autoincrement())
+    name                String
+    characterId         Int?
+    characterSnapshotId Int?
+    character           Character?         @relation(fields: [characterId], references: [id])
+    characterSnapshot   CharacterSnapshot? @relation(fields: [characterSnapshotId], references: [id])
+}
+
+model ItemHeld {
+    id          Int               @id @default(autoincrement())
+    item        String
+    characterId Int
+    character   CharacterSnapshot @relation(fields: [characterId], references: [id])
+}
+
+model Purchase {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    user            User       @relation(fields: [userId], references: [id])
+    userId          String
+    gameCards       GameCard[]
+    isFoil          Boolean
+    isDemo          Boolean    @default(false)
+    stripePaymentId String?
+
+    @@index([userId])
+}
+
+model Reputation {
+    id           Int                 @id @default(autoincrement())
+    name         String
+    reputation   String
+    affinitiesId Int
+    affinities   CharacterAffinities @relation(fields: [affinitiesId], references: [id])
+}
+
+model GameSession {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    gameState String?
+    status    String   @default("LOBBY")
+
+    invitations Invitation[]
+    players     GameSessionPlayer[]
+}
+
+model GameSessionPlayer {
+    id            Int            @id @default(autoincrement())
+    gameSession   GameSession    @relation(fields: [gameSessionId], references: [id])
+    gameSessionId String
+    user          User?          @relation(fields: [userId], references: [id])
+    userId        String? // Optional, expected for HUMAN players
+    playerType    String         @default("COMPUTER")
+    deck          UserCustomDeck @relation(fields: [deckId], references: [id])
+    deckId        Int            @unique
+
+    computerDeckDefinition String?
+
+    @@index([gameSessionId])
+}
+
+model Invitation {
+    id            Int         @id @default(autoincrement())
+    gameSession   GameSession @relation(fields: [gameSessionId], references: [id])
+    gameSessionId String
+    inviter       User        @relation("Inviter", fields: [inviterId], references: [id])
+    inviterId     String
+    invitee       User        @relation("Invitee", fields: [inviteeId], references: [id])
+    inviteeId     String
+    status        String      @default("PENDING")
+    createdAt     DateTime    @default(now())
+    updatedAt     DateTime    @updatedAt
+
+    @@index([gameSessionId])
+    @@index([inviterId])
+    @@index([inviteeId])
+}
