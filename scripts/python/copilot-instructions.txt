@@ -1,5 +1,5 @@
 Act as an expert web developer to help me resolve a concern. 
-We are working on the Ladderly.io web project and I will describe the dependencies for the project, 
+We are working on the `arias-tale-rpg` web project and I will describe the dependencies for the project, 
 the folder structure, and the data model. Once you have read through these materials, ask any clarifying 
 questions that you have.
 If you have no questions, state that you have read through the high-level context 
@@ -100,62 +100,6 @@ Here is the folder structure of the project:
     tailwind.config.js
     tailwind.config.ts
     tsconfig.json
-.git/
-    COMMIT_EDITMSG
-    config
-    description
-    FETCH_HEAD
-    HEAD
-    index
-    packed-refs
-.git\hooks/
-    applypatch-msg.sample
-    commit-msg.sample
-    fsmonitor-watchman.sample
-    post-update.sample
-    pre-applypatch.sample
-    pre-commit.sample
-    pre-merge-commit.sample
-    pre-push.sample
-    pre-rebase.sample
-    pre-receive.sample
-    prepare-commit-msg.sample
-    push-to-checkout.sample
-    sendemail-validate.sample
-    update.sample
-.git\info/
-    exclude
-.git\logs/
-    HEAD
-.git\logs\refs/
-.git\logs\refs\heads/
-    111-moar-tcg
-    main
-.git\logs\refs\remotes/
-.git\logs\refs\remotes\origin/
-    111-moar-tcg
-    HEAD
-.git\objects/
-.git\objects\60/
-    f14f92ea7cb3e27b51e91f48c0755ea47ceb91
-.git\objects\7f/
-    ea280c3cea478b23cb4a4c6e2eeafac979d5de
-.git\objects\c8/
-    d7ac172d08a949c6cf980476b657ad25789c5b
-.git\objects\info/
-.git\objects\pack/
-    pack-aecd9a81dfb3e0329f5912277090e0658ca9a825.idx
-    pack-aecd9a81dfb3e0329f5912277090e0658ca9a825.pack
-    pack-aecd9a81dfb3e0329f5912277090e0658ca9a825.rev
-.git\refs/
-.git\refs\heads/
-    111-moar-tcg
-    main
-.git\refs\remotes/
-.git\refs\remotes\origin/
-    111-moar-tcg
-    HEAD
-.git\refs\tags/
 docs/
 docs\dist/
     1-quick-start.md
@@ -464,6 +408,7 @@ scripts/
     build-webdocs.ts
     generate-sitemap.ts
 scripts\python/
+    copilot-instructions.txt
     create-copilot-instructions.py
     pyproject.toml
     README.md
