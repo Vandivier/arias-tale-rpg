@@ -1,7 +1,0 @@
-{
-  "buildCommand": "cd legacy && npm install && npm run build",
-  "devCommand": "cd legacy && npm run dev",
-  "installCommand": "cd legacy && npm install",
-  "framework": "nextjs",
-  "outputDirectory": "legacy/.next"
-}
