@@ -1,0 +1,136 @@
+Act as an expert AI engineer, software developer, and fullstack developer to help me resolve a concern. 
+Here is the pyproject.toml file for this project which describes the dependencies:
+```
+[project]
+name = "arias-tale-rag"
+version = "0.0.2"
+description = "Backend for the Arias Tale RAG"
+authors = [
+    { name = "John Vandivier", email = "john@ladderly.io" },
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "python-dotenv>=1.0.1",
+    "fastapi>=0.115.12",
+    "google-genai>=1.24.0",
+    "pytest>=8.4.0",
+    "httpx>=0.28.1",
+    "pathspec>=0.12.1",
+    "google-adk>=1.7.0",
+    "supabase>=2.0.0",
+]
+
+
+[project.optional-dependencies]
+dev = ["mypy>=1.11.1", "ruff>=0.11.13"]
+
+[build-system]
+requires = ["setuptools>=73.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+lint.select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "D",    # pydocstyle
+    "D401", # First line should be in imperative mood
+    "T201",
+    "UP",
+]
+lint.ignore = [
+    "UP006",
+    "UP007",
+    # We actually do want to import from typing_extensions
+    "UP035",
+    # Relax the convention by _not_ requiring documentation for every function parameter.
+    "D417",
+    "E501",
+]
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "UP"]
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]
+
+```
+
+Here is the folder structure of the project:
+.gitignore
+Dockerfile
+LICENSE
+README.md
+backend/
+    .env.example
+    LICENSE
+    Makefile
+    README.md
+    pyproject.toml
+    uv.lock
+    backend/.pytest_cache/
+    backend/scripts/
+        cleaned_source.csv
+        copilot-instructions.txt
+        create-copilot-instructions.py
+        create_embeddings.py
+        ingest_data.py
+        source.csv
+        update-source-csv.py
+    backend/src/
+        __init__.py
+        agent.py
+        app.py
+        server.py
+        test_integration.py
+        test_unit.py
+        utils.py
+        backend/src/__pycache__/
+        backend/src/arias_tale_rag.egg-info/
+database/
+    .env.template
+    README.md
+    package-lock.json
+    package.json
+    database/supabase/
+        .gitignore
+        config.toml
+        database/supabase/migrations/
+            20250720184008_create_documents_table.sql
+            20250720185002_update_embedding_dimension.sql
+            20250722232257_create_match_documents_function.sql
+frontend/
+    .env.example
+    .gitignore
+    components.json
+    eslint.config.js
+    index.html
+    package-lock.json
+    package.json
+    tsconfig.json
+    tsconfig.node.json
+    vite.config.ts
+    frontend/public/
+        vite.svg
+    frontend/src/
+        App.tsx
+        global.css
+        main.tsx
+        vite-env.d.ts
+        frontend/src/components/
+            frontend/src/components/ui/
+                badge.tsx
+                button.tsx
+                card.tsx
+                input.tsx
+                scroll-area.tsx
+                select.tsx
+                tabs.tsx
+                textarea.tsx
+        frontend/src/lib/
+            utils.ts
