@@ -1,0 +1,497 @@
+Act as an expert AI engineer, software developer, and fullstack developer to help me resolve a concern. 
+Here is the package.json file for this project which describes the dependencies:
+```
+{
+  "name": "arias-tale-rpg",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsx scripts/build-webdocs.ts && tsx scripts/generate-sitemap.ts && next build",
+    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
+    "dev": "next dev",
+    "postinstall": "prisma generate",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.7",
+    "@prisma/client": "^5.6.0",
+    "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@t3-oss/env-nextjs": "^0.7.1",
+    "@tailwindcss/typography": "^0.5.10",
+    "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-table": "^8.11.3",
+    "@trpc/client": "^10.43.6",
+    "@trpc/next": "^10.43.6",
+    "@trpc/react-query": "^10.43.6",
+    "@trpc/server": "^10.43.6",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "gray-matter": "^4.0.3",
+    "next": "^14.0.3",
+    "next-auth": "^4.24.5",
+    "phaser": "^3.80.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-markdown": "^9.0.1",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "superjson": "^2.2.1",
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^14.0.3",
+    "@types/eslint": "^8.44.7",
+    "@types/node": "^18.17.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.54.0",
+    "postcss": "^8.4.31",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "prisma": "^5.6.0",
+    "tailwindcss": "^3.3.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.1.6"
+  },
+  "ct3aMetadata": {
+    "initVersion": "7.24.0"
+  },
+  "packageManager": "npm@9.6.3",
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}
+
+```
+
+Here is the folder structure of the project:
+docs/
+    docs/dist/
+        docs/dist/narrative/
+            arc-aria.md
+            arc-caelum.md
+            arc-christina.md
+            arc-ezekiel.md
+            arc-lunara.md
+            arc-ragnar.md
+            arc-solara.md
+            on-biomagical-speciation.md
+        1-quick-start.md
+        2-ttrpg.md
+        3-ttrpg-advanced.md
+        4-ttrpg-experimental.md
+        5-tcg.md
+    docs/src/
+        docs/src/components/
+            encyclopedia.csv
+            end-of-instructions-marker.md
+            places.md
+            regions.csv
+            roll-tables.csv
+            ttrpg-core.md
+            ttrpg-experimental.md
+        docs/src/narrative/
+            arc-aria.md
+            arc-caelum.md
+            arc-christina.md
+            arc-ezekiel.md
+            arc-lunara.md
+            arc-ragnar.md
+            arc-solara.md
+            on-biomagical-speciation.md
+        1-quick-start.md
+        2-ttrpg.md
+        3-ttrpg-advanced.md
+        4-ttrpg-experimental.md
+        5-tcg.md
+prisma/
+    schema.prisma
+    seed.ts
+    seedData.ts
+public/
+    public/assets/
+        public/assets/audio/
+            dialogue.wav
+            dialogue_1.mp3
+            dialogue_2.mp3
+            dialogue_3.mp3
+            slam.mp3
+            typing.wav
+            typing_1.mp3
+            typing_2.mp3
+            typing_3.mp3
+            typing_4.mp3
+        public/assets/battlers/
+            female-archer-black-hair.webp
+            female-black-holy-mage.webp
+            male-archer-brown-hair.webp
+            male-blonde-archer.webp
+            male-mage-gray-hair.webp
+            male-red-mage.webp
+            slime-dirt.webp
+            slime-earth.webp
+            slime-fire.webp
+            slime-gold.webp
+            slime-healing-green.webp
+            slime-ice.webp
+            slime-purple.webp
+            slime-shadow.webp
+            slime-water.webp
+            swordsman-black-hair.webp
+            swordsman-brown-hair.webp
+            swordsman-gray-hair.webp
+            swordswoman-blonde.webp
+            swordswoman-two-color-hair.webp
+        public/assets/fighting-sprites/
+            battle_background.webp
+            eidolon_spritesheet.webp
+            tank_spritesheet.webp
+        public/assets/map-sprites/
+            female-archer.png
+            female-healer.png
+            female-magician.png
+            female-ninja.png
+            female-townfolk.png
+            female-warrior.png
+            male-archer.png
+            male-healer.png
+            male-magician.png
+            male-ninja.png
+            male-townfolk.png
+            male-warrior.png
+        public/assets/maps/
+            dreamer-of-fields.webp
+        colosseum_nameform.html
+    public/game-json/
+        arc-lunara-battle-1-start-ch-1.json
+        arc-lunara-party-lunara-ch-1-start.json
+        character-aria.json
+        character-caelum-level-3.json
+        character-eidolon-level-2.json
+        character-eidolon-level-3.json
+        character-eidolon-level-4.json
+        character-elara.json
+        character-eldorin.json
+        character-ivar.json
+        character-lunara.json
+        character-lyra-level-4.json
+        character-lyra-level-5.json
+        character-lysandra.json
+        character-selena.json
+        character-tank-level-1.json
+        character-tank-level-2.json
+        character-tank-level-3.json
+        character-tank-level-4.json
+        character-thane.json
+        character-theron-oakheart.json
+    public/searchable-images/
+        public/searchable-images/bloopers/
+            1-blooper-live-action-squirrel-monster.webp
+            2-blooper-cowboy-eidolon.png
+            3-blooper-eidolon-reverse-arrow.png
+        public/searchable-images/maps/
+            map-region-aetheria-v1.png
+            map-region-coast-of-echoes.png
+            map-region-dragonica.png
+            map-region-forest-of-echoes-1.png
+            map-region-forest-of-echoes-2.png
+            map-region-forest-of-echoes-3.png
+            map-region-old-pillar-highlands.png
+            map-region-raefun.png
+            map-subregion-lake-of-whispers.png
+            map-superregion-obsidia.png
+            map-town-echoes.png
+            map-world-evergreen-regions-marked.jpg
+            map-world-evergreen.jpg
+            map-world-oceanus-anuli.png
+        1-caelum-archmage-moonstaff.png
+        10-caelum-mystic-archer-calm.png
+        100-liquid-iron-elemental.png
+        101-shield-bearers-and-lizard.png
+        102-lyra-and-lizard.png
+        103-eidolon-bandits.png
+        104-dark-dragon-paladin.png
+        105-purple-gate.png
+        106-the-crimson-alliance.png
+        107-eidolon-in-the-tavern.png
+        108-earth-elementals-defeated.png
+        109-tank-second-migraine.png
+        11-caelum-young-shocked.png
+        110-shadow-stalker.png
+        111-spellsword.png
+        112-thane-one-handed-missile.png
+        113-magic-teapot.png
+        114-caelum-exhausted-after-victory-charcoal.png
+        114-caelum-exhausted-after-victory-nahuatl.png
+        115-goblin-monster-truck.png
+        116-princess-on-a-rainbow-unicorn.png
+        117-monstrous-vision.png
+        118-abrahamian-celestial.png
+        119-young-elven-mage-with-blue-light.webp
+        12-lyra-twin-swords.png
+        120-young-elven-mage-of-nature.webp
+        121-young-elven-thunder-mage.webp
+        122-young-elven-water-mage-sisters.webp
+        123-glass-dagger-mage.webp
+        124-magitech-spear-racer.webp
+        125-galantss-the-demon.webp
+        126-ghoul-thug.webp
+        127-goblin-tinkerer-nesart.webp
+        128-nesart-with-racer.webp
+        129-grotesque-harpy.webp
+        13-shield-bearers-in-phalanx.png
+        130-harpy-sisters.webp
+        131-adventurers-and-good-boy.webp
+        132-adventurer.webp
+        133-noble-foxkin.webp
+        134-lesser-hellish-volcano-elemental.jpg
+        135-augmented-hacker.webp
+        136-nesart-station.webp
+        137-usty-station.webp
+        138-hao-with-wings-and-spikes.webp
+        139-witchhat-hao.webp
+        14-elara-can-minor-revive.png
+        140-shadow-warrior-hao.webp
+        141-tank-sits-with-berries.webp
+        142-wanderers-of-the-echoing-vale.webp
+        143-eastgate-commons.png
+        144-old-pillar-at-dusk.jpg
+        145-high-lunari-couple.png
+        146-magic-teapot-metal-elven-town.png
+        147-magic-teapot-bronze-and-china.png
+        148-three-bears-fighting.png
+        149-baby-wendigo.png
+        15-elara-speaks-with-gavriel.png
+        150-wendigo-in-frosted-forest.png
+        151-ancient-wendigo.png
+        152-wendigo-militia.png
+        153-lesser-fire-demon.png
+        154-lysandra-heads-to-the-purple-gate.png
+        155-drogan-flamebeard.png
+        156-drogan-by-the-stream.png
+        157-atlantean-guardian.jpeg
+        158-quantum-voyagers.jpeg
+        159-synthetic-enforcer.jpeg
+        16-eidolon.png
+        160-forgotten-warrior.jpeg
+        161-temporal-anomaly.jpeg
+        162-quantum-sovereign.jpeg
+        163-angel-dogs.jpeg
+        164-theron-oakheart-walking-in-forest.png
+        17-eidolon-level-2.png
+        18-tank-views-purple-gate.png
+        19-island-jumper.png
+        2-caelum-archmage-timesight-wand.png
+        20-tank-crimson-armor.png
+        21-veteran-spearman.png
+        22-warriors-training-in-whispering-woods.png
+        23-elven-archer-atop-a-watchtower.png
+        24-disorganized-shield-bearers.png
+        25-lysandra.png
+        26-thane.png
+        27-aurean-earwing.png
+        3-mace-troll.png
+        30-tank-having-second-thoughts.png
+        31-dark-paladin-level-100.png
+        32-eidolon-in-a-tavern.png
+        33-squirrelkin-angry-grandpa.webp
+        34-squirrelkin-knight-and-prince.webp
+        35-amulet-of-sight.png
+        36-mana-potion.png
+        37-health-potion.png
+        38-greater-health-potion.png
+        39-tome-of-resurrection.png
+        4-guardian-fire-elemental.png
+        40-wooden-shield.png
+        41-glass-dagger.png
+        42-chain-hauberk.png
+        43-air-magic-glove.png
+        44-water-elemental.png
+        45-earth-elemental.png
+        46-elven-vampire.png
+        47-goblin-party.png
+        48-lunara-party-plans.png
+        49-water-magic-glove.png
+        5-thunder-mage.png
+        50-dark-machine-hand.png
+        51-tank-opens-the-gate.png
+        52-dark-paladin-blurs-vision.png
+        53-ivar-in-the-cloak-of-his-father.png
+        54-ornate-spear-and-shield.png
+        55-raging-maul-of-bear.png
+        56-tank-level-1.png
+        57-twin-short-swords.png
+        58-human-archer.png
+        59-elven-rogue.png
+        6-vibrant-anime-caelum-exhausted.png
+        60-persuasive-adventurer.png
+        61-orc-bandit.png
+        62-human-paladin.png
+        63-young-chef-also-making-coffee.png
+        64-blue-enchanter.png
+        65-an-elderly-merchant.png
+        66-young-beverage-goblin.png
+        67-standard-beverage-goblin.png
+        68-old-crazy-wired-beverage-goblin.png
+        69-emissary.png
+        7-crystal-spider.png
+        70-gardener.png
+        71-healing-herbs.png
+        72-random-berries.png
+        73-kicker-mage.png
+        74-dribble-mage.png
+        75-runner-mage.png
+        76-cardback-flat-black-white.png
+        77-cardback-minimalist-white.png
+        78-cardback-tealstone.png
+        79-cardback-charcoal-mandala.png
+        8-caelum-mystic-archer-adrenaline.png
+        80-cardback-abstract-expressionist.png
+        81-cardback-walled-city.png
+        82-dark-paladin-dragon-energy.png
+        83-name-of-elara.png
+        84-the-lizard-is-with-us.png
+        85-abel-gladiator.webp
+        86-the-collector.webp
+        87-areion-entryway.webp
+        88-areion-front-of-the-arena.webp
+        89-areion-of-the-sun-and-moon.webp
+        9-pack-of-crystal-spiders.png
+        90-birdkin-gladiator.webp
+        91-tank-dreams-of-a-celestial-symbol.png
+        92-battlemap-north-new-olympia.png
+        93-battlemap-south-terah.png
+        94-plant-monster.png
+        95-ancestral-strike-plant-monster.png
+        96-tank-and-giant-squirrel.png
+        97-tank-migraine.png
+        98-eidolon-hides.png
+    android-chrome-192x192.png
+    android-chrome-512x512.png
+    apple-touch-icon.png
+    arias-tale-d20-logo.png
+    favicon-16x16.png
+    favicon-32x32.png
+    favicon.ico
+    site.webmanifest
+    sitemap.xml
+scripts/
+    build-webdocs.ts
+    copilot-instructions.txt
+    create-copilot-instructions.ts
+    generate-sitemap.ts
+src/
+    src/components/
+        src/components/colosseum/
+            src/components/colosseum/scenes/
+                src/components/colosseum/scenes/services/
+                    TextAnimationManager.ts
+                src/components/colosseum/scenes/utils/
+                    main.ts
+                BattleScene.ts
+                CharacterCreationScene.ts
+                EncounterScene.ts
+                GameOverScene.ts
+                InventoryScene.ts
+                LeaderboardScene.ts
+                MapScene.ts
+                StartGameScene.ts
+                StoreScene.ts
+                types.ts
+            ColosseumGame.tsx
+            README.md
+        src/components/fighting/
+            src/components/fighting/characters/
+                Character.ts
+                Eidolon.ts
+                Tank.ts
+            src/components/fighting/scenes/
+                BattleScene.ts
+                DifficultySelectScene.ts
+                GameOverScene.ts
+                PlayerSelectScene.ts
+                PreloadScene.ts
+                VictoryScene.ts
+            FighterGame.tsx
+        src/components/ui/
+            button.tsx
+            checkbox.tsx
+            dropdown-menu.tsx
+            input.tsx
+            table.tsx
+        CustomPage.tsx
+        DocContentPage.tsx
+        DocIndexPage.tsx
+        ImageSearchResultTable.tsx
+        MenuComponent.tsx
+        TopNav.tsx
+    src/lib/
+        utils.ts
+    src/pages/
+        src/pages/api/
+            src/pages/api/auth/
+                [...nextauth].ts
+            src/pages/api/trpc/
+                [trpc].ts
+        src/pages/gallery/
+            [searchableImageId].tsx
+            art-roll.tsx
+            index.tsx
+            random.tsx
+            search.tsx
+        src/pages/game-manual/
+            [[...filename]].tsx
+            standard-deck-tables.tsx
+        src/pages/games/
+            src/pages/games/colosseum/
+                index.tsx
+            src/pages/games/fighting/
+                index.tsx
+            src/pages/games/tcg-playmat/
+                index.tsx
+        src/pages/mobile-menu/
+            index.tsx
+        _app.tsx
+        index.tsx
+        privacy-policy.tsx
+    src/server/
+        src/server/api/
+            src/server/api/routers/
+                artRouter.ts
+                post.ts
+                searchableImageRouter.ts
+            root.ts
+            trpc.ts
+        auth.ts
+        db.ts
+    src/styles/
+        globals.css
+    src/utils/
+        api.ts
+    env.js
+.env.example
+.eslintrc.cjs
+LICENSE
+README.md
+components.json
+next.config.js
+package-lock.json
+package.json
+postcss.config.cjs
+prettier.config.js
+tailwind.config.js
+tailwind.config.ts
+tsconfig.json
