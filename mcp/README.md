@@ -18,14 +18,6 @@ source .venv/bin/activate
 uv pip install -e .
 ```
 
-## Configuration
-
-Copy the environment variable file and populate as needed:
-
-```bash
-cp .env.example .env
-```
-
 ## Running the MCP Server
 
 Run the MCP server:
@@ -45,15 +37,19 @@ uv run python src/server.py
 The server provides the following tools for tabletop roleplay:
 
 ### 1. Launch New Campaign
+
 Creates a new campaign with specified setting and difficulty.
 
 ### 2. Character Generation
+
 Generates a new character with randomized ability scores, hit points, and class.
 
 ### 3. Random Encounters and Events
+
 Generates random encounters (combat, social, exploration, puzzle) appropriate for the campaign difficulty.
 
 ### 4. Die Rolling
+
 Rolls dice for ability checks, attacks, and other game mechanics. Supports various die types (d4, d6, d8, d10, d12, d20, d100) and modifiers.
 
 ## Testing
@@ -72,5 +68,46 @@ This server follows the Model Context Protocol (MCP) specification and can be us
 - Claude Desktop
 - Other MCP clients
 
-Configure the client to point to this server's executable or use stdio transport.
+### Configuration
 
+Add the following configuration to your MCP client's configuration file.
+For Cursor, this would be called ``~/.cursor/mcp.json`.
+
+```json
+{
+  "mcpServers": {
+    "arias-tale-rpg": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/absolute/path/to/arias-tale-rpg/mcp",
+        "python",
+        "src/server.py"
+      ]
+    }
+  }
+}
+```
+
+**Note:** Replace `/path/to/arias-tale-rpg/mcp` with the absolute path to this `mcp/` directory on your system.
+
+Alternatively, if you have the project installed in editable mode and `uv` is in your PATH, you can use:
+
+```json
+{
+  "mcpServers": {
+    "arias-tale-rpg": {
+      "command": "python",
+      "args": [
+        "/absolute/path/to/arias-tale-rpg/mcp/src/server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/absolute/path/to/arias-tale-rpg/mcp"
+      }
+    }
+  }
+}
+```
+
+After adding the configuration, restart your MCP client to load the server.
